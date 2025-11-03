@@ -1,0 +1,25 @@
+# Build artifacts
+/bin/
+/build/
+
+# Compiled files
+*.o
+*.exe
+*.gb
+*.elf
+
+# Temporary or backup files
+*.log
+*.tmp
+*.bak
+*.swp
+
+# VSCode settings
+.vscode/
+
+# OS-specific junk
+.DS_Store
+Thumbs.db
+
+# Emu
+emu/
