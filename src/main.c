@@ -1,4 +1,4 @@
-﻿// main.c
+﻿// main.cc
 
 #include <gb/gb.h>
 #include <stdio.h>
