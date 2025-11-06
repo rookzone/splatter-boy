@@ -1,4 +1,4 @@
-﻿// main.cc
+﻿// main.c
 
 #include <gb/gb.h>
 #include <stdio.h>
@@ -16,7 +16,7 @@ void main(void) {
     DISPLAY_ON;
     SHOW_BKG;
     SHOW_SPRITES;
-
+    
     while(1) {
 
         uint8_t keys = joypad();
@@ -26,7 +26,5 @@ void main(void) {
 
         wait_vbl_done(); // Wait for vertical blank
     }
-
-
 
 }
