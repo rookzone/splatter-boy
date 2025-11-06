@@ -2,6 +2,7 @@
 /bin/
 /build/
 
+
 # Compiled files
 *.o
 *.exe
@@ -13,6 +14,9 @@
 *.tmp
 *.bak
 *.swp
+
+# Emulator
+/emu/
 
 # VSCode settings
 .vscode/
