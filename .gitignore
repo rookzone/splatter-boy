@@ -16,7 +16,7 @@
 *.swp
 
 # Emulator
-/emu/
+/emu/BGB/
 
 # VSCode settings
 .vscode/
