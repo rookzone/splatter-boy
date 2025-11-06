@@ -1,0 +1,35 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Build GameBoy ROM",
+      "type": "shell",
+      "command": ".\\bin\\lcc.exe",
+      "args": [
+        "-o",
+        "build/main.gb",
+        "src/main.c"
+      ],
+      "group": {
+        "kind": "build",
+        "isDefault": false
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Run in Emulator",
+      "type": "shell",
+      "command": "powershell",
+      "args": [
+        "-Command",
+        "& 'emu\\BGB\\bgb.exe' 'build\\main.gb'"
+      ],
+      "dependsOn": "Build GameBoy ROM",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "problemMatcher": []
+    }
+  ]
+}
