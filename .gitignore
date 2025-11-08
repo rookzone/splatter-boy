@@ -14,10 +14,9 @@
 *.tmp
 *.bak
 *.swp
-*.ini
 
 # Emulator
-emu/BGB/
+/emu/BGB/
 
 # VSCode settings
 .vscode/
