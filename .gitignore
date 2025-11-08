@@ -17,6 +17,7 @@
 
 # Emulator
 /emu/BGB/
+/dev-tools/
 
 # VSCode settings
 .vscode/
