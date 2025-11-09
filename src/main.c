@@ -11,6 +11,7 @@
 - Detect if ball is rolling or at rest on surface
   - Defined if collision event is the same after each frame, then we can assume that the ball is in a continous collision state
   - This meanswe can apply some friction or allow the wall to exert force on the ball
+  
 ###########*/
 
 enum {
