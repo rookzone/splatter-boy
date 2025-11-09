@@ -106,4 +106,4 @@ void check_ball_wall(Ball *b, Wall *w) {
         b->y = w->y - 8;
         b->vy = -b->vy / DAMPING;
     }
-}
+}  
