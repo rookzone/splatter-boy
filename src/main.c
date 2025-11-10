@@ -1,110 +1,81 @@
-﻿
+﻿//main.c
+
+/*
+tODO:
+
+ Add pins.c/h files
+
+Define Pin struct
+
+Implement init_pins() to place them visually
+
+Store pins in an array
+
+ Add simple overlap detection
+
+Check if ball’s pixel position overlaps a pin
+
+When true, flip ball->vy (and tweak ball->vx)
+
+ Make an array of pin positions
+
+Start small (3–4 pins)
+
+Maybe later load this from a map file
+
+ Integrate into main loop
+
+Call check_pin_collisions() after check_ball_wall()
+*/
+
 #include <gb/gb.h>
 #include <stdio.h>
-#include <stdlib.h>
 #include "tiles/pinballTiles.h"
+#include "physics.h"
 
+enum { BALL_SPRITE = 0, WALL_SPRITE = 1 };
+enum { TILE_BALL = 0, TILE_WALL = 1 };
 
-/*########## TODO #############
-- Render wall sprites
-- Log collision events
-- Detect if ball is rolling or at rest on surface
-  - Defined if collision event is the same after each frame, then we can assume that the ball is in a continous collision state
-  - This meanswe can apply some friction or allow the wall to exert force on the ball
-  
-###########*/
-
-enum {
-    PLAYER_SPRITE = 0,
-    BALL_SPRITE = 0,
-    WALL_SPRITE = 1
-} Sprites;
-
-enum {
-    TILE_SMILE = 0,
-    TILE_BALL = 0,
-    TILE_WALL = 1
-} Tiles;
-
-// Ball struct
-typedef struct {
-    uint8_t x, y;   // position in fixed-point
-    int8_t vx, vy; // velocity in fixed-point
-} Ball;
-
-
-typedef struct {
-    uint8_t x, y;       // top-left position in pixels
-    uint8_t width, height;
-} Wall;
-
-
-#define GRAVITY 1
-#define MAX_SPEED 10
-#define DAMPING 0
-
-void apply_gravity(Ball *b);
-void check_ball_wall(Ball *b, Wall *w);
+Ball pinball;
+Wall floor;
 
 void main(void) {
+    DISPLAY_OFF;
+    SPRITES_8x8;
 
-    DISPLAY_OFF;     
-    SHOW_BKG;         
-    SPRITES_8x8;      
-	
-    // Load tile data
-	  set_sprite_data(0, 2, PinballTiles);
-    
-    // Create ball
-    Ball pinball;
-    pinball.x = 95;
-    pinball.y = 75;
-    pinball.vy = 0; // start stationary
-    // Draw ball
-    set_sprite_tile(BALL_SPRITE, TILE_BALL); 
-    move_sprite(BALL_SPRITE, 95, 75);
+    set_sprite_data(0, 2, PinballTiles);
 
-    // Create floor wall
-    Wall floor;
+    // Initialize ball position and velocity
+    pinball.x = FIXED(95);
+    pinball.y = FIXED(75);
+    pinball.vx = 0;
+    pinball.vy = 0;
+
+    set_sprite_tile(BALL_SPRITE, TILE_BALL);
+    move_sprite(BALL_SPRITE, pinball.x >> 8, pinball.y >> 8);
+
+    // Initialize floor
     floor.x = 0;
-    floor.y = 120;     // near bottom of screen
-    floor.width = 160; // full screen width
-    floor.height = 8;  // 8 pixels tall
-    set_sprite_tile(WALL_SPRITE, TILE_WALL); 
-    move_sprite(WALL_SPRITE, 105, 75);
+    floor.y = 120;
+    floor.width = 160;
+    floor.height = 8;
 
-    printf("Testing a GameBoy \ngame.");
+    set_sprite_tile(WALL_SPRITE, TILE_WALL);
+    move_sprite(WALL_SPRITE, 95, floor.y - 1);
 
     DISPLAY_ON;
-	  SHOW_SPRITES;
+    SHOW_SPRITES;
 
-	while(1){
+    while (1) {
+        apply_gravity(&pinball);
+        check_ball_wall(&pinball, &floor);
 
-      // Apply gravity
-      apply_gravity(&pinball);
+        move_sprite(BALL_SPRITE, pinball.x >> 8, pinball.y >> 8);
 
-      check_ball_wall(&pinball, &floor);
-      
-      // Update sprite position
-      move_sprite(BALL_SPRITE, pinball.x, pinball.y);
+        if (joypad() & J_UP) {
+            apply_impulse(&pinball, 50);
+        }
 
-      wait_vbl_done();
-	}
-
-}
-
-void apply_gravity(Ball *b) {
-  
-  if (abs(b->vy) < MAX_SPEED){
-    b->vy += GRAVITY;  // accelerate downward
-  }
-  b->y += b->vy;     // move down by velocity
-
-}
-
-void check_ball_wall(Ball *b, Wall *w) {
-    if (b->y + 8 >= w->y) { // 8 = sprite height
-        b->y = w->y - 8;
-        b->vy = -b->vy / DAMPING;
+        wait_vbl_done();
     }
-}  
+}
