@@ -1,35 +1,48 @@
 ﻿//main.c
 
 /*
-tODO:
+TODO:
 
- Add pins.c/h files
+Create helper function for assigning sprites. It should keep track of the sprite number.
+I could also designate the sprite group, so if it's something that can be written over or if it's something
+that needs to stay on the screen.
 
-Define Pin struct
+---
 
-Implement init_pins() to place them visually
+I need to think of some way of updating sprite positions and graphics too. I have these things to all associate together:
+1. The struct
+basically objects created that contain values
 
-Store pins in an array
+2. The physics - in fixed point numbers
+The struct references are passed into this basically, then the numbers are changed in fixed point
 
- Add simple overlap detection
+3. Drawing the sprite
+I am setting a sprite number for the object, and also a tile type. 
 
-Check if ball’s pixel position overlaps a pin
+4. Moving the sprite
+I am moving the sprite with pure int, so << 8 conversion.
 
-When true, flip ball->vy (and tweak ball->vx)
+---
 
- Make an array of pin positions
+Start to apply standards across the code. Comment code. Document what I'm doing on GitHub or something.
 
-Start small (3–4 pins)
+---
 
-Maybe later load this from a map file
+Next steps after this housekeeping:
 
- Integrate into main loop
+- Create the pins, these are new objects where the balls will bounce off
+requires a collision check
+imparts force in direction depending on which pixel is hit, so hit at left side impart force leftwards on ball...
 
-Call check_pin_collisions() after check_ball_wall()
+- Better ball motion
+The balls will now need to be able to move left and right. So I'm guessing I'll need to look into vectors and how they work.
+
 */
 
 #include <gb/gb.h>
+#include <gbdk/console.h>
 #include <stdio.h>
+#include <stdbool.h>
 #include "tiles/pinballTiles.h"
 #include "physics.h"
 
@@ -38,6 +51,9 @@ enum { TILE_BALL = 0, TILE_WALL = 1 };
 
 Ball pinball;
 Wall floor;
+Ball pachinkoBalls[10];
+
+void init_balls(Ball* b, uint8_t count);
 
 void main(void) {
     DISPLAY_OFF;
@@ -63,19 +79,72 @@ void main(void) {
     set_sprite_tile(WALL_SPRITE, TILE_WALL);
     move_sprite(WALL_SPRITE, 95, floor.y - 1);
 
+    init_balls(pachinkoBalls, 10);
+
     DISPLAY_ON;
     SHOW_SPRITES;
 
+    uint8_t frame_time;
+    printf("Frame time:   \n");
+    bool frame_advance_mode = false; 
+    uint8_t keys;
+
     while (1) {
-        apply_gravity(&pinball);
-        check_ball_wall(&pinball, &floor);
+      
+      if (joypad() == J_RIGHT && frame_advance_mode == false){
+        frame_advance_mode = true;
+      }
+      
+      uint8_t start = DIV_REG; // Start of perfomence measure block
 
-        move_sprite(BALL_SPRITE, pinball.x >> 8, pinball.y >> 8);
+      apply_gravity(&pinball);
+      check_ball_wall(&pinball, &floor);
+      move_sprite(BALL_SPRITE, pinball.x >> 8, pinball.y >> 8);
 
-        if (joypad() & J_UP) {
-            apply_impulse(&pinball, 50);
-        }
+      apply_gravity_multi(pachinkoBalls, 10);
+      check_ball_wall_multi(pachinkoBalls, &floor, 10);
+      
+      if (joypad() & J_UP) {
+        apply_impulse(&pinball, 50);
+      }
 
-        wait_vbl_done();
+      uint8_t end = DIV_REG; // end of performence measure block
+      
+      frame_time = end - start;
+
+      gotoxy(12, 0);
+      printf("%3u", frame_time);
+
+
+      loop:
+      keys = joypad();
+      if (keys == J_LEFT){
+          frame_advance_mode = false;
+          goto advance;
+      }
+      
+      if(frame_advance_mode == true && keys != J_LEFT){
+
+        if(keys != J_RIGHT)
+          goto loop;
+        
+      }
+      advance:
+
+      wait_vbl_done();
+
     }
 }
+
+void init_balls(Ball* b, uint8_t count){
+
+      for(uint8_t i = 0; i < count; i++){
+        b[i].x = FIXED(60+ i*10);
+        b[i].y = FIXED(40+ i*10);
+        b[i].vx = 0;
+        b[i].vy = 0;
+
+        set_sprite_tile(2 +i, TILE_BALL);
+        move_sprite(2 + i,b[i].x >> 8, b[i].y >> 8);
+      }
+   }
