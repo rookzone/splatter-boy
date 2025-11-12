@@ -1,7 +1,8 @@
 ﻿#include <gb/gb.h>
 #include "physics.h"
 
-void apply_gravity(Ball *b) {
+void apply_gravity(Ball *b) 
+{
     if (b->vy < MAX_SPEED) {
         b->vy += GRAVITY;
     }
@@ -9,7 +10,8 @@ void apply_gravity(Ball *b) {
     b->x += b->vx;  // include horizontal motion if you want
 }
 
-void apply_gravity_multi(Ball *b, uint8_t count) {
+void apply_gravity_multi(Ball *b, uint8_t count) 
+{
     for (uint8_t i = 0; i < count; i++) {
         if (b[i].vy < MAX_SPEED) {
             b[i].vy += GRAVITY;
@@ -21,7 +23,8 @@ void apply_gravity_multi(Ball *b, uint8_t count) {
     }
 }
 
-void check_ball_wall(Ball *b, Wall *w) {
+void check_ball_wall(Ball *b, Wall *w) 
+{
     uint16_t sprite_y = b->y >> 8;
     if (sprite_y + 8 >= w->y) {
         b->y = (w->y - 8) << 8;
@@ -30,7 +33,8 @@ void check_ball_wall(Ball *b, Wall *w) {
     }
 }
 
-void check_ball_wall_multi(Ball *b, Wall *w, uint8_t count) {
+void check_ball_wall_multi(Ball *b, Wall *w, uint8_t count) 
+{
     for (uint8_t i = 0; i < count; i++) {
         uint16_t sprite_y = b[i].y >> 8;
         if (sprite_y + 8 >= w->y) {
@@ -41,6 +45,7 @@ void check_ball_wall_multi(Ball *b, Wall *w, uint8_t count) {
     }
 }
 
-void apply_impulse(Ball *b, uint8_t impulse) {
+void apply_impulse(Ball *b, uint8_t impulse) 
+{
     b->vy -= impulse;
 }

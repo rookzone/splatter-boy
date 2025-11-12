@@ -24,7 +24,9 @@ I am moving the sprite with pure int, so << 8 conversion.
 
 ---
 
-Start to apply standards across the code. Comment code. Document what I'm doing on GitHub or something.
+Set out a style guide and apply it.
+Comment codes.
+Start to document progress on a wiki.
 
 ---
 
@@ -41,8 +43,10 @@ The balls will now need to be able to move left and right. So I'm guessing I'll 
 
 #include <gb/gb.h>
 #include <gbdk/console.h>
+
 #include <stdio.h>
 #include <stdbool.h>
+
 #include "tiles/pinballTiles.h"
 #include "physics.h"
 
@@ -55,7 +59,8 @@ Ball pachinkoBalls[10];
 
 void init_balls(Ball* b, uint8_t count);
 
-void main(void) {
+void main(void) 
+{
     DISPLAY_OFF;
     SPRITES_8x8;
 
@@ -136,15 +141,15 @@ void main(void) {
     }
 }
 
-void init_balls(Ball* b, uint8_t count){
+void init_balls(Ball* b, uint8_t count)
+{
+    for(uint8_t i = 0; i < count; i++){
+      b[i].x = FIXED(60+ i*10);
+      b[i].y = FIXED(40+ i*10);
+      b[i].vx = 0;
+      b[i].vy = 0;
 
-      for(uint8_t i = 0; i < count; i++){
-        b[i].x = FIXED(60+ i*10);
-        b[i].y = FIXED(40+ i*10);
-        b[i].vx = 0;
-        b[i].vy = 0;
-
-        set_sprite_tile(2 +i, TILE_BALL);
-        move_sprite(2 + i,b[i].x >> 8, b[i].y >> 8);
-      }
-   }
+      set_sprite_tile(2 +i, TILE_BALL);
+      move_sprite(2 + i,b[i].x >> 8, b[i].y >> 8);
+    }
+}
