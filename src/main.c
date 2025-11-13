@@ -24,8 +24,6 @@ I am moving the sprite with pure int, so << 8 conversion.
 
 ---
 
-Set out a style guide and apply it.
-Comment codes.
 Start to document progress on a wiki.
 
 ---
@@ -49,31 +47,31 @@ The balls will now need to be able to move left and right. So I'm guessing I'll 
 
 #include "tiles/pinballTiles.h"
 #include "physics.h"
+#include "ball.h"
 
-enum { BALL_SPRITE = 0, WALL_SPRITE = 1 };
-enum { TILE_BALL = 0, TILE_WALL = 1 };
-
+// Create game object structs
 Ball pinball;
 Wall floor;
 Ball pachinkoBalls[10];
 
-void init_balls(Ball* b, uint8_t count);
 
 void main(void) 
 {
     DISPLAY_OFF;
     SPRITES_8x8;
 
+    // Load in sprite sheet
     set_sprite_data(0, 2, PinballTiles);
 
-    // Initialize ball position and velocity
-    pinball.x = FIXED(95);
-    pinball.y = FIXED(75);
-    pinball.vx = 0;
-    pinball.vy = 0;
+    // Initialize logical ball position and velocity
+    pinball.x = TO_FIXED(95);
+    pinball.y = TO_FIXED(75);
+    pinball.vx = TO_FIXED(0);
+    pinball.vy = TO_FIXED(0);
 
+    // assign pinball a sprite, and move sprite to align with logical position
     set_sprite_tile(BALL_SPRITE, TILE_BALL);
-    move_sprite(BALL_SPRITE, pinball.x >> 8, pinball.y >> 8);
+    move_sprite(BALL_SPRITE, FROM_FIXED(pinball.x), FROM_FIXED(pinball.y));
 
     // Initialize floor
     floor.x = 0;
@@ -104,7 +102,7 @@ void main(void)
 
       apply_gravity(&pinball);
       check_ball_wall(&pinball, &floor);
-      move_sprite(BALL_SPRITE, pinball.x >> 8, pinball.y >> 8);
+      move_sprite(BALL_SPRITE, FROM_FIXED(pinball.x), FROM_FIXED(pinball.y));
 
       apply_gravity_multi(pachinkoBalls, 10);
       check_ball_wall_multi(pachinkoBalls, &floor, 10);
@@ -114,13 +112,18 @@ void main(void)
       }
 
       uint8_t end = DIV_REG; // end of performence measure block
+
+      // Resets the balls into their initial position
+      if (joypad() & J_DOWN) {
+        reset_balls(pachinkoBalls, 10);
+      }
       
       frame_time = end - start;
 
       gotoxy(12, 0);
       printf("%3u", frame_time);
 
-
+      // This just
       loop:
       keys = joypad();
       if (keys == J_LEFT){
@@ -129,10 +132,8 @@ void main(void)
       }
       
       if(frame_advance_mode == true && keys != J_LEFT){
-
         if(keys != J_RIGHT)
           goto loop;
-        
       }
       advance:
 
@@ -141,15 +142,4 @@ void main(void)
     }
 }
 
-void init_balls(Ball* b, uint8_t count)
-{
-    for(uint8_t i = 0; i < count; i++){
-      b[i].x = FIXED(60+ i*10);
-      b[i].y = FIXED(40+ i*10);
-      b[i].vx = 0;
-      b[i].vy = 0;
 
-      set_sprite_tile(2 +i, TILE_BALL);
-      move_sprite(2 + i,b[i].x >> 8, b[i].y >> 8);
-    }
-}

@@ -29,7 +29,6 @@ void check_ball_wall(Ball *b, Wall *w)
     if (sprite_y + 8 >= w->y) {
         b->y = (w->y - 8) << 8;
         b->vy = -b->vy / DAMPING;
-        b->vx /= 2;  // optional horizontal friction
     }
 }
 
