@@ -9,7 +9,7 @@
 
 // ---------- Fixed-point setup (8.8) ----------
 
-typedef int16_t fixed;            // 16-bit fixed-point number
+typedef int16_t fixed_n;            // 16-bit fixed-point number
 #define FIXED_SHIFT   8           // number of fractional bits
 #define FIXED_ONE     (1 << FIXED_SHIFT)   // 1.0 in fixed (256)
 #define FIXED_HALF    (1 << (FIXED_SHIFT - 1)) // 0.5 (128)
@@ -17,7 +17,7 @@ typedef int16_t fixed;            // 16-bit fixed-point number
 #define FIXED_EIGHTH  (1 << (FIXED_SHIFT - 3)) // 0.125 (32)
 
 // Conversion helpers
-#define TO_FIXED(x)   ((fixed)((x) << FIXED_SHIFT))       // int → fixed
+#define TO_FIXED(x)   ((fixed_n)((x) << FIXED_SHIFT))       // int → fixed
 #define FROM_FIXED(x) ((x) >> FIXED_SHIFT)                // fixed → int
 #define FIXED_ADD(a,b) ((a) + (b))
 #define FIXED_SUB(a,b) ((a) - (b))
@@ -34,8 +34,8 @@ typedef int16_t fixed;            // 16-bit fixed-point number
 
 // --- Data types ---
 typedef struct {
-    fixed x, y;   // position in 8.8 fixed-point
-    fixed  vx, vy; // velocity in 8.8 fixed-point
+    fixed_n x, y;   // position in 8.8 fixed-point
+    fixed_n  vx, vy; // velocity in 8.8 fixed-point
 } Ball;
 
 typedef struct {
@@ -51,8 +51,5 @@ void check_ball_wall(Ball *b, Wall *w);
 void check_ball_wall_multi(Ball *b, Wall *w, uint8_t count);
 
 void apply_impulse(Ball *b, uint8_t impulse);
-
-// Optionally uncomment if you bring init_balls() back later
-// void init_balls(Ball *b, uint8_t count);
 
 #endif // PHYSICS_H
