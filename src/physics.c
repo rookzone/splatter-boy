@@ -19,7 +19,7 @@ void apply_gravity_multi(Ball *b, uint8_t count)
         b[i].y += b[i].vy;
         b[i].x += b[i].vx;
 
-        move_sprite(2 + i, b[i].x >> 8, b[i].y >> 8);
+        move_sprite(2 + i, FROM_FIXED(b[i].x), FROM_FIXED(b[i].y));
     }
 }
 
