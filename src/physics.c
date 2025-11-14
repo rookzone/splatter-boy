@@ -7,7 +7,7 @@ void apply_gravity(Ball *b)
         b->vy += GRAVITY;
     }
     b->y += b->vy;
-    b->x += b->vx;  // include horizontal motion if you want
+    b->x += b->vx;
 }
 
 void apply_gravity_multi(Ball *b, uint8_t count) 
@@ -28,7 +28,7 @@ void check_ball_wall(Ball *b, Wall *w)
     uint16_t sprite_y = b->y >> 8;
     if (sprite_y + 8 >= w->y) {
         b->y = (w->y - 8) << 8;
-        b->vy = -b->vy / DAMPING;
+        b->vy = -b->vy >> 2; // invert velocity and then divide by 4 (shift 2 bits left)
     }
 }
 
