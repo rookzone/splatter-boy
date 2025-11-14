@@ -6,6 +6,9 @@
 #include <gb/gb.h>
 #include <stdint.h>
 
+// FORWARD DECLARATION:
+
+typedef struct GameSprite GameSprite;
 
 // ---------- Fixed-point setup (8.8) ----------
 
@@ -36,11 +39,13 @@ typedef int16_t fixed_n;            // 16-bit fixed-point number
 typedef struct {
     fixed_n x, y;   // position in 8.8 fixed-point
     fixed_n  vx, vy; // velocity in 8.8 fixed-point
+    GameSprite *game_sprite;
 } Ball;
 
 typedef struct {
     uint8_t x, y;       // top-left in pixels
     uint8_t width, height;
+    GameSprite *game_sprite;
 } Wall;
 
 // --- Function prototypes ---

@@ -1,5 +1,5 @@
-﻿#include <gb/gb.h>
-#include "physics.h"
+﻿#include "physics.h"
+#include "graphics.h"
 
 void apply_gravity(Ball *ball) 
 {
@@ -8,6 +8,9 @@ void apply_gravity(Ball *ball)
     }
     ball->y += ball->vy;
     ball->x += ball->vx;
+
+    // update sprite
+    move_sprite_fixed(ball->game_sprite, ball->x, ball->y);
 }
 
 void check_ball_wall(Ball *ball, Wall *w) 
@@ -33,7 +36,7 @@ void apply_gravity_multi(Ball *balls, uint8_t count)
         balls[i].y += balls[i].vy;
         balls[i].x += balls[i].vx;
 
-        move_sprite(2 + i, FROM_FIXED(balls[i].x), FROM_FIXED(balls[i].y));
+        move_sprite_fixed(balls[i].game_sprite, balls[i].x, balls[i].y);
     }
 }
 

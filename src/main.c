@@ -48,11 +48,13 @@ The balls will now need to be able to move left and right. So I'm guessing I'll 
 #include "tiles/pinballTiles.h"
 #include "physics.h"
 #include "ball.h"
+#include "graphics.h"
 
 // Create game object structs
 Ball pinball;
 Wall floor;
 Ball pachinkoBalls[10];
+GameSprite pachinko_balls_gfx_data[10];
 
 
 void main(void) 
@@ -63,15 +65,19 @@ void main(void)
     // Load in sprite sheet
     set_sprite_data(0, 2, PinballTiles);
 
+
     // Initialize logical ball position and velocity
     pinball.x = TO_FIXED(95);
     pinball.y = TO_FIXED(75);
     pinball.vx = TO_FIXED(0);
     pinball.vy = TO_FIXED(0);
+    GameSprite pinball_graphics_data;
+    pinball_graphics_data = create_sprite(TILE_BALL);
+    pinball.game_sprite = &pinball_graphics_data;
+    
 
-    // assign pinball a sprite, and move sprite to align with logical position
-    set_sprite_tile(BALL_SPRITE, TILE_BALL);
-    move_sprite(BALL_SPRITE, FROM_FIXED(pinball.x), FROM_FIXED(pinball.y));
+    // move sprite to align with logical position
+    move_sprite_fixed(pinball.game_sprite, pinball.x, pinball.y);
 
     // Initialize floor
     floor.x = 0;
@@ -79,10 +85,13 @@ void main(void)
     floor.width = 160;
     floor.height = 8;
 
-    set_sprite_tile(WALL_SPRITE, TILE_WALL);
-    move_sprite(WALL_SPRITE, 95, floor.y - 1);
+    GameSprite wall_graphics_data;
+    wall_graphics_data = create_sprite(TILE_WALL);
+    floor.game_sprite = &wall_graphics_data;
 
-    init_balls(pachinkoBalls, 10);
+    move_sprite_int(floor.game_sprite, 95, floor.y - 1);
+
+    init_balls(pachinkoBalls, pachinko_balls_gfx_data, 10);
 
     DISPLAY_ON;
     SHOW_SPRITES;
@@ -102,7 +111,6 @@ void main(void)
 
       apply_gravity(&pinball);
       check_ball_wall(&pinball, &floor);
-      move_sprite(BALL_SPRITE, FROM_FIXED(pinball.x), FROM_FIXED(pinball.y));
 
       apply_gravity_multi(pachinkoBalls, 10);
       check_ball_wall_multi(pachinkoBalls, &floor, 10);
