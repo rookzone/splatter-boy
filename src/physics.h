@@ -44,12 +44,12 @@ typedef struct {
 } Wall;
 
 // --- Function prototypes ---
-void apply_gravity(Ball *b);
-void apply_gravity_multi(Ball *b, uint8_t count);
+void apply_gravity(Ball *ball);
+void apply_gravity_multi(Ball *balls, uint8_t count);
 
-void check_ball_wall(Ball *b, Wall *w);
-void check_ball_wall_multi(Ball *b, Wall *w, uint8_t count);
+void check_ball_wall(Ball *ball, Wall *w);
+void check_ball_wall_multi(Ball *balls, Wall *w, uint8_t count);
 
-void apply_impulse(Ball *b, uint8_t impulse);
+void apply_impulse(Ball *ball, uint8_t impulse);
 
 #endif // PHYSICS_H

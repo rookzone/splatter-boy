@@ -1,50 +1,50 @@
 ﻿#include <gb/gb.h>
 #include "physics.h"
 
-void apply_gravity(Ball *b) 
+void apply_gravity(Ball *ball) 
 {
-    if (b->vy < MAX_SPEED) {
-        b->vy += GRAVITY;
+    if (ball->vy < MAX_SPEED) {
+        ball->vy += GRAVITY;
     }
-    b->y += b->vy;
-    b->x += b->vx;
+    ball->y += ball->vy;
+    ball->x += ball->vx;
 }
 
-void apply_gravity_multi(Ball *b, uint8_t count) 
+void check_ball_wall(Ball *ball, Wall *w) 
 {
-    for (uint8_t i = 0; i < count; i++) {
-        if (b[i].vy < MAX_SPEED) {
-            b[i].vy += GRAVITY;
-        }
-        b[i].y += b[i].vy;
-        b[i].x += b[i].vx;
-
-        move_sprite(2 + i, FROM_FIXED(b[i].x), FROM_FIXED(b[i].y));
-    }
-}
-
-void check_ball_wall(Ball *b, Wall *w) 
-{
-    uint16_t sprite_y = b->y >> 8;
+    uint16_t sprite_y = ball->y >> 8;
     if (sprite_y + 8 >= w->y) {
-        b->y = (w->y - 8) << 8;
-        b->vy = -b->vy >> 2; // invert velocity and then divide by 4 (shift 2 bits left)
+        ball->y = (w->y - 8) << 8;
+        ball->vy = -ball->vy >> 2; // invert velocity and then divide by 4 (shift 2 bits left)
     }
 }
 
-void check_ball_wall_multi(Ball *b, Wall *w, uint8_t count) 
+void apply_impulse(Ball *ball, uint8_t impulse) 
+{
+    ball->vy -= impulse;
+}
+
+void apply_gravity_multi(Ball *balls, uint8_t count) 
 {
     for (uint8_t i = 0; i < count; i++) {
-        uint16_t sprite_y = b[i].y >> 8;
-        if (sprite_y + 8 >= w->y) {
-            b[i].y = (w->y - 8) << 8;
-            b[i].vy = -b[i].vy / DAMPING;
-            b[i].vx /= 2;
+        if (balls[i].vy < MAX_SPEED) {
+            balls[i].vy += GRAVITY;
         }
+        balls[i].y += balls[i].vy;
+        balls[i].x += balls[i].vx;
+
+        move_sprite(2 + i, FROM_FIXED(balls[i].x), FROM_FIXED(balls[i].y));
     }
 }
 
-void apply_impulse(Ball *b, uint8_t impulse) 
+void check_ball_wall_multi(Ball *balls, Wall *w, uint8_t count) 
 {
-    b->vy -= impulse;
+    for (uint8_t i = 0; i < count; i++) {
+        uint16_t sprite_y = balls[i].y >> 8;
+        if (sprite_y + 8 >= w->y) {
+            balls[i].y = (w->y - 8) << 8;
+            balls[i].vy = -balls[i].vy / DAMPING;
+            balls[i].vx /= 2;
+        }
+    }
 }
