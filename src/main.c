@@ -3,24 +3,9 @@
 /*
 TODO:
 
-Create helper function for assigning sprites. It should keep track of the sprite number.
-I could also designate the sprite group, so if it's something that can be written over or if it's something
-that needs to stay on the screen.
+Seperate out graphics from physics, and create a whole rendering section.
 
----
-
-I need to think of some way of updating sprite positions and graphics too. I have these things to all associate together:
-1. The struct
-basically objects created that contain values
-
-2. The physics - in fixed point numbers
-The struct references are passed into this basically, then the numbers are changed in fixed point
-
-3. Drawing the sprite
-I am setting a sprite number for the object, and also a tile type. 
-
-4. Moving the sprite
-I am moving the sprite with pure int, so << 8 conversion.
+Create a type header file for storing types used across the project. Helps prevent circular referncing and stuff
 
 ---
 
@@ -66,18 +51,18 @@ void main(void)
     set_sprite_data(0, 2, PinballTiles);
 
 
-    // Initialize logical ball position and velocity
+    // Initialize standalone ball
     pinball.x = TO_FIXED(95);
     pinball.y = TO_FIXED(75);
     pinball.vx = TO_FIXED(0);
     pinball.vy = TO_FIXED(0);
+
     GameSprite pinball_graphics_data;
     pinball_graphics_data = create_sprite(TILE_BALL);
     pinball.game_sprite = &pinball_graphics_data;
-    
 
-    // move sprite to align with logical position
-    move_sprite_fixed(pinball.game_sprite, pinball.x, pinball.y);
+    DRAW_SPRITE(pinball.game_sprite,pinball.x,pinball.y);
+  
 
     // Initialize floor
     floor.x = 0;
@@ -89,8 +74,9 @@ void main(void)
     wall_graphics_data = create_sprite(TILE_WALL);
     floor.game_sprite = &wall_graphics_data;
 
-    move_sprite_int(floor.game_sprite, 95, floor.y - 1);
+    DRAW_SPRITE(floor.game_sprite,TO_FIXED(floor.x),TO_FIXED(floor.y));
 
+    // Create the pachinko balls, all handled in this function
     init_balls(pachinkoBalls, pachinko_balls_gfx_data, 10);
 
     DISPLAY_ON;
@@ -103,12 +89,20 @@ void main(void)
 
     while (1) {
       
+
+      // INPUT
       if (joypad() == J_RIGHT && frame_advance_mode == false){
         frame_advance_mode = true;
       }
-      
-      uint8_t start = DIV_REG; // Start of perfomence measure block
 
+      if (joypad() & J_DOWN) {
+        reset_balls(pachinkoBalls, 10);
+      }
+      
+      /* ##### START OF PERFORMANCE MEASURE BLOCK ##### */
+      uint8_t start = DIV_REG;
+
+      // PHYSICS
       apply_gravity(&pinball);
       check_ball_wall(&pinball, &floor);
 
@@ -119,19 +113,23 @@ void main(void)
         apply_impulse(&pinball, 50);
       }
 
-      uint8_t end = DIV_REG; // end of performence measure block
-
-      // Resets the balls into their initial position
-      if (joypad() & J_DOWN) {
-        reset_balls(pachinkoBalls, 10);
+      // DRAW SPRITE IN UPDATED POSITIONS
+      for (uint8_t i = 0; i < 10; i++) {
+        DRAW_SPRITE(pachinkoBalls[i].game_sprite,pachinkoBalls[i].x,pachinkoBalls[i].y);
       }
-      
+
+      DRAW_SPRITE(pinball.game_sprite,pinball.x,pinball.y);
+
+      uint8_t end = DIV_REG;
+      /* ##### END OF PERFORMANCE MEASURE BLOCK ##### */
+
       frame_time = end - start;
 
       gotoxy(12, 0);
       printf("%3u", frame_time);
 
-      // This just
+      // This section just handles a manual frame advance mode. Can be removed without issue.
+      // I'm aware that this could be done much more cleanly, but I like the goto bodge job for aesthetic reasons.
       loop:
       keys = joypad();
       if (keys == J_LEFT){

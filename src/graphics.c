@@ -3,7 +3,7 @@
 #include <gb/gb.h>
 #include "graphics.h"
 
-uint8_t next_sprite_id = 10;
+uint8_t next_sprite_id = 0;
 
 // Function to assign the next available sprite ID and initialize its tile
 GameSprite create_sprite(uint8_t tile_index)
@@ -14,6 +14,7 @@ GameSprite create_sprite(uint8_t tile_index)
     new_sprite.tile_index = tile_index;
 
     set_sprite_tile(next_sprite_id, tile_index);
+
     next_sprite_id++;
 
     return new_sprite;

@@ -27,4 +27,7 @@ void move_sprite_fixed(GameSprite* game_sprite, fixed_n x, fixed_n y);
 // Move the sprite using integer screen values
 void move_sprite_int(GameSprite* game_sprite, uint8_t x, uint8_t y);
 
+#define DRAW_SPRITE(obj_ptr, fixed_x, fixed_y) \
+    move_sprite((obj_ptr)->sprite_index, FROM_FIXED(fixed_x), FROM_FIXED(fixed_y))
+
 #endif
