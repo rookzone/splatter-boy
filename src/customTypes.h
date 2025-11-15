@@ -58,10 +58,9 @@ struct GameSprite {
     uint8_t tile_index;
 };
 
+// === LOOKUP TABLES ===
 
-// ##### PRE-COMPUTED LOOKUP TABLES #####
-
-const fixed_n RANDOM_HORIZONTAL_VX[10] = {
+static const fixed_n RANDOM_HORIZONTAL_VX[10] = {
     5,    // +0.5
     -5,   // -0.5
     5,    // +0.5
@@ -73,5 +72,6 @@ const fixed_n RANDOM_HORIZONTAL_VX[10] = {
     5,    // +0.5
     -5    // -0.5
 };
+
 
 #endif
