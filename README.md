@@ -1,7 +1,16 @@
 # Splatter Boy
-A fun little project where I mess around with C and GBDK. Attempt at a pinball game with pre-calculated physics.
 
-06/11/25 - I am officially beginning this project. The first goal is to create a ball with gravity that can hit a wall and bounce until it's energy has depleted.
+## TODO SUMMARY
+
+**Clean up repo**
+
+Remove all GBDK files not required. Should only need includes and compiler
+
+## About
+
+A fun little project where I mess around with C and GBDK. Attempt at a pachinko game with decent ball physics
+
+= [x] 06/11/25 - I am officially beginning this project. The first goal is to create a ball with gravity that can hit a wall and bounce until it's energy has depleted.
 
 ## Styles
 
@@ -9,11 +18,11 @@ C styles:
 https://www.cs.umd.edu/~nelson/classes/resources/cstyleguide
 https://www.kernel.org/doc/html/v4.10/process/coding-style.html
 
-## Compile instructions
+## Setup and compile
 
-1. Download GBDK and then copy `bin` into the root directory. LCC.exe is required.
+1. Download GBDK 2020 and copy the contents into the repo. This will ensure all the required gbdk files are in the directory, as not everything copies over due to .gitgnore
 
-### Make
+2. Use make
 
 Just use make. Check out 
 
@@ -56,3 +65,10 @@ Just use make. Check out
 }
 
 ```
+
+
+## TODO
+
+Collision logic required. Pin bounce physics required, knowledge of coordinate here:
+
+<img width="700" height="526" alt="image" src="https://github.com/user-attachments/assets/dc91593f-e0c0-4112-9470-0ac3549d81c6" />

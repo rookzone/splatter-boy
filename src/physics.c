@@ -13,7 +13,10 @@ void apply_gravity(Ball *ball)
 void check_ball_wall(Ball *ball, Wall *w) 
 {
     uint16_t sprite_y = ball->y >> 8;
-    if (sprite_y + 8 >= w->y) {
+    if (sprite_y + 8 >= w->y) { // collsion
+
+        uint8_t wall_width = w->width;
+
         ball->y = (w->y - 8) << 8;
         ball->vy = -ball->vy >> 2; // invert velocity and then divide by 4 (shift 2 bits left)
     }
