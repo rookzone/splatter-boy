@@ -21,7 +21,7 @@ GameSprite create_sprite(uint8_t tile_index)
 
 }
 
-// 1. Moves sprite using fixed-point coordinates (e.g., from Ball physics)
+// Moves sprite using fixed-point coordinates (e.g., from Ball physics)
 // This function internally handles the conversion (FROM_FIXED)
 void move_sprite_fixed(GameSprite* game_sprite, fixed_n x, fixed_n y)
 {
@@ -30,8 +30,15 @@ void move_sprite_fixed(GameSprite* game_sprite, fixed_n x, fixed_n y)
 
 }
 
-// 2. Moves sprite using integer pixel coordinates (e.g., for Wall or initialization)
+// Moves sprite using integer pixel coordinates (e.g., for Wall or initialization)
 void move_sprite_int(GameSprite* game_sprite, uint8_t x, uint8_t y)
 {
     move_sprite(game_sprite->sprite_index, x, y);
+}
+
+
+// Plot a point in fixed number space
+void plot_point_fixed(fixed_n x, fixed_n y)
+{
+    plot_point(FROM_FIXED(x), FROM_FIXED(y));
 }

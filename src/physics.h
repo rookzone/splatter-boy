@@ -1,5 +1,15 @@
 ﻿// physics.h
 
+/*
+#TODO
+
+[ ] - Use this formula to create a collission and then deflect from pachinko_pin function, this adds an offset depending on which side of the pin the ball hits
+  when hitting the center some randomness needs to occur...
+// THIS IS THE ACTUAL COLLISION POINT FOR CALCULATIONS
+        plot_point_fixed(ball->x - TO_FIXED(4), ball->y - TO_FIXED(8)); // plot collision point for debugging purposes
+  
+*/
+
 #ifndef PHYSICS_H
 #define PHYSICS_H
 
