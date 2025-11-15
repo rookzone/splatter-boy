@@ -77,14 +77,18 @@ void main(void)
     SHOW_SPRITES;
 
     uint8_t frame_time;
+    uint8_t start_vbl_timer;
+    uint8_t end_vbl_timer;
     printf("Frame time:   \n");
     printf("Draw posit:   \n");
     bool frame_advance_mode = false; 
     uint8_t keys;
 
     while (1) {
-      
-      
+
+      gotoxy(12, 0);
+      printf("%3u", frame_time);
+
       // INPUT
       if (joypad() == J_RIGHT && frame_advance_mode == false){
         frame_advance_mode = true;
@@ -93,31 +97,21 @@ void main(void)
       if (joypad() & J_DOWN) {
         reset_balls(pachinkoBalls, 10);
       }
-      
-      /* ##### START OF PERFORMANCE MEASURE BLOCK ##### */
-      uint8_t start = DIV_REG;
 
-      // PHYSICS
-      apply_gravity_multi(pachinkoBalls, 10);
-      check_ball_wall_multi(pachinkoBalls, &floor, 10);
-
-      // DRAW SPRITE IN UPDATED POSITIONS
+      // Loop through balls
       for (uint8_t i = 0; i < 10; i++) {
 
-       apply_impulse(&pachinkoBalls[i], RANDOM_HORIZONTAL_VX[i]);
+        // PHYSICS
+        apply_gravity(&pachinkoBalls[i]);
 
+        apply_impulse(&pachinkoBalls[i], RANDOM_HORIZONTAL_VX[i]);
+
+        check_ball_wall(&pachinkoBalls[i], &floor);
+
+        // RENDER
         DRAW_SPRITE(pachinkoBalls[i].game_sprite,pachinkoBalls[i].x,pachinkoBalls[i].y);
         
       }
-
-      uint8_t end = DIV_REG;
-      /* ##### END OF PERFORMANCE MEASURE BLOCK ##### */
-
-      frame_time = end - start;
-
-      gotoxy(12, 0);
-      printf("%3u", frame_time);
-
 
       // This section just handles a manual frame advance mode. Can be removed without issue.
       // I'm aware that this could be done much more cleanly, but I like the goto bodge job for aesthetic reasons.
@@ -134,7 +128,16 @@ void main(void)
       }
       advance:
 
-      wait_vbl_done();
+      /* ##### START OF VBLANK TIME LEFT ##### */
 
+      TAC_REG = 0b111;
+      
+      start_vbl_timer = TIMA_REG;
+
+      end_vbl_timer = TIMA_REG;
+
+      frame_time = end_vbl_timer - start_vbl_timer;
+
+      wait_vbl_done();
     }
 }
