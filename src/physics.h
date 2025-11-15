@@ -22,26 +22,19 @@
 #define MAX_SPEED   TO_FIXED(10)
 #define DAMPING     4       // bounce damping
 
-// --- Data types ---
-typedef struct {
-    fixed_n x, y;   // position in 8.8 fixed-point
-    fixed_n  vx, vy; // velocity in 8.8 fixed-point
-    GameSprite *game_sprite;
-} Ball;
+// ##### GRAVITY #####
 
-typedef struct {
-    uint8_t x, y;       // top-left in pixels
-    uint8_t width, height;
-    GameSprite *game_sprite;
-} Wall;
-
-// --- Function prototypes ---
 void apply_gravity(Ball *ball);
 void apply_gravity_multi(Ball *balls, uint8_t count);
+
+// ##### FORCE #####
+
+void apply_impulse(Ball *ball, int8_t impulse_magnitude);
+
+// ##### COLLISSION #####
 
 void check_ball_wall(Ball *ball, Wall *w);
 void check_ball_wall_multi(Ball *balls, Wall *w, uint8_t count);
 
-void apply_impulse(Ball *ball, int8_t impulse_magnitude);
 
 #endif // PHYSICS_H

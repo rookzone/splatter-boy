@@ -8,6 +8,30 @@ https://www.youtube.com/watch?v=oLoTTTuvaRs&list=PLeEj4c2zF7PaFv5MPYhNAkBGrkx4iP
 
 Start to document progress on a wiki.
 
+
+## Structure
+
+All structs, enum, constants, and macros are place in `CustomTypes.h`. This lets me define all the custom 
+stuff in one place, reducing the amount of includes in header files and circular dependcies.
+
+**These are the "engine" functions**
+
+- Physics .c .h
+Applying any movement and forces to logical positions and velocities.
+Generally physics will be applied to the x,y,vx,vy values in the game objects (such as ball or pin).
+
+Operations are done using 8.8 fixed decimal int16s, these helps increase precision.
+These operations take placed in "fixed number space". They will need shifting back for drawing
+
+- Graphics .c .h
+
+**These are game object behaviours**
+
+- ball .c .h
+- pins .c .h
+
+`main.c` is where the game loop is
+
 */
 
 #include <gb/gb.h>
@@ -25,20 +49,6 @@ Start to document progress on a wiki.
 Wall floor;
 Ball pachinkoBalls[10];
 GameSprite pachinko_balls_gfx_data[10];
-
-const fixed_n RANDOM_HORIZONTAL_VX[10] = {
-    5,    // +0.5
-    -5,   // -0.5
-    5,    // +0.5
-    5,    // +0.5
-    -5,   // -0.5
-    -5,   // -0.5
-    5,    // +0.5
-    -5,   // -0.5
-    5,    // +0.5
-    -5    // -0.5
-};
-
 
 void main(void) 
 {

@@ -13,12 +13,6 @@ enum { TILE_BALL = 0, TILE_WALL = 1 };
 
 extern uint8_t next_sprite_id;
 
-// This stores the tile the sprite uses and crucially holds the sprite ID for where it is loaded into VRAM
-struct GameSprite {
-    uint8_t sprite_index;
-    uint8_t tile_index;
-};
-
 // Function to assign the next available sprite ID and initialize its tile
 GameSprite create_sprite(uint8_t tile_index);
 

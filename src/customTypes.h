@@ -1,4 +1,4 @@
-// types.h
+// customTypes.h
 
 #include <gb/gb.h>
 
@@ -28,5 +28,50 @@ typedef int16_t fixed_n;
 #define FIXED_MUL(a,b) (((a) * (b)) >> FIXED_SHIFT)
 #define FIXED_DIV(a,b) (((a) << FIXED_SHIFT) / (b))
 
+
+// ##### GAME OBJECTS #####
+
+// === Interactable objects ===
+
+typedef struct {
+    fixed_n x, y;
+    fixed_n  vx, vy;
+    GameSprite *game_sprite;
+} Ball;
+
+typedef struct {
+    uint8_t x, y;
+    uint8_t width, height;
+    GameSprite *game_sprite;
+} Wall;
+
+typedef struct {
+    uint8_t x, y;
+    GameSprite* game_sprite;
+} Pin;
+
+// === Graphics ===
+
+// This stores the tile the sprite uses and crucially holds the sprite ID for where it is loaded into VRAM
+struct GameSprite {
+    uint8_t sprite_index;
+    uint8_t tile_index;
+};
+
+
+// ##### PRE-COMPUTED LOOKUP TABLES #####
+
+const fixed_n RANDOM_HORIZONTAL_VX[10] = {
+    5,    // +0.5
+    -5,   // -0.5
+    5,    // +0.5
+    5,    // +0.5
+    -5,   // -0.5
+    -5,   // -0.5
+    5,    // +0.5
+    -5,   // -0.5
+    5,    // +0.5
+    -5    // -0.5
+};
 
 #endif
