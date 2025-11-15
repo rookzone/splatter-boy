@@ -19,19 +19,27 @@ void check_ball_wall(Ball *ball, Wall *w)
     }
 }
 
-void apply_impulse(Ball *ball, uint8_t impulse) 
+void apply_impulse(Ball *ball, int16_t impulse_magnitude)
 {
-    ball->vy -= impulse;
+    // TO_FIXED(50) results in 50.0 pixels/frame, which is still too fast. 
+    // Let's assume you want 5.0 pixels/frame.
+    
+    // Pass the impulse as a negative value (upward force)
+    ball->vy += TO_FIXED(impulse_magnitude);
 }
 
 void apply_gravity_multi(Ball *balls, uint8_t count) 
 {
     for (uint8_t i = 0; i < count; i++) {
-        if (balls[i].vy < MAX_SPEED) {
-            balls[i].vy += GRAVITY;
-        }
+
+        balls[i].vy += GRAVITY;
+
         balls[i].y += balls[i].vy;
         balls[i].x += balls[i].vx;
+
+        if (balls[i].vy > MAX_SPEED) {
+        balls[i].vy = MAX_SPEED;
+        }
 
     }
 }

@@ -6,7 +6,7 @@
 
 typedef struct {
     uint8_t x, y;
-    uint8_t sprite_id;
+    GameSprite* game_sprite;
 } Pin;
 
 void init_pins(const uint8_t pin_positions[][2], uint8_t count);

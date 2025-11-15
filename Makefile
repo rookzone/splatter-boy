@@ -9,7 +9,7 @@ CC = ./bin/lcc.exe
 
 # === Source Files ===
 SRC = $(wildcard $(SRC_DIR)/*.c) \
-      $(wildcard $(SRC_DIR)/tiles/*.c)
+	$(wildcard $(SRC_DIR)/tiles/*.c)
 
 # === Output ===
 OBJ = $(patsubst $(SRC_DIR)/%.c,$(BUILD_DIR)/%.o,$(SRC))
@@ -22,14 +22,13 @@ CFLAGS = -Wa-l -Wl-m -Wl-j -Iinclude
 all: $(OUT)
 	@echo "Build complete: $(OUT)"
 
-# === Link rule ===
-$(OUT): $(SRC)
+# NEW LINK RULE:
+# This .PHONY rule forces the linker to run every time, fixing the header dependency problem.
+.PHONY: $(OUT)
+$(OUT): $(SRC) $(wildCARD include/*.h) # Added dependency check to be safer, though .PHONY is the main fix
 	@if not exist "$(BUILD_DIR)" mkdir "$(BUILD_DIR)"
 	@if not exist "$(BIN_DIR)" mkdir "$(BIN_DIR)"
 	$(CC) $(CFLAGS) -o $(OUT) $(SRC)
-
-
-	
 
 # === Clean rule ===
 clean:

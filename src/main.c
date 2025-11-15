@@ -42,6 +42,19 @@ Wall floor;
 Ball pachinkoBalls[10];
 GameSprite pachinko_balls_gfx_data[10];
 
+const fixed_n RANDOM_HORIZONTAL_VX[10] = {
+    5,    // +0.5
+    -5,   // -0.5
+    5,    // +0.5
+    5,    // +0.5
+    -5,   // -0.5
+    -5,   // -0.5
+    5,    // +0.5
+    -5,   // -0.5
+    5,    // +0.5
+    -5    // -0.5
+};
+
 
 void main(void) 
 {
@@ -110,14 +123,14 @@ void main(void)
 
       apply_gravity_multi(pachinkoBalls, 10);
       check_ball_wall_multi(pachinkoBalls, &floor, 10);
-      
-      if (joypad() & J_UP) {
-        apply_impulse(&pinball, 50);
-      }
 
       // DRAW SPRITE IN UPDATED POSITIONS
       for (uint8_t i = 0; i < 10; i++) {
+
+        //apply_impulse(&pachinkoBalls[i], RANDOM_HORIZONTAL_VX[i]);
+
         DRAW_SPRITE(pachinkoBalls[i].game_sprite,pachinkoBalls[i].x,pachinkoBalls[i].y);
+        
       }
 
       DRAW_SPRITE(pinball.game_sprite,pinball.x,pinball.y);
