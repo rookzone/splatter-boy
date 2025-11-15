@@ -46,6 +46,7 @@ void check_ball_wall_multi(Ball *balls, Wall *w, uint8_t count)
 
             // Convert position to integer pixel Y
             uint16_t sprite_y = balls[i].y >> 8;
+            
 
             if (sprite_y + 8 >= w->y) {
                 
