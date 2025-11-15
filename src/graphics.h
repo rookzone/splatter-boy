@@ -1,7 +1,7 @@
 #ifndef GRAPHICS_H
 #define GRAPHICS_H
 
-#include"physics.h"
+#include "customTypes.h"
 
 // Graphics index
 

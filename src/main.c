@@ -3,9 +3,10 @@
 /*
 TODO:
 
-Seperate out graphics from physics, and create a whole rendering section.
+https://www.youtube.com/watch?v=oLoTTTuvaRs&list=PLeEj4c2zF7PaFv5MPYhNAkBGrkx4iPGJo&index=10
+- collision detection
 
-Create a type header file for storing types used across the project. Helps prevent circular referncing and stuff
+
 
 ---
 
@@ -84,12 +85,13 @@ void main(void)
 
     uint8_t frame_time;
     printf("Frame time:   \n");
+    printf("Draw posit:   \n");
     bool frame_advance_mode = false; 
     uint8_t keys;
 
     while (1) {
       
-
+      
       // INPUT
       if (joypad() == J_RIGHT && frame_advance_mode == false){
         frame_advance_mode = true;
@@ -127,6 +129,7 @@ void main(void)
 
       gotoxy(12, 0);
       printf("%3u", frame_time);
+
 
       // This section just handles a manual frame advance mode. Can be removed without issue.
       // I'm aware that this could be done much more cleanly, but I like the goto bodge job for aesthetic reasons.
