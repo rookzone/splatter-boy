@@ -9,11 +9,11 @@ C styles:
 https://www.cs.umd.edu/~nelson/classes/resources/cstyleguide
 https://www.kernel.org/doc/html/v4.10/process/coding-style.html
 
-## Compile instructions
+## Setup and compile
 
-1. Download GBDK and then copy `bin` into the root directory. LCC.exe is required.
+1. Download GBDK 2020 and copy the contents into the repo. This will ensure all the required gbdk files are in the directory, as not everything copies over due to .gitgnore
 
-### Make
+2. Use make
 
 Just use make. Check out 
 
@@ -56,3 +56,10 @@ Just use make. Check out
 }
 
 ```
+
+
+## TODO
+
+Collision logic required. Pin bounce physics required, knowledge of coordinate here:
+
+<img width="700" height="526" alt="image" src="https://github.com/user-attachments/assets/dc91593f-e0c0-4112-9470-0ac3549d81c6" />
