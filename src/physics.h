@@ -18,8 +18,8 @@
 #include "customTypes.h"
 
 // --- Physics constants (8.8 fixed-point) ---
-#define GRAVITY     FIXED_TEENTH   // 0.125 pixels/frame
-#define MAX_SPEED   TO_FIXED(2)    // 10 pixels/frame max
+#define GRAVITY     FIXED_TEENTH  
+#define MAX_SPEED   TO_FIXED(10)
 #define DAMPING     4       // bounce damping
 
 // --- Data types ---
@@ -42,6 +42,6 @@ void apply_gravity_multi(Ball *balls, uint8_t count);
 void check_ball_wall(Ball *ball, Wall *w);
 void check_ball_wall_multi(Ball *balls, Wall *w, uint8_t count);
 
-void apply_impulse(Ball *ball, int16_t impulse_magnitude);
+void apply_impulse(Ball *ball, int8_t impulse_magnitude);
 
 #endif // PHYSICS_H

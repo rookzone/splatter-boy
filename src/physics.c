@@ -22,13 +22,10 @@ void check_ball_wall(Ball *ball, Wall *w)
     }
 }
 
-void apply_impulse(Ball *ball, int16_t impulse_magnitude)
+void apply_impulse(Ball *ball, int8_t impulse_magnitude)
 {
-    // TO_FIXED(50) results in 50.0 pixels/frame, which is still too fast. 
-    // Let's assume you want 5.0 pixels/frame.
-    
-    // Pass the impulse as a negative value (upward force)
-    ball->vy += TO_FIXED(impulse_magnitude);
+
+    ball->vx += impulse_magnitude;
 }
 
 void apply_gravity_multi(Ball *balls, uint8_t count) 
