@@ -9,8 +9,7 @@ typedef struct {
     GameSprite* game_sprite;
 } Pin;
 
-void init_pins(const uint8_t pin_positions[][2], uint8_t count);
-void draw_pins(void);
-void check_pin_collisions(Ball *ball, Pin *pins, uint8_t count);
+
+Pin* init_pins(uint8_t* pin_positions[][], uint8_t count);
 
 #endif

@@ -6,9 +6,7 @@
 https://www.youtube.com/watch?v=oLoTTTuvaRs&list=PLeEj4c2zF7PaFv5MPYhNAkBGrkx4iPGJo&index=10
 - collision detection
 
-
 Start to document progress on a wiki.
-
 
 */
 
