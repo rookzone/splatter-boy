@@ -31,3 +31,26 @@ void reset_balls(Ball* b, uint8_t count)
       
     }
 }
+
+
+void init_ball(Ball* ball, GameSprite* gfx_data, fixed_n ball_x, fixed_n ball_y)
+{
+
+    ball->x = ball_x;
+    ball->y = ball_y;
+    ball->vx = 0;
+    ball->vy = 0;
+
+    *gfx_data = create_sprite(TILE_BALL);
+    ball->game_sprite = gfx_data;
+
+}
+
+void reset_ball(Ball* ball)
+{
+      //ball->x = TO_FIXED(60+ i*10);
+      //ball->y = TO_FIXED(40+ i*10);
+      ball->vx = 0;
+      ball->vy = 0;
+
+}

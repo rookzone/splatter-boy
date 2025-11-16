@@ -41,40 +41,54 @@ These operations take placed in "fixed number space". They will need shifting ba
 #include <stdbool.h>
 
 #include "tiles/pinballTiles.h"
+#include "tiles/pachinkoOneBG.h"
 #include "physics.h"
 #include "ball.h"
 #include "graphics.h"
 #include "debug.h"
 
-// Create game object structs
+// Create game objects
 Wall floor;
 Ball pachinkoBalls[10];
+
+// Create data arrays
+
+// === GRAPHICS DATA ===
+// Store all graphics here so the main loop can control the rendering updates.
 GameSprite pachinko_balls_gfx_data[10];
+GameSprite wall_graphics_data;
 
 void main(void) 
 {
     DISPLAY_OFF;
     SPRITES_8x8;
 
-    // Load in sprite sheet
+    // Load sprite tiles into VRAM
     set_sprite_data(0, 2, PinballTiles);
+
+    // load background tiles into VRAM
+    set_bkg_data(0, 4, PinballTiles);
+    set_bkg_tiles(0, 0, 20, 18, pachinko1);
 
     // Initialize floor
     floor.x = 0;
     floor.y = 120;
-    floor.width = 160;
-    floor.height = 8;
 
-    GameSprite wall_graphics_data;
-    wall_graphics_data = create_sprite(TILE_WALL);
+    wall_graphics_data = create_sprite(2);
     floor.game_sprite = &wall_graphics_data;
 
-    DRAW_SPRITE(floor.game_sprite,TO_FIXED(floor.x),TO_FIXED(floor.y));
+    // Create pachinko balls
+    for (uint8_t i = 0; i < 10; i++) {
+ 
+      fixed_n x = TO_FIXED(60+ i*10);
+      fixed_n y = TO_FIXED(40+ i*10);
+      init_ball(&pachinkoBalls[i],&pachinko_balls_gfx_data[i], x, y);
 
-    // Create the pachinko balls, all handled in this function
-    init_balls(pachinkoBalls, pachinko_balls_gfx_data, 10);
+    }
+    
 
     DISPLAY_ON;
+    SHOW_BKG;
     SHOW_SPRITES;
 
     /*

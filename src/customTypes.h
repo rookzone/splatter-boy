@@ -41,7 +41,6 @@ typedef struct {
 
 typedef struct {
     uint8_t x, y;
-    uint8_t width, height;
     GameSprite *game_sprite;
 } Wall;
 
@@ -58,7 +57,7 @@ typedef struct {
 
 
 // This stores the tile the sprite uses and crucially holds the sprite ID for where it is loaded into VRAM
-struct GameSprite {
+typedef struct GameSprite {
     uint8_t sprite_index;
     uint8_t tile_index;
 };
@@ -79,3 +78,4 @@ static const fixed_n RANDOM_HORIZONTAL_VX[10] = {
 };
 
 #endif
+

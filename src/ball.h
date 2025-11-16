@@ -8,4 +8,7 @@
 void init_balls(Ball* b, GameSprite* gfx_data, uint8_t count);
 void reset_balls(Ball* b, uint8_t count);
 
+void init_ball(Ball* ball, GameSprite* gfx_data, fixed_n ball_x, fixed_n ball_y);
+void reset_ball(Ball* ball);
+
 #endif // BALL_H
