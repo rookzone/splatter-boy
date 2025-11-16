@@ -21,6 +21,8 @@
 #define GRAVITY     FIXED_TEENTH  
 #define MAX_SPEED   TO_FIXED(10)
 #define DAMPING     4       // bounce damping
+#define PIN_BOUNCE_FORCE_H 16
+#define PIN_BOUNCE_FORCE_V 16
 
 // ##### GRAVITY #####
 
@@ -28,7 +30,7 @@ void apply_gravity(Ball* ball);
 
 // ##### FORCE #####
 
-void apply_impulse(Ball *ball, int16_t impulse_magnitude);
+void apply_impulse(Ball *ball, fixed_n impulse_magnitude_x, fixed_n impulse_magnitude_y);
 
 // ##### COLLISSION #####
 

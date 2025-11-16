@@ -54,6 +54,8 @@ typedef struct {
 
 #define TILE_WIDTH 8
 #define TILE_HALF_WIDTH 4
+#define SPRITE_SIZE 8
+
 
 // This stores the tile the sprite uses and crucially holds the sprite ID for where it is loaded into VRAM
 struct GameSprite {

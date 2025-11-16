@@ -1,4 +1,5 @@
 ﻿#include <stdbool.h>
+#include <stdlib.h>
 #include "physics.h"
 #include "graphics.h"
 
@@ -55,12 +56,6 @@ void check_ball_wall(Ball *ball, Wall *w)
 
     }
 }
-
-#define PIN_BOUNCE_FORCE_H 16
-#define PIN_BOUNCE_FORCE_V 16
-
-#define SPRITE_SIZE 8
-#define TILE_HALF_WIDTH 4
 
 void check_ball_pin_collision_point_in_box(Ball* ball, Pin* pin)
 {
