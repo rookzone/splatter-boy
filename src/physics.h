@@ -24,17 +24,17 @@
 
 // ##### GRAVITY #####
 
-void apply_gravity(Ball *ball);
-void apply_gravity_multi(Ball *balls, uint8_t count);
+void apply_gravity(Ball* ball);
 
 // ##### FORCE #####
 
-void apply_impulse(Ball *ball, fixed_n impulse_magnitude);
+void apply_impulse(Ball* ball, int8_t impulse_magnitude);
 
 // ##### COLLISSION #####
 
-void check_ball_wall(Ball *ball, Wall *w);
-void check_ball_wall_multi(Ball *balls, Wall *w, uint8_t count);
+void check_ball_wall(Ball* ball, Wall* w);
+
+void check_ball_pin_collision(Ball* ball, Pin* pin);
 
 
 #endif // PHYSICS_H
