@@ -18,7 +18,7 @@
 # Emulator
 /emu/BGB/
 /dev-tools/
-*bgb.ini
+emu/BGB/bgb.ini
 
 # VSCode settings
 .vscode/
@@ -26,4 +26,4 @@
 # OS-specific junk
 .DS_Store
 Thumbs.db
-emu/BGB/bgb.ini
+
