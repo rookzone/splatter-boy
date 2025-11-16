@@ -1,4 +1,5 @@
-﻿#include "physics.h"
+﻿#include <stdbool.h>
+#include "physics.h"
 #include "graphics.h"
 
 void apply_gravity(Ball *ball) 
@@ -13,10 +14,11 @@ void apply_gravity(Ball *ball)
         }
 }
 
-void apply_impulse(Ball *ball, int16_t impulse_magnitude)
+void apply_impulse(Ball *ball, fixed_n impulse_magnitude_x, fixed_n impulse_magnitude_y)
 {
 
-    ball->vx += impulse_magnitude;
+    ball->vx += impulse_magnitude_x;
+    ball->vy += impulse_magnitude_y;
 
 }
 
@@ -47,15 +49,57 @@ void check_ball_wall(Ball *ball, Wall *w)
                 //ball->vx /= 2;
                                 
             // Add a random impulse
-            apply_impulse(ball,-20);
+            apply_impulse(ball,-20,0);
             }
         }
 
     }
 }
 
-void check_ball_pin_collision(Ball* ball, Pin* pin)
-{
+#define PIN_BOUNCE_FORCE_H 16
+#define PIN_BOUNCE_FORCE_V 16
 
+#define SPRITE_SIZE 8
+#define TILE_HALF_WIDTH 4
+
+void check_ball_pin_collision_point_in_box(Ball* ball, Pin* pin)
+{
+    // 1. Calculate Ball Center (8-bit integer math)
+    // Ball's center is ball->x + 4, ball->y + 4
+    uint8_t ball_center_x = ball->x + TILE_HALF_WIDTH;
+    uint8_t ball_center_y = ball->y + TILE_HALF_WIDTH;
     
+    // 2. Optimized Point-in-Box Check (Pin's bounding box)
+    // The pin's box is from pin->x to pin->x + 8
+    
+    if (ball_center_x >= pin->x && 
+        ball_center_x < (pin->x + SPRITE_SIZE) && 
+        ball_center_y >= pin->y && 
+        ball_center_y < (pin->y + SPRITE_SIZE)) 
+    {
+        // 3. Collision detected! Now switch to fixed_n for precise impulse.
+        
+        // Pin center x (integer) is pin->x + 4
+        int8_t pin_center_x = pin->x + TILE_HALF_WIDTH; 
+        
+        // offset_x_int is the signed integer distance from pin center to ball center
+        int8_t offset_x_int = ball_center_x - pin_center_x; 
+
+        // Convert the integer offset to fixed_n *once* for the physics calculation.
+        fixed_n offset_x_fixed = TO_FIXED(offset_x_int); 
+        
+        // Calculate force_x (Horizontal/Reflection component):
+        // Formula: PIN_BOUNCE_FORCE_H * offset_x_int
+        fixed_n force_x = PIN_BOUNCE_FORCE_H * offset_x_int; 
+        
+        // Calculate magnitude_y_int (Vertical/Forward component):
+        // Magnitude is proportional to (4 - |offset_x_int|).
+        uint8_t magnitude_y_int = TILE_HALF_WIDTH - abs(offset_x_int);
+
+        // Calculate force_y: PIN_BOUNCE_FORCE_V * magnitude_y_int
+        fixed_n force_y = PIN_BOUNCE_FORCE_V * magnitude_y_int;
+
+        // Apply negative sign to force_y to reflect the ball upwards
+        apply_impulse(ball, force_x, -force_y);
+    } 
 }

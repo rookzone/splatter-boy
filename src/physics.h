@@ -28,7 +28,7 @@ void apply_gravity(Ball* ball);
 
 // ##### FORCE #####
 
-void apply_impulse(Ball* ball, int8_t impulse_magnitude);
+void apply_impulse(Ball *ball, int16_t impulse_magnitude);
 
 // ##### COLLISSION #####
 
