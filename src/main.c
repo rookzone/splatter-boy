@@ -76,18 +76,10 @@ void main(void)
     DISPLAY_ON;
     SHOW_SPRITES;
 
-    uint8_t frame_time;
-    uint8_t start_vbl_timer;
-    uint8_t end_vbl_timer;
-    printf("Frame time:   \n");
-    printf("Draw posit:   \n");
     bool frame_advance_mode = false; 
     uint8_t keys;
 
     while (1) {
-
-      gotoxy(12, 0);
-      printf("%3u", frame_time);
 
       // INPUT
       if (joypad() == J_RIGHT && frame_advance_mode == false){
@@ -128,16 +120,7 @@ void main(void)
       }
       advance:
 
-      /* ##### START OF VBLANK TIME LEFT ##### */
+      vsync();
 
-      TAC_REG = 0b111;
-      
-      start_vbl_timer = TIMA_REG;
-
-      end_vbl_timer = TIMA_REG;
-
-      frame_time = end_vbl_timer - start_vbl_timer;
-
-      wait_vbl_done();
     }
 }
