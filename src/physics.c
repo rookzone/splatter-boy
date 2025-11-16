@@ -36,15 +36,18 @@ void check_ball_wall(Ball *ball, Wall *w)
             } else {
                 // It's still bouncing, apply the calculated velocities
                 ball->vy = bounce_vy;
-                ball->vx = ball->vx >> 1;
+                //ball->vx = ball->vx >> 1;
                 //ball->vx /= 2;
+                                
+            // Add a random impulse
+            apply_impulse(ball,-20);
             }
         }
 
     }
 }
 
-void apply_impulse(Ball *ball, int8_t impulse_magnitude)
+void apply_impulse(Ball *ball, int16_t impulse_magnitude)
 {
 
     ball->vx += impulse_magnitude;

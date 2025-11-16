@@ -29,7 +29,7 @@ void apply_gravity_multi(Ball *balls, uint8_t count);
 
 // ##### FORCE #####
 
-void apply_impulse(Ball *ball, int8_t impulse_magnitude);
+void apply_impulse(Ball *ball, fixed_n impulse_magnitude);
 
 // ##### COLLISSION #####
 

@@ -103,7 +103,7 @@ void main(void)
         // PHYSICS
         apply_gravity(&pachinkoBalls[i]);
 
-        apply_impulse(&pachinkoBalls[i], RANDOM_HORIZONTAL_VX[i]);
+        //apply_impulse(&pachinkoBalls[i], RANDOM_HORIZONTAL_VX[i]);
 
         check_ball_wall(&pachinkoBalls[i], &floor);
 
