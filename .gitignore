@@ -1,6 +1,6 @@
 # Build artifacts
-/bin/
-/build/
+bin/
+build/
 
 
 # Compiled files
@@ -16,8 +16,9 @@
 *.swp
 
 # Emulator
-/emu/BGB/
-/dev-tools/
+emu/
+emu/BGB/
+dev-tools/
 emu/BGB/bgb.ini
 
 # VSCode settings
