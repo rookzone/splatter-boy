@@ -127,17 +127,7 @@ void main(void)
       }
       advance:
 
-      /* ##### START OF VBLANK TIME LEFT ##### 
+      vsync();
 
-      TAC_REG = 0b111;
-
-      start_vbl_timer = TIMA_REG;
-
-      end_vbl_timer = TIMA_REG;
-
-      frame_time = end_vbl_timer - start_vbl_timer;
-      */
-
-      wait_vbl_done();
     }
 }
