@@ -9,7 +9,7 @@ void apply_gravity(Ball *ball)
         ball->x += ball->vx;
 
         if (ball->vy > MAX_SPEED) {
-        ball->vy = MAX_SPEED;
+            ball->vy = MAX_SPEED;
         }
 }
 
@@ -21,12 +21,14 @@ void check_ball_wall(Ball *ball, Wall *w)
         uint16_t sprite_y = FROM_FIXED(ball->y);
 
         if (sprite_y + 8 >= w->y) {
-            // 1. Position correction
-            ball->y = (w->y - 8) << 8;
-            // 2. Calculate new (damped) bounce velocity
-            fixed_n bounce_vy = -ball->vy / DAMPING;
 
-            // --- 3. Settling Logic (Saves future CPU time) ---
+            // 1. Position correction
+            ball->y = TO_FIXED(w->y - 8);
+            ball->vx = 0;
+
+            // 2. Calculate new (damped) bounce velocity
+            fixed_n bounce_vy = -ball->vy >> 2; // SAME AS /4;
+
             // If the bounce velocity is tiny (e.g., less than FIXED_EIGHTH or 0.125), stop it entirely.
             if (bounce_vy < FIXED_EIGHTH && bounce_vy > -FIXED_EIGHTH) {
                 ball->vy = 0; // Ball is fully settled (no more vertical movement)
@@ -34,10 +36,11 @@ void check_ball_wall(Ball *ball, Wall *w)
             } else {
                 // It's still bouncing, apply the calculated velocities
                 ball->vy = bounce_vy;
-                ball->vx /= 2
-                ;
+                ball->vx = ball->vx >> 1;
+                //ball->vx /= 2;
             }
         }
+
     }
 }
 

@@ -1,7 +1,7 @@
 // pins.h
 
 #include <gb/gb.h>
-#include "customTypes.h"
+#include "customtypes.h"
 
 #ifndef PINS_H
 #define PINS_H

@@ -15,7 +15,7 @@
 
 #include <gb/gb.h>
 #include <stdint.h>
-#include "customTypes.h"
+#include "customtypes.h"
 
 // --- Physics constants (8.8 fixed-point) ---
 #define GRAVITY     FIXED_TEENTH  

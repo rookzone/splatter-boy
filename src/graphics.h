@@ -1,6 +1,6 @@
 // graphics.h
 
-#include "customTypes.h"
+#include "customtypes.h"
 #include <gb/drawing.h>
 
 #ifndef GRAPHICS_H
