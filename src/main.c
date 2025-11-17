@@ -46,12 +46,12 @@ These operations take placed in "fixed number space". They will need shifting ba
 #include "ball.h"
 #include "graphics.h"
 #include "debug.h"
+#include "tiles/title_map_data.h"
+#include "tiles/title_tiles_data.h"
 
 // Create game objects
 Wall floor;
 Ball pachinkoBalls[10];
-
-// Create data arrays
 
 // === GRAPHICS DATA ===
 // Store all graphics here so the main loop can control the rendering updates.
@@ -63,12 +63,14 @@ void main(void)
     DISPLAY_OFF;
     SPRITES_8x8;
 
-    // Load sprite tiles into VRAM
     set_sprite_data(0, 2, PinballTiles);
 
+    set_bkg_data(0,255,title_tiles_data);
+    set_bkg_tiles(0, 255, 20, 18, title_map_data);
+
     // load background tiles into VRAM
-    set_bkg_data(0, 4, PinballTiles);
-    set_bkg_tiles(0, 0, 20, 18, pachinko1);
+   // set_bkg_data(0, 4, PinballTiles);
+   // set_bkg_tiles(0, 0, 20, 18, pachinko1);
 
     // Initialize floor
     floor.x = 0;
@@ -80,8 +82,8 @@ void main(void)
     // Create pachinko balls
     for (uint8_t i = 0; i < 10; i++) {
  
-      fixed_n x = TO_FIXED(60+ i*10);
-      fixed_n y = TO_FIXED(40+ i*10);
+      fixed_n x = TO_FIXED(30+ i*10);
+      fixed_n y = TO_FIXED(10+ i*10);
       init_ball(&pachinkoBalls[i],&pachinko_balls_gfx_data[i], x, y);
 
     }
