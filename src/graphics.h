@@ -11,7 +11,7 @@ enum { TILE_BALL = 0, TILE_WALL = 1 };
 
 // ##### SPRITE HANDLING #####
 
-extern uint8_t next_sprite_id;
+extern uint16_t next_sprite_id;
 
 // Function to assign the next available sprite ID and initialize its tile
 GameSprite create_sprite(uint8_t tile_index);

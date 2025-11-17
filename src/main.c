@@ -46,12 +46,11 @@ These operations take placed in "fixed number space". They will need shifting ba
 #include "ball.h"
 #include "graphics.h"
 #include "debug.h"
-#include "tiles/title_map_data.h"
-#include "tiles/title_tiles_data.h"
 
 // Create game objects
 Wall floor;
 Ball pachinkoBalls[10];
+
 
 // === GRAPHICS DATA ===
 // Store all graphics here so the main loop can control the rendering updates.
@@ -60,90 +59,91 @@ GameSprite wall_graphics_data;
 
 void main(void) 
 {
-    DISPLAY_OFF;
-    SPRITES_8x8;
+  DISPLAY_OFF;
+  SPRITES_8x8;
+  HIDE_BKG;
+  HIDE_SPRITES;
 
-    set_sprite_data(0, 2, PinballTiles);
+  set_sprite_data(0, 2, PinballTiles);
 
-    set_bkg_data(0,255,title_tiles_data);
-    set_bkg_tiles(0, 255, 20, 18, title_map_data);
+  // load background tiles into VRAM
+  set_bkg_data(0, 4, PinballTiles);
+  set_bkg_tiles(0, 0, 20, 18, pachinko1);
 
-    // load background tiles into VRAM
-   // set_bkg_data(0, 4, PinballTiles);
-   // set_bkg_tiles(0, 0, 20, 18, pachinko1);
 
-    // Initialize floor
-    floor.x = 0;
-    floor.y = 120;
+  // Initialize floor
+  floor.x = 0;
+  floor.y = 120;
 
-    wall_graphics_data = create_sprite(2);
-    floor.game_sprite = &wall_graphics_data;
+  wall_graphics_data = create_sprite(1);
+  floor.game_sprite = &wall_graphics_data;
 
-    // Create pachinko balls
+  // Create pachinko balls
+  for (uint8_t i = 0; i < 10; i++) {
+
+    fixed_n x = TO_FIXED(30+ i*10);
+    fixed_n y = TO_FIXED(10+ i*10);
+    init_ball(&pachinkoBalls[i],&pachinko_balls_gfx_data[i], x, y);
+
+  }
+  
+
+  DISPLAY_ON;
+  SHOW_BKG;
+  SHOW_SPRITES;
+
+  /*
+  uint8_t frame_time;
+  uint8_t start_vbl_timer;
+  uint8_t end_vbl_timer;
+  */
+
+  bool frame_advance_mode = false; 
+  uint8_t keys;
+  
+  while (1) {
+
+    // INPUT
+    if (joypad() == J_RIGHT && frame_advance_mode == false){
+      frame_advance_mode = true;
+    }
+
+    if (joypad() & J_DOWN) {
+      reset_balls(pachinkoBalls, 10);
+    }
+
+    // Loop through balls
     for (uint8_t i = 0; i < 10; i++) {
- 
-      fixed_n x = TO_FIXED(30+ i*10);
-      fixed_n y = TO_FIXED(10+ i*10);
-      init_ball(&pachinkoBalls[i],&pachinko_balls_gfx_data[i], x, y);
 
-    }
-    
+      // PHYSICS
+      apply_gravity(&pachinkoBalls[i]);
 
-    DISPLAY_ON;
-    SHOW_BKG;
-    SHOW_SPRITES;
+      //apply_impulse(&pachinkoBalls[i], RANDOM_HORIZONTAL_VX[i]);
 
-    /*
-    uint8_t frame_time;
-    uint8_t start_vbl_timer;
-    uint8_t end_vbl_timer;
-    */
+      check_ball_wall(&pachinkoBalls[i], &floor);
 
-    bool frame_advance_mode = false; 
-    uint8_t keys;
-    
-    while (1) {
-
-      // INPUT
-      if (joypad() == J_RIGHT && frame_advance_mode == false){
-        frame_advance_mode = true;
-      }
-
-      if (joypad() & J_DOWN) {
-        reset_balls(pachinkoBalls, 10);
-      }
-
-      // Loop through balls
-      for (uint8_t i = 0; i < 10; i++) {
-
-        // PHYSICS
-        apply_gravity(&pachinkoBalls[i]);
-
-        //apply_impulse(&pachinkoBalls[i], RANDOM_HORIZONTAL_VX[i]);
-
-        check_ball_wall(&pachinkoBalls[i], &floor);
-
-        // RENDER
-        DRAW_SPRITE(pachinkoBalls[i].game_sprite,pachinkoBalls[i].x,pachinkoBalls[i].y);
-        
-      }
-
-      // This section just handles a manual frame advance mode. Can be removed without issue.
-      // I'm aware that this could be done much mdore cleanly, but I like the goto bodge job for aesthetic reasons.
-      loop:
-      keys = joypad();
-      if (keys == J_LEFT){
-          frame_advance_mode = false;
-          goto advance;
-      }
+      // RENDER
+      DRAW_SPRITE(pachinkoBalls[i].game_sprite,pachinkoBalls[i].x,pachinkoBalls[i].y);
       
-      if(frame_advance_mode == true && keys != J_LEFT){
-        if(keys != J_RIGHT)
-          goto loop;
-      }
-      advance:
-
-      vsync();
-
     }
+
+    // This section just handles a manual frame advance mode. Can be removed without issue.
+    // I'm aware that this could be done much mdore cleanly, but I like the goto bodge job for aesthetic reasons.
+    loop:
+    keys = joypad();
+    if (keys == J_LEFT){
+        frame_advance_mode = false;
+        goto advance;
+    }
+    
+    if(frame_advance_mode == true && keys != J_LEFT){
+      if(keys != J_RIGHT)
+        goto loop;
+    }
+    advance:
+
+    vsync();
+
+  }
+
 }

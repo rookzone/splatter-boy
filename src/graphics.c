@@ -3,7 +3,7 @@
 #include <gb/gb.h>
 #include "graphics.h"
 
-uint8_t next_sprite_id = 0;
+uint16_t next_sprite_id = 0;
 
 // Create sprite with a tracked VRAM number, assign tile, create and return GameSprite object
 GameSprite create_sprite(uint8_t tile_index)
