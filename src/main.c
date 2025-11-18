@@ -53,7 +53,7 @@ Ball pachinkoBalls[10];
 
 
 // === GRAPHICS DATA ===
-// Store all graphics here so the main loop can control the rendering updates.
+// Store all graphics data here so the main loop can control the rendering updates.
 GameSprite pachinko_balls_gfx_data[10];
 GameSprite wall_graphics_data;
 
@@ -73,7 +73,7 @@ void main(void)
 
   // Initialize floor
   floor.x = 0;
-  floor.y = 120;
+  floor.y = 144;
 
   wall_graphics_data = create_sprite(1);
   floor.game_sprite = &wall_graphics_data;
@@ -81,7 +81,7 @@ void main(void)
   // Create pachinko balls
   for (uint8_t i = 0; i < 10; i++) {
 
-    fixed_n x = TO_FIXED(30+ i*10);
+    fixed_n x = TO_FIXED(10+ i*10);
     fixed_n y = TO_FIXED(10+ i*10);
     init_ball(&pachinkoBalls[i],&pachinko_balls_gfx_data[i], x, y);
 

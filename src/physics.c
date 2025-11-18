@@ -1,5 +1,6 @@
 ﻿#include <stdbool.h>
 #include <stdlib.h>
+#include <stdio.h>
 #include "physics.h"
 #include "graphics.h"
 
@@ -28,34 +29,39 @@ void check_ball_wall(Ball *ball, Wall *w)
     if (ball->vy > 0) { 
 
         // Convert position to integer pixel Y
-        uint16_t sprite_y = FROM_FIXED(ball->y);
+        uint8_t sprite_y = FROM_FIXED(ball->y) +8;
+       // printf("%u", w->y);
 
-        if (sprite_y + 8 >= w->y) {
-
-            // 1. Position correction
-            ball->y = TO_FIXED(w->y - 8);
-            ball->vx = 0;
+        if (sprite_y >= w->y + 8) {
 
             // 2. Calculate new (damped) bounce velocity
-            fixed_n bounce_vy = -ball->vy >> 2; // SAME AS /4;
+            fixed_n bounce_vy = -ball->vy + FIXED_EIGHTH; // SAME AS /4;
 
-            // If the bounce velocity is tiny (e.g., less than FIXED_EIGHTH or 0.125), stop it entirely.
+            ball->y = 0;
+
+            // 1. Position correction
+            ball->y = TO_FIXED(w->y);
+            //ball->vx = 0;
+            //ball->vy = 0;
+
+            //If the bounce velocity is tiny (e.g., less than FIXED_EIGHTH or 0.125), stop it entirely.
             if (bounce_vy < FIXED_EIGHTH && bounce_vy > -FIXED_EIGHTH) {
                 ball->vy = 0; // Ball is fully settled (no more vertical movement)
                 ball->vx = 0; // Stop any sliding (no more horizontal movement)
             } else {
                 // It's still bouncing, apply the calculated velocities
-                ball->vy = bounce_vy;
+                ball->vy = bounce_vy / 4;
                 //ball->vx = ball->vx >> 1;
                 //ball->vx /= 2;
+            }
                                 
             // Add a random impulse
-            apply_impulse(ball,-20,0);
-            }
-        }
+            //apply_impulse(ball,-20,0);
 
+        }
     }
 }
+
 
 void check_ball_pin_collision_point_in_box(Ball* ball, Pin* pin)
 {
