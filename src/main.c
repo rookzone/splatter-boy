@@ -44,18 +44,23 @@ These operations take placed in "fixed number space". They will need shifting ba
 #include "tiles/pachinkoOneBG.h"
 #include "physics.h"
 #include "ball.h"
+#include "pins.h"
 #include "graphics.h"
 #include "debug.h"
 
-// Create game objects
+
+#define BALLS_SIZE 10
+#define NUM_BALLS 10
+
+// === RUNTIME GAME OBJECT DATA ===
 Wall floor;
-Ball pachinkoBalls[10];
+Ball pachinkoBalls[BALLS_SIZE];
+Pin test_pin;
 
-
-// === GRAPHICS DATA ===
-// Store all graphics data here so the main loop can control the rendering updates.
-GameSprite pachinko_balls_gfx_data[10];
+// === RUNTIME GRAPHICS DATA ===
+GameSprite pachinko_balls_gfx_data[BALLS_SIZE];
 GameSprite wall_graphics_data;
+GameSprite test_pin_graphics_data;
 
 void main(void) 
 {
@@ -64,11 +69,11 @@ void main(void)
   HIDE_BKG;
   HIDE_SPRITES;
 
-  set_sprite_data(0, 2, PinballTiles);
+  set_sprite_data(0, 3, PinballTiles);
 
   // load background tiles into VRAM
-  set_bkg_data(0, 4, PinballTiles);
-  set_bkg_tiles(0, 0, 20, 18, pachinko1);
+  //set_bkg_data(0, 4, PinballTiles);
+  //set_bkg_tiles(0, 0, 20, 18, pachinko1);
 
 
   // Initialize floor
@@ -78,12 +83,17 @@ void main(void)
   wall_graphics_data = create_sprite(TILE_WALL);
   floor.game_sprite = &wall_graphics_data;
 
+  // init test pin
+  init_pin(&test_pin, &test_pin_graphics_data, 60, 60);
+  DRAW_SPRITE(test_pin.game_sprite, test_pin.x, test_pin.x);
+
+
   // Create pachinko balls
-  for (uint8_t i = 0; i < 10; i++) {
+  for (uint8_t i = 0; i < BALLS_SIZE; i++) {
 
     uint8_t x = 10+ i*10;
     uint8_t y = 10+ i*10;
-    init_ball(&pachinkoBalls[i],&pachinko_balls_gfx_data[i], x, y);
+    init_ball(&pachinkoBalls[i], &pachinko_balls_gfx_data[i], x, y);
 
   }
   
@@ -92,18 +102,12 @@ void main(void)
   SHOW_BKG;
   SHOW_SPRITES;
 
-  /*
-  uint8_t frame_time;
-  uint8_t start_vbl_timer;
-  uint8_t end_vbl_timer;
-  */
-
   bool frame_advance_mode = false; 
   uint8_t keys;
   
   while (1) {
 
-    // INPUT
+    // === INPUT ===
     if (joypad() == J_RIGHT && frame_advance_mode == false){
       frame_advance_mode = true;
     }
@@ -112,20 +116,21 @@ void main(void)
       reset_balls(pachinkoBalls, 10);
     }
 
-    // Loop through balls
+    // Handle balls and pins main loop. Per frame.
+    // Note: Could be factored into seperate function with parameter for frame-skipping for performance.
     for (uint8_t i = 0; i < 10; i++) {
 
-      // PHYSICS
-      apply_gravity(&pachinkoBalls[i]);
+      // === PHYSICS ===
 
-      //apply_impulse(&pachinkoBalls[i], RANDOM_HORIZONTAL_VX[i]);
+      apply_gravity(&pachinkoBalls[i]); // Apply continous gravity force of GRAVITY
+      check_ball_wall(&pachinkoBalls[i], &floor); // Handle collisions with walls
+      handle_ball_pin_collision(&pachinkoBalls[i], &test_pin); // Handle collisions with pins
 
-      check_ball_wall(&pachinkoBalls[i], &floor);
-
-      // RENDER
-      DRAW_SPRITE(pachinkoBalls[i].game_sprite,pachinkoBalls[i].x,pachinkoBalls[i].y);
+      // === GRAPHICS ===
+      DRAW_SPRITE(pachinkoBalls[i].game_sprite, pachinkoBalls[i].x, pachinkoBalls[i].y);
       
     }
+
 
     // This section just handles a manual frame advance mode. Can be removed without issue.
     // I'm aware that this could be done much mdore cleanly, but I like the goto bodge job for aesthetic reasons.

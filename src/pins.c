@@ -1,7 +1,14 @@
-#include <gb/gb.h>
+// pins.c
 #include "pins.h"
 
 
-const uint8_t pin_positions[][2] = {
-    {40, 40}, {60, 50}, {80, 60}
-};
+void init_pin(Pin* pin, GameSprite* gfx_data, uint8_t pin_x, uint8_t pin_y)
+{
+
+    pin->x = pin_x;
+    pin->y = pin_y;
+
+    *gfx_data = create_sprite(TILE_PIN);
+    pin->game_sprite = gfx_data;
+
+}

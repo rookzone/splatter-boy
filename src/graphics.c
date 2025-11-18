@@ -1,6 +1,5 @@
 // graphics.c
 
-#include <gb/gb.h>
 #include "graphics.h"
 
 uint16_t next_sprite_id = 0;
@@ -19,7 +18,8 @@ GameSprite create_sprite(uint8_t tile_index)
     return new_sprite;
 }
 
-// Plot a point in fixed number space
+
+// Plot a point at position in fixed number space
 void plot_point_fixed(fixed_n x, fixed_n y)
 {
     plot_point(FROM_FIXED(x), FROM_FIXED(y));

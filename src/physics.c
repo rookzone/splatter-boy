@@ -1,5 +1,4 @@
-﻿#include <stdbool.h>
-#include <stdlib.h>
+﻿#include <stdlib.h>
 #include <stdio.h>
 #include "physics.h"
 #include "graphics.h"
@@ -63,6 +62,26 @@ void check_ball_wall(Ball *ball, Wall *w)
     }
 }
 
+
+void handle_ball_pin_collision(Ball* ball, Pin* pin)
+{
+    // 1. Calculate Ball Center (8-bit integer math)
+    // Ball's center is ball->x + 4, ball->y + 4
+    uint8_t ball_center_x = ball->x + TILE_HALF_WIDTH;
+    uint8_t ball_center_y = ball->y + TILE_HALF_WIDTH;
+
+    if (ball_center_x >= pin->x && 
+        ball_center_x < (pin->x + SPRITE_SIZE) && 
+        ball_center_y >= pin->y && 
+        ball_center_y < (pin->y + SPRITE_SIZE)) {
+
+        gotogxy(12,0);
+        printf("collision!");
+        gotogxy(0,0);
+
+    }
+
+}
 
 /*
 void check_ball_pin_collision_point_in_box(Ball* ball, Pin* pin)

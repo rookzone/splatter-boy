@@ -1,38 +1,35 @@
 // graphics.h
 
-#include "customtypes.h"
+#include <gb/gb.h>
 #include <gb/drawing.h>
+#include "customtypes.h"
 
 #ifndef GRAPHICS_H
 #define GRAPHICS_H
 
-// Graphics indices.
-enum { TILE_BALL = 0, TILE_WALL = 1 };
+// Graphics indices. There should be one of these per sprite sheet.
+// Friendly name that corresponds with tile position in sprite sheet(s). 
+enum { TILE_BALL = 0, TILE_WALL = 1, TILE_PIN = 2 };
 
-// ##### SPRITE HANDLING #####
+// === SPRITE HANDLING ===
 
+// This is used to keep track of which sprite_index is available
+// The value of this number is the number of sprites "instantiated"
 extern uint16_t next_sprite_id;
 
-// Function to assign the next available sprite ID and initialize its tile
+// Allocates a sprite at sprite_index with a tile at tile_index.
+// Returns GameSprite struct that stores these values, plus other useful graphics data TBC
 GameSprite create_sprite(uint8_t tile_index);
 
-// ##### DRAW FUNCTIONS ######
+// === DRAW FUNCTIONS ===
 
-// Moves the sprite using fixed decimal space values
-void move_sprite_fixed(GameSprite* game_sprite, fixed_n x, fixed_n y);
-
-// Move the sprite using integer screen values
-void move_sprite_int(GameSprite* game_sprite, uint8_t x, uint8_t y);
-
-/* Fast sprite draw using built in move_sprite routine, 
-passed "fixed" space numbers which are bit shifted into 8bit integers for pixel rendering position */
+// Fast sprite draw using GBDK in move_sprite routine. Pass pointer to GameSprite
 #define DRAW_SPRITE(obj_ptr, x, y) \
     move_sprite((obj_ptr)->sprite_index, x, y)
 
+// === ANIMATIONS ===
 
-// ##### ANIMATIONS #####
-
-// forward declaration for clarity
+// forward declaration from GBDK for clarity
 void plot_point(uint8_t x, uint8_t y) OLDCALL;
 
 // Plot a point in fixed number space

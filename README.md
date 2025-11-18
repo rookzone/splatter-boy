@@ -2,6 +2,11 @@
 
 ## TODO SUMMARY
 
+- [ ] Extract pin positions from background data and instantiate the pins
+- [ ] Create function to handle balls and pins loop with parameter for frame-skip
+  - [ ] BETTER: split into input, physics, and drawing so can be optimised seperately
+- [ ] Apply bounce to ball function, used to add force to ball depending on where it hits the pin
+
 **Clean up repo**
 
 Remove all GBDK files not required. Should only need includes and compiler
