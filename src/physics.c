@@ -35,17 +35,18 @@ void check_ball_wall(Ball *ball, Wall *w)
         if (sprite_y >= w->y + 8) {
 
             // 2. Calculate new (damped) bounce velocity
-            fixed_n bounce_vy = -ball->vy + FIXED_EIGHTH; // SAME AS /4;
+            int16_t bounce_vy = FROM_FIXED(-ball->vy + FIXED_EIGHTH); // SAME AS /4;
 
             ball->y = 0;
 
             // 1. Position correction
             ball->y = TO_FIXED(w->y);
-            //ball->vx = 0;
-            //ball->vy = 0;
+            ball->vx = 0;
+            ball->vy = 0;
 
+            // BOUNCE NOT WORKING. RECALC PHYSX
             //If the bounce velocity is tiny (e.g., less than FIXED_EIGHTH or 0.125), stop it entirely.
-            if (bounce_vy < FIXED_EIGHTH && bounce_vy > -FIXED_EIGHTH) {
+            if (bounce_vy < 1 && bounce_vy > -1) {
                 ball->vy = 0; // Ball is fully settled (no more vertical movement)
                 ball->vx = 0; // Stop any sliding (no more horizontal movement)
             } else {
