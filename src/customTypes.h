@@ -34,7 +34,7 @@ typedef int16_t fixed_n;
 // === Interactable objects ===
 
 typedef struct {
-    fixed_n x, y;
+    uint8_t x, y;
     fixed_n  vx, vy;
     GameSprite *game_sprite;
 } Ball;

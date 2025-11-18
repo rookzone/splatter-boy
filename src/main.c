@@ -75,14 +75,14 @@ void main(void)
   floor.x = 0;
   floor.y = 144;
 
-  wall_graphics_data = create_sprite(1);
+  wall_graphics_data = create_sprite(TILE_WALL);
   floor.game_sprite = &wall_graphics_data;
 
   // Create pachinko balls
   for (uint8_t i = 0; i < 10; i++) {
 
-    fixed_n x = TO_FIXED(10+ i*10);
-    fixed_n y = TO_FIXED(10+ i*10);
+    uint8_t x = 10+ i*10;
+    uint8_t y = 10+ i*10;
     init_ball(&pachinkoBalls[i],&pachinko_balls_gfx_data[i], x, y);
 
   }

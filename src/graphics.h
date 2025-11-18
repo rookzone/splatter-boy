@@ -26,8 +26,8 @@ void move_sprite_int(GameSprite* game_sprite, uint8_t x, uint8_t y);
 
 /* Fast sprite draw using built in move_sprite routine, 
 passed "fixed" space numbers which are bit shifted into 8bit integers for pixel rendering position */
-#define DRAW_SPRITE(obj_ptr, fixed_x, fixed_y) \
-    move_sprite((obj_ptr)->sprite_index, FROM_FIXED(fixed_x), FROM_FIXED(fixed_y))
+#define DRAW_SPRITE(obj_ptr, x, y) \
+    move_sprite((obj_ptr)->sprite_index, x, y)
 
 
 // ##### ANIMATIONS #####

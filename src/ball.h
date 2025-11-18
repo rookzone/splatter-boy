@@ -5,7 +5,6 @@
 #include "physics.h"
 #include "graphics.h"
 
-void init_balls(Ball* b, GameSprite* gfx_data, uint8_t count);
 void reset_balls(Ball* b, uint8_t count);
 
 void init_ball(Ball* ball, GameSprite* gfx_data, fixed_n ball_x, fixed_n ball_y);

@@ -8,8 +8,8 @@ void apply_gravity(Ball *ball)
 {
         ball->vy += GRAVITY;
 
-        ball->y += ball->vy;
-        ball->x += ball->vx;
+        ball->y += FROM_FIXED(ball->vy);
+        ball->x += FROM_FIXED(ball->vx);
 
         if (ball->vy > MAX_SPEED) {
             ball->vy = MAX_SPEED;
@@ -29,7 +29,7 @@ void check_ball_wall(Ball *ball, Wall *w)
     if (ball->vy > 0) { 
 
         // Convert position to integer pixel Y
-        uint8_t sprite_y = FROM_FIXED(ball->y) +8;
+        uint8_t sprite_y = ball->y + 8;
        // printf("%u", w->y);
 
         if (sprite_y >= w->y + 8) {
@@ -40,7 +40,7 @@ void check_ball_wall(Ball *ball, Wall *w)
             ball->y = 0;
 
             // 1. Position correction
-            ball->y = TO_FIXED(w->y);
+            ball->y = w->y;
             ball->vx = 0;
             ball->vy = 0;
 
@@ -64,6 +64,7 @@ void check_ball_wall(Ball *ball, Wall *w)
 }
 
 
+/*
 void check_ball_pin_collision_point_in_box(Ball* ball, Pin* pin)
 {
     // 1. Calculate Ball Center (8-bit integer math)
@@ -105,3 +106,4 @@ void check_ball_pin_collision_point_in_box(Ball* ball, Pin* pin)
         apply_impulse(ball, force_x, -force_y);
     } 
 }
+    */
