@@ -2,9 +2,9 @@
 
 ## TODO
 
-= [] Add collision logic to pins (basic like the wall) and check that bounding box is correct 
-- [] Extract pin positions from background data and instantiate the pins
-- [] Create function to handle balls and pins loop with parameter for frame-skip
+- [ ] Draw a plot point at the x, values of balls and pins to determine if x,y is on the top left.
+- [ ] Extract pin positions from background data and instantiate the pins
+- [ ] Create function to handle balls and pins loop with parameter for frame-skip
   - [ ] BETTER: split into input, physics, and drawing so can be optimised seperately
 - [ ] Apply bounce to ball function, used to add force to ball depending on where it hits the pin
 
