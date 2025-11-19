@@ -35,6 +35,7 @@ typedef int16_t fixed_n;
 
 typedef struct {
     uint8_t x, y;
+    fixed_n sub_x, sub_y;
     fixed_n  vx, vy;
     GameSprite *game_sprite;
 } Ball;
@@ -65,16 +66,16 @@ typedef struct GameSprite {
 // === LOOKUP TABLES ===
 
 static const fixed_n RANDOM_HORIZONTAL_VX[10] = {
-    5,    // +0.5
-    -5,   // -0.5
-    5,    // +0.5
-    5,    // +0.5
-    -5,   // -0.5
-    -5,   // -0.5
-    5,    // +0.5
-    -5,   // -0.5
-    5,    // +0.5
-    -5    // -0.5
+    50,    // +0.5
+    -50,   // -0.5
+    50,    // +0.5
+    50,    // +0.5
+    -50,   // -0.5
+    -50,   // -0.5
+    50,    // +0.5
+    -50,   // -0.5
+    50,    // +0.5
+    -50    // -0.5
 };
 
 #endif

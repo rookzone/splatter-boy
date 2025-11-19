@@ -125,6 +125,8 @@ void main(void)
       apply_gravity(&pachinkoBalls[i]); // Apply continous gravity force of GRAVITY
       check_ball_wall(&pachinkoBalls[i], &floor); // Handle collisions with walls
       handle_ball_pin_collision(&pachinkoBalls[i], &test_pin); // Handle collisions with pins
+      
+      //apply_impulse(&pachinkoBalls[i],RANDOM_HORIZONTAL_VX[i],0); // test horizontal impulse
 
       // === GRAPHICS ===
       DRAW_SPRITE(pachinkoBalls[i].game_sprite, pachinkoBalls[i].x, pachinkoBalls[i].y);
