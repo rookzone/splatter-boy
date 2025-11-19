@@ -1,6 +1,6 @@
 # Splatter Boy
 
-## TODO SUMMARY
+## TODO
 
 - [ ] Draw a plot point at the x, values of balls and pins to determine if x,y is on the top left.
 - [ ] Extract pin positions from background data and instantiate the pins
@@ -8,15 +8,16 @@
   - [ ] BETTER: split into input, physics, and drawing so can be optimised seperately
 - [ ] Apply bounce to ball function, used to add force to ball depending on where it hits the pin
 
-**Clean up repo**
-
-Remove all GBDK files not required. Should only need includes and compiler
+- [ ] States. This lets me switch out to a different scene pretty much. Like a different screen or level.
 
 ## About
 
 A fun little project where I mess around with C and GBDK. Attempt at a pachinko game with decent ball physics
 
+## Goals and progress
 = [x] 06/11/25 - I am officially beginning this project. The first goal is to create a ball with gravity that can hit a wall and bounce until it's energy has depleted.
+
+- [ ] Started on 18/11/25 - My goal now is to place 10 pins in the game and have a button spawn balls at the top. The balls should drop down through the pins with good physics. I am allowing some time to play around with a title screen to test graphics out.
 
 ## Links to dev tools
 
@@ -26,7 +27,7 @@ https://gameboy.prodigle.dev
 
 https://github.com/systemoflevers/image_to_gb
 
-## Styles
+## Programming styles
 
 C styles:
 https://www.cs.umd.edu/~nelson/classes/resources/cstyleguide
@@ -38,7 +39,9 @@ https://www.kernel.org/doc/html/v4.10/process/coding-style.html
 
 2. Use make
 
-Just use make. Check out 
+Just use make.
+
+**.vscode tasks.json**
 
 ```JSON
 {
@@ -79,10 +82,3 @@ Just use make. Check out
 }
 
 ```
-
-
-## TODO
-
-Collision logic required. Pin bounce physics required, knowledge of coordinate here:
-
-<img width="700" height="526" alt="image" src="https://github.com/user-attachments/assets/dc91593f-e0c0-4112-9470-0ac3549d81c6" />

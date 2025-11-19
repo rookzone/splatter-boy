@@ -5,23 +5,14 @@
 
 void apply_gravity(Ball *ball) 
 {
-    ball->vy += GRAVITY;
-    
-    if (ball->vy > MAX_SPEED) {
-        ball->vy = MAX_SPEED;
-    }
-    
-    ball->sub_x += ball->vx;
-    ball->sub_y += ball->vy;
-    
-    int8_t dx = FROM_FIXED(ball->sub_x);  // >> 8
-    int8_t dy = FROM_FIXED(ball->sub_y);  // >> 8
-    
-    ball->x += dx;
-    ball->y += dy;
-    
-    ball->sub_x -= TO_FIXED(dx);  // - (dx << 8)
-    ball->sub_y -= TO_FIXED(dy);  // - (dy << 8)
+        ball->vy += GRAVITY;
+
+        ball->y += FROM_FIXED(ball->vy);
+        ball->x += FROM_FIXED(ball->vx);
+
+        if (ball->vy > MAX_SPEED) {
+            ball->vy = MAX_SPEED;
+        }
 }
 
 void apply_impulse(Ball *ball, fixed_n impulse_magnitude_x, fixed_n impulse_magnitude_y)
@@ -35,28 +26,42 @@ void apply_impulse(Ball *ball, fixed_n impulse_magnitude_x, fixed_n impulse_magn
 void check_ball_wall(Ball *ball, Wall *w) 
 {
     if (ball->vy > 0) { 
-        uint8_t sprite_y = ball->y + SPRITE_SIZE;
 
-        if (sprite_y >= w->y + SPRITE_SIZE) {
-            // Position correction
+        // Convert position to integer pixel Y
+        uint8_t sprite_y = ball->y + 8;
+       // printf("%u", w->y);
+
+        if (sprite_y >= w->y + 8) {
+
+            // 2. Calculate new (damped) bounce velocity
+            int16_t bounce_vy = FROM_FIXED(-ball->vy + FIXED_EIGHTH); // SAME AS /4;
+
+            ball->y = 0;
+
+            // 1. Position correction
             ball->y = w->y;
-            
-            // Bounce with damping
-            ball->vy = -(ball->vy >> 2);  // Divide by 4 and negate
-            ball->vx = ball->vx >> 1;     // Halve horizontal velocity
-            
-            // Clear sub-pixel accumulators on collision
-            ball->sub_x = 0;
-            ball->sub_y = 0;
-            
-            // Stop if bounce is too weak
-            if (ball->vy > -FIXED_EIGHTH && ball->vy < FIXED_EIGHTH) {
-                ball->vy = 0;
-                ball->vx = 0;
+            ball->vx = 0;
+            ball->vy = 0;
+
+            // BOUNCE NOT WORKING. RECALC PHYSX
+            //If the bounce velocity is tiny (e.g., less than FIXED_EIGHTH or 0.125), stop it entirely.
+            if (bounce_vy < 1 && bounce_vy > -1) {
+                ball->vy = 0; // Ball is fully settled (no more vertical movement)
+                ball->vx = 0; // Stop any sliding (no more horizontal movement)
+            } else {
+                // It's still bouncing, apply the calculated velocities
+                ball->vy = bounce_vy / 4;
+                //ball->vx = ball->vx >> 1;
+                //ball->vx /= 2;
             }
+                                
+            // Add a random impulse
+            //apply_impulse(ball,-20,0);
+
         }
     }
 }
+
 
 void handle_ball_pin_collision(Ball* ball, Pin* pin)
 {
@@ -74,18 +79,6 @@ void handle_ball_pin_collision(Ball* ball, Pin* pin)
         printf("collision!");
         gotogxy(0,0);
 
-        
-        // calc offset
-        int8_t pin_center_x = pin->x + TILE_HALF_WIDTH; 
-        int8_t offset_x_int = ball_center_x - pin_center_x; 
-
-        uint8_t magnitude_y_int = TILE_HALF_WIDTH - abs(offset_x_int);
-        
-        fixed_n force_x = PIN_BOUNCE_FORCE_H * offset_x_int; 
-        fixed_n force_y = PIN_BOUNCE_FORCE_V * magnitude_y_int;
-
-        // Apply negative sign to force_y to reflect the ball upwards
-        apply_impulse(ball, force_x, -force_y);
     }
 
 }
