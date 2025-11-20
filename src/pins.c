@@ -12,3 +12,8 @@ void init_pin(Pin* pin, GameSprite* gfx_data, uint8_t pin_x, uint8_t pin_y)
     pin->game_sprite = gfx_data;
 
 }
+
+void get_pin_coords_from_bkg()
+{
+    // 
+}

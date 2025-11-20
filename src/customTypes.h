@@ -7,6 +7,8 @@
 
 typedef struct GameSprite GameSprite;
 
+// ***** FIXED NUMBERS *****
+
 typedef int16_t fixed_n;   
 
 #define FIXED_SHIFT   8           // number of fractional bits
@@ -18,15 +20,23 @@ typedef int16_t fixed_n;
 #define FIXED_TENBAG  (1 << (FIXED_SHIFT - 5)) // (8)
 
 
-// Conversion helpers
+// === CONVERSION HELPERS ===
 #define TO_FIXED(x)   ((fixed_n)((x) << FIXED_SHIFT))       // int -> fixed
 #define FROM_FIXED(x) ((x) >> FIXED_SHIFT)                // fixed -> int
 #define FIXED_ADD(a,b) ((a) + (b))
 #define FIXED_SUB(a,b) ((a) - (b))
 
-// Optional multiply/divide (integer-safe, not float)
+// === SLOW MATHS ===
 #define FIXED_MUL(a,b) (((a) * (b)) >> FIXED_SHIFT)
 #define FIXED_DIV(a,b) (((a) << FIXED_SHIFT) / (b))
+
+
+// === STATES ===
+
+#define STATE_GAME_SCREEN 1
+#define STATE_TITLE_SCREEN 2
+#define STATE_SCORE_SCREEN 3
+#define STATE_DEMO_SCREEN 4
 
 
 // ##### GAME OBJECTS #####

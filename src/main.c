@@ -62,6 +62,21 @@ GameSprite pachinko_balls_gfx_data[BALLS_SIZE];
 GameSprite wall_graphics_data;
 GameSprite test_pin_graphics_data;
 
+// === GAME (and/or) STATE ===
+
+uint8_t current_state = STATE_GAME_SCREEN;
+
+// current key press etc
+uint8_t keys;
+
+// Forward declarations
+
+void game_state_input();
+void end_step();
+void change_state(uint8_t state);
+void game_state_physics(uint8_t frame_skip);
+
+
 void main(void) 
 {
   DISPLAY_OFF;
@@ -69,12 +84,68 @@ void main(void)
   HIDE_BKG;
   HIDE_SPRITES;
 
+  switch (current_state) {
+    
+    case STATE_DEMO_SCREEN:
+      // code block
+      break;
+
+    case STATE_GAME_SCREEN:
+      init_game_state();
+      break;
+
+    case STATE_SCORE_SCREEN:
+      // code
+      break;
+
+    case STATE_TITLE_SCREEN:
+      // code
+      break;
+  }
+
+  DISPLAY_ON;
+  SHOW_BKG;
+  SHOW_SPRITES;
+
+  while (1) {
+
+
+    while(current_state = STATE_GAME_SCREEN)
+    {
+
+      // Checks for inputs and set behaviour and flags
+      game_state_input();
+
+      // Updates physics, location, and renders
+      game_state_physics(0);
+
+      // Calls vsync and other end of frame code
+      end_step();
+
+    }
+
+  }
+
+}
+
+void end_step(){
+  vsync();
+}
+
+void change_state(uint8_t state)
+{
+  if (state != current_state){
+    current_state = state;
+  }
+
+}
+
+// ##### GAME STATE FUNCTIONS #####
+
+void init_game_state()
+{
+    
   set_sprite_data(0, 3, PinballTiles);
-
-  // load background tiles into VRAM
-  //set_bkg_data(0, 4, PinballTiles);
-  //set_bkg_tiles(0, 0, 20, 18, pachinko1);
-
 
   // Initialize floor
   floor.x = 0;
@@ -96,33 +167,30 @@ void main(void)
     init_ball(&pachinkoBalls[i], &pachinko_balls_gfx_data[i], x, y);
 
   }
-  
 
-  DISPLAY_ON;
-  SHOW_BKG;
-  SHOW_SPRITES;
+}
 
-  bool frame_advance_mode = false; 
-  uint8_t keys;
-  
-  while (1) {
+void game_state_input()
+{
 
-    // === INPUT ===
-    if (joypad() == J_RIGHT && frame_advance_mode == false){
-      frame_advance_mode = true;
-    }
+  keys = joypad();
 
-    if (joypad() & J_DOWN) {
-      reset_balls(pachinkoBalls, 10);
-    }
+  // replace with switch case if more conditions
+  if (keys == J_DOWN) {
+    reset_balls(pachinkoBalls, 10);
+  }
 
+}
+
+void game_state_physics(uint8_t frame_skip)
+{
     // Handle balls and pins main loop. Per frame.
     // Note: Could be factored into seperate function with parameter for frame-skipping for performance.
     for (uint8_t i = 0; i < 10; i++) {
 
       // === PHYSICS ===
 
-      apply_gravity(&pachinkoBalls[i]); // Apply continous gravity force of GRAVITY
+      update_ball_position(&pachinkoBalls[i]); // Apply continous gravity force of GRAVITY
       check_ball_wall(&pachinkoBalls[i], &floor); // Handle collisions with walls
       handle_ball_pin_collision(&pachinkoBalls[i], &test_pin); // Handle collisions with pins
 
@@ -130,25 +198,7 @@ void main(void)
       DRAW_SPRITE(pachinkoBalls[i].game_sprite, pachinkoBalls[i].x, pachinkoBalls[i].y);
       
     }
-
-
-    // This section just handles a manual frame advance mode. Can be removed without issue.
-    // I'm aware that this could be done much mdore cleanly, but I like the goto bodge job for aesthetic reasons.
-    loop:
-    keys = joypad();
-    if (keys == J_LEFT){
-        frame_advance_mode = false;
-        goto advance;
-    }
-    
-    if(frame_advance_mode == true && keys != J_LEFT){
-      if(keys != J_RIGHT)
-        goto loop;
-    }
-    advance:
-
-    vsync();
-
-  }
-
 }
+
+
+

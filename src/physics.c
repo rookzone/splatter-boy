@@ -3,13 +3,11 @@
 #include "physics.h"
 #include "graphics.h"
 
-void apply_gravity(Ball *ball) 
+
+void update_ball_position(Ball *ball)
 {
-    ball->vy += GRAVITY;
-    
-    if (ball->vy > MAX_SPEED) {
-        ball->vy = MAX_SPEED;
-    }
+
+    apply_gravity(ball);
     
     ball->sub_x += ball->vx;
     ball->sub_y += ball->vy;
@@ -22,6 +20,17 @@ void apply_gravity(Ball *ball)
     
     ball->sub_x -= TO_FIXED(dx);  // - (dx << 8)
     ball->sub_y -= TO_FIXED(dy);  // - (dy << 8)
+
+}
+
+void apply_gravity(Ball *ball) 
+{
+    ball->vy += GRAVITY;
+    
+    if (ball->vy > MAX_SPEED) {
+        ball->vy = MAX_SPEED;
+    }
+
 }
 
 void apply_impulse(Ball *ball, fixed_n impulse_magnitude_x, fixed_n impulse_magnitude_y)

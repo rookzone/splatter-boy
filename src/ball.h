@@ -1,10 +1,10 @@
-#ifndef BALL_H
-#define BALL_H
-
 #include <gb/gb.h>
 #include "physics.h"
 #include "graphics.h"
 #include "customtypes.h"
+
+#ifndef BALL_H
+#define BALL_H
 
 void reset_balls(Ball* b, uint8_t count);
 

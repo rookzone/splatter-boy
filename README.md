@@ -1,15 +1,5 @@
 # Splatter Boy
 
-## TODO
-
-- [ ] Draw a plot point at the x, values of balls and pins to determine if x,y is on the top left.
-- [ ] Extract pin positions from background data and instantiate the pins
-- [ ] Create function to handle balls and pins loop with parameter for frame-skip
-  - [ ] BETTER: split into input, physics, and drawing so can be optimised seperately
-- [ ] Apply bounce to ball function, used to add force to ball depending on where it hits the pin
-
-- [ ] States. This lets me switch out to a different scene pretty much. Like a different screen or level.
-
 ## About
 
 A fun little project where I mess around with C and GBDK. Attempt at a pachinko game with decent ball physics
