@@ -137,6 +137,7 @@ void init_game_state(void)
     uint8_t x = 10+ i*10;
     uint8_t y = 10+ i*10;
     init_ball(&pachinkoBalls[i], &pachinko_balls_gfx_data[i], x, y);
+    pachinkoBalls[i].vx = RANDOM_HORIZONTAL_VX[i];
 
   }
 

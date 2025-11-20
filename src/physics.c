@@ -41,27 +41,28 @@ void apply_impulse(Ball *ball, fixed_n impulse_magnitude_x, fixed_n impulse_magn
 
 }
 
+
 void check_ball_wall(Ball *ball, Wall *w) 
 {
     if (ball->vy > 0) { 
-        uint8_t sprite_y = ball->y + SPRITE_SIZE;
+        uint8_t ball_bottom = ball->y + SPRITE_SIZE;
 
-        if (sprite_y >= w->y + SPRITE_SIZE) {
-            // Position correction
-            ball->y = w->y;
-            
-            // Bounce with damping
-            ball->vy = -(ball->vy >> 2);  // Divide by 4 and negate
-            ball->vx = ball->vx >> 1;     // Halve horizontal velocity
-            
-            // Clear sub-pixel accumulators on collision
-            ball->sub_x = 0;
+        if (ball_bottom >= w->y) {
+            // Correct position
+            ball->y = w->y - SPRITE_SIZE;
             ball->sub_y = 0;
             
+            // Bounce (50% energy retention)
+            ball->vy = -(ball->vy >> 2);
+            
+            // Friction (75% horizontal speed)
+            ball->vx = (ball->vx * 3) >> 2;
+            
             // Stop if bounce is too weak
-            if (ball->vy > -FIXED_EIGHTH && ball->vy < FIXED_EIGHTH) {
+            if (ball->vy > -FIXED_QUARTER) {
                 ball->vy = 0;
                 ball->vx = 0;
+                ball->sub_x = 0;
             }
         }
     }

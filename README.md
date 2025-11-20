@@ -5,7 +5,7 @@
 A fun little project where I mess around with C and GBDK. Attempt at a pachinko game with decent ball physics
 
 ## Goals and progress
-= [x] 06/11/25 - I am officially beginning this project. The first goal is to create a ball with gravity that can hit a wall and bounce until it's energy has depleted.
+- [x] 06/11/25 - I am officially beginning this project. The first goal is to create a ball with gravity that can hit a wall and bounce until it's energy has depleted.
 
 - [ ] Started on 18/11/25 - My goal now is to place 10 pins in the game and have a button spawn balls at the top. The balls should drop down through the pins with good physics. I am allowing some time to play around with a title screen to test graphics out.
 
