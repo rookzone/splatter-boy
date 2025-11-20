@@ -24,14 +24,17 @@ void end_step(void);
 // Ball values
 #define BALLS_SIZE 10
 #define NUM_BALLS 10
+#define NUM_PINS 5
 
 // === RUNTIME GAME OBJECT DATA ===
 Wall floor;
 Ball pachinkoBalls[BALLS_SIZE];
+Pin pachinkoPins[NUM_PINS];
 Pin test_pin;
 
 // === RUNTIME GRAPHICS DATA ===
 GameSprite pachinko_balls_gfx_data[BALLS_SIZE];
+GameSprite pachinko_pins_gfx_data[NUM_PINS];
 GameSprite wall_graphics_data;
 GameSprite test_pin_graphics_data;
 
@@ -126,9 +129,14 @@ void init_game_state(void)
   wall_graphics_data = create_sprite(TILE_WALL);
   floor.game_sprite = &wall_graphics_data;
 
-  // init test pin
-  init_pin(&test_pin, &test_pin_graphics_data, 60, 60);
-  DRAW_SPRITE(test_pin.game_sprite, test_pin.x, test_pin.y);
+
+  // create a bunch of pins
+  for (uint8_t i = 0; i < NUM_PINS; i++) {
+    uint8_t x = 40+ i*5;
+    uint8_t y = 100+ i*5;
+    init_pin(&pachinkoPins[i], &pachinko_pins_gfx_data[i], x, y);
+    DRAW_SPRITE(pachinkoPins[i].game_sprite, x, y);
+  }
 
 
   // Create pachinko balls
@@ -169,8 +177,12 @@ void game_state_physics(uint8_t frame_skip)
 
       update_ball_position(&pachinkoBalls[i]); // Apply continous gravity force of GRAVITY
       check_ball_wall(&pachinkoBalls[i], &floor); // Handle collisions with walls
-      handle_ball_pin_collision(&pachinkoBalls[i], &test_pin); // Handle collisions with pins
 
+      // HERE IS WHERE IT GETS SPENNY
+      for (uint8_t j = 0; j < NUM_BALLS; j++){
+        handle_ball_pin_collision(&pachinkoBalls[i], &pachinkoPins[j]); // Handle collisions with pins
+      }
+      
       // === GRAPHICS ===
       DRAW_SPRITE(pachinkoBalls[i].game_sprite, pachinkoBalls[i].x, pachinkoBalls[i].y);
       
