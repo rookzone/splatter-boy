@@ -1,39 +1,5 @@
 ﻿//main.c
 
-/*
-# TODO
-
-https://www.youtube.com/watch?v=oLoTTTuvaRs&list=PLeEj4c2zF7PaFv5MPYhNAkBGrkx4iPGJo&index=10
-- collision detection
-
-Start to document progress on a wiki.
-
-
-## Structure
-
-All structs, enum, constants, and macros are place in `CustomTypes.h`. This lets me define all the custom 
-stuff in one place, reducing the amount of includes in header files and circular dependcies.
-
-**These are the "engine" functions**
-
-- Physics .c .h
-Applying any movement and forces to logical positions and velocities.
-Generally physics will be applied to the x,y,vx,vy values in the game objects (such as ball or pin).
-
-Operations are done using 8.8 fixed decimal int16s, these helps increase precision.
-These operations take placed in "fixed number space". They will need shifting back for drawing
-
-- Graphics .c .h
-
-**These are game object behaviours**
-
-- ball .c .h
-- pins .c .h
-
-`main.c` is where the game loop is
-
-*/
-
 #include <gb/gb.h>
 #include <gbdk/console.h>
 
@@ -48,7 +14,14 @@ These operations take placed in "fixed number space". They will need shifting ba
 #include "graphics.h"
 #include "debug.h"
 
+// Forward declarations
+void init_game_state(void);
+void game_state_input(void);
+void game_state_physics(uint8_t frame_skip);
+void change_state(uint8_t state);
+void end_step(void);
 
+// Ball values
 #define BALLS_SIZE 10
 #define NUM_BALLS 10
 
@@ -64,63 +37,33 @@ GameSprite test_pin_graphics_data;
 
 // === GAME (and/or) STATE ===
 
-uint8_t current_state = STATE_GAME_SCREEN;
+uint8_t current_state = 0;
 
 // current key press etc
 uint8_t keys;
 
-// Forward declarations
-
-void game_state_input();
-void end_step();
-void change_state(uint8_t state);
-void game_state_physics(uint8_t frame_skip);
-
-
 void main(void) 
 {
-  DISPLAY_OFF;
-  SPRITES_8x8;
-  HIDE_BKG;
-  HIDE_SPRITES;
 
-  switch (current_state) {
-    
-    case STATE_DEMO_SCREEN:
-      // code block
-      break;
-
-    case STATE_GAME_SCREEN:
-      init_game_state();
-      break;
-
-    case STATE_SCORE_SCREEN:
-      // code
-      break;
-
-    case STATE_TITLE_SCREEN:
-      // code
-      break;
-  }
-
-  DISPLAY_ON;
-  SHOW_BKG;
-  SHOW_SPRITES;
+  change_state(STATE_GAME_SCREEN);
 
   while (1) {
 
+    switch(current_state) {
+        case STATE_GAME_SCREEN:
+            game_state_input();
+            game_state_physics(0);
+            end_step();
+            break;
+        
+        case STATE_TITLE_SCREEN:
+            break;
 
-    while(current_state = STATE_GAME_SCREEN)
-    {
+        case STATE_DEMO_SCREEN:
+            break;
 
-      // Checks for inputs and set behaviour and flags
-      game_state_input();
-
-      // Updates physics, location, and renders
-      game_state_physics(0);
-
-      // Calls vsync and other end of frame code
-      end_step();
+        case STATE_SCORE_SCREEN:
+            break;
 
     }
 
@@ -128,23 +71,52 @@ void main(void)
 
 }
 
-void end_step(){
+void end_step(void)
+{
   vsync();
 }
 
 void change_state(uint8_t state)
 {
   if (state != current_state){
-    current_state = state;
-  }
 
+    current_state = state;
+
+    switch(current_state)
+    {
+      case STATE_GAME_SCREEN:
+        init_game_state();
+        current_state = state;
+        // Main game screen
+        break;
+
+      case STATE_DEMO_SCREEN:
+        // Demo screen
+        break;
+
+      case STATE_SCORE_SCREEN:
+        // Score board
+        break;
+
+      case STATE_TITLE_SCREEN:
+        // Title screen
+        break;
+    }
+  }
 }
 
 // ##### GAME STATE FUNCTIONS #####
 
-void init_game_state()
+void init_game_state(void)
 {
-    
+
+  DISPLAY_OFF;
+  SPRITES_8x8;
+  HIDE_BKG;
+  HIDE_SPRITES;
+
+  next_sprite_id = 0; // reset sprites
+
   set_sprite_data(0, 3, PinballTiles);
 
   // Initialize floor
@@ -156,7 +128,7 @@ void init_game_state()
 
   // init test pin
   init_pin(&test_pin, &test_pin_graphics_data, 60, 60);
-  DRAW_SPRITE(test_pin.game_sprite, test_pin.x, test_pin.x);
+  DRAW_SPRITE(test_pin.game_sprite, test_pin.x, test_pin.y);
 
 
   // Create pachinko balls
@@ -168,16 +140,20 @@ void init_game_state()
 
   }
 
+  DISPLAY_ON;
+  SHOW_BKG;
+  SHOW_SPRITES;
+
 }
 
-void game_state_input()
+void game_state_input(void)
 {
 
   keys = joypad();
 
   // replace with switch case if more conditions
   if (keys == J_DOWN) {
-    reset_balls(pachinkoBalls, 10);
+    reset_balls(pachinkoBalls, NUM_BALLS);
   }
 
 }
@@ -186,7 +162,7 @@ void game_state_physics(uint8_t frame_skip)
 {
     // Handle balls and pins main loop. Per frame.
     // Note: Could be factored into seperate function with parameter for frame-skipping for performance.
-    for (uint8_t i = 0; i < 10; i++) {
+    for (uint8_t i = 0; i < NUM_BALLS; i++) {
 
       // === PHYSICS ===
 
@@ -199,6 +175,5 @@ void game_state_physics(uint8_t frame_skip)
       
     }
 }
-
 
 
