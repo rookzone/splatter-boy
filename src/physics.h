@@ -21,8 +21,8 @@
 #define GRAVITY     FIXED_TEENTH  
 #define MAX_SPEED   TO_FIXED(10)
 #define DAMPING     4       // bounce damping
-#define PIN_BOUNCE_FORCE_H 16
-#define PIN_BOUNCE_FORCE_V 64
+#define PIN_BOUNCE_FORCE_H 8
+#define PIN_BOUNCE_FORCE_V 48
 
 // ##### GRAVITY #####
 

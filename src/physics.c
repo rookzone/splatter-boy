@@ -70,7 +70,6 @@ void check_ball_wall(Ball *ball, Wall *w)
 
 void handle_ball_pin_collision(Ball* ball, Pin* pin)
 {
-
     // Grab center point of objects
     uint8_t ball_center_x = ball->x + TILE_HALF_WIDTH;
     uint8_t ball_center_y = ball->y + TILE_HALF_WIDTH;
@@ -86,22 +85,23 @@ void handle_ball_pin_collision(Ball* ball, Pin* pin)
         goto finish;
     }
         
+    
     if (ball_center_x >= pin->x && 
         ball_center_x < (pin->x + SPRITE_SIZE) && 
         ball_center_y >= pin->y && 
         ball_center_y < (pin->y + SPRITE_SIZE)) {
         
         // calc offset
-        int8_t offset_x_int = ball_center_x - pin_center_x; 
+        int8_t offset_x_int = distance_x;
 
-        uint8_t magnitude_y_int = TILE_HALF_WIDTH - abs(offset_x_int);
+        uint8_t magnitude_y_int = TILE_HALF_WIDTH - offset_x_int;
         
         fixed_n force_x = PIN_BOUNCE_FORCE_H * offset_x_int; 
         fixed_n force_y = PIN_BOUNCE_FORCE_V * magnitude_y_int;
 
         // Apply negative sign to force_y to reflect the ball upwards
         apply_impulse(ball, force_x, -force_y);
-    }
+    
 
     finish:
 
