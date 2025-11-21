@@ -6,6 +6,7 @@
 #ifndef BALL_H
 #define BALL_H
 
+// Reset an array of balls to starting positions.
 void reset_balls(Ball* b, uint8_t count);
 
 

@@ -10,6 +10,8 @@ void reset_balls(Ball* b, uint8_t count)
       b[i].vy = 0;
 
       DRAW_SPRITE(b[i].game_sprite,b[i].x,b[i].y);
+
+      b[i].vx = RANDOM_HORIZONTAL_VX[i];
       
     }
 }
