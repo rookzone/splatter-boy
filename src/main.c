@@ -170,6 +170,7 @@ void game_state_input(void)
 void game_state_physics(void)
 {
   for (uint8_t i = 0; i < NUM_BALLS; i++) {
+    
       update_ball_position(&pachinkoBalls[i]);
       check_ball_wall(&pachinkoBalls[i], &floor);
       
