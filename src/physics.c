@@ -101,6 +101,8 @@ void handle_ball_pin_collision(Ball* ball, Pin* pin)
 
         // Apply negative sign to force_y to reflect the ball upwards
         apply_impulse(ball, force_x, -force_y);
+        
+        }
     
 
     finish:
