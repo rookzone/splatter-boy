@@ -22,13 +22,14 @@
 #define MAX_SPEED   TO_FIXED(10)
 #define DAMPING     4       // bounce damping
 #define PIN_BOUNCE_FORCE_H 16
-#define PIN_BOUNCE_FORCE_V 16
+#define PIN_BOUNCE_FORCE_V 64
 
 // ##### GRAVITY #####
 
 // Apply gravity to ball
 void apply_gravity(Ball *ball);
 
+// Applies forces and updates ball position in logical fixed number space (does NOT render)
 void update_ball_position(Ball *ball);
 
 // ##### FORCE #####
