@@ -9,6 +9,7 @@
     I can then seperate the generic part of the loop. Maybe setting a proxy value for inputs depending on state.
     Basically if there's an enum or something for each state. So for input it would be checking
     if(STATE_PROXY_FOR_UP) or actually switch CASE that 
-- [ ] Create function to handle balls and pins loop with parameter for frame-skip
-  - [ ] BETTER: split into input, physics, and drawing so can be optimised seperately
-- [ ] Apply bounce to ball function, used to add force to ball depending on where it hits the pin
+- [x] Create function to handle balls and pins loop with parameter for frame-skip
+  - [x] BETTER: split into input, physics, and drawing so can be optimised seperately
+- [x] Apply bounce to ball function, used to add force to ball depending on where it hits the pin
+= [x] Create debug functionality to count instruction or measure performance to find bottlenecks

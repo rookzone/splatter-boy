@@ -17,7 +17,7 @@
 // Forward declarations
 void init_game_state(void);
 void game_state_input(void);
-void game_state_physics(uint8_t frame_skip);
+void game_state_physics(void);
 void change_state(uint8_t state);
 void end_step(void);
 
@@ -55,7 +55,7 @@ void main(void)
     switch(current_state) {
         case STATE_GAME_SCREEN:
             game_state_input();
-            game_state_physics(0);
+            game_state_physics();
             end_step();
             break;
         
@@ -167,26 +167,25 @@ void game_state_input(void)
 
 }
 
-void game_state_physics(uint8_t frame_skip)
+void game_state_physics(void)
 {
-    // Handle balls and pins main loop. Per frame.
-    // Note: Could be factored into seperate function with parameter for frame-skipping for performance.
+    static uint8_t collision_frame = 0;
+    
     for (uint8_t i = 0; i < NUM_BALLS; i++) {
-
-      // === PHYSICS ===
-
-      update_ball_position(&pachinkoBalls[i]); // Apply continous gravity force of GRAVITY
-      check_ball_wall(&pachinkoBalls[i], &floor); // Handle collisions with walls
-
-      // HERE IS WHERE IT GETS SPENNY
-      for (uint8_t j = 0; j < NUM_BALLS; j++){
-        handle_ball_pin_collision(&pachinkoBalls[i], &pachinkoPins[j]); // Handle collisions with pins
-      }
-      
-      // === GRAPHICS ===
-      DRAW_SPRITE(pachinkoBalls[i].game_sprite, pachinkoBalls[i].x, pachinkoBalls[i].y);
-      
+        update_ball_position(&pachinkoBalls[i]);
+        check_ball_wall(&pachinkoBalls[i], &floor);
+        
+        // Only check collisions:
+        // - Every other frame (30fps)
+        // - When ball is falling
+        if (collision_frame && pachinkoBalls[i].vy > 0) {
+            for (uint8_t j = 0; j < NUM_PINS; j++) {
+                handle_ball_pin_collision(&pachinkoBalls[i], &pachinkoPins[j]);
+            }
+        }
+        
+        DRAW_SPRITE(pachinkoBalls[i].game_sprite, pachinkoBalls[i].x, pachinkoBalls[i].y);
     }
+    
+    collision_frame = !collision_frame;
 }
-
-
