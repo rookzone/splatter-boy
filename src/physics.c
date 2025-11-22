@@ -65,13 +65,12 @@ void handle_ball_pin_collision(Ball* ball, Pin* pin)
     int16_t distance_x = abs(ball_center_x - pin_center_x);
     int16_t distance_y = abs(ball_center_y - pin_center_y);
 
-    // if ball is more than 8 units away, skip check
-    if(distance_x >= SPRITE_SIZE || distance_y >= SPRITE_SIZE)
-        return;
-
-
-    // Ball is within collision bounds and colliding is false
-    if ((ball_center_x >= pin->x && 
+    // if ball is 16 or more units away then skip collision check
+    if(distance_x >= SPRITE_SIZE || distance_y >= SPRITE_SIZE){
+        goto finish;
+    }
+        
+    if (ball_center_x >= pin->x && 
         ball_center_x < (pin->x + SPRITE_SIZE) && 
         ball_center_y >= pin->y && 
         ball_center_y < (pin->y + SPRITE_SIZE)) || ball->is_colliding == false) {
@@ -82,10 +81,15 @@ void handle_ball_pin_collision(Ball* ball, Pin* pin)
 
             ball->is_colliding = true;
         
-    } else {
-        ball->is_colliding = false; // If ball isn't in bounds but IS within range then colliding = false;
+        // calc offset
+        int8_t offset_x_int = ball_center_x - pin_center_x; 
+
+        uint8_t magnitude_y_int = TILE_HALF_WIDTH - abs(offset_x_int);
+        
+        fixed_n force_x = PIN_BOUNCE_FORCE_H * offset_x_int; 
+        fixed_n force_y = PIN_BOUNCE_FORCE_V * magnitude_y_int;
+
+        // Apply negative sign to force_y to reflect the ball upwards
+        apply_impulse(ball, force_x, -force_y);
     }
-
-}
-
 

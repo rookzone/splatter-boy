@@ -21,8 +21,8 @@
 #define GRAVITY     FIXED_TEENTH  
 #define MAX_SPEED   TO_FIXED(4)
 #define DAMPING     4       // bounce damping
-#define PIN_BOUNCE_FORCE_H 8
-#define PIN_BOUNCE_FORCE_V 48
+#define PIN_BOUNCE_FORCE_H 16
+#define PIN_BOUNCE_FORCE_V 64
 
 
 // Applies forces and updates ball position in logical fixed number space (does NOT render)
