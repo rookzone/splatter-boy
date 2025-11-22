@@ -25,6 +25,8 @@
 #define PIN_BOUNCE_FORCE_V 64
 
 
+void apply_gravity(Ball *ball);
+
 // Applies forces and updates ball position in logical fixed number space (does NOT render)
 void update_ball_position(Ball *ball);
 

@@ -1,7 +1,6 @@
 // customTypes.h
 
 #include <gb/gb.h>
-#include <stdbool.h>
 
 #ifndef CUSTOMTYPES_H
 #define CUSTOMTYPES_H
@@ -46,9 +45,9 @@ typedef int16_t fixed_n;
 
 typedef struct {
     uint8_t x, y;
+    fixed_n sub_x, sub_y;
     fixed_n  vx, vy;
     GameSprite *game_sprite;
-    bool is_colliding;
 } Ball;
 
 typedef struct {
@@ -68,8 +67,7 @@ typedef struct {
 #define SPRITE_SIZE 8
 
 
-// This stores the tile the sprite uses and 
-// Holds the sprite ID for where it is loaded into VRAM
+// This stores the tile the sprite uses and crucially holds the sprite ID for where it is loaded into VRAM
 typedef struct GameSprite {
     uint8_t sprite_index;
     uint8_t tile_index;
