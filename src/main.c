@@ -22,9 +22,9 @@ void change_state(uint8_t state);
 void end_step(void);
 
 // Ball values
-#define BALLS_SIZE 10
-#define NUM_BALLS 5
-#define NUM_PINS 10
+#define BALLS_SIZE 6
+#define NUM_BALLS 6
+#define NUM_PINS 6
 
 // === RUNTIME GAME OBJECT DATA ===
 Wall floor;
@@ -46,6 +46,8 @@ uint8_t frame_counter = 0;
 
 // current key press etc
 uint8_t keys;
+// Key on last frame
+uint8_t previous_keys;
 
 
 void main(void) 
@@ -75,11 +77,6 @@ void main(void)
 
   }
 
-}
-
-void end_step(void)
-{
-  vsync();
 }
 
 void change_state(uint8_t state)
@@ -135,17 +132,17 @@ void init_game_state(void)
 
   // create a bunch of pins
   for (uint8_t i = 0; i < NUM_PINS; i++) {
-    uint8_t x = 40+ i*16;
+    uint8_t x = 40+ i*10;
     uint8_t y = 100;
     init_pin(&pachinkoPins[i], &pachinko_pins_gfx_data[i], x, y);
-    DRAW_SPRITE(pachinkoPins[i].game_sprite, x, y);
+    //DRAW_SPRITE(pachinkoPins[i].game_sprite, x, y);
   }
 
 
   // Create pachinko balls
   for (uint8_t i = 0; i < BALLS_SIZE; i++) {
 
-    uint8_t x = 10+ i*10;
+    uint8_t x = 42+ i*12;
     uint8_t y = 20;
     init_ball(&pachinkoBalls[i], &pachinko_balls_gfx_data[i], x, y);
     pachinkoBalls[i].vx = RANDOM_HORIZONTAL_VX[i];
@@ -158,17 +155,53 @@ void init_game_state(void)
 
 }
 
+
+
+void game_state_input(void)
+{
+    
+    keys = joypad();
+
+    
+    if ((keys & J_LEFT) && !(previous_keys & J_LEFT)) {
+        
+        Ball* ball_to_launch = find_lowest_ball(pachinkoBalls, NUM_BALLS);
+        
+        if (ball_to_launch != NULL) {
+
+            launch_ball(ball_to_launch, 0, 90, LAUNCH_FORCE_X, -LAUNCH_FORCE_Y+FIXED_HALF);
+
+        }
+    }
+
+    if ((keys & J_UP) && !(previous_keys & J_UP)) {
+        reset_balls(pachinkoBalls, NUM_BALLS);
+    }
+    
+}
+
+/*
 void game_state_input(void)
 {
 
   keys = joypad();
 
-  // replace with switch case if more conditions
-  if (keys == J_DOWN) {
-    reset_balls(pachinkoBalls, NUM_BALLS);
+
+  switch (keys){
+
+    case J_LEFT:
+      for (uint8_t i = 0; i < NUM_BALLS; i++) {
+        launch_ball((find_lowest_ball(&pachinkoBalls, NUM_BALLS), &pachinkoPins[i]), 0, 72, LAUNCH_FORCE_X, -LAUNCH_FORCE_Y);
+      }
+      break;
+    case J_UP:
+      reset_balls(pachinkoBalls, NUM_BALLS);
+      break;
+
   }
 
 }
+  */
 
 void game_state_physics(void)
 {
@@ -190,4 +223,10 @@ void game_state_physics(void)
     DRAW_SPRITE(pachinkoBalls[i].game_sprite, pachinkoBalls[i].x, pachinkoBalls[i].y);
 
   }
+}
+
+void end_step(void)
+{
+  previous_keys = keys;
+  vsync();
 }

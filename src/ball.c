@@ -4,8 +4,8 @@
 void reset_balls(Ball* b, uint8_t count)
 {
     for(uint8_t i = 0; i < count; i++){
-      b[i].x = 10+ i*10;
-      b[i].y = 10+ i*10;
+      b[i].x = 42+ i*12;
+      b[i].y = 20;
       b[i].vx = 0;
       b[i].vy = 0;
 
@@ -35,4 +35,40 @@ void reset_ball(Ball* ball)
     ball->vy = 0;
     ball->sub_x = 0;
     ball->sub_y = 0;
+}
+
+
+Ball* find_lowest_ball(Ball* balls, uint8_t count)
+{
+    if (count == 0) {
+        return NULL; // Return NULL if the array is empty
+    }
+
+    Ball* lowest_ball = &balls[0];
+    uint8_t highest_y = balls[0].y;
+
+    for (uint8_t i = 1; i < count; i++) {
+        // Compare the current ball's y-coordinate with the maximum found so far
+        if (balls[i].y > highest_y) {
+            highest_y = balls[i].y;
+            lowest_ball = &balls[i];
+        }
+    }
+
+    return lowest_ball;
+}
+
+
+
+void launch_ball(Ball* ball, uint8_t from_x, uint8_t from_y, fixed_n launch_power_x, fixed_n launch_power_y)
+{
+    // Reset ball velocity and sub-pixel accumulator
+    reset_ball(ball);
+
+    // Move ball to screen position
+    ball->x = from_x;
+    ball->y = from_y;
+
+    apply_impulse(ball, launch_power_x, launch_power_y);
+
 }
