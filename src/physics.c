@@ -11,15 +11,14 @@ void update_ball_position(Ball *ball)
     
     ball->sub_x += ball->vx;
     ball->sub_y += ball->vy;
+
+    // ** Optimization: Use direct calculation and assignment **
+    ball->x += (int8_t)(ball->sub_x >> FIXED_SHIFT);
+    ball->y += (int8_t)(ball->sub_y >> FIXED_SHIFT);
     
-    int8_t dx = FROM_FIXED(ball->sub_x);  // >> 8
-    int8_t dy = FROM_FIXED(ball->sub_y);  // >> 8
-    
-    ball->x += dx;
-    ball->y += dy;
-    
-    ball->sub_x -= TO_FIXED(dx);  // - (dx << 8)
-    ball->sub_y -= TO_FIXED(dy);  // - (dy << 8)
+    ball->sub_x &= 0xFF; // Keep only the fractional part (8 bits)
+    ball->sub_y &= 0xFF; // Keep only the fractional part (8 bits)
+
 
 }
 
@@ -48,17 +47,16 @@ void check_ball_wall(Ball *ball, Wall *w)
         uint8_t ball_bottom = ball->y + SPRITE_SIZE;
 
         if (ball_bottom >= w->y) {
+
             // Correct position
             ball->y = w->y - SPRITE_SIZE;
             ball->sub_y = 0;
             
             // Bounce (50% energy retention)
             ball->vy = -(ball->vy >> 1);
+            ball->vx = ball->vx - (ball->vx >> 2);
             
-            // Friction (75% horizontal speed)
-            ball->vx = (ball->vx * 3) >> 2;
-            
-            // Stop if bounce is too weak
+            // Stop if bounce is too weak (> 0.25 vx/y)
             if (ball->vy > -FIXED_QUARTER) {
                 ball->vy = 0;
                 ball->vx = 0;
@@ -80,17 +78,17 @@ void handle_ball_pin_collision(Ball* ball, Pin* pin)
     int8_t distance_x = ball_center_x - pin_center_x;
     int8_t distance_y = ball_center_y - pin_center_y;
 
-    // if ball is 8 or more units away then skip collision check
-    if(abs(distance_x) >= SPRITE_SIZE || abs(distance_y) >= SPRITE_SIZE){
+    if(distance_x >= SPRITE_SIZE || distance_x <= -SPRITE_SIZE ||
+        distance_y >= SPRITE_SIZE || distance_y <= -SPRITE_SIZE){
         return;
     }
         
     
-    if (ball_center_x >= (pin->x + 2) && 
-        ball_center_x < (pin->x + 6) && 
-        ball_center_y >= (pin->y + 2) && 
-        ball_center_y < (pin->y + 6)) {
-
+    if (ball_center_x >= pin->x && 
+    ball_center_x < (pin->x + SPRITE_SIZE) && 
+    ball_center_y >= pin->y && 
+    ball_center_y < (pin->y + SPRITE_SIZE)) {
+        
         // settle position
         ball->y = pin->y - TILE_HALF_WIDTH;
         ball->sub_y = 0;

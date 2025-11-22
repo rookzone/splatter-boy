@@ -24,7 +24,7 @@ void end_step(void);
 // Ball values
 #define BALLS_SIZE 10
 #define NUM_BALLS 10
-#define NUM_PINS 5
+#define NUM_PINS 10
 
 // === RUNTIME GAME OBJECT DATA ===
 Wall floor;
@@ -42,8 +42,11 @@ GameSprite test_pin_graphics_data;
 
 uint8_t current_state = 0;
 
+uint8_t frame_counter = 0;
+
 // current key press etc
 uint8_t keys;
+
 
 void main(void) 
 {
@@ -132,7 +135,7 @@ void init_game_state(void)
 
   // create a bunch of pins
   for (uint8_t i = 0; i < NUM_PINS; i++) {
-    uint8_t x = 40+ i*10;
+    uint8_t x = 40+ i*16;
     uint8_t y = 100;
     init_pin(&pachinkoPins[i], &pachinko_pins_gfx_data[i], x, y);
     DRAW_SPRITE(pachinkoPins[i].game_sprite, x, y);
@@ -169,10 +172,16 @@ void game_state_input(void)
 
 void game_state_physics(void)
 {
+  // ** Tweak the divisor (e.g., 2, 3, or 4) to find the right balance **
+  bool run_collision_check = (frame_counter % 2) == 0;
+  frame_counter++; // Increment the counter every frame
+
   for (uint8_t i = 0; i < NUM_BALLS; i++) {
     
-    for (uint8_t j = 0; j < NUM_PINS; j++) {
-        handle_ball_pin_collision(&pachinkoBalls[i], &pachinkoPins[j]);
+    if (run_collision_check) { // Only run this block every 2nd frame
+        for (uint8_t j = 0; j < NUM_PINS; j++) {
+            handle_ball_pin_collision(&pachinkoBalls[i], &pachinkoPins[j]);
+        }
     }
     
     check_ball_wall(&pachinkoBalls[i], &floor);
