@@ -7,7 +7,7 @@
 #include <stdbool.h>
 
 #include "tiles/pinballTiles.h"
-#include "tiles/pachinkoOneBG.h"
+#include "tiles/testLevelBG.h"
 #include "physics.h"
 #include "ball.h"
 #include "pins.h"
@@ -23,7 +23,7 @@ void end_step(void);
 
 // Ball values
 #define BALLS_SIZE 10
-#define NUM_BALLS 10
+#define NUM_BALLS 5
 #define NUM_PINS 10
 
 // === RUNTIME GAME OBJECT DATA ===
