@@ -171,12 +171,14 @@ void game_state_physics(void)
 {
   for (uint8_t i = 0; i < NUM_BALLS; i++) {
     
-      update_ball_position(&pachinkoBalls[i]);
-      //check_ball_wall(&pachinkoBalls[i], &floor);
+
       
       for (uint8_t j = 0; j < NUM_PINS; j++) {
           handle_ball_pin_collision(&pachinkoBalls[i], &pachinkoPins[j]);
       }
+      check_ball_wall(&pachinkoBalls[i], &floor);
+        update_ball_position(&pachinkoBalls[i]);
+      
       
       DRAW_SPRITE(pachinkoBalls[i].game_sprite, pachinkoBalls[i].x, pachinkoBalls[i].y);
 

@@ -24,10 +24,6 @@
 #define PIN_BOUNCE_FORCE_H 8
 #define PIN_BOUNCE_FORCE_V 48
 
-// ##### GRAVITY #####
-
-// Apply gravity to ball
-void apply_gravity(Ball *ball);
 
 // Applies forces and updates ball position in logical fixed number space (does NOT render)
 void update_ball_position(Ball *ball);
@@ -44,7 +40,5 @@ void check_ball_wall(Ball *ball, Wall *w);
 
 // Handle collision between a Ball and Pin.
 void handle_ball_pin_collision(Ball *ball, Pin *pin);
-
-
 
 #endif // PHYSICS_H

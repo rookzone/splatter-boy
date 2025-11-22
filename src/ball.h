@@ -9,7 +9,6 @@
 // Reset an array of balls to starting positions.
 void reset_balls(Ball* b, uint8_t count);
 
-
 void init_ball(Ball* ball, GameSprite* gfx_data, uint8_t ball_x, uint8_t ball_y);
 
 void reset_ball(Ball* ball);
