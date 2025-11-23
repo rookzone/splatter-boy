@@ -16,9 +16,8 @@ build/
 *.swp
 
 # Emulator
-emu/BGB/*
 dev-tools/
-emu/BGB/bgb.ini
+emu\BGB/*
 
 # VSCode settings
 .vscode/
