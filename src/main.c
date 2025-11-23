@@ -2,17 +2,17 @@
 
 #include <gb/gb.h>
 #include <gbdk/console.h>
-
 #include <stdio.h>
 #include <stdbool.h>
 
-#include "tiles/pinballTiles.h"
-#include "tiles/testLevelBG.h"
 #include "physics.h"
 #include "ball.h"
 #include "pins.h"
 #include "graphics.h"
 #include "debug.h"
+
+#include "tiles/pinballTiles.h"
+#include "tiles/testLevelBG.h"
 
 // Forward declarations
 void init_game_state(void);
