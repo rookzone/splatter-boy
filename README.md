@@ -15,6 +15,7 @@ A fun little project where I mess around with C and GBDK. Attempt at a pachinko 
 
 **update - 23/11/25:**  
 *See TODO.md list*
+
 Physics is working nicely. Well optimised. Goals now:
 - [ ] Get a proper game screen with all the pins hooked up
 - [ ] Load in background and store array of pin locations
@@ -45,7 +46,8 @@ https://github.com/systemoflevers/image_to_gb
 
 ## Programming styles
 
-C styles:
+**C**
+
 https://www.cs.umd.edu/~nelson/classes/resources/cstyleguide
 https://www.kernel.org/doc/html/v4.10/process/coding-style.html
 
