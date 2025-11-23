@@ -15,7 +15,6 @@ A fun little project where I mess around with C and GBDK. Attempt at a pachinko 
 
 **update - 23/11/25:**  
 *See TODO.md list*
-
 Physics is working nicely. Well optimised. Goals now:
 - [ ] Get a proper game screen with all the pins hooked up
 - [ ] Load in background and store array of pin locations
@@ -30,6 +29,9 @@ Physics is working nicely. Well optimised. Goals now:
 To achieve a game where balls are fired out on button press, collide with exit walls,
 drop through the pins and to the bottom of the screen. Pin and wall positions are pulled
 via the tile ID on the map data. Get some debug functions for drawing zones. 
+
+## Fun?
+
 
 **Project stuff**
 - Check out licenses to use for distribution and tools used to make this.
@@ -46,8 +48,7 @@ https://github.com/systemoflevers/image_to_gb
 
 ## Programming styles
 
-**C**
-
+C styles:
 https://www.cs.umd.edu/~nelson/classes/resources/cstyleguide
 https://www.kernel.org/doc/html/v4.10/process/coding-style.html
 

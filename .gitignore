@@ -26,3 +26,6 @@ emu\BGB/*
 .DS_Store
 Thumbs.db
 
+emu/BGB/bgb.ini
+emu/BGB/bgb.html
+emu/BGB/bgb.ini
