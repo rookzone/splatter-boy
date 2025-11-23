@@ -135,7 +135,7 @@ void init_game_state(void)
     uint8_t x = 40+ i*10;
     uint8_t y = 100;
     init_pin(&pachinkoPins[i], &pachinko_pins_gfx_data[i], x, y);
-    //DRAW_SPRITE(pachinkoPins[i].game_sprite, x, y);
+    DRAW_SPRITE(pachinkoPins[i].game_sprite, x, y);
   }
 
 
@@ -154,7 +154,6 @@ void init_game_state(void)
   SHOW_SPRITES;
 
 }
-
 
 
 void game_state_input(void)
@@ -179,29 +178,6 @@ void game_state_input(void)
     }
     
 }
-
-/*
-void game_state_input(void)
-{
-
-  keys = joypad();
-
-
-  switch (keys){
-
-    case J_LEFT:
-      for (uint8_t i = 0; i < NUM_BALLS; i++) {
-        launch_ball((find_lowest_ball(&pachinkoBalls, NUM_BALLS), &pachinkoPins[i]), 0, 72, LAUNCH_FORCE_X, -LAUNCH_FORCE_Y);
-      }
-      break;
-    case J_UP:
-      reset_balls(pachinkoBalls, NUM_BALLS);
-      break;
-
-  }
-
-}
-  */
 
 void game_state_physics(void)
 {
