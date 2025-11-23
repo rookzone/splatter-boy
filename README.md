@@ -30,6 +30,13 @@ To achieve a game where balls are fired out on button press, collide with exit w
 drop through the pins and to the bottom of the screen. Pin and wall positions are pulled
 via the tile ID on the map data. Get some debug functions for drawing zones. 
 
+**Project stuff**
+- Check out licenses to use for distribution and tools used to make this.
+- Wiki / Docs
+- Physics engine for GB export?
+- Asm optimisation
+- Versioning!
+
 ## Links to dev tools
 
 https://gameboy.prodigle.dev
