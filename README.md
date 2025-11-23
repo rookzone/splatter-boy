@@ -9,32 +9,30 @@ A fun little project where I mess around with C and GBDK. Attempt at a pachinko 
 
 - [x] Started on 18/11/25 - My goal now is to place 10 pins in the game and have a button spawn balls at the top. The balls should drop down through the pins with good physics. I am allowing some time to play around with a title screen to test graphics out.
 
-**update** - 21/11/25
+**update - 21/11/25**
   - [x] I have got the balls and pins working, collision is janky and performance is somewhat of an issue. I'm going to revise the
   collision method used, this bounding box thing is too heavy on the calcs. Also it's not reliable.
 
-**update** - 23/11/25
-  Physics is working nicely. Well optimised. Goals now:
-  - [ ] Get a proper game screen with all the pins hooked up
-    - [ ] Load in background and store array of pin locations
-    - [ ] Use pin locations to spawn Pin structs in
-    - [ ] Define zones on map, debug draw them
-  - [ ] Hook up buttons to a ball firing system
-  - [ ] Create diagnal walls with bounce logic
-    -[ ] Balls will need a seperate collision mode:
-     - Collide with wall mode (after being fired out) 
-     - Collision mode defined by zones on the map
+**update - 23/11/25:**  
+*See TODO.md list*
+Physics is working nicely. Well optimised. Goals now:
+- [ ] Get a proper game screen with all the pins hooked up
+- [ ] Load in background and store array of pin locations
+- [ ] Use pin locations to spawn Pin structs in
+- [ ] Define zones on map, debug draw them
+- [ ] Hook up buttons to a ball firing system
+- [ ] Create diagnal walls with bounce logic
+- [ ] Balls will need a seperate collision mode:
+- [ ] Collide with wall mode (after being fired out) 
+- [ ] Collision mode defined by zones on the map
 
 To achieve a game where balls are fired out on button press, collide with exit walls,
 drop through the pins and to the bottom of the screen. Pin and wall positions are pulled
 via the tile ID on the map data. Get some debug functions for drawing zones. 
 
-
 ## Links to dev tools
 
 https://gameboy.prodigle.dev
-
-** HOWEVER THIS WORKS, I WANT IT TO MAKE GFX**
 
 https://github.com/systemoflevers/image_to_gb
 
@@ -46,11 +44,11 @@ https://www.kernel.org/doc/html/v4.10/process/coding-style.html
 
 ## Setup and compile
 
-1. Download GBDK 2020 and copy the contents into the repo. This will ensure all the required gbdk files are in the directory, as not everything copies over due to .gitgnore
+1. Download GBDK 2020 and copy the contents into the repo. This will ensure all the required gbdk files are in the directory as the binaries and documents are not included *Note: check out licenses*
 
 2. Use make
 
-Just use make.
+Just type `make`
 
 **.vscode tasks.json**
 
