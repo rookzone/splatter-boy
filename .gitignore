@@ -16,8 +16,7 @@ build/
 *.swp
 
 # Emulator
-emu/
-emu/BGB/
+emu/BGB/*
 dev-tools/
 emu/BGB/bgb.ini
 
