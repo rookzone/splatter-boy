@@ -1,3 +1,5 @@
+// ball.h
+
 #include <gb/gb.h>
 #include "physics.h"
 #include "graphics.h"
@@ -12,11 +14,14 @@
 // Reset an array of balls to starting positions.
 void reset_balls(Ball* b, uint8_t count);
 
+// Pass in ball object alongside graphics data and screen position and it will be set up for handling
 void init_ball(Ball* ball, GameSprite* gfx_data, uint8_t ball_x, uint8_t ball_y);
 
+// Reset balls to a position (for testing)
 void reset_ball(Ball* ball);
 
-Ball* find_lowest_ball(Ball* balls, uint8_t count);
+// Return the ball with the highest y index (lowest on screen)
+Ball *find_lowest_ball(Ball* balls, uint8_t count);
 
 // Launch the ball from screen position from_x,y
 // Default is 45 degrees

@@ -1,4 +1,5 @@
 // ball.c
+
 #include "ball.h"
 
 void reset_balls(Ball* b, uint8_t count)

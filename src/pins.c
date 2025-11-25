@@ -1,4 +1,5 @@
 // pins.c
+
 #include "pins.h"
 
 void init_pin(Pin* pin, GameSprite* gfx_data, uint8_t pin_x, uint8_t pin_y)

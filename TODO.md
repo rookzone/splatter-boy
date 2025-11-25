@@ -1,7 +1,7 @@
 # TODO
 
 - [x] Draw a plot point at the x, values of balls and pins to determine if x,y is on the top left.
-    - [ ] I'm thinking some decent debug functions. Maybe I can pass a gameobject
+    - [x] I'm thinking some decent debug functions. Maybe I can pass a gameobject
 - [x] Extract pin positions from background data and instantiate the pins
 - [x] States. This lets me switch out to a different scene pretty much. Like a different screen or level.
     I'm thinking that a state has an initialisation function and a loop function.
@@ -24,6 +24,7 @@
 - [ ] Ball array and pin array should have a count of 20.
   -[ ] Ball and pin arrays need handling functions to ensure no overflow or overwrites take place
     - [ ] Re-use slot ball despawn order, prioritise which can be despawned if too many
+- [ ] Handling for sprite_index, no more than 39. Will need to reassign indices to corresponding object (or inverse)
 
 ### Ball collision improvements
 
