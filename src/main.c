@@ -24,7 +24,7 @@ void end_step(void);
 // Ball values
 #define BALLS_SIZE 6
 #define NUM_BALLS 6
-#define NUM_PINS 6
+#define NUM_PINS 10
 
 // === RUNTIME GAME OBJECT DATA ===
 Wall floor;
@@ -108,7 +108,7 @@ void change_state(uint8_t state)
   }
 }
 
-// ##### GAME STATE FUNCTIONS #####
+// === GAME STATE FUNCTIONS ===
 
 void init_game_state(void)
 {
@@ -132,7 +132,7 @@ void init_game_state(void)
 
   // create a bunch of pins
   for (uint8_t i = 0; i < NUM_PINS; i++) {
-    uint8_t x = 40+ i*10;
+    uint8_t x = 40+ i*15;
     uint8_t y = 100;
     init_pin(&pachinkoPins[i], &pachinko_pins_gfx_data[i], x, y);
     DRAW_SPRITE(pachinkoPins[i].game_sprite, x, y);

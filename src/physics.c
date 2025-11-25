@@ -78,16 +78,18 @@ void handle_ball_pin_collision(Ball* ball, Pin* pin)
     int8_t distance_x = ball_center_x - pin_center_x;
     int8_t distance_y = ball_center_y - pin_center_y;
 
-    if(distance_x >= SPRITE_SIZE || distance_x <= -SPRITE_SIZE ||
-        distance_y >= SPRITE_SIZE || distance_y <= -SPRITE_SIZE){
+    // Distance greater than sprite size 
+    if(distance_x >= TILE_WIDTH || distance_x <= -TILE_WIDTH ||
+        distance_y >= TILE_WIDTH || distance_y <= -TILE_WIDTH){
         return;
     }
         
     
     if (ball_center_x >= pin->x && 
-    ball_center_x < (pin->x + SPRITE_SIZE) && 
-    ball_center_y >= pin->y && 
-    ball_center_y < (pin->y + SPRITE_SIZE)) {
+        ball_center_x < (pin->x + SPRITE_SIZE) && 
+        ball_center_y >= pin->y && 
+        ball_center_y < (pin->y + SPRITE_SIZE)) 
+    {
         
         // settle position
         ball->y = pin->y - TILE_HALF_WIDTH;
@@ -96,8 +98,19 @@ void handle_ball_pin_collision(Ball* ball, Pin* pin)
         // invert and reduce vertical speed by 50%
         ball->vy = -(ball->vy >> 1);
         
-        // Reduce horizontal speed by 50%
+        // Invert horizontal speed
         ball->vx = -(ball->vx);
-    
+
+        // give the ball a little nudge if it becomes settled on top the pin
+        // TO TRY: Play around with the freshold or roll "strength" here.
+        if (ball->vy > -FIXED_TENBAG) { 
+
+            if (distance_x > 0) { // Hit right of center
+                ball->vx = FIXED_TEENTH; 
+            } else if (distance_x < 0) { // Hit left of center
+                ball->vx = -FIXED_TEENTH; 
+            }
+
+        }
     }
 }
