@@ -62,11 +62,16 @@ typedef struct {
 
 // === Graphics ===
 
+// General gameboy graphics sizes
 #define TILE_WIDTH 8
+#define TILE_LENGTH 8
 #define TILE_HALF_WIDTH 4
+#define TILE_HALF_LENGTH 4
 #define SPRITE_SIZE 8
-#define ROW_LENGTH 18 // length of x in 8x8 tiles = 18
-#define COL_LENGTH 20 // length of y in 8x8 tiles = 20
+#define MAP_WIDTH_TILES 20
+#define MAP_HEIGHT_TILES 18
+#define MAP_WIDTH_PIXELS 160
+#define MAP_HEIGHT_PIXELS 144
 
 
 // This stores the tile the sprite uses and crucially holds the sprite ID for where it is loaded into VRAM

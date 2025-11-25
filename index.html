@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gabe Newell's Yacht Tracker</title>
+    <!-- Load Tailwind CSS for modern styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom styles for the embed container */
+        .embed-container {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+            height: 0;
+            overflow: hidden;
+            max-width: 100%;
+            background: #0d1117;
+            border-radius: 0.75rem;
+        }
+        .embed-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-white font-sans min-h-screen p-4 sm:p-8">
+
+    <div class="max-w-4xl mx-auto">
+        <header class="text-center mb-10">
+            <h1 class="text-4xl font-extrabold text-teal-400">Gaben's Sea Voyage Tracker</h1>
+            <p class="mt-2 text-gray-400">Tracking the last known location of M/Y Rocinante (IMO 1009699)</p>
+            <p class="mt-1 text-sm text-yellow-500">
+                The newer yacht, Leviathan, may restrict its AIS data, but Rocinante is frequently public.
+            </p>
+        </header>
+
+        <!-- Container for the dynamic map embed -->
+        <div class="embed-container shadow-2xl shadow-teal-500/20" id="vessel-map-container">
+            <div class="flex items-center justify-center h-full text-gray-500">
+                <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-teal-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                </svg>
+                Loading AIS Data...
+            </div>
+        </div>
+    </div>
+
+    <!-- START OF USER-REQUESTED SCRIPT BLOCK -->
+    <script>
+        // Define the IMO number for the vessel (Rocinante)
+        const IMO_NUMBER = '1009699';
+        
+        // **FIXED LINK:** Using the /aismap endpoint to get the direct map view
+        const trackingUrl = `https://www.vesselfinder.com/aismap?imo=${IMO_NUMBER}`;
+
+        // 1. Get the container element where the map will be placed
+        const container = document.getElementById('vessel-map-container');
+
+        // 2. Create the iframe element
+        const iframe = document.createElement('iframe');
+
+        // 3. Set iframe attributes for security, responsiveness, and content
+        iframe.setAttribute('src', trackingUrl);
+        iframe.setAttribute('frameborder', '0');
+        iframe.setAttribute('scrolling', 'no');
+        iframe.setAttribute('allowfullscreen', 'true');
+        iframe.setAttribute('sandbox', 'allow-scripts allow-same-origin allow-popups'); // Good security practice
+
+        // 4. Set the initial loading state (optional, but good for UX)
+        iframe.onload = () => {
+            // Remove the loading message once the iframe content starts to load
+            const loadingDiv = container.querySelector('div');
+            if (loadingDiv) {
+                loadingDiv.remove();
+            }
+        };
+
+        // 5. Append the iframe to the container, making the map appear
+        if (container) {
+            // Clear any existing content (like the loading message)
+            container.innerHTML = '';
+            container.appendChild(iframe);
+        } else {
+            console.error('Map container element not found.');
+        }
+
+        // Add a simple error message if the tracking link breaks or the service changes:
+        setTimeout(() => {
+            if (container && container.childNodes.length === 0) {
+                 container.innerHTML = '<div class="flex items-center justify-center h-full text-red-500 p-8 text-center">' +
+                                       'Error loading tracking data. The external tracking service may be offline, or the vessel\'s AIS signal may be off.' +
+                                       '</div>';
+            }
+        }, 10000); // 10 second timeout check
+    </script>
+    <!-- END OF USER-REQUESTED SCRIPT BLOCK -->
+
+</body>
+</html>

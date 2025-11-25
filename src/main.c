@@ -129,7 +129,6 @@ void init_game_state(void)
   wall_graphics_data = create_sprite(TILE_WALL);
   floor.game_sprite = &wall_graphics_data;
 
-
   // create a bunch of pins
   for (uint8_t i = 0; i < NUM_PINS; i++) {
     uint8_t x = 40+ i*15;
@@ -152,6 +151,7 @@ void init_game_state(void)
   DISPLAY_ON;
   SHOW_BKG;
   SHOW_SPRITES;
+
 
 }
 
@@ -181,9 +181,9 @@ void game_state_input(void)
 
 void game_state_physics(void)
 {
-  // ** Tweak the divisor (e.g., 2, 3, or 4) to find the right balance **
+  
   bool run_collision_check = (frame_counter % 2) == 0;
-  frame_counter++; // Increment the counter every frame
+  frame_counter++;
 
   for (uint8_t i = 0; i < NUM_BALLS; i++) {
     
