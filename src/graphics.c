@@ -24,3 +24,10 @@ void plot_point_fixed(fixed_n x, fixed_n y)
 {
     plot_point(FROM_FIXED(x), FROM_FIXED(y));
 }
+
+
+void set_game_background(unsigned char *background, unsigned char *tiles)
+{
+    game_background = background;
+    game_background_tiles = tiles;
+}

@@ -65,6 +65,8 @@ typedef struct {
 #define TILE_WIDTH 8
 #define TILE_HALF_WIDTH 4
 #define SPRITE_SIZE 8
+#define ROW_LENGTH 18 // length of x in 8x8 tiles = 18
+#define COL_LENGTH 20 // length of y in 8x8 tiles = 20
 
 
 // This stores the tile the sprite uses and crucially holds the sprite ID for where it is loaded into VRAM
