@@ -28,7 +28,7 @@
 ### Ball collision improvements
 
 **roll**
-- [ ] Add a little bit of roll to the balls on collision with pins
+- [x] Add a little bit of roll to the balls on collision with pins
 - [ ] Add slanted walls balls can roll down!
 **bounce**
 - [ ] Add a bit of randomness to balls on bounce (very small amount)
