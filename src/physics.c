@@ -80,6 +80,12 @@ void handle_ball_pin_collision(Ball* ball, Pin* pin)
     int8_t distance_x = ball_center_x - pin_center_x;
     int8_t distance_y = ball_center_y - pin_center_y;
 
+
+    // Don't collide with pins above you
+    if (ball_center_y > pin_center_y){
+        return;
+    }
+
     // Distance greater than sprite size 
     if(distance_x >= TILE_WIDTH || distance_x <= -TILE_WIDTH ||
         distance_y >= TILE_WIDTH || distance_y <= -TILE_WIDTH){
@@ -90,9 +96,8 @@ void handle_ball_pin_collision(Ball* ball, Pin* pin)
     if (ball_center_x >= pin->x && 
         ball_center_x < (pin->x + SPRITE_SIZE) && 
         ball_center_y >= pin->y && 
-        ball_center_y < (pin->y + SPRITE_SIZE)) 
-    {
-        
+        ball_center_y < (pin->y + SPRITE_SIZE)) {       
+
         // settle position
         ball->y = pin->y - TILE_HALF_WIDTH;
         ball->sub_y = 0;
@@ -101,7 +106,7 @@ void handle_ball_pin_collision(Ball* ball, Pin* pin)
         ball->vy = -(ball->vy >> 1);
         
         // Invert horizontal speed
-        ball->vx = -(ball->vx)+FIXED_HALF;
+        ball->vx = -(ball->vx+FIXED_QUARTER);
 
         // give the ball a little nudge if it becomes settled on top the pin
         // TO TRY: Play around with the freshold or roll "strength" here.

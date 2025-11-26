@@ -22,9 +22,9 @@ void change_state(uint8_t state);
 void end_step(void);
 
 // Ball values
-#define BALLS_SIZE 6
-#define NUM_BALLS 6
-#define NUM_PINS 18
+#define BALLS_SIZE 8
+#define NUM_BALLS 8
+#define NUM_PINS 36
 
 // === RUNTIME GAME OBJECT DATA ===
 Wall floor;
@@ -41,8 +41,9 @@ GameSprite test_pin_graphics_data;
 // === GAME (and/or) STATE ===
 
 uint8_t current_state = 0;
-
 uint8_t frame_counter = 0;
+
+uint8_t collision_frame_skip = 2;
 
 // current key press etc
 uint8_t keys;
@@ -187,14 +188,21 @@ void game_state_input(void)
 void game_state_physics(void)
 {
   
-  bool run_collision_check = (frame_counter % 3) == 0;
+  bool run_collision_check = (frame_counter % collision_frame_skip) == 0;
   frame_counter++;
 
   for (uint8_t i = 0; i < NUM_BALLS; i++) {
+
+
+    uint8_t ball_x = pachinkoBalls[i].x;
+    uint8_t ball_y = pachinkoBalls[i].y;
     
     if (run_collision_check) { // Only run this block every 2nd frame
         for (uint8_t j = 0; j < NUM_PINS; j++) {
+
+          if (pachinkoBalls[i].y < pachinkoPins[j].y)
             handle_ball_pin_collision(&pachinkoBalls[i], &pachinkoPins[j]);
+            
         }
     }
     
