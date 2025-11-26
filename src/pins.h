@@ -23,7 +23,7 @@ void instantiate_pins_from_background(Pin *pins, uint8_t count);
 uint8_t get_x_coord_from_tile_number(uint16_t tile_number);
 
 // Pass in the tile number from the background map and this will return the pixel coord Y
-uint8_t get_y_coord_from_tile_number(uint16_t tile_number);
+uint8_t get_y_coord_from_tile_index(uint16_t tile_number);
 
 
 #endif // PINS_H

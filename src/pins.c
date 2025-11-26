@@ -42,8 +42,8 @@ void instantiate_pins_from_background(Pin *pins, uint8_t max_capacity)
          if(active_background_tilemap[i] == PIN_TILE_ID){
 
             // Get the tile x/y location of this tile
-            uint8_t tile_loc_x = get_x_coord_from_tile_number(i);
-            uint8_t tile_loc_y = get_y_coord_from_tile_number(i);
+            uint8_t tile_loc_x = get_x_coord_from_tile_index(i);
+            uint8_t tile_loc_y = get_y_coord_from_tile_index(i);
 
             // Create pin at x,y location where background tile is a pin
             init_background_pin(&pins[pins_created], tile_loc_x, tile_loc_y);
@@ -55,14 +55,14 @@ void instantiate_pins_from_background(Pin *pins, uint8_t max_capacity)
     }
 }
 
-uint8_t get_y_coord_from_tile_number(uint16_t tile_number)
+uint8_t get_y_coord_from_tile_index(uint16_t tile_number)
 {
     uint8_t y_tile_index = tile_number / BACKGROUND_WIDTH_TILES;
     
     return y_tile_index*TILE_WIDTH;
 }
 
-uint8_t get_x_coord_from_tile_number(uint16_t tile_number)
+uint8_t get_x_coord_from_tile_index(uint16_t tile_number)
 {
     uint8_t x_tile_index = tile_number % BACKGROUND_WIDTH_TILES;
 
