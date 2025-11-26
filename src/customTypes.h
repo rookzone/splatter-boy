@@ -68,11 +68,10 @@ typedef struct {
 #define TILE_HALF_WIDTH 4
 #define TILE_HALF_LENGTH 4
 #define SPRITE_SIZE 8
-#define MAP_WIDTH_TILES 20
-#define MAP_HEIGHT_TILES 18
-#define MAP_WIDTH_PIXELS 160
-#define MAP_HEIGHT_PIXELS 144
-
+#define BACKGROUND_WIDTH_TILES 20
+#define BACKGROUND_HEIGHT_TILES 18
+#define BACKGROUND_WIDTH_PIXELS 160
+#define BACKGROUND_HEIGHT_PIXELS 144
 
 // This stores the tile the sprite uses and crucially holds the sprite ID for where it is loaded into VRAM
 typedef struct GameSprite {
@@ -80,20 +79,5 @@ typedef struct GameSprite {
     uint8_t tile_index;
 };
 
-// === LOOKUP TABLES ===
-
-static const fixed_n RANDOM_HORIZONTAL_VX[10] = {
-    50,    // +0.5
-    -50,   // -0.5
-    50,    // +0.5
-    50,    // +0.5
-    -50,   // -0.5
-    -50,   // -0.5
-    50,    // +0.5
-    -50,   // -0.5
-    50,    // +0.5
-    -50    // -0.5
-};
-
-#endif
+#endif // CUSTOMTYPES_H
 

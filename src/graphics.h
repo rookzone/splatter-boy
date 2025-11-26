@@ -20,8 +20,12 @@ extern uint16_t next_sprite_id;
 // Returns GameSprite struct that stores these values, plus other useful graphics data TBC
 GameSprite create_sprite(uint8_t tile_index);
 
+// === BACKGROUNDS ===
+
+extern unsigned char *active_background_tilemap;
+extern unsigned char *active_background_data;
+
 // Loads background tiles and map into memory
-// Pass references to graphics data arrays
 void set_game_background(unsigned char *background, unsigned char *tiles);
 
 // === DRAW FUNCTIONS ===
@@ -39,4 +43,4 @@ void plot_point(uint8_t x, uint8_t y) OLDCALL;
 void plot_point_fixed(fixed_n x, fixed_n y);
 
 
-#endif
+#endif // GRAPHICS_H

@@ -24,7 +24,7 @@ void end_step(void);
 // Ball values
 #define BALLS_SIZE 6
 #define NUM_BALLS 6
-#define NUM_PINS 10
+#define NUM_PINS 18
 
 // === RUNTIME GAME OBJECT DATA ===
 Wall floor;
@@ -119,8 +119,22 @@ void init_game_state(void)
   HIDE_SPRITES;
 
   next_sprite_id = 0; // reset sprites
-
   set_sprite_data(0, 3, PinballTiles);
+
+  // Load background
+  set_game_background(pachinko1,PinballTiles);
+  
+  // Create pins
+  instantiate_pins_from_background(pachinkoPins, NUM_PINS);
+
+  /* create a bunch of pins
+  for (uint8_t i = 0; i < NUM_PINS; i++) {
+    uint8_t x = 40+ i*15;
+    uint8_t y = 100;
+    init_pin(&pachinkoPins[i], &pachinko_pins_gfx_data[i], x, y);
+    DRAW_SPRITE(pachinkoPins[i].game_sprite, x, y);
+  }
+  */
 
   // Initialize floor
   floor.x = 0;
@@ -128,15 +142,6 @@ void init_game_state(void)
 
   wall_graphics_data = create_sprite(TILE_WALL);
   floor.game_sprite = &wall_graphics_data;
-
-  // create a bunch of pins
-  for (uint8_t i = 0; i < NUM_PINS; i++) {
-    uint8_t x = 40+ i*15;
-    uint8_t y = 100;
-    init_pin(&pachinkoPins[i], &pachinko_pins_gfx_data[i], x, y);
-    DRAW_SPRITE(pachinkoPins[i].game_sprite, x, y);
-  }
-
 
   // Create pachinko balls
   for (uint8_t i = 0; i < BALLS_SIZE; i++) {
@@ -182,7 +187,7 @@ void game_state_input(void)
 void game_state_physics(void)
 {
   
-  bool run_collision_check = (frame_counter % 2) == 0;
+  bool run_collision_check = (frame_counter % 3) == 0;
   frame_counter++;
 
   for (uint8_t i = 0; i < NUM_BALLS; i++) {

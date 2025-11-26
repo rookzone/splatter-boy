@@ -30,4 +30,20 @@ void check_ball_wall(Ball *ball, Wall *w);
 // Handle collision between a Ball and Pin.
 void handle_ball_pin_collision(Ball *ball, Pin *pin);
 
+
+// === LOOKUP TABLES ===
+
+static const fixed_n RANDOM_HORIZONTAL_VX[10] = {
+    50,    // +0.5
+    -50,   // -0.5
+    50,    // +0.5
+    50,    // +0.5
+    -50,   // -0.5
+    -50,   // -0.5
+    50,    // +0.5
+    -50,   // -0.5
+    50,    // +0.5
+    -50    // -0.5
+};
+
 #endif // PHYSICS_H

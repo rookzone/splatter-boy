@@ -1,6 +1,7 @@
 // pins.c
 
 #include "pins.h"
+#include <stdio.h>
 
 void init_pin(Pin* pin, GameSprite* gfx_data, uint8_t pin_x, uint8_t pin_y)
 {
@@ -13,61 +14,57 @@ void init_pin(Pin* pin, GameSprite* gfx_data, uint8_t pin_x, uint8_t pin_y)
 
 }
 
-
-/* TODO:
-Create helper functions in graphics.c/h to load in background tiles
-and background map
-Create variables to store this data in
-
-Figure out how tiles are represneted in the set, and the map
-Then use this to figure out how to index the map and find the pin tile
-add pin tiles x/y to 2d array
-
-Update game init to load in the map using graphics, and then instantiate the pins...
-
-
-*/
-
-// Pointer to current backround array...
-//unsigned char *game_background;
-//unsigned char *game_background_tiles;
-// Maybe the above could just be handled in graphics.c/h
-// I can use a function to return a reference rather than putting the reference in global...
-
-//uint8_t pin_tile_location[20][18];
-//unsigned char pin_tile_value = 0;
-//uint16_t background_array_length = sizeof(game_background);
-
-void get_pin_coords_from_bkg(void)
+void init_background_pin(Pin* pin, uint8_t pin_x, uint8_t pin_y)
 {
-    /*
-    **Required values for algo**
-    game_background
-    game_background_tiles
-    pin_tile_value
-    pin_tile_location[][]
-    background_array_length
-    
-    if game_background[i] == pin_tile_value..
 
-        tile_loc_x = get_x_coord_from_tile_number(pin_tile_value) = 
-        tile_loc_y = get_y_coord_from_tile_number(pin_tile_value)
-    */
+    pin->x = pin_x;
+    pin->y = pin_y;
+    pin->game_sprite = NULL; // empty gamesprite
 
-    // pin_tile_location[1][1] = tile_loc_x tile_loc_y //pseudo...
-   
 }
 
-uint8_t get_y_coord_from_tile_number(uint8_t tile_number)
+// Pass pin array
+void instantiate_pins_from_background(Pin *pins, uint8_t max_capacity)
 {
-    uint8_t y_tile_index = tile_number / MAP_WIDTH_TILES;
+    // The size of the pin array to prevent assigning pins out of bounds
+    // Array *should* be the same size as the number of pin tiles placed on map
+    uint8_t pins_created = 0;
+
+    // Get the number of map tiles as we need to check each one
+    uint16_t num_map_tiles = BACKGROUND_WIDTH_TILES * BACKGROUND_HEIGHT_TILES;
+
+    // For each map tile check for the pin tile
+    for (uint16_t i = 0; i < num_map_tiles; i++) {
+
+        if (pins_created >= max_capacity) break;
+
+        // if this map tile is a pin tile and space in pin array
+         if(active_background_tilemap[i] == PIN_TILE_ID){
+
+            // Get the tile x/y location of this tile
+            uint8_t tile_loc_x = get_x_coord_from_tile_number(i);
+            uint8_t tile_loc_y = get_y_coord_from_tile_number(i);
+
+            // Create pin at x,y location where background tile is a pin
+            init_background_pin(&pins[pins_created], tile_loc_x, tile_loc_y);
+
+            //plot_point(tile_loc_x, tile_loc_y);
+            // decriment num pins available to allocate
+            pins_created++;
+        }
+    }
+}
+
+uint8_t get_y_coord_from_tile_number(uint16_t tile_number)
+{
+    uint8_t y_tile_index = tile_number / BACKGROUND_WIDTH_TILES;
     
     return y_tile_index*TILE_WIDTH;
 }
 
-uint8_t get_x_coord_from_tile_number(uint8_t tile_number)
+uint8_t get_x_coord_from_tile_number(uint16_t tile_number)
 {
-    uint8_t x_tile_index = tile_number % MAP_WIDTH_TILES;
+    uint8_t x_tile_index = tile_number % BACKGROUND_WIDTH_TILES;
 
     return x_tile_index*TILE_WIDTH;
 }

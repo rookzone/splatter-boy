@@ -101,7 +101,7 @@ void handle_ball_pin_collision(Ball* ball, Pin* pin)
         ball->vy = -(ball->vy >> 1);
         
         // Invert horizontal speed
-        ball->vx = -(ball->vx);
+        ball->vx = -(ball->vx)+FIXED_HALF;
 
         // give the ball a little nudge if it becomes settled on top the pin
         // TO TRY: Play around with the freshold or roll "strength" here.
