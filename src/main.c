@@ -59,20 +59,21 @@ void main(void)
   while (1) {
 
     switch(current_state) {
-        case STATE_GAME_SCREEN:
-            game_state_input();
-            game_state_physics();
-            end_step();
-            break;
-        
-        case STATE_TITLE_SCREEN:
-            break;
 
-        case STATE_DEMO_SCREEN:
-            break;
+      case STATE_GAME_SCREEN:
+        game_state_input();
+        game_state_physics();
+        end_step();
+        break;
+      
+      case STATE_TITLE_SCREEN:
+        break;
 
-        case STATE_SCORE_SCREEN:
-            break;
+      case STATE_DEMO_SCREEN:
+        break;
+
+      case STATE_SCORE_SCREEN:
+        break;
 
     }
 
@@ -200,10 +201,11 @@ void game_state_physics(void)
     if (run_collision_check) { // Only run this block every 2nd frame
         for (uint8_t j = 0; j < NUM_PINS; j++) {
 
-          if (pachinkoBalls[i].y < pachinkoPins[j].y)
-            handle_ball_pin_collision(&pachinkoBalls[i], &pachinkoPins[j]);
+          if (pachinkoBalls[i].y < pachinkoPins[j].y){
+            //handle_ball_pin_collision(&pachinkoBalls[i], &pachinkoPins[j]);
             
         }
+      }
     }
     
     check_ball_wall(&pachinkoBalls[i], &floor);
