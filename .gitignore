@@ -25,4 +25,6 @@ emu/BGB/*
 # OS-specific junk
 .DS_Store
 Thumbs.db
+
+# Added via gh UI
 emu/BGB/bgb.ini
