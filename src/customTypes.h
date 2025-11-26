@@ -43,6 +43,7 @@ typedef int16_t fixed_n;
 
 // === Interactable objects ===
 
+// Ball object
 typedef struct {
     uint8_t x, y;
     fixed_n sub_x, sub_y;
@@ -50,17 +51,28 @@ typedef struct {
     GameSprite *game_sprite;
 } Ball;
 
+// Wall object
 typedef struct {
     uint8_t x, y;
     GameSprite *game_sprite;
 } Wall;
 
+// Pin object
 typedef struct {
     uint8_t x, y;
     GameSprite* game_sprite;
 } Pin;
 
 // === Graphics ===
+
+// Convert Pixel coordinate to Grid coordinate (Divide by 8)
+#define PIXEL_TO_GRID(x) ((x) >> 3)
+
+// Convert Grid coordinate to Pixel coordinate (Multiply by 8)
+#define GRID_TO_PIXEL(x) ((x) << 3)
+
+// Get tilemap Array Index from Col/Row (Row * Width + Col)
+#define GET_TILE_INDEX(col, row) (((uint16_t)(row) * BACKGROUND_WIDTH_TILES) + (col))
 
 // General gameboy graphics sizes
 #define TILE_WIDTH 8

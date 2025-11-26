@@ -5,15 +5,15 @@
 void reset_balls(Ball* b, uint8_t count)
 {
     for(uint8_t i = 0; i < count; i++){
-      b[i].x = 42+ i*12;
+      b[i].x = 20 + i*8;
       b[i].y = 20;
       b[i].vx = 0;
       b[i].vy = 0;
 
       DRAW_SPRITE(b[i].game_sprite,b[i].x,b[i].y);
 
-      b[i].vx = RANDOM_HORIZONTAL_VX[i];
-      
+      b[i].vx = RANDOM_HORIZONTAL_VX[(count-1)-i];
+
     }
 }
 

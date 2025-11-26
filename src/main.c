@@ -22,18 +22,17 @@ void change_state(uint8_t state);
 void end_step(void);
 
 // Ball values
-#define BALLS_SIZE 8
-#define NUM_BALLS 8
+#define NUM_BALLS 16
 #define NUM_PINS 36
 
 // === RUNTIME GAME OBJECT DATA ===
 Wall floor;
-Ball pachinkoBalls[BALLS_SIZE];
+Ball pachinkoBalls[NUM_BALLS];
 Pin pachinkoPins[NUM_PINS];
 Pin test_pin;
 
 // === RUNTIME GRAPHICS DATA ===
-GameSprite pachinko_balls_gfx_data[BALLS_SIZE];
+GameSprite pachinko_balls_gfx_data[NUM_BALLS];
 GameSprite pachinko_pins_gfx_data[NUM_PINS];
 GameSprite wall_graphics_data;
 GameSprite test_pin_graphics_data;
@@ -43,7 +42,7 @@ GameSprite test_pin_graphics_data;
 uint8_t current_state = 0;
 uint8_t frame_counter = 0;
 
-uint8_t collision_frame_skip = 2;
+uint8_t collision_frame_skip = 1;
 
 // current key press etc
 uint8_t keys;
@@ -76,10 +75,8 @@ void main(void)
         break;
 
     }
-
   }
-
-}
+} // end of main
 
 void change_state(uint8_t state)
 {
@@ -129,15 +126,6 @@ void init_game_state(void)
   // Create pins
   instantiate_pins_from_background(pachinkoPins, NUM_PINS);
 
-  /* create a bunch of pins
-  for (uint8_t i = 0; i < NUM_PINS; i++) {
-    uint8_t x = 40+ i*15;
-    uint8_t y = 100;
-    init_pin(&pachinkoPins[i], &pachinko_pins_gfx_data[i], x, y);
-    DRAW_SPRITE(pachinkoPins[i].game_sprite, x, y);
-  }
-  */
-
   // Initialize floor
   floor.x = 0;
   floor.y = 144;
@@ -146,9 +134,9 @@ void init_game_state(void)
   floor.game_sprite = &wall_graphics_data;
 
   // Create pachinko balls
-  for (uint8_t i = 0; i < BALLS_SIZE; i++) {
+  for (uint8_t i = 0; i < NUM_BALLS; i++) {
 
-    uint8_t x = 42+ i*12;
+    uint8_t x = 20 + i*8;
     uint8_t y = 20;
     init_ball(&pachinkoBalls[i], &pachinko_balls_gfx_data[i], x, y);
     pachinkoBalls[i].vx = RANDOM_HORIZONTAL_VX[i];
@@ -168,9 +156,8 @@ void game_state_input(void)
     
     keys = joypad();
 
-    
     if ((keys & J_LEFT) && !(previous_keys & J_LEFT)) {
-        
+
         Ball* ball_to_launch = find_lowest_ball(pachinkoBalls, NUM_BALLS);
         
         if (ball_to_launch != NULL) {
@@ -193,23 +180,31 @@ void game_state_physics(void)
   frame_counter++;
 
   for (uint8_t i = 0; i < NUM_BALLS; i++) {
+        
+    //
+    uint8_t center_x = pachinkoBalls[i].x + TILE_HALF_WIDTH;
+    uint8_t center_y = pachinkoBalls[i].y + TILE_HALF_WIDTH;
 
+    //
+    uint8_t col = PIXEL_TO_GRID(center_x);
+    uint8_t row = PIXEL_TO_GRID(center_y);
 
-    uint8_t ball_x = pachinkoBalls[i].x;
-    uint8_t ball_y = pachinkoBalls[i].y;
-    
-    if (run_collision_check) { // Only run this block every 2nd frame
-        for (uint8_t j = 0; j < NUM_PINS; j++) {
+    //
+    uint16_t map_index = GET_TILE_INDEX(col, row);
 
-          if (pachinkoBalls[i].y < pachinkoPins[j].y){
-            //handle_ball_pin_collision(&pachinkoBalls[i], &pachinkoPins[j]);
-            
-        }
-      }
+    if (active_background_tilemap[map_index] == PIN_TILE_ID) {
+        
+        //
+        Pin virtual_pin;
+        virtual_pin.x = GRID_TO_PIXEL(col);
+        virtual_pin.y = GRID_TO_PIXEL(row);
+
+        //
+        handle_ball_pin_collision(&pachinkoBalls[i], &virtual_pin);
     }
-    
+  
     check_ball_wall(&pachinkoBalls[i], &floor);
-    update_ball_position(&pachinkoBalls[i]);
+    update_ball_position(&pachinkoBalls[i]); // 
     
     DRAW_SPRITE(pachinkoBalls[i].game_sprite, pachinkoBalls[i].x, pachinkoBalls[i].y);
 

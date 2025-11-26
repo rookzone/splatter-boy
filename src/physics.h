@@ -33,7 +33,17 @@ void handle_ball_pin_collision(Ball *ball, Pin *pin);
 
 // === LOOKUP TABLES ===
 
-static const fixed_n RANDOM_HORIZONTAL_VX[10] = {
+static const fixed_n RANDOM_HORIZONTAL_VX[20] = {
+    50,    // +0.5
+    -50,   // -0.5
+    50,    // +0.5
+    50,    // +0.5
+    -50,   // -0.5
+    -50,   // -0.5
+    50,    // +0.5
+    -50,   // -0.5
+    50,    // +0.5
+    -50,   // -0.5
     50,    // +0.5
     -50,   // -0.5
     50,    // +0.5

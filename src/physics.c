@@ -71,7 +71,6 @@ void check_ball_wall(Ball *ball, Wall *w)
 void handle_ball_pin_collision(Ball* ball, Pin* pin)
 {
 
-
     // Grab center point of objects
     uint8_t ball_center_x = ball->x + TILE_HALF_WIDTH;
     uint8_t ball_center_y = ball->y + TILE_HALF_WIDTH;
@@ -81,26 +80,6 @@ void handle_ball_pin_collision(Ball* ball, Pin* pin)
     // Calculate distance of object
     int8_t distance_x = ball_center_x - pin_center_x;
     int8_t distance_y = ball_center_y - pin_center_y;
-
-    /*
-    
-    // Don't collide with pins above you
-    if (ball_center_y > pin_center_y){
-        return;
-    }
-
-    // Distance greater than sprite size 
-    if(distance_x >= TILE_WIDTH || distance_x <= -TILE_WIDTH ||
-        distance_y >= TILE_WIDTH || distance_y <= -TILE_WIDTH){
-        return;
-    }
-        
-    
-    if (ball_center_x >= pin->x && 
-        ball_center_x < (pin->x + SPRITE_SIZE) && 
-        ball_center_y >= pin->y && 
-        ball_center_y < (pin->y + SPRITE_SIZE)) {       
-    */
 
     // settle position
     ball->y = pin->y - TILE_HALF_WIDTH;
@@ -117,9 +96,9 @@ void handle_ball_pin_collision(Ball* ball, Pin* pin)
     if (ball->vy > -FIXED_TENBAG) { 
 
         if (distance_x > 0) { // Hit right of center
-            ball->vx = FIXED_TEENTH; 
+            ball->vx += FIXED_TEENTH; 
         } else if (distance_x < 0) { // Hit left of center
-            ball->vx = -FIXED_TEENTH; 
+            ball->vx += -FIXED_TEENTH; 
         }
     }
 }
