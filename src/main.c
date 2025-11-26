@@ -42,7 +42,7 @@ GameSprite test_pin_graphics_data;
 uint8_t current_state = 0;
 uint8_t frame_counter = 0;
 
-uint8_t collision_frame_skip = 1;
+uint8_t collision_frame_skip = 2;
 
 // current key press etc
 uint8_t keys;

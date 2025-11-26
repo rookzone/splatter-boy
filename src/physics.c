@@ -68,6 +68,7 @@ void check_ball_wall(Ball *ball, Wall *w)
     }
 }
 
+
 void handle_ball_pin_collision(Ball* ball, Pin* pin)
 {
 
@@ -90,16 +91,16 @@ void handle_ball_pin_collision(Ball* ball, Pin* pin)
     
     // Invert horizontal speed
     ball->vx = -(ball->vx);
-    ball->vx -= FIXED_EIGHTH; // bleed off some speed after bouncing
+    //ball->vx -= FIXED_TEENTH; // bleed off some speed after bouncing
 
     // give the ball a little nudge if it becomes settled on top the pin
     // TO TRY: Play around with the freshold or roll "strength" here.
     if (ball->vy > -FIXED_TENBAG) { 
 
         if (distance_x > 0) { // Hit right of center
-            ball->vx += FIXED_TEENTH; 
+            ball->vx += FIXED_EIGHTH; 
         } else if (distance_x < 0) { // Hit left of center
-            ball->vx += -FIXED_TEENTH; 
+            ball->vx += -FIXED_EIGHTH; 
         }
     }
 }
