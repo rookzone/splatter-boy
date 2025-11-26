@@ -2,12 +2,16 @@
 bin/
 build/
 
-
 # Compiled files
 *.o
 *.exe
 *.gb
 *.elf
+
+# Wiki branch
+docs/
+wiki/
+
 
 # Temporary or backup files
 *.log
