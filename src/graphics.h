@@ -13,7 +13,7 @@ enum { TILE_BALL = 0, TILE_WALL = 1, TILE_PIN = 2 };
 
 // === SPRITE HANDLING ===
 
-// This is used to keep track of which sprite_index is available in memory
+// This is used to keep track of the most recently available sprite index in memory
 extern uint16_t next_sprite_id;
 
 // Allocates a sprite at sprite_index with a tile at tile_index

@@ -4,17 +4,28 @@
 
 void reset_balls(Ball* b, uint8_t count)
 {
-    for(uint8_t i = 0; i < count; i++){
-      b[i].x = 20 + i*8;
-      b[i].y = 20;
-      b[i].vx = 0;
-      b[i].vy = 0;
+    for (uint8_t i = 0; i < count/2; i++) {
+        b[i].x = 10 + i*8;
+        b[i].y = 20;
+        b[i].vx = 0;
+        b[i].vy = 0;
 
-      DRAW_SPRITE(b[i].game_sprite,b[i].x,b[i].y);
+        DRAW_SPRITE(b[i].game_sprite,b[i].x,b[i].y);
 
-      b[i].vx = RANDOM_HORIZONTAL_VX[(count-1)-i];
-
+        b[i].vx = RANDOM_HORIZONTAL_VX[i];
     }
+    
+    for (uint8_t i = 8; i < count; i++) {
+        b[i].x = 20 + i*8;
+        b[i].y = 30;
+        b[i].vx = 0;
+        b[i].vy = 0;
+
+        DRAW_SPRITE(b[i].game_sprite,b[i].x,b[i].y);
+
+        b[i].vx = RANDOM_HORIZONTAL_VX[i];
+    }
+    
 }
 
 void init_ball(Ball* ball, GameSprite* gfx_data, uint8_t ball_x, uint8_t ball_y)

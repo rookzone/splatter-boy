@@ -23,6 +23,11 @@ void init_background_pin(Pin* pin, uint8_t pin_x, uint8_t pin_y)
 
 }
 
+// === PIN OBJECT HANDLING ===
+// Note: most of this is unused now as collisions are handled by a single "virtual" pin that is passed around
+// This is because all pins are fundamentally the same, have no graphics, or any other data that needs handling
+// on an individual level.
+
 // Pass pin array
 void instantiate_pins_from_background(Pin *pins, uint8_t max_capacity)
 {
