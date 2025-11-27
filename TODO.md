@@ -17,8 +17,8 @@
 ## **21-11-25 - TODO:**
 
 ### Pin spawing
-- [ ] Extract pin positions from background data and instantiate the pins
-  - [ ] disable sprites
+- [x] Extract pin positions from background data and instantiate the pins
+  - [x] disable sprites
 
 ### Game object memory management 
 - [ ] Ball array and pin array should have a count of 20.

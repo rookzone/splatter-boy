@@ -126,12 +126,14 @@ void init_game_state(void)
   // Create pins
   //instantiate_pins_from_background(pachinkoPins, NUM_PINS);
 
+  /*
   // Initialize floor
   floor.x = 0;
   floor.y = 144;
 
   wall_graphics_data = create_sprite(TILE_WALL);
   floor.game_sprite = &wall_graphics_data;
+  */
 
   // Create two rows of balls
   for (uint8_t i = 0; i < NUM_BALLS/2; i++) {
@@ -211,7 +213,7 @@ void game_state_physics(void)
         handle_ball_pin_collision(&pachinkoBalls[i], &virtual_pin);
     }
   
-    check_ball_wall(&pachinkoBalls[i], &floor);
+    //check_ball_wall(&pachinkoBalls[i], &floor);
     update_ball_position(&pachinkoBalls[i]);
     
     DRAW_SPRITE(pachinkoBalls[i].game_sprite, pachinkoBalls[i].x, pachinkoBalls[i].y);

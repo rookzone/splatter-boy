@@ -9,7 +9,7 @@
 
 // Physics constants (8.8 fixed-point)
 #define GRAVITY     FIXED_TEENTH  // 256/16
-#define MAX_SPEED   TO_FIXED(4) // Max speed of balls in fixed-point number space
+#define MAX_SPEED   TO_FIXED(2) // Max speed of balls in fixed-point number space
 
 // Adds GRAVITY to velocity Y (vy)
 void apply_gravity(Ball *ball);

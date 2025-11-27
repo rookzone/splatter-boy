@@ -85,6 +85,9 @@ typedef struct {
 #define BACKGROUND_WIDTH_PIXELS 160
 #define BACKGROUND_HEIGHT_PIXELS 144
 
+#define PIN_HALF_WIDTH 2 
+#define ROLL_FORCE FIXED_EIGHTH
+
 // This stores the tile the sprite uses and crucially holds the sprite ID for where it is loaded into VRAM
 typedef struct GameSprite {
     uint8_t sprite_index;
