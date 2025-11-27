@@ -31,6 +31,7 @@ void handle_ball_pin_collision(Ball *ball, Pin *pin);
 
 // === LOOKUP TABLES ===
 
+// Random horizontal velocities for ball resets
 extern const fixed_n RANDOM_HORIZONTAL_VX[20];
 
 #endif // PHYSICS_H

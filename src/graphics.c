@@ -5,7 +5,7 @@
 unsigned char *active_background_tilemap = NULL;
 unsigned char *active_background_data = NULL;
 
-uint16_t next_sprite_id = 0;
+uint16_t next_sprite_id = 0; // current sprite index
 
 // Create sprite with a tracked VRAM number, assign tile, create and return GameSprite object
 GameSprite create_sprite(uint8_t tile_index)

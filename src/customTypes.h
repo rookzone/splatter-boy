@@ -63,7 +63,10 @@ typedef struct {
     GameSprite* game_sprite;
 } Pin;
 
+
 // === Graphics ===
+
+#define PIN_TILE_ID 0x02
 
 // Convert Pixel coordinate to Grid coordinate (Divide by 8)
 #define PIXEL_TO_GRID(x) ((x) >> 3)
