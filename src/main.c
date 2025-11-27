@@ -42,13 +42,8 @@ GameSprite test_pin_graphics_data;
 uint8_t current_state = 0;
 uint8_t frame_counter = 0;
 
-uint8_t collision_frame_skip = 2;
-
-// current key press etc
-uint8_t keys;
-// Key on last frame
-uint8_t previous_keys;
-
+uint8_t keys; // current key press
+uint8_t previous_keys; // Key on last frame
 
 void main(void) 
 {
@@ -111,7 +106,6 @@ void change_state(uint8_t state)
 
 void init_game_state(void)
 {
-
   DISPLAY_OFF;
   SPRITES_8x8;
   HIDE_BKG;
@@ -122,22 +116,9 @@ void init_game_state(void)
 
   // Load background
   set_game_background(pachinko1,PinballTiles);
-  
-  // Create pins
-  //instantiate_pins_from_background(pachinkoPins, NUM_PINS);
-
-  /*
-  // Initialize floor
-  floor.x = 0;
-  floor.y = 144;
-
-  wall_graphics_data = create_sprite(TILE_WALL);
-  floor.game_sprite = &wall_graphics_data;
-  */
 
   // Create two rows of balls
   for (uint8_t i = 0; i < NUM_BALLS/2; i++) {
-
     uint8_t x = 10 + i*8;
     uint8_t y = 20;
     init_ball(&pachinkoBalls[i], &pachinko_balls_gfx_data[i], x, y);
@@ -156,9 +137,7 @@ void init_game_state(void)
   DISPLAY_ON;
   SHOW_BKG;
   SHOW_SPRITES;
-
 }
-
 
 void game_state_input(void)
 {
@@ -168,30 +147,22 @@ void game_state_input(void)
     if ((keys & J_LEFT) && !(previous_keys & J_LEFT)) {
 
         Ball* ball_to_launch = find_lowest_ball(pachinkoBalls, NUM_BALLS);
-        
+
         if (ball_to_launch != NULL) {
-
             launch_ball(ball_to_launch, 0, 90, LAUNCH_FORCE_X, -LAUNCH_FORCE_Y+FIXED_HALF);
-
         }
     }
 
     if ((keys & J_UP) && !(previous_keys & J_UP)) {
         reset_balls(pachinkoBalls, NUM_BALLS);
     }
-    
 }
 
 void game_state_physics(void)
 {
-  
-  bool run_collision_check = (frame_counter % collision_frame_skip) == 0;
-  frame_counter++;
 
-  
-  /*
-  Use the ball objects location to determine if it is on a pin tile for collision.
-  If on a pin tile then create a "virtual pin" at that tile and pass it*/
+  // Use the ball objects location to determine if it is on a pin tile for collision.
+  // If on a pin tile then create a "virtual pin" at that tile and pass it
   for (uint8_t i = 0; i < NUM_BALLS; i++) {
         
     uint8_t ball_center_x = pachinkoBalls[i].x + TILE_HALF_WIDTH;

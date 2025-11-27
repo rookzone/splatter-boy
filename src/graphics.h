@@ -7,7 +7,6 @@
 #ifndef GRAPHICS_H
 #define GRAPHICS_H
 
-// Graphics indices. There should be one of these per sprite sheet.
 // Friendly name that corresponds with tile position in sprite sheet(s). 
 enum { TILE_BALL = 0, TILE_WALL = 1, TILE_PIN = 2 };
 
@@ -22,7 +21,9 @@ GameSprite create_sprite(uint8_t tile_index);
 
 // === BACKGROUNDS ===
 
+// The map made of 20x18 8x8 tiles
 extern unsigned char *active_background_tilemap;
+// The actual tile data the map uses
 extern unsigned char *active_background_data;
 
 // Loads background tiles and map into memory

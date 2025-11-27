@@ -70,8 +70,6 @@ Ball* find_lowest_ball(Ball* balls, uint8_t count)
     return lowest_ball;
 }
 
-
-
 void launch_ball(Ball* ball, uint8_t from_x, uint8_t from_y, fixed_n launch_power_x, fixed_n launch_power_y)
 {
     // Reset ball velocity and sub-pixel accumulator

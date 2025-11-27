@@ -8,12 +8,10 @@
 
 void update_ball_position(Ball *ball)
 {
+    ball->vy += GRAVITY;
 
-    apply_gravity(ball);
-
-    if (ball->vy > MAX_SPEED) {
+    if (ball->vy > MAX_SPEED)
         ball->vy = MAX_SPEED;
-    }
     
     ball->sub_x += ball->vx;
     ball->sub_y += ball->vy;
@@ -25,24 +23,13 @@ void update_ball_position(Ball *ball)
     ball->sub_x &= 0xFF; // Keep only the fractional part (8 bits)
     ball->sub_y &= 0xFF; // Keep only the fractional part (8 bits)
 
-
-}
-
-void apply_gravity(Ball *ball) 
-{
-    ball->vy += GRAVITY;
-
-
 }
 
 void apply_impulse(Ball *ball, fixed_n impulse_magnitude_x, fixed_n impulse_magnitude_y)
 {
-
     ball->vx += impulse_magnitude_x;
     ball->vy += impulse_magnitude_y;
-
 }
-
 
 void check_ball_wall(Ball *ball, Wall *w) 
 {
@@ -105,6 +92,30 @@ void handle_ball_pin_collision(Ball* ball, Pin* pin)
 
         if (ball->vx > FIXED_HALF) ball->vx = FIXED_HALF;
         else if (ball->vx < -FIXED_HALF) ball->vx = -FIXED_HALF;
-
     }
 }
+
+// Lookup tables
+
+const fixed_n RANDOM_HORIZONTAL_VX[20] = {
+    50,    // +0.5
+    -50,   // -0.5
+    50,    // +0.5
+    50,    // +0.5
+    -50,   // -0.5
+    -50,   // -0.5
+    50,    // +0.5
+    -50,   // -0.5
+    50,    // +0.5
+    -50,   // -0.5
+    50,    // +0.5
+    -50,   // -0.5
+    50,    // +0.5
+    50,    // +0.5
+    -50,   // -0.5
+    -50,   // -0.5
+    50,    // +0.5
+    -50,   // -0.5
+    50,    // +0.5
+    -50    // -0.5
+};

@@ -10,9 +10,8 @@
 // Physics constants (8.8 fixed-point)
 #define GRAVITY     FIXED_TEENTH  // 256/16
 #define MAX_SPEED   TO_FIXED(2) // Max speed of balls in fixed-point number space
-
-// Adds GRAVITY to velocity Y (vy)
-void apply_gravity(Ball *ball);
+#define PIN_HALF_WIDTH 2 
+#define ROLL_FORCE FIXED_EIGHTH
 
 // Applies forces and updates ball position in fixed-point number space (does NOT render)
 void update_ball_position(Ball *ball);
@@ -30,30 +29,8 @@ void check_ball_wall(Ball *ball, Wall *w);
 // Handle collision between a Ball and Pin.
 void handle_ball_pin_collision(Ball *ball, Pin *pin);
 
-
 // === LOOKUP TABLES ===
 
-static const fixed_n RANDOM_HORIZONTAL_VX[20] = {
-    50,    // +0.5
-    -50,   // -0.5
-    50,    // +0.5
-    50,    // +0.5
-    -50,   // -0.5
-    -50,   // -0.5
-    50,    // +0.5
-    -50,   // -0.5
-    50,    // +0.5
-    -50,   // -0.5
-    50,    // +0.5
-    -50,   // -0.5
-    50,    // +0.5
-    50,    // +0.5
-    -50,   // -0.5
-    -50,   // -0.5
-    50,    // +0.5
-    -50,   // -0.5
-    50,    // +0.5
-    -50    // -0.5
-};
+extern const fixed_n RANDOM_HORIZONTAL_VX[20];
 
 #endif // PHYSICS_H
