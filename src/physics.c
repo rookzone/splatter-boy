@@ -68,6 +68,13 @@ void check_ball_wall(Ball *ball, Wall *w)
     }
 }
 
+// New constant for 80% elasticity (205 / 256 ~= 0.80)
+#define PIN_ELASTICITY_80 205 
+// Roll force is now FIXED_EIGHTH (0.125) which is double the previous FIXED_TEENTH (0.0625)
+#define ROLL_FORCE FIXED_EIGHTH  
+// Max rolling speed is 0.75 pixels/frame
+#define ROLL_SPEED_MAX (FIXED_HALF + FIXED_QUARTER)
+
 void handle_ball_pin_collision(Ball* ball, Pin* pin)
 {
 
@@ -86,22 +93,27 @@ void handle_ball_pin_collision(Ball* ball, Pin* pin)
     ball->sub_y = 0;
 
     // Check if this is a bounce (falling onto pin) or resting (settled on top)
-    // If vy is positive (falling down), it's a bounce
-    if (ball->vy > FIXED_TEENTH) {
 
-        // invert and reduce vertical speed by 50%
+    if (ball->vy > FIXED_EIGHTH) { // BOUNCE
+
+        // invert vy and add speed loss component
         ball->vy = -(ball->vy >> 1);
         
-        // Invert horizontal speed
-        ball->vx = -(ball->vx);
-        //ball->vx += (distance_x); // bleed off some speed after bouncing
+        // Invert vx and add speed loss component
+        ball->vx = -(ball->vx >> 1);
+        
 
     } else {
-        // RESTING: just cancel downward velocity (gravity will re-apply next frame)
+// Cancel vertical velocity to stick to pin surface
         ball->vy = 0;
         
-        // Apply gentle rolling force proportional to offset from center
-        ball->vx += (distance_x); // gentler for resting state
+        // Apply gentle rolling force proportional to offset from center.
+        // ROLL_FORCE is now higher (FIXED_EIGHTH) for a snappier start.
+        ball->vx += FIXED_MUL(distance_x, ROLL_FORCE);
+        
+        // Limit the horizontal speed to the new, higher max (0.75 pixels/frame)
+        if (ball->vx > ROLL_SPEED_MAX) ball->vx = ROLL_SPEED_MAX;
+        else if (ball->vx < -ROLL_SPEED_MAX) ball->vx = -ROLL_SPEED_MAX;
     }
 }
 
