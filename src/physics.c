@@ -68,7 +68,44 @@ void check_ball_wall(Ball *ball, Wall *w)
     }
 }
 
+void handle_ball_pin_collision(Ball* ball, Pin* pin)
+{
 
+    // Grab center point of objects
+    uint8_t ball_center_x = ball->x + TILE_HALF_WIDTH;
+    uint8_t ball_center_y = ball->y + TILE_HALF_WIDTH;
+    uint8_t pin_center_x = pin->x + TILE_HALF_WIDTH;
+    uint8_t pin_center_y = pin->y + TILE_HALF_WIDTH;
+
+    // Calculate distance of object
+    int8_t distance_x = ball_center_x - pin_center_x;
+    int8_t distance_y = ball_center_y - pin_center_y;
+
+    // settle position
+    ball->y = pin->y - TILE_HALF_WIDTH;
+    ball->sub_y = 0;
+
+    // Check if this is a bounce (falling onto pin) or resting (settled on top)
+    // If vy is positive (falling down), it's a bounce
+    if (ball->vy > FIXED_TEENTH) {
+
+        // invert and reduce vertical speed by 50%
+        ball->vy = -(ball->vy >> 1);
+        
+        // Invert horizontal speed
+        ball->vx = -(ball->vx);
+        //ball->vx += (distance_x); // bleed off some speed after bouncing
+
+    } else {
+        // RESTING: just cancel downward velocity (gravity will re-apply next frame)
+        ball->vy = 0;
+        
+        // Apply gentle rolling force proportional to offset from center
+        ball->vx += (distance_x); // gentler for resting state
+    }
+}
+
+/*
 void handle_ball_pin_collision(Ball* ball, Pin* pin)
 {
 
@@ -90,17 +127,9 @@ void handle_ball_pin_collision(Ball* ball, Pin* pin)
     ball->vy = -(ball->vy >> 1);
     
     // Invert horizontal speed
-    ball->vx = -(ball->vx);
-    //ball->vx -= FIXED_TEENTH; // bleed off some speed after bouncing
+    ball->vx = -(ball->vx >> 1);
+   // ball->vx -= FIXED_TEENTH; // bleed off some speed after bouncing
 
-    // give the ball a little nudge if it becomes settled on top the pin
-    // TO TRY: Play around with the freshold or roll "strength" here.
-    if (ball->vy > -FIXED_TENBAG) { 
-
-        if (distance_x > 0) { // Hit right of center
-            ball->vx += FIXED_EIGHTH; 
-        } else if (distance_x < 0) { // Hit left of center
-            ball->vx += -FIXED_EIGHTH; 
-        }
-    }
+    ball->vx += (distance_x >> 2);
 }
+*/
