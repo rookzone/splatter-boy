@@ -68,13 +68,6 @@ void check_ball_wall(Ball *ball, Wall *w)
     }
 }
 
-// New constant for 80% elasticity (205 / 256 ~= 0.80)
-#define PIN_ELASTICITY_80 205 
-// Roll force is now FIXED_EIGHTH (0.125) which is double the previous FIXED_TEENTH (0.0625)
-#define ROLL_FORCE FIXED_EIGHTH  
-// Max rolling speed is 0.75 pixels/frame
-#define ROLL_SPEED_MAX (FIXED_HALF + FIXED_QUARTER)
-
 void handle_ball_pin_collision(Ball* ball, Pin* pin)
 {
 
@@ -104,16 +97,11 @@ void handle_ball_pin_collision(Ball* ball, Pin* pin)
         
 
     } else {
-// Cancel vertical velocity to stick to pin surface
+        // RESTING: just cancel downward velocity (gravity will re-apply next frame)
         ball->vy = 0;
         
-        // Apply gentle rolling force proportional to offset from center.
-        // ROLL_FORCE is now higher (FIXED_EIGHTH) for a snappier start.
-        ball->vx += FIXED_MUL(distance_x, ROLL_FORCE);
-        
-        // Limit the horizontal speed to the new, higher max (0.75 pixels/frame)
-        if (ball->vx > ROLL_SPEED_MAX) ball->vx = ROLL_SPEED_MAX;
-        else if (ball->vx < -ROLL_SPEED_MAX) ball->vx = -ROLL_SPEED_MAX;
+        // Apply gentle rolling force proportional to offset from center
+        ball->vx += (distance_x); // gentler for resting state
     }
 }
 
