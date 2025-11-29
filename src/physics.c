@@ -66,7 +66,7 @@ void handle_ball_pin_collision(Ball* ball, Pin* pin)
     int8_t distance_x = ball_center_x - pin_center_x;
 
     // If we are outide pin horizontal bounds
-    // But still within collision tile (this function is only called if ball is on pin tile)
+    // But still within collision tile (handle_ball_pin_collision is only called if ball is on pin tile)
     // then nudge ball and exit
     if (distance_x > PIN_HALF_WIDTH || distance_x < -PIN_HALF_WIDTH) {
     
