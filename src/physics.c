@@ -108,6 +108,21 @@ void handle_ball_pin_collision(Ball* ball, Pin* pin)
     }
 }
 
+
+void handle_ball_45_degree_wall_collision(Ball *ball, Wall *w)
+{
+    // Calculate visual point of collision for the "surface"
+
+    // Settle the velocity and sub pixel accumulator
+
+    // Determine if bounce or roll
+
+    // If roll, skip low-energy micro-bounce and apply force into rolling motion
+
+    // If bounce, apply basic axes swap
+
+}
+
 // Lookup tables
 
 const fixed_n RANDOM_HORIZONTAL_VX[20] = {

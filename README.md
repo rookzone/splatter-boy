@@ -34,6 +34,16 @@ To achieve a game where balls are fired out on button press, collide with exit w
 drop through the pins and to the bottom of the screen. Pin and wall positions are pulled
 via the tile ID on the map data. Get some debug functions for drawing zones. 
 
+**update - 29/11/25:**
+
+The game is heading a few different directions from here. This is re-writing goals
+for focus.
+
+- [ ] Create collision check function which returns the tile index(indices) (int) of tile ball is touching
+- [ ] 45 degree wall collision
+- [ ] Better game state structure and switching
+
+
 ## Fun?
 
 

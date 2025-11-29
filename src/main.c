@@ -165,6 +165,10 @@ void game_state_physics(void)
   // If on a pin tile then create a "virtual pin" at that tile and pass it
   for (uint8_t i = 0; i < NUM_BALLS; i++) {
         
+    // Turn this into a function "check_collision" that is able to return the
+    // index for the type of object collided into
+    // then a switch case can be used to handle the various types of collisions
+    // such as with a pin, a wall, a ball, a spinner, flipper etc etc.
     uint8_t ball_center_x = pachinko_balls[i].x + TILE_HALF_WIDTH;
     uint8_t ball_center_y = pachinko_balls[i].y + TILE_HALF_WIDTH;
 
