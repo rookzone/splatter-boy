@@ -21,6 +21,9 @@
   - [x] disable sprites
 
 ### Game object memory management 
+
+I need a place to store references to all the data object, their indices in memory, and aliases
+
 - [ ] Ball array and pin array should have a count of 20.
   -[ ] Ball and pin arrays need handling functions to ensure no overflow or overwrites take place
     - [ ] Re-use slot ball despawn order, prioritise which can be despawned if too many
@@ -37,12 +40,12 @@
 **Collision detection optimisations**
 - [ ] Wall collision can be checked with masks, as nothing is behind the wall.
   Essentially we are drawing an area of the game that is off bounds
-- [ ] Balls could be flagged collision_enabled to false then filtered out of the checking method
-- [ ] Balls could only check for any distance_y below them as bouncing back up would be rare...
-- [ ] Think about ball on ball collisions, could the sprite size be reduced?
+- [x] Balls could be flagged collision_enabled to false then filtered out of the checking method
+- [x] Balls could only check for any distance_y below them as bouncing back up would be rare...
+- [x] Think about ball on ball collisions, could the sprite size be reduced?
 
 **Housekeeping**
-- [ ] Clean up: code review; remove magic numbers; add good comments; Write up some documentation...
+- [x] Clean up: code review; remove magic numbers; add good comments; Write up some documentation...
 
 **Score and "window" sprites**
 - [ ] Add a way of scoring... move the game beyond a tech demo...

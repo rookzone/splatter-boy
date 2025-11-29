@@ -15,13 +15,14 @@ A fun little project where I mess around with C and GBDK. Attempt at a pachinko 
   - [x] I have got the balls and pins working, collision is janky and performance is somewhat of an issue. I'm going to revise the
   collision method used, this bounding box thing is too heavy on the calcs. Also it's not reliable.
 
-**update - 23/11/25:**  
+**update - 23/11/25:**
+
 *See TODO.md list*
 
 Physics is working nicely. Well optimised. Goals now:
-- [ ] Get a proper game screen with all the pins hooked up
-- [ ] Load in background and store array of pin locations
-- [ ] Use pin locations to spawn Pin structs in
+- [x] Get a proper game screen with all the pins hooked up
+- [x] Load in background and store array of pin locations
+- [x] Use pin locations to spawn Pin structs in
 - [ ] Define zones on map, debug draw them
 - [ ] Hook up buttons to a ball firing system
 - [ ] Create diagnal walls with bounce logic
@@ -37,6 +38,7 @@ via the tile ID on the map data. Get some debug functions for drawing zones.
 
 
 **Project stuff**
+
 - Check out licenses to use for distribution and tools used to make this.
 - Wiki / Docs
 - Physics engine for GB export?
