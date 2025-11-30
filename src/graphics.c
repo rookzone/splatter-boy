@@ -30,7 +30,7 @@ void set_game_background(unsigned char *background, unsigned char *tiles)
     active_background_tilemap = background;
     active_background_data = tiles;
 
-    set_bkg_data(0, 4, active_background_data);
+    set_bkg_data(0, 16, active_background_data);
     set_bkg_tiles(0, 0, 20, 18, active_background_tilemap);
 
 }

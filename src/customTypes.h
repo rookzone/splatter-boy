@@ -66,6 +66,13 @@ typedef struct {
 
 // === Graphics ===
 
+// This stores the tile the sprite uses and crucially holds the sprite index for where it is loaded into VRAM
+typedef struct GameSprite {
+    uint8_t sprite_index;
+    uint8_t tile_index;
+};
+
+// Byte that represents the PIN. Used for collision checks
 #define PIN_TILE_ID 0x02
 
 // Convert Pixel coordinate to Grid coordinate (Divide by 8)
@@ -87,12 +94,6 @@ typedef struct {
 #define BACKGROUND_HEIGHT_TILES 18
 #define BACKGROUND_WIDTH_PIXELS 160
 #define BACKGROUND_HEIGHT_PIXELS 144
-
-// This stores the tile the sprite uses and crucially holds the sprite ID for where it is loaded into VRAM
-typedef struct GameSprite {
-    uint8_t sprite_index;
-    uint8_t tile_index;
-};
 
 #endif // CUSTOMTYPES_H
 

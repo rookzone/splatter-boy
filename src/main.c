@@ -112,7 +112,7 @@ void init_game_state(void)
   HIDE_SPRITES;
 
   next_sprite_id = 0; // reset sprites
-  set_sprite_data(0, 5, PinballTiles);
+  set_sprite_data(0, 16, PinballTiles);
 
   // Load background
   set_game_background(pachinko1,PinballTiles);
