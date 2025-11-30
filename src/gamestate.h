@@ -11,6 +11,13 @@
 #define NUM_BALLS 16
 #define NUM_PINS 36
 
+// === STATES ===
+
+#define STATE_GAME_SCREEN 1
+#define STATE_TITLE_SCREEN 2
+#define STATE_SCORE_SCREEN 3
+#define STATE_DEMO_SCREEN 4
+
 
 typedef struct {
 

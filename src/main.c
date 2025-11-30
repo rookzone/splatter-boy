@@ -22,11 +22,9 @@ void change_state(uint8_t state);
 void end_step(void);
 
 // === RUNTIME GAME OBJECT DATA ===
-Wall floor;
 Pin test_pin;
 
 // === RUNTIME GRAPHICS DATA ===
-GameSprite wall_graphics_data;
 GameSprite test_pin_graphics_data;
 
 void main(void) 
@@ -173,7 +171,6 @@ void game_state_physics(void)
         handle_ball_pin_collision(&game.objects.balls.list[i], &virtual_pin);
     }
   
-    //check_ball_wall(&pachinkoBalls[i], &floor);
     update_ball_position(&game.objects.balls.list[i]);
     
     DRAW_SPRITE(game.objects.balls.list[i].game_sprite, game.objects.balls.list[i].x, game.objects.balls.list[i].y);
