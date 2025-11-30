@@ -1,9 +1,9 @@
 // ball.h
 
 #include <gb/gb.h>
-#include "customTypes.h"  // For Ball struct and fixed_n
-#include "graphics.h"     // For GameSprite and drawing macros
-#include "physics.h"      // For physics constants
+#include "physics.h"
+#include "graphics.h"
+#include "customtypes.h"
 
 #ifndef BALL_H
 #define BALL_H

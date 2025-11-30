@@ -5,12 +5,10 @@
 #ifndef CUSTOMTYPES_H
 #define CUSTOMTYPES_H
 
-// Forward declaration of GameSprite for object definitions
 typedef struct GameSprite GameSprite;
 
 // ***** FIXED NUMBERS *****
 
-// 16-bit signed integer for 8.8 fixed-point numbers
 typedef int16_t fixed_n;   
 
 #define FIXED_SHIFT   8           // number of fractional bits
@@ -29,12 +27,17 @@ typedef int16_t fixed_n;
 #define FIXED_SUB(a,b) ((a) - (b))
 
 // === SLOW MATHS ===
-#define FIXED_MUL(a,b) (((a) * (b)) >> FIXED_SHIFT) // fixed * fixed -> fixed
-#define FIXED_DIV(a,b) (((a) << FIXED_SHIFT) / (b)) // fixed / fixed -> fixed
+#define FIXED_MUL(a,b) (((a) * (b)) >> FIXED_SHIFT)
+#define FIXED_DIV(a,b) (((a) << FIXED_SHIFT) / (b))
 
-// === SPRITE/TILE CONSTANTS ===
-#define SPRITE_SIZE 8 // 8x8 pixels
-#define TILE_HALF_WIDTH 4 // 8/2 = 4
+
+// === STATES ===
+
+#define STATE_GAME_SCREEN 1
+#define STATE_TITLE_SCREEN 2
+#define STATE_SCORE_SCREEN 3
+#define STATE_DEMO_SCREEN 4
+
 
 // ##### GAME OBJECTS #####
 
@@ -43,14 +46,14 @@ typedef int16_t fixed_n;
 // Ball object
 typedef struct {
     uint8_t x, y;
-    fixed_n sub_x, sub_y; // Fractional part of position (sub-pixel)
-    fixed_n  vx, vy;      // Velocity
+    fixed_n sub_x, sub_y;
+    fixed_n  vx, vy;
     GameSprite *game_sprite;
 } Ball;
 
 // Wall object
 typedef struct {
-    uint8_t x, y; // Top-left corner of the wall section
+    uint8_t x, y;
     GameSprite *game_sprite;
 } Wall;
 
@@ -69,7 +72,7 @@ typedef struct GameSprite {
     uint8_t tile_index;
 };
 
-// Byte that represents the PIN. Used for collision checks
+// Byte that represents the PIN. Used for collision checks 
 #define PIN_TILE_ID 0x02
 
 // Convert Pixel coordinate to Grid coordinate (Divide by 8)
@@ -78,7 +81,19 @@ typedef struct GameSprite {
 // Convert Grid coordinate to Pixel coordinate (Multiply by 8)
 #define GRID_TO_PIXEL(x) ((x) << 3)
 
-// Get tilemap Array Index (assuming 20 tiles wide)
-#define GET_TILE_INDEX(col, row) ((row) * 20 + (col))
+// Get tilemap Array Index from Col/Row (Row * Width + Col)
+#define GET_TILE_INDEX(col, row) (((uint16_t)(row) * BACKGROUND_WIDTH_TILES) + (col))
+
+// General gameboy graphics sizes
+#define TILE_WIDTH 8
+#define TILE_LENGTH 8
+#define TILE_HALF_WIDTH 4
+#define TILE_HALF_LENGTH 4
+#define SPRITE_SIZE 8
+#define BACKGROUND_WIDTH_TILES 20
+#define BACKGROUND_HEIGHT_TILES 18
+#define BACKGROUND_WIDTH_PIXELS 160
+#define BACKGROUND_HEIGHT_PIXELS 144
 
 #endif // CUSTOMTYPES_H
+

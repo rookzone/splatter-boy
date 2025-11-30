@@ -1,25 +1,17 @@
 // ball.c
 
 #include "ball.h"
-#include "memory.h" // Now includes memory for full context access
-
-// Forward declarations for functions moved out of main.c
-extern const fixed_n RANDOM_HORIZONTAL_VX[];
 
 void reset_balls(Ball* b, uint8_t count)
 {
-    // The previous logic was complex; I'll simplify it to use the new memory context
-    // This function can be called from game_state_init
-
     for (uint8_t i = 0; i < count/2; i++) {
         b[i].x = 10 + i*8;
         b[i].y = 20;
         b[i].vx = 0;
         b[i].vy = 0;
 
-        // DRAW_SPRITE uses the GameSprite pointer which is set in init_ball
-        // The draw routine in states.c handles drawing in the loop
-        
+        DRAW_SPRITE(b[i].game_sprite,b[i].x,b[i].y);
+
         b[i].vx = RANDOM_HORIZONTAL_VX[i];
     }
     
@@ -29,8 +21,7 @@ void reset_balls(Ball* b, uint8_t count)
         b[i].vx = 0;
         b[i].vy = 0;
 
-        // DRAW_SPRITE uses the GameSprite pointer which is set in init_ball
-        // The draw routine in states.c handles drawing in the loop
+        DRAW_SPRITE(b[i].game_sprite,b[i].x,b[i].y);
 
         b[i].vx = RANDOM_HORIZONTAL_VX[i];
     }
@@ -66,19 +57,30 @@ Ball* find_lowest_ball(Ball* balls, uint8_t count)
     }
 
     Ball* lowest_ball = &balls[0];
-    
-    // Find the ball with the highest Y coordinate (lowest on the screen)
+    uint8_t highest_y = balls[0].y;
+
     for (uint8_t i = 1; i < count; i++) {
-        if (balls[i].y > lowest_ball->y) {
+        // Compare the current ball's y-coordinate with the maximum found so far
+        if (balls[i].y > highest_y) {
+            highest_y = balls[i].y;
             lowest_ball = &balls[i];
         }
     }
+
     return lowest_ball;
 }
 
 void launch_ball(Ball* ball, uint8_t from_x, uint8_t from_y, fixed_n launch_power_x, fixed_n launch_power_y)
 {
+    // Reset ball velocity and sub-pixel accumulator
+    reset_ball(ball);
+
+    // Move ball to screen position
     ball->x = from_x;
     ball->y = from_y;
+
     apply_impulse(ball, launch_power_x, launch_power_y);
+
 }
+
+// end ball.c
