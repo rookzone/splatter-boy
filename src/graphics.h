@@ -2,7 +2,7 @@
 
 #include <gb/gb.h>
 #include <gb/drawing.h>
-#include "customtypes.h"
+#include "customTypes.h" // For GameSprite, fixed_n, and PIXEL_TO_GRID
 
 #ifndef GRAPHICS_H
 #define GRAPHICS_H
@@ -32,16 +32,14 @@ void set_game_background(unsigned char *background, unsigned char *tiles);
 // === DRAW FUNCTIONS ===
 
 // Fast sprite draw using GBDK in move_sprite routine. Pass pointer to GameSprite
+// Offsets are added here because Game Boy sprites are rendered at (x+8, y+16)
 #define DRAW_SPRITE(obj_ptr, x, y) \
     move_sprite((obj_ptr)->sprite_index, x + 8, y + 16)
 
-// === ANIMATIONS ===
-
-// forward declaration from GBDK for clarity
-void plot_point(uint8_t x, uint8_t y) OLDCALL;
-
-// Plot a point in fixed number space
+// Plot a point at position in pixel space (int)
 void plot_point_fixed(fixed_n x, fixed_n y);
 
+// === ANIMATIONS ===
+// Future-proofing for animation functions
 
 #endif // GRAPHICS_H

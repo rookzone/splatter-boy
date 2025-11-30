@@ -1,9 +1,7 @@
 // pins.h
 
 #include <gb/gb.h>
-#include "physics.h"
-#include "graphics.h"
-#include "customtypes.h"
+#include "customTypes.h"  // For Pin struct and GameSprite
 
 #ifndef PINS_H
 #define PINS_H

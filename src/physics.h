@@ -5,7 +5,7 @@
 
 #include <gb/gb.h>
 #include <stdint.h>
-#include "customtypes.h"
+#include "customTypes.h" // For fixed_n, Ball, Pin, Wall structs
 
 // Physics constants (8.8 fixed-point)
 #define GRAVITY     FIXED_TEENTH  // 256/16
@@ -25,18 +25,19 @@ void apply_impulse(Ball *ball, fixed_n impulse_magnitude_x, fixed_n impulse_magn
 
 // === COLLISSION ===
 
-// Handle collision between a Ball and Wall.
+// Handle collision between a Ball and Wall (includes the floor).
 void check_ball_wall(Ball *ball, Wall *w);
 
 // Handle collision between a Ball and Pin.
 void handle_ball_pin_collision(Ball *ball, Pin *pin);
 
-// Reflects ball from wall or sets it "rolling" along wall at 45 degree angle
+// Reflects ball from wall or sets it "rolling" along wall at 45 degrees
 void handle_ball_45_degree_wall_collision(Ball *ball, Wall *w);
 
-// === LOOKUP TABLES ===
+// Lookup tables
+extern const fixed_n RANDOM_HORIZONTAL_VX[];
 
-// Random horizontal velocities for ball resets
-extern const fixed_n RANDOM_HORIZONTAL_VX[20];
+// TEMP - Only needed for wall/floor initialisation
+void init_wall(Wall* w, GameSprite* gfx_data, uint8_t w_x, uint8_t w_y);
 
 #endif // PHYSICS_H
