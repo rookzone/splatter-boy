@@ -89,7 +89,7 @@ void handle_ball_pin_collision(Ball* ball, Pin* pin)
         ball->vy = -(ball->vy >> 1); // 50% energy retention
         
         // apply horizontal impulse based on distance from center
-        fixed_n impulse_x = FIXED_MUL(distance_x, FIXED_QUARTER);
+        fixed_n impulse_x = FIXED_MUL(distance_x, HORIZONTAL_PIN_FORCE);
         ball->vx += impulse_x;
 
         
@@ -102,8 +102,8 @@ void handle_ball_pin_collision(Ball* ball, Pin* pin)
         ball->vx += FIXED_MUL(distance_x, ROLL_FORCE); 
 
         // Clamp horizontal speed to prevent excessive rolling
-        if (ball->vx > FIXED_HALF) ball->vx = FIXED_HALF;
-        else if (ball->vx < -FIXED_HALF) ball->vx = -FIXED_HALF;
+        if (ball->vx > MAX_ROLL_SPEED) ball->vx = MAX_ROLL_SPEED;
+        else if (ball->vx < -MAX_ROLL_SPEED) ball->vx = -MAX_ROLL_SPEED;
         
     }
 }
