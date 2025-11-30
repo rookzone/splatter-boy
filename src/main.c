@@ -8,13 +8,11 @@
 #include "ball.h"
 #include "pins.h"
 #include "graphics.h"
+#include "gamestate.h"
 
 // Tiles
 #include "tiles/pinballTiles.h"
 #include "tiles/pachinkoOneBG.h"
-
-#include "tiles/conn.h"
-
 
 // Forward declarations
 void init_game_state(void);
@@ -23,29 +21,13 @@ void game_state_physics(void);
 void change_state(uint8_t state);
 void end_step(void);
 
-// Ball values
-#define NUM_BALLS 16
-#define NUM_PINS 36
-
 // === RUNTIME GAME OBJECT DATA ===
 Wall floor;
-Ball pachinko_balls[NUM_BALLS];
-Pin pachinko_pins[NUM_PINS];
 Pin test_pin;
 
 // === RUNTIME GRAPHICS DATA ===
-GameSprite pachinko_balls_gfx_data[NUM_BALLS];
-GameSprite pachinko_pins_gfx_data[NUM_PINS];
 GameSprite wall_graphics_data;
 GameSprite test_pin_graphics_data;
-
-// === GAME (and/or) STATE ===
-
-uint8_t current_state = 0;
-uint8_t frame_counter = 0;
-
-uint8_t keys; // current key press
-uint8_t previous_keys; // Key on last frame
 
 void main(void) 
 {
@@ -54,7 +36,7 @@ void main(void)
 
   while (1) {
 
-    switch(current_state) {
+    switch(game.system.current_state) {
 
       case STATE_GAME_SCREEN:
         game_state_input();
@@ -77,15 +59,15 @@ void main(void)
 
 void change_state(uint8_t state)
 {
-  if (state != current_state){
+  if (state != game.system.current_state){
 
-    current_state = state;
+    game.system.current_state = state;
 
-    switch(current_state)
+    switch(game.system.current_state)
     {
       case STATE_GAME_SCREEN:
         init_game_state();
-        current_state = state;
+        game.system.current_state = state;
         // Main game screen
         break;
 
@@ -113,26 +95,27 @@ void init_game_state(void)
   HIDE_BKG;
   HIDE_SPRITES;
 
-  next_sprite_id = 0; // reset sprites
-  set_sprite_data(0, 16, PinballTiles);
+  game.graphics.next_sprite_id = 0; // reset sprites
+
+  set_sprite_sheet(PinballTiles);
 
   // Load background
-  set_game_background(conn_map, conn_tiles);
+  set_game_background(pachinko1, PinballTiles);
 
   // Create two rows of balls
   for (uint8_t i = 0; i < NUM_BALLS/2; i++) {
     uint8_t x = 10 + i*8;
     uint8_t y = 20;
-    init_ball(&pachinko_balls[i], &pachinko_balls_gfx_data[i], x, y);
-    pachinko_balls[i].vx = RANDOM_HORIZONTAL_VX[i];
+    init_ball(&game.objects.balls.list[i], &game.objects.balls.graphics[i], x, y);
+    game.objects.balls.list[i].vx = RANDOM_HORIZONTAL_VX[i];
 
   }
 
   for (uint8_t i = 8; i < NUM_BALLS; i++) {
     uint8_t x = 10 + i*8;
     uint8_t y = 30;
-    init_ball(&pachinko_balls[i], &pachinko_balls_gfx_data[i], x, y);
-    pachinko_balls[i].vx = RANDOM_HORIZONTAL_VX[i];
+    init_ball(&game.objects.balls.list[i], &game.objects.balls.graphics[i], x, y);
+    game.objects.balls.list[i].vx = RANDOM_HORIZONTAL_VX[i];
 
   }
 
@@ -144,19 +127,19 @@ void init_game_state(void)
 void game_state_input(void)
 {
     
-    keys = joypad();
+    game.system.keys = joypad();
 
-    if ((keys & J_LEFT) && !(previous_keys & J_LEFT)) {
+    if ((game.system.keys & J_LEFT) && !(game.system.previous_keys & J_LEFT)) {
 
-        Ball* ball_to_launch = find_lowest_ball(pachinko_balls, NUM_BALLS);
+        Ball* ball_to_launch = find_lowest_ball(game.objects.balls.list, NUM_BALLS);
 
         if (ball_to_launch != NULL) {
             launch_ball(ball_to_launch, 0, 90, LAUNCH_FORCE_X, -LAUNCH_FORCE_Y+FIXED_HALF);
         }
     }
 
-    if ((keys & J_UP) && !(previous_keys & J_UP)) {
-        reset_balls(pachinko_balls, NUM_BALLS);
+    if ((game.system.keys & J_UP) && !(game.system.previous_keys & J_UP)) {
+        reset_balls(game.objects.balls.list, NUM_BALLS);
     }
 }
 
@@ -171,36 +154,36 @@ void game_state_physics(void)
     // index for the type of object collided into
     // then a switch case can be used to handle the various types of collisions
     // such as with a pin, a wall, a ball, a spinner, flipper etc etc.
-    uint8_t ball_center_x = pachinko_balls[i].x + TILE_HALF_WIDTH;
-    uint8_t ball_center_y = pachinko_balls[i].y + TILE_HALF_WIDTH;
+    uint8_t ball_center_x = game.objects.balls.list[i].x + TILE_HALF_WIDTH;
+    uint8_t ball_center_y = game.objects.balls.list[i].y + TILE_HALF_WIDTH;
 
     uint8_t col = PIXEL_TO_GRID(ball_center_x);
     uint8_t row = PIXEL_TO_GRID(ball_center_y);
 
     uint16_t tilemap_index = GET_TILE_INDEX(col, row);
 
-    if (active_background_tilemap[tilemap_index] == PIN_TILE_ID) {
+    if (game.graphics.active_background_tilemap[tilemap_index] == PIN_TILE_ID) {
         
-        //
+        // game.
         Pin virtual_pin;
         virtual_pin.x = GRID_TO_PIXEL(col);
         virtual_pin.y = GRID_TO_PIXEL(row);
 
         //
-        handle_ball_pin_collision(&pachinko_balls[i], &virtual_pin);
+        handle_ball_pin_collision(&game.objects.balls.list[i], &virtual_pin);
     }
   
     //check_ball_wall(&pachinkoBalls[i], &floor);
-    update_ball_position(&pachinko_balls[i]);
+    update_ball_position(&game.objects.balls.list[i]);
     
-    DRAW_SPRITE(pachinko_balls[i].game_sprite, pachinko_balls[i].x, pachinko_balls[i].y);
+    DRAW_SPRITE(game.objects.balls.list[i].game_sprite, game.objects.balls.list[i].x, game.objects.balls.list[i].y);
 
   }
 }
 
 void end_step(void)
 {
-  previous_keys = keys; // Place value of keys into previous_keys for next frame
+  game.system.previous_keys = game.system.keys; // Place value of keys into previous_keys for next frame
   vsync();
 }
 

@@ -1,9 +1,9 @@
 // customTypes.h
 
-#include <gb/gb.h>
-
 #ifndef CUSTOMTYPES_H
 #define CUSTOMTYPES_H
+
+#include <gb/gb.h>
 
 typedef struct GameSprite GameSprite;
 
