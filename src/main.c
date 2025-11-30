@@ -201,3 +201,5 @@ void end_step(void)
   previous_keys = keys; // Place value of keys into previous_keys for next frame
   vsync();
 }
+
+// end main.c

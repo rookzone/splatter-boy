@@ -34,3 +34,5 @@ void set_game_background(unsigned char *background, unsigned char *tiles)
     set_bkg_tiles(0, 0, 20, 18, active_background_tilemap);
 
 }
+
+// end graphics.c

@@ -82,3 +82,5 @@ void launch_ball(Ball* ball, uint8_t from_x, uint8_t from_y, fixed_n launch_powe
     apply_impulse(ball, launch_power_x, launch_power_y);
 
 }
+
+// end ball.c
