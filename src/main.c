@@ -13,6 +13,9 @@
 #include "tiles/pinballTiles.h"
 #include "tiles/pachinkoOneBG.h"
 
+#include "tiles/conn.h"
+
+
 // Forward declarations
 void init_game_state(void);
 void game_state_input(void);
@@ -114,7 +117,7 @@ void init_game_state(void)
   set_sprite_data(0, 16, PinballTiles);
 
   // Load background
-  set_game_background(pachinko1,PinballTiles);
+  set_game_background(conn_map, conn_tiles);
 
   // Create two rows of balls
   for (uint8_t i = 0; i < NUM_BALLS/2; i++) {
