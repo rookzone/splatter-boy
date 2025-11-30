@@ -3,14 +3,13 @@
 #include <gb/gb.h>
 #include <gbdk/console.h>
 #include <stdio.h>
-#include <stdbool.h>
 
 #include "physics.h"
 #include "ball.h"
 #include "pins.h"
 #include "graphics.h"
-#include "debug.h"
 
+// Tiles
 #include "tiles/pinballTiles.h"
 #include "tiles/pachinkoOneBG.h"
 

@@ -3,8 +3,6 @@
 #ifndef PHYSICS_H
 #define PHYSICS_H
 
-#include <gb/gb.h>
-#include <stdint.h>
 #include "customtypes.h"
 
 // Physics constants (8.8 fixed-point)

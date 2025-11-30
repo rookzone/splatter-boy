@@ -1,10 +1,6 @@
 ﻿// Physics.c
 
-#include <stdlib.h>
-#include <stdio.h>
 #include "physics.h"
-#include "graphics.h"
-
 
 void update_ball_position(Ball *ball)
 {

@@ -1,11 +1,10 @@
 // graphics.h
 
-#include <gb/gb.h>
-#include <gb/drawing.h>
-#include "customTypes.h" // For GameSprite, fixed_n, and PIXEL_TO_GRID
-
 #ifndef GRAPHICS_H
 #define GRAPHICS_H
+
+#include <gb/drawing.h>
+#include "customtypes.h"
 
 // Friendly name that corresponds with tile position in sprite sheet(s). 
 enum { TILE_BALL = 0, TILE_WALL = 1, TILE_PIN = 2 };

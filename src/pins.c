@@ -1,7 +1,7 @@
 // pins.c
 
 #include "pins.h"
-#include <stdio.h>
+#include "graphics.h" // Needs create_sprite, TILE_PIN
 
 void init_pin(Pin* pin, GameSprite* gfx_data, uint8_t pin_x, uint8_t pin_y)
 {

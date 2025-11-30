@@ -1,12 +1,10 @@
 // ball.h
 
-#include <gb/gb.h>
-#include "physics.h"
-#include "graphics.h"
-#include "customtypes.h"
 
 #ifndef BALL_H
 #define BALL_H
+
+#include "customtypes.h"
 
 #define LAUNCH_FORCE_X TO_FIXED(2)
 #define LAUNCH_FORCE_Y TO_FIXED(2)
