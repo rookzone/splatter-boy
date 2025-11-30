@@ -41,7 +41,7 @@ for focus.
 
 - [ ] Create collision check function which returns the tile index(indices) (int) of tile ball is touching
 - [ ] 45 degree wall collision
-- [ ] Better game state structure and switching
+- [x] Better game state structure and switching
 
 
 ## Fun?
