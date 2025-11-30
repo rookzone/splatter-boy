@@ -23,12 +23,12 @@ Physics is working nicely. Well optimised. Goals now:
 - [x] Get a proper game screen with all the pins hooked up
 - [x] Load in background and store array of pin locations
 - [x] Use pin locations to spawn Pin structs in
-- [ ] Define zones on map, debug draw them
-- [ ] Hook up buttons to a ball firing system
+- [] Define zones on map, debug draw them
+- [x] Hook up buttons to a ball firing system
 - [ ] Create diagnal walls with bounce logic
-- [ ] Balls will need a seperate collision mode:
-- [ ] Collide with wall mode (after being fired out) 
-- [ ] Collision mode defined by zones on the map
+- [n/a] Balls will need a seperate collision mode:
+- [n/a] Collide with wall mode (after being fired out) 
+- [n/a] Collision mode defined by zones on the map
 
 To achieve a game where balls are fired out on button press, collide with exit walls,
 drop through the pins and to the bottom of the screen. Pin and wall positions are pulled
@@ -39,7 +39,12 @@ via the tile ID on the map data. Get some debug functions for drawing zones.
 The game is heading a few different directions from here. This is re-writing goals
 for focus.
 
-- [ ] Create collision check function which returns the tile index(indices) (int) of tile ball is touching
+- [ ] State and memory manager
+  - [ ] states.c - Change state functions, generic init_state functions
+  - [ ] state_game + state_title - specific state, contatins enums, init, input, update etc
+  - [ ] memory.c (holds data) - references to all arrays of gameobjects, graphics data (GameSprite) etc
+- [x] Create collision check function which returns the tile index(indices) (int) of tile ball is touching
+  - [ ] This requires extending to return all tiles being touched, and priority processing to take place...
 - [ ] 45 degree wall collision
 - [ ] Better game state structure and switching
 
