@@ -52,3 +52,40 @@ I need a place to store references to all the data object, their indices in memo
   Number of balls, ball speed, ball weight change? Things on map
   and things that can be controlled wiht buttons would be cool
   Even power ups wuould be so good, can be showing with a window bg
+
+  - [x] 06/11/25 - I am officially beginning this project. The first goal is to create a ball with gravity that can hit a wall and bounce until it's energy has depleted.
+
+- [x] Started on 18/11/25 - My goal now is to place 10 pins in the game and have a button spawn balls at the top. The balls should drop down through the pins with good physics. I am allowing some time to play around with a title screen to test graphics out.
+
+**update - 21/11/25**
+
+  - [x] I have got the balls and pins working, collision is janky and performance is somewhat of an issue. I'm going to revise the
+  collision method used, this bounding box thing is too heavy on the calcs. Also it's not reliable.
+
+**update - 23/11/25:**
+
+*See TODO.md list*
+
+Physics is working nicely. Well optimised. Goals now:
+- [x] Get a proper game screen with all the pins hooked up
+- [x] Load in background and store array of pin locations
+- [x] Use pin locations to spawn Pin structs in
+- [ ] Define zones on map, debug draw them
+- [ ] Hook up buttons to a ball firing system
+- [ ] Create diagnal walls with bounce logic
+- [ ] Balls will need a seperate collision mode:
+- [ ] Collide with wall mode (after being fired out) 
+- [ ] Collision mode defined by zones on the map
+
+To achieve a game where balls are fired out on button press, collide with exit walls,
+drop through the pins and to the bottom of the screen. Pin and wall positions are pulled
+via the tile ID on the map data. Get some debug functions for drawing zones. 
+
+**update - 29/11/25:**
+
+The game is heading a few different directions from here. This is re-writing goals
+for focus.
+
+- [ ] Create collision check function which returns the tile index(indices) (int) of tile ball is touching
+- [ ] 45 degree wall collision
+- [x] Better game state structure and switching

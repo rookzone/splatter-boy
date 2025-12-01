@@ -1,23 +1,21 @@
-# Build artifacts
+# Don't include gbdk binaries and emulator
 bin/
-build/
-
+dev-tools/
+emu/
 
 # Compiled files
 *.o
 *.exe
 *.gb
 *.elf
+*.map
+*.noi
 
 # Temporary or backup files
 *.log
 *.tmp
 *.bak
 *.swp
-
-# Emulator
-dev-tools/
-emu/
 
 # VSCode settings
 .vscode/
@@ -26,7 +24,5 @@ emu/
 .DS_Store
 Thumbs.db
 
-# Added via gh UI
-emu/BGB/bgb.ini
-emu/BGB/bgb.ini
+# Annoying ini
 emu/BGB/bgb.ini

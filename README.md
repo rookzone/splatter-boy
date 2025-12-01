@@ -4,62 +4,39 @@
 
 A fun little project where I mess around with C and GBDK. Attempt at a pachinko game with decent ball physics
 
-## Goals and progress
+## Current goals, progress, and todo
 
-- [x] 06/11/25 - I am officially beginning this project. The first goal is to create a ball with gravity that can hit a wall and bounce until it's energy has depleted.
+**01/12/25**
 
-- [x] Started on 18/11/25 - My goal now is to place 10 pins in the game and have a button spawn balls at the top. The balls should drop down through the pins with good physics. I am allowing some time to play around with a title screen to test graphics out.
+States need properly implementing.
+state_game (main in-game) and state_title (title screen) need doing, with easy switching.
 
-**update - 21/11/25**
+establish a decent input system that is scalable.
 
-  - [x] I have got the balls and pins working, collision is janky and performance is somewhat of an issue. I'm going to revise the
-  collision method used, this bounding box thing is too heavy on the calcs. Also it's not reliable.
+**Measure resource between any two points** in the code execution would be useful.
+Optimisation will need looking at again.
 
-**update - 23/11/25:**
+Sound stuff.
 
-*See TODO.md list*
+**Project stuff todo**
 
-Physics is working nicely. Well optimised. Goals now:
-- [x] Get a proper game screen with all the pins hooked up
-- [x] Load in background and store array of pin locations
-- [x] Use pin locations to spawn Pin structs in
-- [ ] Define zones on map, debug draw them
-- [ ] Hook up buttons to a ball firing system
-- [ ] Create diagnal walls with bounce logic
-- [ ] Balls will need a seperate collision mode:
-- [ ] Collide with wall mode (after being fired out) 
-- [ ] Collision mode defined by zones on the map
-
-To achieve a game where balls are fired out on button press, collide with exit walls,
-drop through the pins and to the bottom of the screen. Pin and wall positions are pulled
-via the tile ID on the map data. Get some debug functions for drawing zones. 
-
-**update - 29/11/25:**
-
-The game is heading a few different directions from here. This is re-writing goals
-for focus.
-
-- [ ] Create collision check function which returns the tile index(indices) (int) of tile ball is touching
-- [ ] 45 degree wall collision
-- [x] Better game state structure and switching
-
-
-## Fun?
-
-
-**Project stuff**
-
-- Check out licenses to use for distribution and tools used to make this.
 - Wiki / Docs
-- Physics engine for GB export?
-- Asm optimisation
-- Versioning!
+- Possible in-line asm optimisations
+- Versioning
 
 ## Links to dev tools
 
-https://gameboy.prodigle.dev
+Super useful for creating tilesets and background maps:
 
-https://github.com/systemoflevers/image_to_gb
+[Game Boy Tile Designer](http://www.devrs.com/gb/hmgd/gbtd.html)
+[Game Boy Map Builder](http://www.devrs.com/gb/hmgd/gbmb.html)
+
+This is super useful for turning images into PNGs compatible with Game Boy
+
+[Image to GB](https://github.com/systemoflevers/image_to_gb)
+
+Check out png2Asset in gbdk bin directory. Pass an image (Generated from above).
+Will output a tileset and background map that is ready to use.
 
 ## Programming styles
 
@@ -67,13 +44,24 @@ C styles:
 https://www.cs.umd.edu/~nelson/classes/resources/cstyleguide
 https://www.kernel.org/doc/html/v4.10/process/coding-style.html
 
+## AI usage
+
+Very little to no AI code. AI seems to suck at C, especially optimised C for GB dev.
+I have used it on occasion to recommend reading materials and discuss ideas.
+The idea was to not use it at all on this project. This is my personal choice, I'm not bothered what anyone else does.
+
 ## Setup and compile
 
-1. Download GBDK 2020 and copy the contents into the repo. This will ensure all the required gbdk files are in the directory as the binaries and documents are not included *Note: check out licenses*
+Dev environment is Win11 and VSCode. Will probably be fine on linux but may need some tweaks in Makefile.
+_note: at some point add in .env or equivalent to allow easy cross-platform dev_
 
-2. Use make
+1. Download [GBDK 2020](https://gbdk.org) and copy the contents into the repo. 
 
-Just type `make`
+2. Use [make for windows](https://gnuwin32.sourceforge.net/packages/make.htm)
+
+3. Download [BGB emulator](https://bgb.bircd.org) and place in `emu/BGB`
+
+4. In .vscode create tasks.json with content below. Then build and run is ctrl+shift+b.
 
 **.vscode tasks.json**
 

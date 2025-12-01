@@ -32,7 +32,7 @@ $(OUT): $(SRC) $(wildCARD include/*.h) # Added dependency check to be safer, tho
 
 # === Clean rule ===
 clean:
-	@echo "🧹 Cleaning build files..."
+	@echo "Cleaning build files..."
 	@rm -rf $(BUILD_DIR) $(BIN_DIR)
 	@echo "Done."
 
