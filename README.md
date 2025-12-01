@@ -2,7 +2,9 @@
 
 ## About
 
-A fun little project where I mess around with C and GBDK. Attempt at a pachinko game with decent ball physics
+A fun little project where I mess around with C and GBDK. Attempt at a pachinko game with decent ball physics.
+
+This is in __VERY EARLY__ stages.
 
 ## Current goals, progress, and todo
 
