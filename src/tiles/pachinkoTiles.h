@@ -26,6 +26,6 @@
 /* Bank of tiles. */
 #define PinballTilesBank 0
 /* Start of tile array. */
-extern unsigned char PinballTiles[];
+extern unsigned char PanchinkoTiles[];
 
 /* End of PINBALLTILES.H */

@@ -24,4 +24,4 @@
 
 extern unsigned char pachinko1[];
 
-/* End of PACHINKOONEBG.H */
+/* End of PACHINKOMAP.H */

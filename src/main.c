@@ -11,8 +11,8 @@
 #include "gamestate.h"
 
 // Tiles
-#include "tiles/pinballTiles.h"
-#include "tiles/pachinkoOneBG.h"
+#include "tiles/pachinkoTiles.h"
+#include "maps/pachinkoMap.c"
 
 // Forward declarations
 void init_game_state(void);
@@ -95,10 +95,10 @@ void init_game_state(void)
 
   game.graphics.next_sprite_id = 0; // reset sprites
 
-  set_sprite_sheet(PinballTiles);
+  set_sprite_sheet(PanchinkoTiles);
 
   // Load background
-  set_game_background(pachinko1, PinballTiles);
+  set_game_background(pachinko1, PanchinkoTiles);
 
   // Create two rows of balls
   for (uint8_t i = 0; i < NUM_BALLS/2; i++) {
