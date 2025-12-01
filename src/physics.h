@@ -1,9 +1,9 @@
 ﻿// physics.h
 
-#ifndef PHYSICS_H
-#define PHYSICS_H
+#ifndef PHYSICS_H_
+#define PHYSICS_H_
 
-#include "customtypes.h"
+#include "custom_types.h"
 
 // Physics constants (8.8 fixed-point)
 #define GRAVITY     FIXED_TEENTH  // 256/16
@@ -37,4 +37,4 @@ void handle_ball_45_degree_wall_collision(Ball *ball, Wall *w);
 // Random horizontal velocities for ball resets
 extern const fixed_n RANDOM_HORIZONTAL_VX[20];
 
-#endif // PHYSICS_H
+#endif // PHYSICS_H_

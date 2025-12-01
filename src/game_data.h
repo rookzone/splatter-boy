@@ -1,11 +1,10 @@
 // gamestate.h
 
-#ifndef GAMESTATE_H
-#define GAMESTATE_H
+#ifndef GAME_DATA_H_
+#define GAME_DATA_H_
 
 #include <gb/gb.h>
-#include "customTypes.h"
-
+#include "custom_types.h"
 
 // Ball values
 #define NUM_BALLS 16
@@ -18,7 +17,6 @@
 #define STATE_SCORE_SCREEN 3
 #define STATE_DEMO_SCREEN 4
 
-
 typedef struct {
 
     uint8_t current_state;
@@ -26,7 +24,6 @@ typedef struct {
     uint8_t previous_keys;
 
 } System;
-
 
 typedef struct {
     
@@ -36,7 +33,6 @@ typedef struct {
     uint16_t next_sprite_id;
 
 } Graphics;
-
 
 typedef struct {
     Ball list[NUM_BALLS];
@@ -67,4 +63,4 @@ typedef struct {
 extern GameState game;
 
 
-#endif //GAMESTATE_H
+#endif //GAME_DATA_H_

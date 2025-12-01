@@ -1,7 +1,7 @@
-// customTypes.h
+// custom_types.h
 
-#ifndef CUSTOMTYPES_H
-#define CUSTOMTYPES_H
+#ifndef CUSTOM_TYPES_H_
+#define CUSTOM_TYPES_H_
 
 #include <gb/gb.h>
 
@@ -16,11 +16,11 @@ typedef int16_t fixed_n;
 
 #define FIXED_SHIFT   8           // number of fractional bits
 #define FIXED_ONE     (1 << FIXED_SHIFT)   // 1.0 in fixed (256)
-#define FIXED_HALF    (1 << (FIXED_SHIFT - 1)) // 0.5 (128)
-#define FIXED_QUARTER (1 << (FIXED_SHIFT - 2)) // 0.25 (64)
-#define FIXED_EIGHTH  (1 << (FIXED_SHIFT - 3)) // 0.125 (32)
-#define FIXED_TEENTH  (1 << (FIXED_SHIFT - 4)) // (16)
-#define FIXED_TENBAG  (1 << (FIXED_SHIFT - 5)) // (8)
+#define FIXED_HALF    (1 << (FIXED_SHIFT - 1)) // 0.5 (128)     << 7
+#define FIXED_QUARTER (1 << (FIXED_SHIFT - 2)) // 0.25 (64)     << 6
+#define FIXED_EIGHTH  (1 << (FIXED_SHIFT - 3)) // 0.125 (32)    << 5
+#define FIXED_TEENTH  (1 << (FIXED_SHIFT - 4)) // (16)          << 4
+#define FIXED_TENBAG  (1 << (FIXED_SHIFT - 5)) // (8)           << 3
 
 
 // === CONVERSION HELPERS ===
@@ -32,7 +32,6 @@ typedef int16_t fixed_n;
 // === SLOW MATHS ===
 #define FIXED_MUL(a,b) (((a) * (b)) >> FIXED_SHIFT)
 #define FIXED_DIV(a,b) (((a) << FIXED_SHIFT) / (b))
-
 
 
 // ##### GAME OBJECTS #####
@@ -68,28 +67,5 @@ typedef struct GameSprite {
     uint8_t tile_index;
 };
 
-// Byte that represents the PIN. Used for collision checks 
-#define PIN_TILE_ID 0x02
-
-// Convert Pixel coordinate to Grid coordinate (Divide by 8)
-#define PIXEL_TO_GRID(x) ((x) >> 3)
-
-// Convert Grid coordinate to Pixel coordinate (Multiply by 8)
-#define GRID_TO_PIXEL(x) ((x) << 3)
-
-// Get tilemap Array Index from Col/Row (Row * Width + Col)
-#define GET_TILE_INDEX(col, row) (((uint16_t)(row) * BACKGROUND_WIDTH_TILES) + (col))
-
-// General gameboy graphics sizes
-#define TILE_WIDTH 8
-#define TILE_LENGTH 8
-#define TILE_HALF_WIDTH 4
-#define TILE_HALF_LENGTH 4
-#define SPRITE_SIZE 8
-#define BACKGROUND_WIDTH_TILES 20
-#define BACKGROUND_HEIGHT_TILES 18
-#define BACKGROUND_WIDTH_PIXELS 160
-#define BACKGROUND_HEIGHT_PIXELS 144
-
-#endif // CUSTOMTYPES_H
+#endif // CUSTOM_TYPES_H_
 

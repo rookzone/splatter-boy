@@ -9,7 +9,9 @@ CC = ./bin/lcc.exe
 
 # === Source Files ===
 SRC = $(wildcard $(SRC_DIR)/*.c) \
-	$(wildcard $(SRC_DIR)/tiles/*.c)
+	$(wildcard $(SRC_DIR)/tiles/*.c) \
+	$(wildcard $(SRC_DIR)/maps/*.c) \
+	$(wildcard $(SRC_DIR)/states/*.c)
 
 # === Output ===
 OBJ = $(patsubst $(SRC_DIR)/%.c,$(BUILD_DIR)/%.o,$(SRC))

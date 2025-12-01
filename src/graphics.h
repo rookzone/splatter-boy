@@ -1,13 +1,37 @@
 // graphics.h
 
-#ifndef GRAPHICS_H
-#define GRAPHICS_H
+#ifndef GRAPHICS_H_
+#define GRAPHICS_H_
 
 #include <gb/drawing.h>
-#include "customtypes.h"
+#include "custom_types.h"
+
+// Byte that represents the PIN. Used for collision checks 
+#define PIN_TILE_ID 0x02
+
+// Convert Pixel coordinate to Grid coordinate (Divide by 8)
+#define PIXEL_TO_GRID(x) ((x) >> 3)
+
+// Convert Grid coordinate to Pixel coordinate (Multiply by 8)
+#define GRID_TO_PIXEL(x) ((x) << 3)
+
+// Get tilemap Array Index from Col/Row (Row * Width + Col)
+#define GET_TILE_INDEX(col, row) (((uint16_t)(row) * BACKGROUND_WIDTH_TILES) + (col))
+
+// General gameboy graphics sizes
+#define TILE_WIDTH 8
+#define TILE_LENGTH 8
+#define TILE_HALF_WIDTH 4
+#define TILE_HALF_LENGTH 4
+#define SPRITE_SIZE 8
+#define BACKGROUND_WIDTH_TILES 20
+#define BACKGROUND_HEIGHT_TILES 18
+#define BACKGROUND_WIDTH_PIXELS 160
+#define BACKGROUND_HEIGHT_PIXELS 144
 
 // Friendly name that corresponds with tile position in sprite sheet(s). 
 enum { TILE_BALL = 0, TILE_WALL = 1, TILE_PIN = 2 };
+
 
 // === SPRITE HANDLING ===
 
@@ -36,4 +60,4 @@ void plot_point_fixed(fixed_n x, fixed_n y);
 // === ANIMATIONS ===
 // Future-proofing for animation functions
 
-#endif // GRAPHICS_H
+#endif // GRAPHICS_H_
