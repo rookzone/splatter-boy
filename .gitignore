@@ -2,6 +2,7 @@
 bin/
 dev-tools/
 emu/
+docs/
 
 # Compiled files
 *.o
