@@ -8,11 +8,6 @@ build/
 *.gb
 *.elf
 
-# Wiki branch
-docs/
-wiki/
-
-
 # Temporary or backup files
 *.log
 *.tmp
