@@ -23,8 +23,3 @@ emu/
 # OS-specific junk
 .DS_Store
 Thumbs.db
-
-# Annoying ini
-emu/BGB/bgb.ini
-emu/BGB/bgb.ini
-emu/BGB/bgb.ini
