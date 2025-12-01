@@ -10,12 +10,12 @@ This is in __VERY EARLY__ stages.
 
 **01/12/25**
 
-States need properly implementing.
-state_game (main in-game) and state_title (title screen) need doing, with easy switching.
+- States need properly implementing.
+  - state_game (main in-game) and state_title (title screen) need doing, with easy switching.
 
-establish a decent input system that is scalable.
+- establish a decent input system that is scalable.
 
-**Measure resource between any two points** in the code execution would be useful.
+- **Measure time between any two points** in the code execution would be useful.
 Optimisation will need looking at again.
 
 Sound stuff.
@@ -31,6 +31,7 @@ Sound stuff.
 Super useful for creating tilesets and background maps:
 
 [Game Boy Tile Designer](http://www.devrs.com/gb/hmgd/gbtd.html)
+
 [Game Boy Map Builder](http://www.devrs.com/gb/hmgd/gbmb.html)
 
 This is super useful for turning images into PNGs compatible with Game Boy
@@ -42,8 +43,10 @@ Will output a tileset and background map that is ready to use.
 
 ## Programming styles
 
-C styles:
+**C styles**:
+
 https://www.cs.umd.edu/~nelson/classes/resources/cstyleguide
+
 https://www.kernel.org/doc/html/v4.10/process/coding-style.html
 
 ## AI usage
