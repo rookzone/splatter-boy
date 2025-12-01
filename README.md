@@ -145,6 +145,6 @@ Follow these steps to get started:
 
 There is no copy/paste AI code in this project. AI has been used to suggest documentation, provide a basic review of the code, and assist with comments and commit messages. This is a concious choice by myself, AI code is ok so long as the contributer understands what the code does.
 
-## Licensing
+## License
 
 This project uses the MIT License. Any third-party tools including GBDK and png2asset have their respective licenses are provided in the /licenses directory.
