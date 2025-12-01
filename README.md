@@ -22,6 +22,7 @@ Sound stuff.
 
 **Project stuff todo**
 
+- Structure diagram (Show how GameState works, memory pointers and arrays for data, custom types, engine functionalities, and state specific code and the loop)
 - Wiki / Docs
 - Possible in-line asm optimisations
 - Versioning
@@ -49,24 +50,19 @@ https://www.cs.umd.edu/~nelson/classes/resources/cstyleguide
 
 https://www.kernel.org/doc/html/v4.10/process/coding-style.html
 
-## AI usage
-
-Very little to no AI code. AI seems to suck at C, especially optimised C for GB dev.
-I have used it on occasion to recommend reading materials and discuss ideas.
-The idea was to not use it at all on this project. This is my personal choice, I'm not bothered what anyone else does.
-
 ## Setup and compile
 
-Dev environment is Win11 and VSCode. Will probably be fine on linux but may need some tweaks in Makefile.
-_note: at some point add in .env or equivalent to allow easy cross-platform dev_
+Dev environment is Win11 with VSCode using Make. Compiler is LCC.exe included with GBDK2020.
 
-1. Download [GBDK 2020](https://gbdk.org) and copy the contents into the repo. 
+Follow these steps to get started:
 
-2. Use [make for windows](https://gnuwin32.sourceforge.net/packages/make.htm)
-
-3. Download [BGB emulator](https://bgb.bircd.org) and place in `emu/BGB`
-
-4. In .vscode create tasks.json with content below. Then build and run is ctrl+shift+b.
+1. `git clone https://github.com/rookzone/splatter-boy.git`
+2. `cd splatter-boy`
+4. Download [GBDK 2020](https://gbdk.org) and copy the contents into the repo. 
+5. Install [make for windows](https://gnuwin32.sourceforge.net/packages/make.htm)
+6. Download [BGB emulator](https://bgb.bircd.org) and place in `emu/BGB`
+7. `make` and it will create the .gb file in "emu/BGB"
+8. Use below in .vscode/tasks.json, this should build the project and open it with BGB emulator when pressing ctrl+shift+b
 
 **.vscode tasks.json**
 
@@ -109,3 +105,11 @@ _note: at some point add in .env or equivalent to allow easy cross-platform dev_
 }
 
 ```
+
+## AI usage
+
+Very little to no AI code. AI seems to suck at C, especially optimised C for GB dev.
+
+
+I have used it on occasion to recommend reading materials and discuss ideas.
+The idea was to not use it at all on this project. This is my personal choice, I'm not bothered what anyone else does.
