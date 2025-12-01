@@ -93,6 +93,7 @@ Follow these steps to get started:
 
 1. `git clone https://github.com/rookzone/splatter-boy.git`
 2. `cd splatter-boy`
+3. Make sure you are in the splatter-boy workspace. Open VSCode at that folder.
 4. Download [GBDK 2020](https://gbdk.org) and copy the contents into the repo. 
 5. Install [make for windows](https://gnuwin32.sourceforge.net/packages/make.htm)
 6. Download [BGB emulator](https://bgb.bircd.org) and place in `emu/BGB`
