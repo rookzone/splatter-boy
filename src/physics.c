@@ -82,13 +82,14 @@ void handle_ball_pin_collision(Ball* ball, Pin* pin)
     ball->y = pin->y - TILE_HALF_WIDTH;
     ball->sub_y = 0; 
 
-    if (ball->vy > FIXED_EIGHTH) { // BOUNCE if vy is significant (fixed_eighth = 0.125)
+    if (ball->vy > FIXED_EIGHTH) { // BOUNCE if vy is significant (fixed_eighth = 0.125px)
 
+        // Bounce UP
         ball->vy = -(ball->vy >> 1); // 50% energy retention
         
         // apply horizontal impulse based on distance from center
         fixed_n impulse_x = FIXED_MUL(distance_x, HORIZONTAL_PIN_FORCE);
-        ball->vx += impulse_x;
+        ball->vx += impulse_x; // Bounce off side
 
         
     } else { // ROLL if vy is small
