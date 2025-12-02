@@ -1,4 +1,4 @@
-// gamestate.h
+// game_data.h
 
 #ifndef GAME_DATA_H_
 #define GAME_DATA_H_
@@ -6,16 +6,10 @@
 #include <gb/gb.h>
 #include "custom_types.h"
 
-// Ball values
-#define NUM_BALLS 16
+// Game Object list sizes
+#define NUM_BALLS 18 // HIGHER THAN 18 LAGS - DO NOT SET TO ODD NUMBER
 #define NUM_PINS 36
 
-// === STATES ===
-
-#define STATE_GAME_SCREEN 1
-#define STATE_TITLE_SCREEN 2
-#define STATE_SCORE_SCREEN 3
-#define STATE_DEMO_SCREEN 4
 
 typedef struct {
 

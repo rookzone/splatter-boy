@@ -15,7 +15,6 @@
 #include "../tiles/pachinkoTiles.h"
 #include "../maps/pachinkoMap.h"
 
-
 void init_game_screen(void)
 {
     // The previous init_game_state() content goes here
@@ -49,6 +48,10 @@ void init_game_screen(void)
     SHOW_SPRITES;
 }
 
+/** @todo
+ * DO NOT CHECK COLLISIONS OR DRAW BALLS OFF-SCREEN
+ * SWITCH CASE TILE COLLISION CHECK AND CHOOSE INTERACTION
+ */
 void update_game_screen(void)
 {
     // === INPUT ===

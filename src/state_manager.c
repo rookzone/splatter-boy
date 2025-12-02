@@ -20,6 +20,12 @@ void set_state(uint8_t new_state)
     }
 }
 
+void buffer_state(uint8_t state)
+{
+    // Load state data into a copy of init and game_data
+}
+
+
 void init_state(void)
 {
     switch (game.system.current_state) 
