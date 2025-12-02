@@ -26,7 +26,7 @@ void init_game_screen(void)
     game.graphics.next_sprite_id = 0;
 
     set_sprite_sheet(PanchinkoTiles);
-    set_game_background(pachinko1, PanchinkoTiles);
+    set_game_background(PachinkoMap, PanchinkoTiles);
 
     // Create two rows of balls
     for (uint8_t i = 0; i < NUM_BALLS/2; i++) {
