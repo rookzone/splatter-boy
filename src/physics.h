@@ -1,5 +1,9 @@
-﻿// physics.h
-
+﻿/**
+ * @file physics.h
+ * @brief Contains physics functionality to the Game Objects.
+ * * @details 
+ * * @defgroup Physics
+ */
 #ifndef PHYSICS_H_
 #define PHYSICS_H_
 
