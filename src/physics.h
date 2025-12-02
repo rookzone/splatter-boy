@@ -1,7 +1,13 @@
 ﻿/**
  * @file physics.h
  * @brief Contains physics functionality to the Game Objects.
- * * @details 
+ * * @details This contains functions for object movement and interactions.
+ * The physics is not true to life but is instead optimised for speed.
+ * As long as it looks good and it's cheap then that's fine.
+ * We have constants that define certain forces like gravity and roll speed.
+ * All physics interactions take place in "fixed-number space".
+ * This means that the fixed number decimals are used for higher precision.
+ * The update_position functions will convert the numbers back to integer and set x,y.
  * * @defgroup Physics
  */
 #ifndef PHYSICS_H_

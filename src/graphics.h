@@ -1,4 +1,14 @@
-// graphics.h
+/**
+ * @file graphics.h
+ * @brief Handles drawing of background, window or sprite tiles on screen.
+ * * @details Contains useful macros for handling tile grids and pixels.
+ * Functions to load tiles, backgrounds, and sprites. The GameSprite struct is used.
+ * This contains the tile_index and sprite_index, these are indices that reference the ID in memory.
+ * Memory is managed in here, so the logic can just ask for something to be drawn without worrying about IDs and memory.
+ * The GameSprite object reference that is returned can be used to call graphics functions.
+ * Passing around structs is slow, so try and keep that stuff out of any update loops.
+ * * @defgroup Graphics
+ */
 
 #ifndef GRAPHICS_H_
 #define GRAPHICS_H_
