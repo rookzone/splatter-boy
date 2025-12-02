@@ -73,6 +73,10 @@ Follow these steps to get started:
 
 ```
 
+## Structure
+
+![Basic structure flow](simple-overview-flow.png)
+
 ## Programming styles
 
 **C styles**:
