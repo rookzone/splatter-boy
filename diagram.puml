@@ -1,0 +1,132 @@
+@startuml
+title Pachinko Game Execution Flow (Modular View)
+skinparam conditionStyle insideDiamond
+skinparam activity {
+  BackgroundColor #FEFECE
+  BorderColor #A80036
+}
+skinparam partition {
+  BackgroundColor #E0E0E0
+  BorderColor Black
+}
+
+start
+
+partition "main.c" {
+    :main();
+    :set_state(STATE_GAME_SCREEN);
+}
+
+partition "state_manager.c" {
+    if (Current State != New State?) then (yes)
+        :Update current_state;
+        :init_state();
+        
+        switch (current_state)
+        case (STATE_GAME_SCREEN)
+            partition "state_game_screen.c" {
+                :init_game_screen();
+                partition "graphics.c" {
+                    :set_sprite_sheet();
+                    :set_game_background();
+                }
+                partition "ball.c" {
+                    while (i < NUM_BALLS)
+                        :init_ball();
+                    endwhile
+                }
+            }
+        case (STATE_TITLE_SCREEN)
+            partition "state_title_screen.c" {
+                :init_title_screen();
+            }
+        case (STATE_SCORE_SCREEN)
+            partition "state_score_screen.c" {
+                :init_score_screen() (Future);
+            }
+        case (STATE_DEMO_SCREEN)
+             partition "state_demo_screen.c" {
+                :init_demo_screen() (Future);
+            }
+        endswitch
+    else (no)
+    endif
+}
+
+partition "main.c (Infinite Loop)" {
+    while (true)
+        :update_state();
+        
+        partition "state_manager.c" {
+            switch (current_state)
+            
+            case (STATE_GAME_SCREEN)
+                partition "state_game_screen.c" {
+                    
+                    group Input Handling
+                        :Read Joypad;
+                        
+                        if (LEFT pressed?) then (yes)
+                            partition "ball.c" {
+                                :find_lowest_ball();
+                                if (Ball found?) then (yes)
+                                    :launch_ball();
+                                    partition "physics.c" {
+                                        :apply_impulse();
+                                    }
+                                endif
+                            }
+                        endif
+                        
+                        if (UP pressed?) then (yes)
+                            partition "ball.c" {
+                                :reset_balls();
+                            }
+                        endif
+                    end group
+                    
+                    group Physics & Rendering Loop
+                        while (For i = 0 to NUM_BALLS)
+                            partition "physics.c" {
+                                :Check Grid/Tile Collision;
+                                if (Tile == PIN?) then (yes)
+                                    :handle_ball_pin_collision();
+                                endif
+                                :update_ball_position();
+                            }
+                            
+                            partition "graphics.h" {
+                                :DRAW_SPRITE();
+                            }
+                        endwhile
+                    end group
+                    
+                    :vsync();
+                }
+                
+            case (STATE_TITLE_SCREEN)
+                partition "state_title_screen.c" {
+                    :update_title_screen();
+                    note right: Handle Start Button\nTransition state
+                }
+
+            case (STATE_SCORE_SCREEN)
+                partition "state_score_screen.c" {
+                    :update_score_screen() (Future);
+                    note right: Display Hi-Scores\nWait for input
+                }
+
+            case (STATE_DEMO_SCREEN)
+                 partition "state_demo_screen.c" {
+                    :update_demo_screen() (Future);
+                    note right: Auto-play logic
+                }
+            
+            endswitch
+        }
+        
+    endwhile
+}
+
+stop
+@enduml
