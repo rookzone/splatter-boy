@@ -24,7 +24,7 @@
 
 I need a place to store references to all the data object, their indices in memory, and aliases
 
-- [ ] Ball array and pin array should have a count of 20.
+- [x] Ball array and pin array should have a count of 20.
   -[ ] Ball and pin arrays need handling functions to ensure no overflow or overwrites take place
     - [ ] Re-use slot ball despawn order, prioritise which can be despawned if too many
 - [ ] Handling for sprite_index, no more than 39. Will need to reassign indices to corresponding object (or inverse)

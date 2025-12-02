@@ -106,7 +106,7 @@ Play some sound effects. Sound system.
 
 ### Project
 
-- Structure diagram (Show how GameState works, memory pointers and arrays for data, custom types, engine functionalities, and state specific code and the loop)
+- Structure diagram (Show how GameState works, memory pointers and arrays for data, custom types, engine functionalities, and state specific code and the loop) - **done** https://plantuml.com diagrams added.
 - Wiki / Docs
 - Possible in-line asm optimisations
 - Versioning
