@@ -18,7 +18,8 @@ This is in __VERY EARLY__ stages.
 
 Dev environment is Win11 with VSCode using Make. Compiler is LCC.exe included with GBDK2020.
 
-These are steps for Windows. For linux GBDK will need installing and a Makefile creating to compile. There is a `Makefile_linux` provided, but this might not be correct.
+_ **note**: These are steps for Windows. For linux GBDK will need installing and a Makefile creating to compile. There is a `Makefile_linux` provided, but this might not be correct._
+
 Follow these steps to get started:
 
 1. `git clone https://github.com/rookzone/splatter-boy.git`
