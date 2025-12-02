@@ -24,3 +24,6 @@ docs/
 # OS-specific junk
 .DS_Store
 Thumbs.db
+
+## OS-specific makefile - copy Makefile_windows or Makefile_linux into your own makefile
+Makefile
