@@ -135,7 +135,7 @@ Will output a tileset and background map that is ready to use.
 
 ## AI usage
 
-There is no copy/paste AI code in this project. AI has been used to suggest documentation, provide a basic review of the code, and assist with comments and commit messages. This is a concious choice by myself, AI code is ok so long as the contributer understands what the code does.
+There is no copy/paste AI code in this project (except the Makefiles... for now...). AI has been used to suggest documentation, provide a basic review of the code, and assist with comments and commit messages. This is a concious choice by myself, AI code is ok so long as the contributer understands what the code does.
 
 ## License
 
