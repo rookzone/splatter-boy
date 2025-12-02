@@ -5,6 +5,7 @@ emu/
 docs/
 lib/
 libexec/
+include/
 
 # Compiled files
 *.o
