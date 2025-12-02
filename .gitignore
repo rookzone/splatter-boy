@@ -1,8 +1,10 @@
-# Don't include gbdk binaries and emulator
+# No GBDK and tools
 bin/
 dev-tools/
 emu/
 docs/
+lib/
+libexec/
 
 # Compiled files
 *.o
