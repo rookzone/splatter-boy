@@ -91,7 +91,7 @@ https://www.kernel.org/doc/html/v4.10/process/coding-style.html
 
 **01/12/25**
 
-- Game states need properly implementing.
+- ~Game states need properly implementing.~
   - **gamestate .c/.h** create functions that handle state changes, memory init and cleanup
   - **`state_game` & `state_title` .c/.h** main in-game and title screen functions
 
@@ -106,7 +106,7 @@ Play some sound effects. Sound system.
 
 ### Project
 
-- Structure diagram (Show how GameState works, memory pointers and arrays for data, custom types, engine functionalities, and state specific code and the loop) - **done** https://plantuml.com diagrams added.
+- ~Structure diagram (Show how GameState works, memory pointers and arrays for data, custom types, engine functionalities, and state specific code and the loop)~ - **done** https://plantuml.com diagrams added.
 - Wiki / Docs
 - Possible in-line asm optimisations
 - Versioning
