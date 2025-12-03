@@ -51,6 +51,8 @@ void init_game_screen(void)
 /** @todo
  * DO NOT CHECK COLLISIONS OR DRAW BALLS OFF-SCREEN
  * SWITCH CASE TILE COLLISION CHECK AND CHOOSE INTERACTION
+ * Gameboy backgrounds are 360 x 8x8 tiles, a total of 360 tiles.
+ * Only 256 unique tiles can be loaded into memory at once.
  */
 void update_game_screen(void)
 {
