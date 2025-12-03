@@ -131,7 +131,6 @@ Will output a tileset and background map that is ready to use.
 
 ### Sounds
 
-[example dev sofware](example.com)
 
 ## AI usage
 
