@@ -10,6 +10,8 @@
 #define NUM_BALLS 18 // HIGHER THAN 18 LAGS - DO NOT SET TO ODD NUMBER
 #define NUM_PINS 36
 
+#define MAX_OBJECTS 64 // Max number of GameObject
+
 
 typedef struct {
 

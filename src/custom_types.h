@@ -46,6 +46,12 @@ typedef struct {
     GameSprite *game_sprite;
 } Ball;
 
+// Ball object
+typedef struct {
+    fixed_n sub_x, sub_y;
+    fixed_n  vx, vy;
+} Ball_new;
+
 // Wall object
 typedef struct {
     uint8_t x, y;
