@@ -15,9 +15,6 @@
 #include "../tiles/pachinkoTiles.h"
 #include "../maps/pachinkoMap.h"
 
-// Lookup table is in physics.c
-extern const fixed_n RANDOM_HORIZONTAL_VX[];
-
 void init_game_screen(void)
 {
     // The previous init_game_state() content goes here
@@ -27,10 +24,6 @@ void init_game_screen(void)
     HIDE_SPRITES;
 
     game.graphics.next_sprite_id = 0;
-    
-    // Reset object memory logic
-    game.object_count = 0;
-    ball_list.count = 0;
 
     set_sprite_sheet(PanchinkoTiles);
     set_game_background(PachinkoMap, PanchinkoTiles);
@@ -58,6 +51,8 @@ void init_game_screen(void)
 /** @todo
  * DO NOT CHECK COLLISIONS OR DRAW BALLS OFF-SCREEN
  * SWITCH CASE TILE COLLISION CHECK AND CHOOSE INTERACTION
+ * Gameboy backgrounds are 360 x 8x8 tiles, a total of 360 tiles.
+ * Only 256 unique tiles can be loaded into memory at once.
  */
 void update_game_screen(void)
 {
