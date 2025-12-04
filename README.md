@@ -75,7 +75,13 @@ Follow these steps to get started:
 
 ## Structure
 
+### Execution Flow
+
 ![Basic structure flow](simple-overview-flow.png)
+
+### Data Layout
+
+![data diagram](data-storage.png)
 
 ## Programming Styles
 
