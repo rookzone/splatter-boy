@@ -5,7 +5,10 @@
 
 #include <gb/gb.h>
 #include "custom_types.h"
-#include "game_object.h"
+
+// Game Object list sizes
+#define NUM_BALLS 18 // HIGHER THAN 18 LAGS - DO NOT SET TO ODD NUMBER
+#define NUM_PINS 36
 
 typedef struct {
 
