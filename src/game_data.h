@@ -10,7 +10,6 @@
 #define NUM_BALLS 18 // HIGHER THAN 18 LAGS - DO NOT SET TO ODD NUMBER
 #define NUM_PINS 36
 
-
 typedef struct {
 
     uint8_t current_state;
