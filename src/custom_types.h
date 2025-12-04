@@ -36,7 +36,9 @@ typedef int16_t fixed_n;
 
 // ##### GAME OBJECTS #####
 
-// === Interactable objects ===
+/** === Interactable objects ===
+* These are specific game object types for specific attributes
+*/
 
 // Ball object
 typedef struct {
@@ -67,11 +69,45 @@ typedef struct {
 
 // === Graphics ===
 
-// This stores the tile the sprite uses and crucially holds the sprite index for where it is loaded into VRAM
-typedef struct GameSprite {
+struct GameSprite {
     uint8_t sprite_index;
     uint8_t tile_index;
 };
+
+/** === Game Object definitons ===
+ *  Generic GameObject.
+ */
+
+typedef struct GameObject GameObject;
+
+typedef void (*UpdateFunc)(GameObject *obj);
+
+typedef enum {
+    OBJ_BALL,
+    OBJ_ENEMY,
+    OBJ_COIN
+} ObjectType;
+
+struct GameObject{ 
+    
+    // Position
+    uint8_t x, y;
+
+    // For reference
+    ObjectType object_type;
+
+    // Points to a function defined in the object types specific code.
+    UpdateFunc update;
+
+    GameSprite* sprite;
+
+    // A list of more specific object structures.
+    union{
+        Ball_new ball;
+    } data;
+};
+
+
 
 #endif // CUSTOM_TYPES_H_
 

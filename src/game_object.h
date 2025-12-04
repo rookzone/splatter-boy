@@ -15,54 +15,18 @@
 #include <gb/gb.h>
 #include "custom_types.h"
 
-// Max number of objects supported (adjust based on game/memory)
-#define MAX_GAME_OBJECTS 32 
+// Max number of objects
+#define MAX_GAME_OBJECTS 64
+#define MAX_BALLS 32
 
 // The main pool where all object data lives
 GameObject game_object_pool[MAX_GAME_OBJECTS];
 
 // Separate arrays to store the indices (in the pool) of specific object types
-uint8_t ball_indices[MAX_GAME_OBJECTS];
+uint8_t ball_indices[MAX_BALLS];
 uint8_t num_balls = 0; // Tracks the current count
 
-
-typedef void (*UpdateFunc)(GameObject *obj);
-
-typedef enum {
-    OBJ_BALL,
-    OBJ_ENEMY,
-    OBJ_COIN
-} ObjectType;
-
-typedef struct{
-
-    // Position
-    uint8_t x, y;
-
-    // For reference
-    ObjectType object_type;
-
-    // Points to a function defined in the object types specific code.
-    UpdateFunc update;
-
-    GameSprite* sprite;
-
-    // A list of more specific object structures.
-    // Can be accessed like this `GameObject.data.specific_object.specific_value`
-    union{
-        Ball_new ball;
-    } data;
-
-
-} GameObject;
-
-
-// Object registers
-// These are used to track indices for the objects that are created.
-
-struct ball_list {
-
-};
+uint8_t find_free_slot(void);
 
 // This function will check the game_object array and update the list registries with the correct indexing data.
 void update_object_list_registry(void);
