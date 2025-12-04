@@ -20,8 +20,8 @@ GameObject* spawn_ball(uint8_t x, uint8_t y)
     init_ball(&new_object->data.ball, &new_object->sprite, x, y);
 
     // Pass x,y back into generic obj
-    new_object->x = new_object->data.ball.x;
-    new_object->y = new_object->data.ball.y;
+    new_object->x = x;
+    new_object->y = y;
 
     return new_object;
 }
