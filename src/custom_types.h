@@ -36,36 +36,36 @@ typedef int16_t fixed_n;
 
 // ##### GAME OBJECTS #####
 
-// === Interactable objects ===
+// === Graphics ===
+
+struct GameSprite {
+    uint8_t sprite_index;
+    uint8_t tile_index;
+};
 
 // Ball object
 typedef struct {
     uint8_t x, y;
     fixed_n sub_x, sub_y;
     fixed_n  vx, vy;
-    GameSprite *game_sprite;
 } Ball;
 
 // Wall object
 typedef struct {
     uint8_t x, y;
-    GameSprite *game_sprite;
 } Wall;
 
 // Pin object
 typedef struct {
     uint8_t x, y;
-    GameSprite* game_sprite;
 } Pin;
 
+// Create definitions for the different object types
+typedef enum {
+    OBJ_BALL,
+    OBJ_PIN
+} ObjectType;
 
-// === Graphics ===
-
-// This stores the tile the sprite uses and crucially holds the sprite index for where it is loaded into VRAM
-typedef struct GameSprite {
-    uint8_t sprite_index;
-    uint8_t tile_index;
-};
 
 #endif // CUSTOM_TYPES_H_
 

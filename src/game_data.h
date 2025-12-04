@@ -28,27 +28,9 @@ typedef struct {
 } Graphics;
 
 typedef struct {
-    Ball list[NUM_BALLS];
-    GameSprite graphics[NUM_BALLS];
-} BallObjects;
-
-typedef struct {
-    Pin list[NUM_PINS];
-    GameSprite graphics[NUM_PINS];
-} PinObjects;
-
-typedef struct {
-
-    BallObjects balls;
-    PinObjects pins;
-
-} GameObjects;
-
-typedef struct {
 
     System system;
     Graphics graphics;
-    GameObjects objects;
 
 } GameState;
 
@@ -56,5 +38,4 @@ typedef struct {
 extern GameState game;
 
 
-#endif //GAME_DATA_H_
-
+#endif // GAME_DATA_H_
