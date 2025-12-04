@@ -36,37 +36,6 @@ typedef int16_t fixed_n;
 
 // ##### GAME OBJECTS #####
 
-/** === Interactable objects ===
-* These are specific game object types for specific attributes
-*/
-
-// Ball object
-typedef struct {
-    uint8_t x, y;
-    fixed_n sub_x, sub_y;
-    fixed_n  vx, vy;
-    GameSprite *game_sprite;
-} Ball;
-
-// Ball object
-typedef struct {
-    fixed_n sub_x, sub_y;
-    fixed_n  vx, vy;
-} Ball_new;
-
-// Wall object
-typedef struct {
-    uint8_t x, y;
-    GameSprite *game_sprite;
-} Wall;
-
-// Pin object
-typedef struct {
-    uint8_t x, y;
-    GameSprite* game_sprite;
-} Pin;
-
-
 // === Graphics ===
 
 struct GameSprite {
@@ -74,39 +43,22 @@ struct GameSprite {
     uint8_t tile_index;
 };
 
-/** === Game Object definitons ===
- *  Generic GameObject.
- */
-
-typedef struct GameObject GameObject;
-
-typedef void (*UpdateFunc)(GameObject *obj);
-
-typedef enum {
-    OBJ_BALL,
-    OBJ_ENEMY,
-    OBJ_COIN
-} ObjectType;
-
-struct GameObject{ 
-    
-    // Position
+// Ball object
+typedef struct {
     uint8_t x, y;
+    fixed_n sub_x, sub_y;
+    fixed_n  vx, vy;
+} Ball;
 
-    // For reference
-    ObjectType object_type;
+// Wall object
+typedef struct {
+    uint8_t x, y;
+} Wall;
 
-    // Points to a function defined in the object types specific code.
-    UpdateFunc update;
-
-    GameSprite* sprite;
-
-    // A list of more specific object structures.
-    union{
-        Ball_new ball;
-    } data;
-};
-
+// Pin object
+typedef struct {
+    uint8_t x, y;
+} Pin;
 
 
 #endif // CUSTOM_TYPES_H_

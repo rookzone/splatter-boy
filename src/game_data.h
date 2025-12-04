@@ -25,25 +25,9 @@ typedef struct {
 } Graphics;
 
 typedef struct {
-    uint8_t active_balls_indices[MAX_BALLS];
-    uint8_t ball_count; // Current next available index
-
-
-} ObjectIndices;
-
-typedef struct {
-
-    ObjectIndices indices; // WHAT NAME???
-    GameObject game_object_pool[MAX_GAME_OBJECTS];
-    uint8_t total_object_count;
-
-} ObjectManager;
-
-typedef struct {
 
     System system;
     Graphics graphics;
-    ObjectManager objects;
 
 } GameState;
 

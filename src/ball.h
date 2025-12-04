@@ -6,15 +6,13 @@
 
 #include "custom_types.h"
 #include "game_object.h"
+#include "game_data.h"
 
 #define LAUNCH_FORCE_X TO_FIXED(2)
 #define LAUNCH_FORCE_Y TO_FIXED(2)
 
-// Spawning
-GameObject* spawn_ball(void);
-
-// Pass in ball object alongside graphics data and screen position and it will be set up for handling
-void init_ball(Ball* ball, GameSprite* gfx_data, uint8_t ball_x, uint8_t ball_y);
+// Update
+void update_ball(GameObject* obj);
 
 // Reset an array of balls to starting positions.
 void reset_all_balls(Ball* b, uint8_t count);

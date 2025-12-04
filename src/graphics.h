@@ -42,7 +42,6 @@
 // Friendly name that corresponds with tile position in sprite sheet(s). 
 enum { TILE_BALL = 0, TILE_WALL = 1, TILE_PIN = 2 };
 
-
 // === SPRITE HANDLING ===
 
 // Allocates a sprite at sprite_index with a tile at tile_index
