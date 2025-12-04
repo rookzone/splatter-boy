@@ -17,16 +17,11 @@
 
 // Max number of objects supported (adjust based on game/memory)
 #define MAX_GAME_OBJECTS 32 
+#define MAX_BALLS 16
+#define MAX_PINS 16
 
-// The main pool where all object data lives
-GameObject game_object_pool[MAX_GAME_OBJECTS];
-
-// Separate arrays to store the indices (in the pool) of specific object types
-uint8_t ball_indices[MAX_GAME_OBJECTS];
-uint8_t num_balls = 0; // Tracks the current count
-
-
-typedef void (*UpdateFunc)(GameObject *obj);
+// Define function pointer type so object can point to it's specific update function
+typedef void (*UpdateFunc)(GameObject *obj); 
 
 typedef enum {
     OBJ_BALL,
@@ -45,30 +40,17 @@ typedef struct{
     // Points to a function defined in the object types specific code.
     UpdateFunc update;
 
+    // gfx data
     GameSprite* sprite;
 
     // A list of more specific object structures.
     // Can be accessed like this `GameObject.data.specific_object.specific_value`
     union{
-        Ball_new ball;
+        Ball ball;
     } data;
 
 
 } GameObject;
-
-
-// Object registers
-// These are used to track indices for the objects that are created.
-
-struct ball_list {
-
-};
-
-// This function will check the game_object array and update the list registries with the correct indexing data.
-void update_object_list_registry(void);
-
-// Spawning
-GameObject* spawn_ball(void);
 
 
 #endif

@@ -5,13 +5,7 @@
 
 #include <gb/gb.h>
 #include "custom_types.h"
-
-// Game Object list sizes
-#define NUM_BALLS 18 // HIGHER THAN 18 LAGS - DO NOT SET TO ODD NUMBER
-#define NUM_PINS 36
-
-#define MAX_OBJECTS 64 // Max number of GameObject
-
+#include "game_object.h"
 
 typedef struct {
 
@@ -31,27 +25,25 @@ typedef struct {
 } Graphics;
 
 typedef struct {
-    Ball list[NUM_BALLS];
-    GameSprite graphics[NUM_BALLS];
-} BallObjects;
+    uint8_t active_balls_indices[MAX_BALLS];
+    uint8_t ball_count; // Current next available index
 
-typedef struct {
-    Pin list[NUM_PINS];
-    GameSprite graphics[NUM_PINS];
-} PinObjects;
+
+} ObjectIndices;
 
 typedef struct {
 
-    BallObjects balls;
-    PinObjects pins;
+    ObjectIndices indices; // WHAT NAME???
+    GameObject game_object_pool[MAX_GAME_OBJECTS];
+    uint8_t total_object_count;
 
-} GameObjects;
+} ObjectManager;
 
 typedef struct {
 
     System system;
     Graphics graphics;
-    GameObjects objects;
+    ObjectManager objects;
 
 } GameState;
 
@@ -59,5 +51,4 @@ typedef struct {
 extern GameState game;
 
 
-#endif //GAME_DATA_H_
-
+#endif // GAME_DATA_H_
