@@ -6,7 +6,6 @@
 // Create sprite with a tracked VRAM number, assign tile, create and return GameSprite object
 GameSprite create_sprite(uint8_t tile_index)
 {
-
     GameSprite new_sprite;
     new_sprite.sprite_index = game.graphics.next_sprite_id;
     new_sprite.tile_index = tile_index;

@@ -33,30 +33,22 @@ void init_game_screen(void)
 
     // Spawn some balls in
     for (uint8_t i = 0; i < MAX_BALLS; i++) {
-        
-        // Create new ball object
-        GameObject* object = go_spawn_object(OBJ_BALL);
-        
-        if (object) {
-            // Grab reference to ball type
-            Ball* ball = &object->data.ball;
 
-            // Set initial position based on index logic
-            if (i < 8) {
-                ball->x = 10 + i*8;
-                ball->y = 20;
-            } else {
-                ball->x = 10 + (i-8)*8;
-                ball->y = 30;
-            }
+        GameObject* ball;
 
-            // Give random horizontal speed
-            ball->vx = RANDOM_HORIZONTAL_VX[i];
-            
-            // Sync ball position to generic
-            object->x = ball->x;
-            object->y = ball->y;
+        // Set initial position based on index
+        if (i < 8) {
+            uint8_t ball_x = 10 + i*8;
+            uint8_t ball_y = 20;
+            ball = spawn_ball(ball_x, ball_y);
+        } else {
+            uint8_t ball_x  = 10 + (i-8)*8;
+            uint8_t ball_y = 30;
+            ball = spawn_ball(ball_x, ball_y);
         }
+
+        // Give random horizontal speed
+        ball->data.ball.vx = RANDOM_HORIZONTAL_VX[i];
     }
 
     SHOW_BKG;

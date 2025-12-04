@@ -10,12 +10,6 @@
 #define MAX_BALLS 16
 #define MAX_PINS 16
 
-// Create definitions for the different object types
-typedef enum {
-    OBJ_BALL,
-    OBJ_PIN
-} ObjectType;
-
 // Forward declaration for the function pointer
 typedef struct GameObject GameObject; 
 

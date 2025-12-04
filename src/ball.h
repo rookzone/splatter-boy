@@ -11,6 +11,10 @@
 #define LAUNCH_FORCE_X TO_FIXED(2)
 #define LAUNCH_FORCE_Y TO_FIXED(2)
 
+GameObject* spawn_ball(uint8_t x, uint8_t y);
+
+void init_ball(Ball* ball, GameSprite* gfx_data, uint8_t ball_x, uint8_t ball_y);
+
 // Update
 void update_ball(GameObject* obj);
 

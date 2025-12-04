@@ -60,6 +60,12 @@ typedef struct {
     uint8_t x, y;
 } Pin;
 
+// Create definitions for the different object types
+typedef enum {
+    OBJ_BALL,
+    OBJ_PIN
+} ObjectType;
+
 
 #endif // CUSTOM_TYPES_H_
 

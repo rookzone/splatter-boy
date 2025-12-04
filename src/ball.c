@@ -3,6 +3,39 @@
 #include "ball.h"
 #include "graphics.h"
 #include "physics.h"
+#include "game_object.h"
+
+
+GameObject* spawn_ball(uint8_t x, uint8_t y)
+{
+    // Create generic GameObject
+    GameObject* new_object = go_spawn_object(OBJ_BALL);
+
+    // Assign update function to go
+    new_object->update = update_ball;
+    // New sprite
+    new_object->sprite = create_sprite(TILE_BALL);
+
+    // Initialise the ball specific data struct
+    init_ball(&new_object->data.ball, &new_object->sprite, x, y);
+
+    // Pass x,y back into generic obj
+    new_object->x = new_object->data.ball.x;
+    new_object->y = new_object->data.ball.y;
+
+    return new_object;
+}
+
+
+void init_ball(Ball* ball, GameSprite* gfx_data, uint8_t ball_x, uint8_t ball_y)
+{
+    ball->x = ball_x;
+    ball->y = ball_y;
+    ball->vx = 0;
+    ball->vy = 0;
+    ball->sub_x = 0;
+    ball->sub_y = 0;
+}
 
 
 /** @todo
@@ -39,6 +72,8 @@ void update_ball(GameObject* obj) {
         // Perform collision with physics
         handle_ball_pin_collision(ball, &virtual_pin);
     }
+
+    update_ball_position(ball);
 
     // After updating, generic object needs updating to match any changes in the ball
     obj->x = ball->x;

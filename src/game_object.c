@@ -33,9 +33,7 @@ GameObject* go_spawn_object(ObjectType type) {
     
     new_object->object_type = type;
     new_object->active = 1;
-    new_object->update = update_ball;
-    new_object->sprite = create_sprite(TILE_BALL);
-    
+
     if (type == OBJ_BALL && indices.ball_count < MAX_BALLS) {
         indices.ball_indices[indices.ball_count] = pool_index; 
         indices.ball_count++;
