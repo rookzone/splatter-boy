@@ -71,7 +71,7 @@ void update_game_screen(void)
     }
 
     if ((game.system.keys & J_UP) && !(game.system.previous_keys & J_UP)) {
-        reset_balls(game.objects.balls.list, NUM_BALLS);
+        reset_all_balls(game.objects.balls.list, NUM_BALLS);
     }
     
     // === PHYSICS ===

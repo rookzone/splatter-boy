@@ -4,7 +4,25 @@
 #include "graphics.h"
 #include "physics.h"
 
-void reset_balls(Ball* b, uint8_t count)
+
+// Spawning
+GameObject* spawn_ball(void){
+    
+    // Create a new GameObject and list it in the object pool at next available index
+    GameObject* new_ball = &game_object_pool[game_object_count];
+    new_ball->object_type = OBJ_BALL;
+    // ... initialize other generic and ball-specific data
+
+    // 3. Register the index in the ball-type array.
+    ball_indices[ball_object_count] = game_object_count;
+    ball_object_count++; // Increment the count of active balls
+    game_object_count++; // 
+    
+    return new_ball;
+
+}
+
+void reset_all_balls(Ball* b, uint8_t count)
 {
     for (uint8_t i = 0; i < count/2; i++) {
         b[i].x = 10 + i*8;
