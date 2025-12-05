@@ -19,7 +19,7 @@
 #define GRAVITY     FIXED_TEENTH  // 256/16
 #define MAX_SPEED   TO_FIXED(2) // Max speed of balls in fixed-point number space
 #define PIN_HALF_WIDTH 2 // half of pin pixel width (used for collisions)
-#define ROLL_FORCE FIXED_EIGHTH // Amount of force applied to ball to continue roll
+#define ROLL_FORCE FIXED_QUARTER // Amount of force applied to ball to continue roll
 #define MAX_ROLL_SPEED FIXED_HALF+FIXED_QUARTER // Max speed ball can go while rolling
 #define HORIZONTAL_PIN_FORCE FIXED_QUARTER // For bounce force on x-axis
 
