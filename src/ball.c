@@ -106,6 +106,7 @@ void reset_all_balls(void)
 
 
 /* NOT YET REFACTORED TO USE GENERIC GAME OBJECT SYSTEM
+
 void launch_ball(Ball* ball, uint8_t from_x, uint8_t from_y, fixed_n launch_power_x, fixed_n launch_power_y)
 {
     ball->vx = 0;
