@@ -55,4 +55,7 @@ void go_update_all(void);
 
 void go_draw_all(void);
 
+// Return ball GameObject defined at position index using ball registry
+GameObject* go_return_ball(uint8_t index);
+
 #endif // GAME_OBJECT_H_

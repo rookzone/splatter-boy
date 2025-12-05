@@ -63,6 +63,10 @@ void update_game_screen(void)
 
     // INPUT MISSING
 
+    if ((game.system.keys & J_UP) && !(game.system.previous_keys & J_UP)) {
+        reset_all_balls();
+    }
+    
     // Update all game objects
     // All ball update logic in associated source files. Check ball.c for ball update
     go_update_all();

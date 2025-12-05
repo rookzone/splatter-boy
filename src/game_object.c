@@ -70,3 +70,12 @@ void go_draw_all(void) {
         }
     }
 }
+
+GameObject* go_return_ball(uint8_t index)
+{
+    if (index < MAX_BALLS)
+        return &game_object_pool[indices.ball_indices[index]];
+    
+    return NULL;
+    
+}

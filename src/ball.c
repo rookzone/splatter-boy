@@ -80,6 +80,31 @@ void update_ball(GameObject* obj) {
     obj->y = ball->y;
 }
 
+void reset_all_balls(void)
+{
+    for (uint8_t i = 0; i < MAX_BALLS; i++) {
+
+    Ball* ball = &go_return_ball(i)->data.ball;
+
+    if (ball!=NULL){
+
+        // Set initial position based on index
+        if (i < 8) {
+            ball->x = 10 + i*8;
+            ball->y = 20;
+        } else {
+            ball->x  = 10 + (i-8)*8;
+            ball->y = 30;
+        }
+
+        // Give random horizontal speed
+        ball->vx = RANDOM_HORIZONTAL_VX[i];
+        }
+
+    }
+}
+
+
 /* NOT YET REFACTORED TO USE GENERIC GAME OBJECT SYSTEM
 void launch_ball(Ball* ball, uint8_t from_x, uint8_t from_y, fixed_n launch_power_x, fixed_n launch_power_y)
 {
@@ -93,31 +118,7 @@ void launch_ball(Ball* ball, uint8_t from_x, uint8_t from_y, fixed_n launch_powe
 }
 */
 /*
-void reset_all_balls(Ball* b, uint8_t count)
-{
-    for (uint8_t i = 0; i < count/2; i++) {
-        b[i].x = 10 + i*8;
-        b[i].y = 20;
-        b[i].vx = 0;
-        b[i].vy = 0;
 
-        DRAW_SPRITE(b[i].game_sprite,b[i].x,b[i].y);
-
-        b[i].vx = RANDOM_HORIZONTAL_VX[i];
-    }
-    
-    for (uint8_t i = 8; i < count; i++) {
-        b[i].x = 20 + i*8;
-        b[i].y = 30;
-        b[i].vx = 0;
-        b[i].vy = 0;
-
-        DRAW_SPRITE(b[i].game_sprite,b[i].x,b[i].y);
-
-        b[i].vx = RANDOM_HORIZONTAL_VX[i];
-    }
-    
-}
 
 
 void reset_ball(Ball* ball)
