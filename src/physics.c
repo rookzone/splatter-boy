@@ -59,51 +59,32 @@ void handle_ball_pin_collision(Ball* ball, Pin* pin)
     // Calculate centers
     uint8_t ball_center_x = ball->x + TILE_HALF_WIDTH;
     uint8_t pin_center_x = pin->x + TILE_HALF_WIDTH;
-
-    // Check horizontal distance
     int8_t distance_x = ball_center_x - pin_center_x;
 
-    // If we are outide pin horizontal bounds
-    // But still within collision tile (handle_ball_pin_collision is only called if ball is on pin tile)
-    // then nudge ball and exit
+    // Outside pin bounds
     if (distance_x > PIN_HALF_WIDTH || distance_x < -PIN_HALF_WIDTH) {
-    
-        ball->vy = 0; 
-        
-        if (distance_x > 0) ball->vx = FIXED_QUARTER; 
-        else ball->vx = -FIXED_QUARTER;
-        
         return; 
     }
 
-    // === collision ===
-
-    // settle position on top of pin
+    // === settle position on top ===
     ball->y = pin->y - TILE_HALF_WIDTH;
     ball->sub_y = 0; 
 
-    if (ball->vy > FIXED_EIGHTH) { // BOUNCE if vy is significant (fixed_eighth = 0.125px)
+    
+    if (ball->vy > FIXED_EIGHTH) { // Bounce
 
-        // Bounce UP
         ball->vy = -(ball->vy >> 1); // 50% energy retention
-        
-        // apply horizontal impulse based on distance from center
-        fixed_n impulse_x = FIXED_MUL(distance_x, HORIZONTAL_PIN_FORCE);
-        ball->vx += impulse_x; // Bounce off side
+        ball->vx += distance_x;
+    } 
+    else { // Roll
 
-        
-    } else { // ROLL if vy is small
-
-        // stop vertical movement
         ball->vy = 0;
+        ball->vx += FIXED_MUL(distance_x, ROLL_FORCE
+        );
         
-        // apply rolling force based on distance from center
-        ball->vx += FIXED_MUL(distance_x, ROLL_FORCE); 
-
-        // Clamp horizontal speed to prevent excessive rolling
+        // Clamp horizontal speed
         if (ball->vx > MAX_ROLL_SPEED) ball->vx = MAX_ROLL_SPEED;
         else if (ball->vx < -MAX_ROLL_SPEED) ball->vx = -MAX_ROLL_SPEED;
-        
     }
 }
 

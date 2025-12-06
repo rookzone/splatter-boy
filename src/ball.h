@@ -21,6 +21,8 @@ void update_ball(GameObject* obj);
 // Reset an array of balls to starting positions.
 void reset_all_balls(void);
 
+/* NOT YET REFACTORED TO USE GENERIC GAME OBJECT SYSTEM
+
 // Reset balls to a position (for testing)
 void reset_ball(Ball* ball);
 
@@ -29,7 +31,9 @@ Ball *find_lowest_ball(Ball* balls, uint8_t count);
 
 // Launch the ball from screen position from_x,y
 // Default is 45 degrees
+
 void launch_ball(Ball* ball, uint8_t from_x, uint8_t from_y, fixed_n launch_power_x, fixed_n launch_power_y);
 
+*/
 
 #endif // BALL_H_
