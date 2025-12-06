@@ -150,7 +150,7 @@ Game Loop Flow (PlantUML Diagram):
 
 **01/12/25**
 
-- ~Game states need properly implementing.~
+- ~~Game states need properly implementing.~~
   - **gamestate .c/.h** create functions that handle state changes, memory init and cleanup
   - **`state_game` & `state_title` .c/.h** main in-game and title screen functions
 

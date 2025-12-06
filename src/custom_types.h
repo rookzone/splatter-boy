@@ -68,4 +68,3 @@ typedef enum {
 
 
 #endif // CUSTOM_TYPES_H_
-
