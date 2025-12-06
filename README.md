@@ -91,7 +91,7 @@ https://www.cs.umd.edu/~nelson/classes/resources/cstyleguide
 
 https://www.kernel.org/doc/html/v4.10/process/coding-style.html
 
-## Generic Game Objects ECS
+## LATEST BIG UPDATE: **Generic Game Objects ECS**
 
 **04/12/2025**
 
@@ -146,32 +146,53 @@ Game Loop Flow (PlantUML Diagram):
 
 ## Current Focus
 
-### Code
+### Current TODO
 
-**01/12/25**
+Check TODO.md for change history
 
-- ~~Game states need properly implementing.~~
-  - **gamestate .c/.h** create functions that handle state changes, memory init and cleanup
-  - **`state_game` & `state_title` .c/.h** main in-game and title screen functions
+**06/12/2025**
 
-- Expand on collisions and interactions by returning the tile IDs on the background and applying behaviour appropriate for those tiles.
+Reset focus after Game Object and Game State architecture.
 
-- build input system that is scalable.
+### **Title screen with text and state transition**
 
-- **Measure time between any two points** in the code execution would be useful.
-Optimisation will need looking at again.
+- [ ] Create title screen BG graphics
+- [ ] Build font tile-set
+- [ ] Function to convert string into text @ tile_index on screen. Can parse newline and other chars in string
+- [ ] On press start transition into Game State, check VRAM and data structures for cleanliness
 
-Play some sound effects. Sound system.
+### **Game Object Saftey**
+
+- [ ] On create of Game Object, each type needs safety handling to prevent too many being created.
+- [ ] Function to clean out game data on state transition
+
+### **Graphics Safety**
+
+- [ ] Read VRAM for usage. Use this to build safety and cleaning for state transitions.
+
+### **New "physics"**
+
+- [ ] Migrate collision tile checker to physics.c/.h
+- [ ] Improve collision tile checker function to pick up contact within multiple tiles
+- [ ] 45 degree walls vs ball collision implementation
+
+**Tweaks**
+
+- [ ] Add a bit of randomness to balls on bounce (very small amount)
+
+---
 
 ### Project
 
-- ~Structure diagram (Show how GameState works, memory pointers and arrays for data, custom types, engine functionalities, and state specific code and the loop)~ - **done** https://plantuml.com diagrams added.
+- ~~Structure diagram Show how GameState works, memory pointers and arrays for data, custom types, engine functionalities, and state specific code and the loop https://plantuml.com diagrams added.~~
+
 - Wiki / Docs
 - Possible in-line asm optimisations
 - Versioning
-
+- GDD (Game Design Document) with full feature requirments
 
 ## Dev Tools
+
 
 ### Graphics Tools
 
