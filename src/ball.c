@@ -53,6 +53,19 @@ void update_ball(GameObject* obj) {
     // Grab reference to ball type struct
     Ball* ball = &obj->data.ball;
 
+    handle_ball_collision(ball);
+
+    update_ball_position(ball);
+
+    // After updating, generic object needs updating to match any changes in the ball
+    obj->x = ball->x;
+    obj->y = ball->y;
+}
+
+
+void handle_ball_collision(Ball* ball)
+{
+    
     // COLLISION
     // Get ball centers
     uint8_t ball_center_x = ball->x + TILE_HALF_WIDTH;
@@ -61,6 +74,9 @@ void update_ball(GameObject* obj) {
     // Find which 8x8 tile the ball is in
     uint8_t col = PIXEL_TO_GRID(ball_center_x);
     uint8_t row = PIXEL_TO_GRID(ball_center_y);
+
+    if (col >= BACKGROUND_WIDTH_TILES || row >= BACKGROUND_HEIGHT_TILES)
+    return; // Do no continue with check if off screen.
 
     // Grab the tiles index value
     uint16_t tilemap_index = GET_TILE_INDEX(col, row);
@@ -76,21 +92,18 @@ void update_ball(GameObject* obj) {
         // Perform collision with physics
         handle_ball_pin_collision(ball, &virtual_pin);
     }
-
-    update_ball_position(ball);
-
-    // After updating, generic object needs updating to match any changes in the ball
-    obj->x = ball->x;
-    obj->y = ball->y;
 }
 
 void reset_all_balls(void)
 {
+    // Iterate for each ball
     for (uint8_t i = 0; i < MAX_BALLS; i++) {
 
-    Ball* ball = &go_return_ball(i)->data.ball;
+    GameObject* obj = go_return_ball(i);
 
-    if (ball!=NULL){
+    if (obj != NULL){
+
+        Ball* ball = &obj->data.ball;
 
         // Set initial position based on index
         if (i < 8) {
@@ -157,4 +170,4 @@ Ball* find_lowest_ball(Ball* balls, uint8_t count)
 }
     */
 
-// end ball.c
+/* End of ball.c */

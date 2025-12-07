@@ -1,4 +1,4 @@
-﻿// Physics.c
+﻿// physics.c
 
 #include <gb/gb.h>
 #include "physics.h"
@@ -128,4 +128,4 @@ const fixed_n RANDOM_HORIZONTAL_VX[20] = {
     -50    // -0.5
 };
 
-// end physics.c
+/* End of physics.c */

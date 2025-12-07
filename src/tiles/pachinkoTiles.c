@@ -59,4 +59,4 @@ unsigned char PanchinkoTiles[] =
   0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00
 };
 
-/* End of PINBALLTILES.C */
+/* End of /tiles/pachinkoTiles.C */

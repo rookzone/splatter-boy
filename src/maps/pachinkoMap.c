@@ -1,6 +1,6 @@
 /*
 
- PACHINKOONEBG.C
+/maps/pachinkoMap.c
 
  Map Source File.
 
@@ -62,4 +62,4 @@ unsigned char PachinkoMap[] =
   0x0F,0x0F,0x03,0x05,0x04,0x04,0x04,0x04,0x04,0x04
 };
 
-/* End of PACHINKOONEBG.C */
+/* End of /maps/pachinkoMap.c */
