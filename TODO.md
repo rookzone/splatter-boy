@@ -4,46 +4,30 @@
 
 Reset focus after Game Object and Game State architecture.
 
-### **Title screen with text and state transition**
+**Title screen with text and state transition**
 
-- [ ] Create title screen BG graphics
-- [ ] Build font tile-set
-- [ ] Function to convert string into text @ tile_index on screen. Can parse newline and other chars in string
-- [ ] On press start transition into Game State, check VRAM and data structures for cleanliness
+- [ ] Ball and pin arrays need handling functions to ensure no overflow or overwrites take place
+    - [ ] Re-use slot ball despawn order, prioritise which can be despawned if too many
+- [ ] Handling for sprite_index, no more than 39. Will need to reassign indices to corresponding object (or inverse)
+- [ ] Wall collision can be checked with masks, as nothing is behind the wall
 
-### **Game Object Saftey**
+**Score and "window" sprites**
 
-- [ ] On create of Game Object, each type needs safety handling to prevent too many being created.
-- [ ] Function to clean out game data on state transition
+- [ ] Add a way of scoring... move the game beyond a tech demo...
+Number of balls, ball speed, ball weight change? Things on map
+and things that can be controlled wiht buttons would be cool
+Even power ups wuould be so good, can be showing with a window bg
 
-### **Graphics Safety**
+- [ ] Create collision check function which returns the tile index(indices) (int) of tile ball is touching
+- [ ] 45 degree wall collision
 
-- [ ] Read VRAM for usage. Use this to build safety and cleaning for state transitions.
-
-### **New "physics"**
-
-- [ ] Migrate collision tile checker to physics.c/.h
-- [ ] Improve collision tile checker function to pick up contact within multiple tiles
-- [ ] 45 degree walls vs ball collision implementation
-
-**Tweaks**
+**bounce**
 
 - [ ] Add a bit of randomness to balls on bounce (very small amount)
 
 ---
 
 ## DONE:
-
-
-**01/12/25**
-
-- ~~Game states need properly implementing.~~
-  - **gamestate .c/.h** create functions that handle state changes, memory init and cleanup
-  - **`state_game` & `state_title` .c/.h** main in-game and title screen functions
-- Expand on collisions and interactions by returning the tile IDs on the background and applying behaviour appropriate for those tiles.
-- build input system that is scalable.
-- **Measure time between any two points** in the code execution would be useful.
-Optimisation will need looking at again.
 
 - [x] Draw a plot point at the x, values of balls and pins to determine if x,y is on the top left.
     - [x] I'm thinking some decent debug functions. Maybe I can pass a gameobject
