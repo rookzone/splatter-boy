@@ -128,4 +128,4 @@ const fixed_n RANDOM_HORIZONTAL_VX[20] = {
     -50    // -0.5
 };
 
-/* End of physics.c */
+// end physics.c

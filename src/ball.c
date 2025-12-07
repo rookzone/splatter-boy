@@ -53,15 +53,11 @@ void update_ball(GameObject* obj) {
 
     update_ball_position(ball);
 
-    // After updating, generic object needs updating to match any changes in the ball
-    obj->x = ball->x;
-    obj->y = ball->y;
 }
-
 
 void handle_ball_collision(Ball* ball){
 
-            // COLLISION
+    // COLLISION
     // Get ball centers
     uint8_t ball_center_x = ball->x + TILE_HALF_WIDTH;
     uint8_t ball_center_y = ball->y + TILE_HALF_WIDTH;
@@ -165,4 +161,4 @@ Ball* find_lowest_ball(Ball* balls, uint8_t count)
 }
     */
 
-/* End of ball.c */
+// end ball.c

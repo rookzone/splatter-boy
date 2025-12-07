@@ -19,4 +19,4 @@ void init_background_pin(Pin* pin, uint8_t pin_x, uint8_t pin_y)
    // pin->game_sprite = NULL; // empty gamesprite
 }
 
-/* End of pins.c */
+// end pins.c

@@ -14,5 +14,3 @@ void main(void)
 
     }
 }
-
-/* End of main.c */

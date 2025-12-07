@@ -85,6 +85,36 @@ Follow these steps to get started:
 
 ## Programming Styles
 
+**Functions and Variables**
+
+*snake_case, lower-case*
+
+e.g 
+
+`update_ball_physics`
+`uint_8 ball_center_position`
+
+**Macros and Defines**
+
+*SNAKE_CASE, CAPITAL*
+
+e.g.
+
+`DRAW_SPRITE`
+`MAX_GAME_OBJECTS`
+
+**Structs, Typedefs, Enum, Union - "Custom Types"**
+
+PascalCase
+
+e.g.
+
+`GameObject`
+`GameSprite`
+`GameState`
+`Game`
+`Ball`
+
 **C styles**:
 
 https://www.cs.umd.edu/~nelson/classes/resources/cstyleguide
@@ -208,15 +238,6 @@ This is super useful for turning images into PNGs compatible with Game Boy
 
 Check out png2Asset in gbdk bin directory. Pass an image (Generated from above).
 Will output a tileset and background map that is ready to use.
-
-### Misc
-
-This PS command will take all the source files and put in one document.
-
-```powershell
-Get-ChildItem -Recurse -File | Where-Object { $_.FullName -notlike "*combined.c" } | ForEach-Object { Get-Content $_.FullName -Raw }
- | Out-File combined.txt -Encoding utf8
-```
 
 ### Sound Tools
 

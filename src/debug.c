@@ -10,4 +10,4 @@ void debug_print_data(void)
     
 }
 
-/* End of debug.c */
+// end debug.c
