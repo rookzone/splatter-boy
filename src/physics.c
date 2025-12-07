@@ -15,8 +15,8 @@ void update_ball_position(Ball *ball)
     ball->sub_y += ball->vy;
 
     // ** Optimization: Use direct calculation and assignment **
-    ball->x += (uint8_t)(ball->sub_x >> FIXED_SHIFT);
-    ball->y += (uint8_t)(ball->sub_y >> FIXED_SHIFT);
+    ball->x += (int8_t)(ball->sub_x >> FIXED_SHIFT);
+    ball->y += (int8_t)(ball->sub_y >> FIXED_SHIFT);
     
     ball->sub_x &= 0xFF; // Keep only the fractional part (8 bits)
     ball->sub_y &= 0xFF; // Keep only the fractional part (8 bits)
