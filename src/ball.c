@@ -37,8 +37,8 @@ void init_ball(Ball* ball, GameSprite* gfx_data, uint8_t ball_x, uint8_t ball_y)
     ball->y = ball_y;
     ball->vx = 0;
     ball->vy = 0;
-    ball->sub_x = 0;
-    ball->sub_y = 0;
+    ball->fractional_x = 0;
+    ball->fractional_y = 0;
 }
 
 

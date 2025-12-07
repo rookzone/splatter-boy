@@ -46,7 +46,7 @@ struct GameSprite {
 // Ball object
 typedef struct {
     uint8_t x, y;
-    fixed_n sub_x, sub_y;
+    fixed_n fractional_x, fractional_y;
     fixed_n  vx, vy;
 } Ball;
 

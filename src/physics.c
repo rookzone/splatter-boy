@@ -11,15 +11,17 @@ void update_ball_position(Ball *ball)
     if (ball->vy > MAX_SPEED)
         ball->vy = MAX_SPEED;
     
-    ball->sub_x += ball->vx;
-    ball->sub_y += ball->vy;
+    // Add our velocity to the fixed number fraction left over from last frame
+    ball->fractional_x += ball->vx;
+    ball->fractional_y += ball->vy;
 
-    // ** Optimization: Use direct calculation and assignment **
-    ball->x += (int8_t)(ball->sub_x >> FIXED_SHIFT);
-    ball->y += (int8_t)(ball->sub_y >> FIXED_SHIFT);
+    // Convert fixed value back to signed integer and apply to screen position
+    ball->x += (int8_t)(ball->fractional_x >> FIXED_SHIFT);
+    ball->y += (int8_t)(ball->fractional_y >> FIXED_SHIFT);
     
-    ball->sub_x &= 0xFF; // Keep only the fractional part (8 bits)
-    ball->sub_y &= 0xFF; // Keep only the fractional part (8 bits)
+    // Zero off the left-hand byte to leave us with the decimal
+    ball->fractional_x &= 0xFF;
+    ball->fractional_y &= 0xFF;
 
 }
 
@@ -38,7 +40,7 @@ void check_ball_wall(Ball *ball, Wall *w)
 
             // Correct position
             ball->y = w->y - SPRITE_SIZE;
-            ball->sub_y = 0;
+            ball->fractional_y = 0;
             
             // Bounce (50% energy retention)
             ball->vy = -(ball->vy >> 1);
@@ -48,7 +50,7 @@ void check_ball_wall(Ball *ball, Wall *w)
             if (ball->vy > -FIXED_QUARTER) {
                 ball->vy = 0;
                 ball->vx = 0;
-                ball->sub_x = 0;
+                ball->fractional_x = 0;
             }
         }
     }
@@ -68,7 +70,7 @@ void handle_ball_pin_collision(Ball* ball, Pin* pin)
 
     // === settle position on top ===
     ball->y = pin->y - TILE_HALF_WIDTH;
-    ball->sub_y = 0; 
+    ball->fractional_y = 0; 
 
     
     if (ball->vy > FIXED_EIGHTH) { // Bounce

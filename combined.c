@@ -37,8 +37,8 @@ void init_ball(Ball* ball, GameSprite* gfx_data, uint8_t ball_x, uint8_t ball_y)
     ball->y = ball_y;
     ball->vx = 0;
     ball->vy = 0;
-    ball->sub_x = 0;
-    ball->sub_y = 0;
+    ball->fractional_x = 0;
+    ball->fractional_y = 0;
 }
 
 
@@ -645,15 +645,15 @@ void update_ball_position(Ball *ball)
     if (ball->vy > MAX_SPEED)
         ball->vy = MAX_SPEED;
     
-    ball->sub_x += ball->vx;
-    ball->sub_y += ball->vy;
+    ball->fractional_x += ball->vx;
+    ball->fractional_y += ball->vy;
 
     // ** Optimization: Use direct calculation and assignment **
-    ball->x += (int8_t)(ball->sub_x >> FIXED_SHIFT);
-    ball->y += (int8_t)(ball->sub_y >> FIXED_SHIFT);
+    ball->x += (int8_t)(ball->fractional_x >> FIXED_SHIFT);
+    ball->y += (int8_t)(ball->fractional_y >> FIXED_SHIFT);
     
-    ball->sub_x &= 0xFF; // Keep only the fractional part (8 bits)
-    ball->sub_y &= 0xFF; // Keep only the fractional part (8 bits)
+    ball->fractional_x &= 0xFF; // Keep only the fractional part (8 bits)
+    ball->fractional_y &= 0xFF; // Keep only the fractional part (8 bits)
 
 }
 
@@ -672,7 +672,7 @@ void check_ball_wall(Ball *ball, Wall *w)
 
             // Correct position
             ball->y = w->y - SPRITE_SIZE;
-            ball->sub_y = 0;
+            ball->fractional_y = 0;
             
             // Bounce (50% energy retention)
             ball->vy = -(ball->vy >> 1);
@@ -682,7 +682,7 @@ void check_ball_wall(Ball *ball, Wall *w)
             if (ball->vy > -FIXED_QUARTER) {
                 ball->vy = 0;
                 ball->vx = 0;
-                ball->sub_x = 0;
+                ball->fractional_x = 0;
             }
         }
     }
@@ -702,7 +702,7 @@ void handle_ball_pin_collision(Ball* ball, Pin* pin)
 
     // === settle position on top ===
     ball->y = pin->y - TILE_HALF_WIDTH;
-    ball->sub_y = 0; 
+    ball->fractional_y = 0; 
 
     
     if (ball->vy > FIXED_EIGHTH) { // Bounce
