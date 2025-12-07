@@ -19,6 +19,10 @@ GameObject* spawn_ball(uint8_t x, uint8_t y)
     // Initialise the ball specific data struct
     init_ball(&new_object->data.ball, x, y);
 
+    // Pass x,y back into generic obj
+    new_object->x = x;
+    new_object->y = y;
+
     return new_object;
 }
 

@@ -64,10 +64,10 @@ void go_draw_all(void) {
         uint8_t pool_index = indices.ball_indices[i];
         GameObject* obj = &game_object_pool[pool_index];
         
-        // FIX
+        
         if (obj->active) {
             // Access the generic sprite struct
-           // DRAW_SPRITE(&obj->sprite, obj->x, obj->y);
+           DRAW_SPRITE(&obj->sprite, obj->x, obj->y);
         }
     }
 }
