@@ -85,6 +85,36 @@ Follow these steps to get started:
 
 ## Programming Styles
 
+**Functions and Variables**
+
+*snake_case, lower-case*
+
+e.g 
+
+`update_ball_physics`
+`uint_8 ball_center_position`
+
+**Macros and Defines**
+
+*SNAKE_CASE, CAPITAL*
+
+e.g.
+
+`DRAW_SPRITE`
+`MAX_GAME_OBJECTS`
+
+**Structs, Typedefs, Enum, Union - "Custom Types"**
+
+PascalCase
+
+e.g.
+
+`GameObject`
+`GameSprite`
+`GameState`
+`Game`
+`Ball`
+
 **C styles**:
 
 https://www.cs.umd.edu/~nelson/classes/resources/cstyleguide
