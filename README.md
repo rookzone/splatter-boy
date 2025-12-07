@@ -239,15 +239,6 @@ This is super useful for turning images into PNGs compatible with Game Boy
 Check out png2Asset in gbdk bin directory. Pass an image (Generated from above).
 Will output a tileset and background map that is ready to use.
 
-### Misc
-
-This PS command will take all the source files and put in one document.
-
-```powershell
-Get-ChildItem -Recurse -File | Where-Object { $_.FullName -notlike "*combined.c" } | ForEach-Object { Get-Content $_.FullName -Raw }
- | Out-File combined.txt -Encoding utf8
-```
-
 ### Sound Tools
 
  ...
