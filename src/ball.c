@@ -17,17 +17,13 @@ GameObject* spawn_ball(uint8_t x, uint8_t y)
     new_object->sprite = create_sprite(TILE_BALL);
 
     // Initialise the ball specific data struct
-    init_ball(&new_object->data.ball, &new_object->sprite, x, y);
-
-    // Pass x,y back into generic obj
-    new_object->x = x;
-    new_object->y = y;
+    init_ball(&new_object->data.ball, x, y);
 
     return new_object;
 }
 
 
-void init_ball(Ball* ball, GameSprite* gfx_data, uint8_t ball_x, uint8_t ball_y)
+void init_ball(Ball* ball, uint8_t ball_x, uint8_t ball_y)
 {
     ball->x = ball_x;
     ball->y = ball_y;
@@ -49,7 +45,19 @@ void update_ball(GameObject* obj) {
     // Grab reference to ball type struct
     Ball* ball = &obj->data.ball;
 
-    // COLLISION
+    handle_ball_collision(ball);
+
+    update_ball_position(ball);
+
+    // After updating, generic object needs updating to match any changes in the ball
+    obj->x = ball->x;
+    obj->y = ball->y;
+}
+
+
+void handle_ball_collision(Ball* ball){
+
+            // COLLISION
     // Get ball centers
     uint8_t ball_center_x = ball->x + TILE_HALF_WIDTH;
     uint8_t ball_center_y = ball->y + TILE_HALF_WIDTH;
@@ -57,6 +65,10 @@ void update_ball(GameObject* obj) {
     // Find which 8x8 tile the ball is in
     uint8_t col = PIXEL_TO_GRID(ball_center_x);
     uint8_t row = PIXEL_TO_GRID(ball_center_y);
+
+    // Do not check collision if off screen
+    if (col >= BACKGROUND_WIDTH_TILES || row >= BACKGROUND_HEIGHT_TILES)
+    return; // skip collisions
 
     // Grab the tiles index value
     uint16_t tilemap_index = GET_TILE_INDEX(col, row);
@@ -73,20 +85,16 @@ void update_ball(GameObject* obj) {
         handle_ball_pin_collision(ball, &virtual_pin);
     }
 
-    update_ball_position(ball);
-
-    // After updating, generic object needs updating to match any changes in the ball
-    obj->x = ball->x;
-    obj->y = ball->y;
 }
 
 void reset_all_balls(void)
 {
     for (uint8_t i = 0; i < MAX_BALLS; i++) {
 
-    Ball* ball = &go_return_ball(i)->data.ball;
+    GameObject* obj = go_return_ball(i);
 
-    if (ball!=NULL){
+    if (obj != NULL) {
+        Ball* ball = &obj->data.ball;
 
         // Set initial position based on index
         if (i < 8) {

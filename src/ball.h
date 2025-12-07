@@ -13,10 +13,14 @@
 
 GameObject* spawn_ball(uint8_t x, uint8_t y);
 
-void init_ball(Ball* ball, GameSprite* gfx_data, uint8_t ball_x, uint8_t ball_y);
+// Initialise 
+void init_ball(Ball* ball, uint8_t ball_x, uint8_t ball_y);
 
-// Update
+// Main loop update call
 void update_ball(GameObject* obj);
+
+// Check ball position for collision with pin, pass to physics collision action
+void handle_ball_collision(Ball* ball);
 
 // Reset an array of balls to starting positions.
 void reset_all_balls(void);

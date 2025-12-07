@@ -23,8 +23,6 @@ typedef struct {
 } ObjectIndices;
 
 struct GameObject {
-    // Position (Generic)
-    uint8_t x, y;
 
     // Type
     ObjectType object_type;
