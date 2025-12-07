@@ -203,6 +203,12 @@ Play some sound effects. Sound system.
 
 ## Dev Tools
 
+Useful command to combine source code into a single document.
+
+```powershell
+Get-ChildItem -Recurse -File | Where-Object { $_.Name -ne "combined.txt" } | ForEach-Object { Get-Content $_.FullName -Raw } | Out-File combined.txt -Encoding utf8
+```
+
 ### Graphics Tools
 
 Community tools for creating tilesets and background maps:
