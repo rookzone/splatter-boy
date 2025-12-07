@@ -80,5 +80,3 @@ GameObject* go_return_ball(uint8_t index)
     return NULL;
     
 }
-
-/* End of game_object.c */

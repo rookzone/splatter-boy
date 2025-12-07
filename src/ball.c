@@ -157,4 +157,4 @@ Ball* find_lowest_ball(Ball* balls, uint8_t count)
 }
     */
 
-/* End of ball.c */
+// end ball.c

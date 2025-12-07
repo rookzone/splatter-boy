@@ -1,5 +1,6 @@
 /*
-pachinkoTiles.c
+
+ PINBALLTILES.C
 
  Tile Source File.
 
@@ -58,4 +59,4 @@ unsigned char PanchinkoTiles[] =
   0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00
 };
 
-/* End of pachinkoTiles.c */
+/* End of PINBALLTILES.C */
