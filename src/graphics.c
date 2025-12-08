@@ -30,6 +30,11 @@ void set_game_background(unsigned char *background, unsigned char *tiles)
     set_bkg_data(0, 255, game.graphics.active_background_tiledata);
 }
 
+unsigned char* get_game_background_tilemap(void)
+{
+    return game.graphics.active_background_tilemap;
+}
+
 void set_sprite_sheet(unsigned char *sprite_sheet)
 {
     game.graphics.active_sprite_sheet = sprite_sheet;

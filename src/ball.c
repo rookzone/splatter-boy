@@ -53,45 +53,13 @@ void update_ball(GameObject* obj) {
     // Grab reference to ball type struct
     Ball* ball = &obj->data.ball;
 
-    handle_ball_collision(ball);
+    handle_ball_pin_collision(ball);
 
     update_ball_position(ball);
 
     // After updating, generic object needs updating to match any changes in the ball
     obj->x = ball->x;
     obj->y = ball->y;
-}
-
-
-void handle_ball_collision(Ball* ball)
-{
-    
-    // COLLISION
-    // Get ball centers
-    uint8_t ball_center_x = ball->x + TILE_HALF_WIDTH;
-    uint8_t ball_center_y = ball->y + TILE_HALF_WIDTH;
-
-    // Find which 8x8 tile the ball is in
-    uint8_t col = PIXEL_TO_GRID(ball_center_x);
-    uint8_t row = PIXEL_TO_GRID(ball_center_y);
-
-    if (col >= BACKGROUND_WIDTH_TILES || row >= BACKGROUND_HEIGHT_TILES)
-    return; // Do no continue with check if off screen.
-
-    // Grab the tiles index value
-    uint16_t tilemap_index = GET_TILE_INDEX(col, row);
-
-    // Check the tile in the map at that index, if it's a pin tile we need to collide
-    if (game.graphics.active_background_tilemap[tilemap_index] == PIN_TILE_ID) {
-        
-        // Just make a pin for the purpose of collision
-        Pin virtual_pin;
-        virtual_pin.x = GRID_TO_PIXEL(col);
-        virtual_pin.y = GRID_TO_PIXEL(row);
-
-        // Perform collision with physics
-        handle_ball_pin_collision(ball, &virtual_pin);
-    }
 }
 
 void reset_all_balls(void)

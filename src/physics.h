@@ -37,7 +37,7 @@ void apply_impulse(Ball *ball, fixed_n impulse_magnitude_x, fixed_n impulse_magn
 void check_ball_wall(Ball *ball, Wall *w);
 
 // Handle collision between a Ball and Pin.
-void handle_ball_pin_collision(Ball *ball, Pin *pin);
+void handle_ball_pin_collision(Ball *ball);
 
 // Reflects ball from wall or sets it "rolling" along wall at 45 degree angle
 void handle_ball_45_degree_wall_collision(Ball *ball, Wall *w);

@@ -18,8 +18,6 @@ void init_ball(Ball* ball, GameSprite* gfx_data, uint8_t ball_x, uint8_t ball_y)
 // Update
 void update_ball(GameObject* obj);
 
-void handle_ball_collision(Ball* ball);
-
 // Reset an array of balls to starting positions.
 void reset_all_balls(void);
 
