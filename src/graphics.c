@@ -36,4 +36,4 @@ void set_sprite_sheet(unsigned char *sprite_sheet)
     set_sprite_data(0, 16, game.graphics.active_sprite_sheet);
 }
 
-// end graphics.c
+/* End of graphics.c */

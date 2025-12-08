@@ -1,4 +1,5 @@
 // game_object.c
+
 #include "game_object.h"
 #include "graphics.h"
 #include "ball.h"
@@ -79,3 +80,5 @@ GameObject* go_return_ball(uint8_t index)
     return NULL;
     
 }
+
+/* End of game_object.c */

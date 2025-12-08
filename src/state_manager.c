@@ -77,3 +77,5 @@ void cleanup_state(void)
             break;
     }
 }
+
+/* End of state_manager.c */

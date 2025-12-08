@@ -82,3 +82,5 @@ void cleanup_game_screen(void)
     HIDE_SPRITES; 
     HIDE_BKG;
 }
+
+/* End of states/state_game_screen.c */
