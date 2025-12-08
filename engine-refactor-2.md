@@ -372,4 +372,191 @@ After each phase, verify:
 
 ---
 
-This refactor will make your codebase **much cleaner** and set you up perfectly for adding new features like scoring, multiple levels, and save systems. Take it one phase at a time and test frequently!
+Gemini AI drafted task list:
+
+This is a solid architectural move. transitioning from a **tagged union** (Specific types) to a **Component-based** (Composition) architecture is standard for game development.
+
+For the Game Boy (GBDK/SDCC), this is actually **faster** in many cases because you avoid the pointer redirection of `obj->data.ball.x`. If you keep the data "flat" (contiguous in memory), the CPU can access it very quickly.
+
+Here is a phased plan to refactor your code into a "Unity-Lite" system.
+
+-----
+
+### Phase 1: The Data Structure (The "Skeleton")
+
+**Goal:** Flatten `GameObject` and move the Manager into `game_data`.
+
+Instead of `union { Ball b; Pin p; }`, every `GameObject` will have a `Transform`, `PhysicsBody`, and `Renderer` struct built directly inside it. If an object doesn't need physics (like a static decoration), we just ignore those fields using flags.
+
+**Tasks:**
+
+1.  **Define Components in `custom_types.h`:** Create simple structs for `Transform` (x, y), `Physics` (vx, vy, mass/elasticity), and `Renderer` (sprite id, tile id).
+2.  **Redefine `GameObject`:** Remove the union. Include the components directly. Add a `flags` bitmask to determine which components are active (e.g., `HAS_PHYSICS`, `HAS_COLLIDER`).
+3.  **Update `GameState`:** Move the `ObjectManager` struct definition inside the `GameState` struct in `game_data.h`.
+
+**Snippet (`custom_types.h` / `game_object.h`):**
+
+```c
+// Bitmasks for component activity
+#define COMP_ACTIVE     0x01
+#define COMP_PHYSICS    0x02
+#define COMP_RENDER     0x04
+#define COMP_COLLIDER   0x08 
+
+typedef struct {
+    uint8_t x, y;
+    fixed_n fractional_x, fractional_y; // Keep fixed point logic here
+} Transform;
+
+typedef struct {
+    fixed_n vx, vy;
+    uint8_t gravity_scale; // 0 for no gravity, 1 for normal
+} PhysicsBody;
+
+typedef struct {
+    uint8_t sprite_index;
+    uint8_t tile_index;
+    uint8_t visible; 
+} Renderer;
+
+struct GameObject {
+    uint8_t id;          // Useful for debugging
+    uint8_t flags;       // Which components are on?
+    uint8_t tag;         // OBJ_BALL, OBJ_PIN (still useful for logic)
+    
+    // Components are embedded directly (Data Locality)
+    Transform transform;
+    PhysicsBody physics;
+    Renderer renderer;
+    // Input input;      // Future scope
+};
+```
+
+-----
+
+### Phase 2: Centralizing the Manager (The "Brain")
+
+**Goal:** Move ownership of the object pool to `game_data` so the State Machine owns the memory.
+
+**Tasks:**
+
+1.  **Refactor `game_data.h`:** Ensure `ObjectManager` contains the `GameObject pool[MAX_OBJECTS]` and the `count`.
+2.  **Refactor `game_object.c`:**
+      * Remove the `static GameObject game_object_pool` array.
+      * Update `go_spawn_object` to look for a free slot in `game.manager.pool`.
+      * Update `go_init_manager` to clear `game.manager`.
+3.  **Update `main` / `state_game_screen`:** Ensure `game` struct is initialized zeroed out on startup.
+
+**Snippet (`game_object.c`):**
+
+```c
+GameObject* go_spawn(uint8_t tag, uint8_t x, uint8_t y) {
+    // Access the central store
+    ObjectManager* mgr = &game.manager; 
+    
+    if (mgr->total_count >= MAX_GAME_OBJECTS) return NULL;
+
+    // Find first inactive slot (simple optimization: keep a 'next_free' index)
+    GameObject* obj = &mgr->pool[mgr->total_count]; 
+    
+    // Reset data
+    memset(obj, 0, sizeof(GameObject));
+    
+    // Default Transform setup
+    obj->flags |= COMP_ACTIVE;
+    obj->tag = tag;
+    obj->transform.x = x;
+    obj->transform.y = y;
+    
+    mgr->total_count++;
+    return obj;
+}
+```
+
+-----
+
+### Phase 3: The Systems (The "Muscles")
+
+**Goal:** Rewrite Physics and Graphics to accept generic `GameObject` pointers and check flags, rather than expecting specific types like `Ball`.
+
+**Tasks:**
+
+1.  **Update `physics.c`:**
+      * Change functions to accept `GameObject* obj`.
+      * At the start of the function, check `if (!(obj->flags & COMP_PHYSICS)) return;`.
+      * Update math to access `obj->transform.x` and `obj->physics.vx`.
+2.  **Update `graphics.c`:**
+      * Update `go_draw_all`. It should loop through the pool, check `(flags & COMP_RENDER)`, and draw using `obj->renderer` data and `obj->transform` position.
+3.  **Remove `ball.c` / `pins.c` structs:** You might keep these files for *Constructors* (e.g., `make_ball(obj)`) or *Specific Logic* (e.g., `update_ball_logic(obj)`), but they no longer define the data structure.
+
+**Snippet (New Physics Loop):**
+
+```c
+void physics_update_system(void) {
+    ObjectManager* mgr = &game.manager;
+    
+    for(uint8_t i = 0; i < mgr->total_count; i++) {
+        GameObject* obj = &mgr->pool[i];
+        
+        // Skip dead or static objects immediately
+        if ((obj->flags & (COMP_ACTIVE | COMP_PHYSICS)) != (COMP_ACTIVE | COMP_PHYSICS)) 
+            continue;
+
+        // Apply Gravity
+        obj->physics.vy += GRAVITY;
+        
+        // Move Transform
+        // ... (Your existing fixed point math here, accessing obj->transform)
+    }
+}
+```
+
+-----
+
+### Phase 4: The API & Gameplay (The "Interface")
+
+**Goal:** The gameplay code (`state_game_screen.c`) should use high-level "Builders" or "Factories" to create entities.
+
+**Tasks:**
+
+1.  **Create Factory Functions:** Instead of `spawn_ball`, create a function that grabs a raw GameObject and configures its components.
+2.  **Refactor `state_game_screen.c`:**
+      * `init`: Call `go_init_manager()`.
+      * `init`: Call `factory_create_ball(x,y)` for your setup loop.
+      * `update`: Call `go_update_systems()` (which calls physics, then specific logic, then render).
+
+**Snippet (Factory in `ball.c`):**
+
+```c
+GameObject* factory_create_ball(uint8_t x, uint8_t y) {
+    GameObject* obj = go_spawn(OBJ_BALL, x, y);
+    
+    // Turn on components
+    obj->flags |= (COMP_PHYSICS | COMP_RENDER | COMP_COLLIDER);
+    
+    // Setup Physics
+    obj->physics.vx = 0;
+    
+    // Setup Graphics
+    obj->renderer.tile_index = TILE_BALL;
+    obj->renderer.sprite_index = alloc_sprite_id(); 
+    
+    return obj;
+}
+```
+
+-----
+
+### Performance Reminders for GBDK
+
+1.  **Pointer Caching:** In your loops, don't do `game.manager.pool[i].transform.x` repeatedly.
+      * *Do:* `GameObject* obj = &game.manager.pool[i];` then `obj->transform.x`.
+2.  **Structure Padding:** GBDK (SDCC) is usually 8-bit. Try to order your struct members so `x` and `y` are next to each other, and commonly accessed flags are at the top.
+3.  **The "Update" Function:**
+      * Previously you had `obj->update = update_ball`.
+      * In a Component system, you usually iterate **Systems** (Physics System, Render System) over all objects.
+      * *However*, for specific logic (like "If Ball hits X, add Score"), you can still keep a function pointer `obj->behaviour` or use a switch statement on `obj->tag` inside a generic loop. A switch statement on `tag` is often faster and uses less RAM than function pointers for every object on the Game Boy.
+
+### Next Step for User
+
+Would you like me to generate the code for **Phase 1 (The Structs)** so you can copy-paste that into `custom_types.h` and `game_data.h` to get started?
