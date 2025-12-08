@@ -71,7 +71,7 @@ void handle_ball_pin_collision(Ball* ball, Pin* pin)
     ball->sub_y = 0; 
 
     
-    if (ball->vy > FIXED_EIGHTH) { // Bounce
+    if (ball->vy > FIXED_HALF) { // Bounce
 
         ball->vy = -(ball->vy >> 1); // 50% energy retention
         ball->vx += distance_x;
@@ -79,9 +79,9 @@ void handle_ball_pin_collision(Ball* ball, Pin* pin)
     else { // Roll
 
         ball->vy = 0;
-        ball->vx += FIXED_MUL(distance_x, ROLL_FORCE
-        );
-        
+        //ball->vx += FIXED_MUL(distance_x, ROLL_FORCE);
+        ball->vx += distance_x;
+
         // Clamp horizontal speed
         if (ball->vx > MAX_ROLL_SPEED) ball->vx = MAX_ROLL_SPEED;
         else if (ball->vx < -MAX_ROLL_SPEED) ball->vx = -MAX_ROLL_SPEED;
