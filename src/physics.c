@@ -81,9 +81,8 @@ void handle_ball_pin_collision(Ball* ball, Pin* pin)
     else { // Roll
 
         ball->vy = 0;
-        ball->vx += FIXED_MUL(distance_x, ROLL_FORCE
-        );
-        
+        ball->vx += distance_x;
+
         // Clamp horizontal speed
         if (ball->vx > MAX_ROLL_SPEED) ball->vx = MAX_ROLL_SPEED;
         else if (ball->vx < -MAX_ROLL_SPEED) ball->vx = -MAX_ROLL_SPEED;
