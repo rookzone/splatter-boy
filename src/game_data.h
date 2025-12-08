@@ -33,20 +33,26 @@ typedef struct {
     GameObject pool[MAX_GAME_OBJECTS];
     uint8_t total_count;             // Total active objects
     
-    /** === REGISTRIES ===
-     * These registries are used to hold the index (location) of a certain type of GameObject
-     * On creation an object should register it's index in the main object pool into this array.
-     * This allows for parts of the game to iterate through only this object type without expensive object type checks
-     */
+    // Registries (indices into pool for fast iteration by type)
     uint8_t ball_indices[MAX_BALLS];
     uint8_t ball_count;
+    
+    uint8_t pin_indices[MAX_PINS];
+    uint8_t pin_count;
 
 } ObjectManager;
+
 
 typedef struct {
 
     System system;
     Graphics graphics;
+    ObjectManager objects;
+
+    // More subsystems to come, e.g.
+    // SoundManager sound;
+    // ScoreManager score;
+    // etc.
 
 } GameState;
 

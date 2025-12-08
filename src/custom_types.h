@@ -43,6 +43,7 @@ struct GameSprite {
     uint8_t tile_index;
 };
 
+/*
 // Ball object
 typedef struct {
     uint8_t x, y;
@@ -60,10 +61,42 @@ typedef struct {
     uint8_t x, y;
 } Pin;
 
+*/
+
+// === GAME OBJECT ===
+
+// ** Components **
+typedef struct{
+
+    fixed_n vx, vy; // Velocity
+
+    fixed_n fractional_vx, fractional_vy; // Velocity fractional accumulater (sub-pixel)
+
+} PhysicsComponent;
+
+typedef struct{
+
+    uint8_t sprite_index;
+    uint8_t tile_index;
+    uint8_t visible;
+
+} RenderComponent;
+
+typedef struct {
+
+    uint8_t x, y; // Position in pixels
+    
+} TransformComponent;
+
+// ** Flags and Settings **
+
 // Create definitions for the different object types
 typedef enum {
     OBJ_BALL,
-    OBJ_PIN
+    OBJ_PIN,
+    OBJ_SLANTED_WALL,
+    OBJ_GENERAL,
+    OBJ_SPINNER
 } ObjectType;
 
 
