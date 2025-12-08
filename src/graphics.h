@@ -28,11 +28,13 @@
 // Get tilemap Array Index from Col/Row (Row * Width + Col)
 #define GET_TILE_INDEX(col, row) (((uint16_t)(row) * BACKGROUND_WIDTH_TILES) + (col))
 
-// General gameboy graphics sizes
+// Tile and sprite sizes
 #define TILE_WIDTH 8
 #define TILE_LENGTH 8
 #define TILE_HALF_WIDTH 4
+#define TILE_HALF_HEIGHT 4
 #define TILE_HALF_LENGTH 4
+#define PIN_HALF_WIDTH 3 // Half the width of the pin sprite.
 #define SPRITE_SIZE 8
 #define BACKGROUND_WIDTH_TILES 20
 #define BACKGROUND_HEIGHT_TILES 18
