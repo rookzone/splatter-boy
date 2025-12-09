@@ -5,18 +5,12 @@
 #include "ball.h"
 #include <string.h>
 
-
-static GameObject game_object_pool[MAX_GAME_OBJECTS];
-static uint8_t total_object_count = 0;
-static ObjectIndices indices;
-
 // === GAME OBJECT HANDLING ===
 
 // Initialise the manager, reset the index values to 0 for re-writing
 void go_init_manager(void) {
-    total_object_count = 0;
-    indices.ball_count = 0;
-    // @todo set active to 0 (for when active is used)
+    game.objects.total_count = 0;
+    game.objects.ball_count = 0;
 }
 
 // Spawn an object of ObjectType.

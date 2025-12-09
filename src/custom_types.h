@@ -36,32 +36,11 @@ typedef int16_t fixed_n;
 
 // ##### GAME OBJECTS #####
 
-// === Graphics ===
-
-struct GameSprite {
-    uint8_t sprite_index;
-    uint8_t tile_index;
-};
-
-/*
-// Ball object
-typedef struct {
-    uint8_t x, y;
-    fixed_n fractional_x, fractional_y;
-    fixed_n  vx, vy;
-} Ball;
-
-// Wall object
-typedef struct {
-    uint8_t x, y;
-} Wall;
-
-// Pin object
-typedef struct {
-    uint8_t x, y;
-} Pin;
-
-*/
+// === COMPONENT FLAGS ===
+#define COMP_ACTIVE    0x01  // Object is alive
+#define COMP_TRANSFORM 0x02  // Has position
+#define COMP_PHYSICS   0x04  // Has velocity/physics
+#define COMP_RENDER    0x08  // Has sprite/should render
 
 // === GAME OBJECT ===
 
@@ -98,6 +77,14 @@ typedef enum {
     OBJ_GENERAL,
     OBJ_SPINNER
 } ObjectType;
+
+// === Graphics ===
+
+struct GameSprite {
+    uint8_t sprite_index;
+    uint8_t tile_index;
+};
+
 
 
 #endif // CUSTOM_TYPES_H_

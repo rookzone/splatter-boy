@@ -25,7 +25,7 @@ typedef struct {
     unsigned char *active_background_tiledata;
     unsigned char *active_sprite_sheet;
     uint16_t next_sprite_id;
-
+    uint8_t sprite_count;
 } Graphics;
 
 typedef struct {
@@ -36,9 +36,6 @@ typedef struct {
     // Registries (indices into pool for fast iteration by type)
     uint8_t ball_indices[MAX_BALLS];
     uint8_t ball_count;
-    
-    uint8_t pin_indices[MAX_PINS];
-    uint8_t pin_count;
 
 } ObjectManager;
 
