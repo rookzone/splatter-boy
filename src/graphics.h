@@ -70,6 +70,8 @@ void set_sprite_sheet(unsigned char *sprite_sheet);
 // Plot a point at position in pixel space (int)
 void plot_point_fixed(fixed_n x, fixed_n y);
 
+void gr_hide_all_sprites(void);
+
 // === ANIMATIONS ===
 // Future-proofing for animation functions
 

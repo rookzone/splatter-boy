@@ -3,7 +3,7 @@
 #include <gb/gb.h>
 #include <stdio.h>
 
-#include "state_game_screen.h"
+#include "state_game2_screen.h"
 
 #include "../state_manager.h" // State manager for switching states
 #include "../game_object.h" // GameObject manager
@@ -17,7 +17,7 @@
 #include "../tiles/pachinkoTiles.h"
 #include "../maps/pachinkoMap.h"
 
-void init_game_screen(void)
+void init_game2_screen(void)
 {
     DISPLAY_OFF;
     SPRITES_8x8;
@@ -29,8 +29,9 @@ void init_game_screen(void)
     // Spawn some balls in
     for (uint8_t i = 0; i < NUM_BALLS; i++) {
 
-        GameObject* ball;
+        //GameObject* ball;
 
+        /*
         // Set initial position based on index
         if (i < 8) {
             uint8_t ball_x = 10 + i*8;
@@ -44,6 +45,7 @@ void init_game_screen(void)
 
         // Give random horizontal speed
         ball->physics.vx = RANDOM_HORIZONTAL_VX[i];
+        */
     }
 
     // Turn on our screen, sprites, and BG
@@ -52,7 +54,7 @@ void init_game_screen(void)
     DISPLAY_ON;
 }
 
-void update_game_screen(void)
+void update_game2_screen(void)
 {
     game.system.previous_keys = game.system.keys;
     game.system.keys = joypad();
@@ -66,10 +68,6 @@ void update_game_screen(void)
     if ((game.system.keys & J_UP) && !(game.system.previous_keys & J_UP)) {
         reset_all_balls();
     }
-
-    if ((game.system.keys & J_DOWN) && !(game.system.previous_keys & J_DOWN)) {
-        set_state(STATE_GAME2_SCREEN);
-    }
     
     // Update all balls
     go_update_all_balls();
@@ -80,8 +78,9 @@ void update_game_screen(void)
     vsync();
 }
 
-void cleanup_game_screen(void)
+void cleanup_game2_screen(void)
 {
+    // Memset?
     HIDE_SPRITES; 
     HIDE_BKG;
 }

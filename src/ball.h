@@ -19,4 +19,8 @@ void update_ball(GameObject* obj);
 
 void reset_all_balls(void);
 
+void launch_ball(GameObject* ball, uint8_t from_x, uint8_t from_y, fixed_n launch_power_x, fixed_n launch_power_y);
+
+GameObject* find_lowest_ball(void);
+
 #endif // BALL_H_

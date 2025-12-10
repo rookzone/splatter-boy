@@ -8,6 +8,7 @@
 // State headers
 #include "states/state_title_screen.h"
 #include "states/state_game_screen.h"
+#include "states/state_game2_screen.h"
 
 
 void set_state(uint8_t new_state)
@@ -20,22 +21,21 @@ void set_state(uint8_t new_state)
     }
 }
 
-void buffer_state(uint8_t state)
-{
-    // Load state data into a copy of init and game_data
-}
-
 
 void init_state(void)
 {
     switch (game.system.current_state) 
     {
         case STATE_GAME_SCREEN:
-            clear_game_data(game); // Wipe game state for new load
+            clear_game_data(&game); // Wipe game state for new load
             init_game_screen(); // Init game screen code in states/
             break;
+        case STATE_GAME2_SCREEN:
+            clear_game_data(&game); // Wipe game state for new load
+            init_game2_screen(); // Init game screen code in states/
+            break;
         case STATE_TITLE_SCREEN:
-            clear_game_data(game);
+            clear_game_data(&game);
             break;
 
         default:
@@ -50,6 +50,9 @@ void update_state(void)
     {
         case STATE_GAME_SCREEN:
             update_game_screen();
+            break;
+        case STATE_GAME2_SCREEN:
+            update_game2_screen();
             break;
         case STATE_TITLE_SCREEN:
             //CODE
@@ -67,6 +70,9 @@ void cleanup_state(void)
     switch (game.system.current_state) 
     {
         case STATE_GAME_SCREEN:
+            // code
+            break;
+        case STATE_GAME2_SCREEN:
             // code
             break;
         case STATE_TITLE_SCREEN:

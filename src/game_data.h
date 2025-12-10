@@ -52,7 +52,7 @@ typedef struct {
 extern GameState game;
 
 // Clean up the state ready for a new setup
-void clear_game_data(GameState game);
+void clear_game_data(GameState* game);
 
 
 #endif // GAME_DATA_H_

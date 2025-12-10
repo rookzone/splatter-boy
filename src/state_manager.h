@@ -14,17 +14,14 @@
 
 // === STATES ===
 
+#define STATE_TITLE_SCREEN 0
 #define STATE_GAME_SCREEN 1
-#define STATE_TITLE_SCREEN 2
+#define STATE_GAME2_SCREEN 2
 #define STATE_SCORE_SCREEN 3
 #define STATE_DEMO_SCREEN 4
 
 
 void set_state(uint8_t state);
-
-// Init state in memory, set_state will check if state is buffered and reference those values
-// This may be used to reduce load times... !!! NOT IMPLEMENTED !!!
-void buffer_state(uint8_t state);
 
 void init_state(void);
 
