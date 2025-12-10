@@ -48,7 +48,7 @@ void handle_ball_pin_collision(GameObject* ball)
 
     // Get ball's bottom-middle point
     uint8_t ball_bottom_x = ball->transform.x + TILE_HALF_WIDTH;
-    uint8_t ball_bottom_y = ball->transform.x  + TILE_WIDTH;
+    uint8_t ball_bottom_y = ball->transform.y  + TILE_WIDTH;
 
     // Find which 8x8 tile the ball's bottom is in
     uint8_t col = PIXEL_TO_GRID(ball_bottom_x);
