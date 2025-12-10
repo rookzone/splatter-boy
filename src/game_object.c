@@ -19,6 +19,9 @@ GameObject* go_spawn_object(ObjectType type) {
 
     uint8_t pool_index = game.objects.total_count;
     GameObject* obj = &game.objects.pool[pool_index];
+
+    // Zero out object values in case any junk values exist.
+    memset(obj, 0, sizeof(GameObject));
     
     // Set up object values
     obj->id = pool_index;
@@ -44,7 +47,7 @@ void go_update_all_balls(void) {
         uint8_t pool_index = game.objects.ball_indices[i];
         GameObject* obj = &game.objects.pool[pool_index];
         
-        if (obj->flags && OBJECT_ACTIVE) { // TODO - NEED TO RETHINK UPDATE, FUNC POINTER IS TOO SLOW
+        if (obj->flags & OBJECT_ACTIVE) { // TODO - NEED TO RETHINK UPDATE, FUNC POINTER IS TOO SLOW
            update_ball(obj);
         }
     }

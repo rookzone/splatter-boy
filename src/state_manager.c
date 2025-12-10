@@ -35,11 +35,11 @@ void init_state(void)
             init_game_screen(); // Init game screen code in states/
             break;
         case STATE_TITLE_SCREEN:
-            //CODE
+            clear_game_data(game);
             break;
 
         default:
-            // Handle unknown state
+            // Handle unknown state - back to title?zx
             break;
     }
 }

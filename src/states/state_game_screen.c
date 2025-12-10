@@ -1,18 +1,19 @@
 // states/state_game_screen.c
 
 #include <gb/gb.h>
-#include <gbdk/console.h>
 #include <stdio.h>
 
-#include "../game_data.h"
-#include "../game_object.h"
+#include "state_game_screen.h"
+
+#include "../state_manager.h" // State manager for switching states
+#include "../game_object.h" // GameObject manager
+// Game elements
 #include "../graphics.h"
 #include "../physics.h"
 #include "../ball.h"
 #include "../pins.h"
 
-#include "state_game_screen.h"
-
+// Map assets
 #include "../tiles/pachinkoTiles.h"
 #include "../maps/pachinkoMap.h"
 

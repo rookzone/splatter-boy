@@ -6,7 +6,6 @@
 #include "game_object.h"
 
 
-
 GameObject* spawn_ball(uint8_t x, uint8_t y) {
 
     GameObject* obj = go_spawn_object(OBJ_BALL);

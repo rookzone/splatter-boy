@@ -82,6 +82,4 @@ struct GameSprite {
     uint8_t tile_index;
 };
 
-
-
 #endif // CUSTOM_TYPES_H_
