@@ -1,18 +1,19 @@
 // states/state_game_screen.c
 
 #include <gb/gb.h>
-#include <gbdk/console.h>
 #include <stdio.h>
 
-#include "../game_data.h"
-#include "../game_object.h"
+#include "state_game_screen.h"
+
+#include "../state_manager.h" // State manager for switching states
+#include "../game_object.h" // GameObject manager
+// Game elements
 #include "../graphics.h"
 #include "../physics.h"
 #include "../ball.h"
 #include "../pins.h"
 
-#include "state_game_screen.h"
-
+// Map assets
 #include "../tiles/pachinkoTiles.h"
 #include "../maps/pachinkoMap.h"
 
@@ -20,19 +21,13 @@ void init_game_screen(void)
 {
     DISPLAY_OFF;
     SPRITES_8x8;
-    
-    // Initialize the Object Manager (Resets counters)
-    go_init_manager(); 
-    
-    // Reset the sprite counter
-    game.graphics.next_sprite_id = 0;
 
     // Load in the sprite and background we want
     set_sprite_sheet(PanchinkoTiles);
     set_game_background(PachinkoMap, PanchinkoTiles);
 
     // Spawn some balls in
-    for (uint8_t i = 0; i < MAX_BALLS; i++) {
+    for (uint8_t i = 0; i < NUM_BALLS; i++) {
 
         GameObject* ball;
 
@@ -48,9 +43,10 @@ void init_game_screen(void)
         }
 
         // Give random horizontal speed
-        ball->data.ball.vx = RANDOM_HORIZONTAL_VX[i];
+        ball->physics.vx = RANDOM_HORIZONTAL_VX[i];
     }
 
+    // Turn on our screen, sprites, and BG
     SHOW_BKG;
     SHOW_SPRITES;
     DISPLAY_ON;
@@ -69,16 +65,17 @@ void update_game_screen(void)
     
     // Update all game objects
     // All ball update logic in associated source files. Check ball.c for ball update
-    go_update_all();
+    go_update_all_balls();
 
     // Draw all game objects
-    go_draw_all();
+    go_draw_all_balls();
         
     vsync();
 }
 
 void cleanup_game_screen(void)
 {
+    // Memset?
     HIDE_SPRITES; 
     HIDE_BKG;
 }

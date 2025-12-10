@@ -5,80 +5,76 @@
 #include "ball.h"
 #include <string.h>
 
-
-static GameObject game_object_pool[MAX_GAME_OBJECTS];
-static uint8_t total_object_count = 0;
-static ObjectIndices indices;
-
 // === GAME OBJECT HANDLING ===
-
-// Initialise the manager, reset the index values to 0 for re-writing
-void go_init_manager(void) {
-    total_object_count = 0;
-    indices.ball_count = 0;
-    // @todo set active to 0 (for when active is used)
-}
 
 // Spawn an object of ObjectType.
 // Creates GameObject and assigns it to the pool
 // Registers the object with it's specific registry function to keep track of index values
 // Incriment index values ready for next object
 GameObject* go_spawn_object(ObjectType type) {
-    
-    if (total_object_count >= MAX_GAME_OBJECTS) {
-        return NULL; // Pool full
+
+    if (game.objects.total_count >= MAX_GAME_OBJECTS) {
+        return NULL; // Pool's closed
     }
 
-    uint8_t pool_index = total_object_count; 
-    GameObject* new_object = &game_object_pool[pool_index];
-    
-    new_object->object_type = type;
-    new_object->active = 1;
+    uint8_t pool_index = game.objects.total_count;
+    GameObject* obj = &game.objects.pool[pool_index];
 
-    if (type == OBJ_BALL && indices.ball_count < MAX_BALLS) {
-        indices.ball_indices[indices.ball_count] = pool_index; 
-        indices.ball_count++;
+    // Zero out object values in case any junk values exist.
+    memset(obj, 0, sizeof(GameObject));
+    
+    // Set up object values
+    obj->id = pool_index;
+    obj->flags = OBJECT_ACTIVE;
+    obj->type = type;
+    
+    // Register in type-specific registry
+    if (type == OBJ_BALL && game.objects.ball_count < MAX_BALLS) {
+        game.objects.ball_indices[game.objects.ball_count] = pool_index;
+        game.objects.ball_count++;
     }
+
+    // Change to switch case when more objects are built
     
-    total_object_count++;
-    
-    return new_object;
+    game.objects.total_count++;
+    return obj;
 }
 
-// Loops through the objects running their associated update functions
-void go_update_all(void) {
+void go_update_all_balls(void) {
 
-    // Iterate through all ball objects and run each update function
-    for (uint8_t i = 0; i < indices.ball_count; i++) {
-        uint8_t pool_index = indices.ball_indices[i];
-        GameObject* obj = &game_object_pool[pool_index];
+    // Iterate through ball registry
+    for (uint8_t i = 0; i < game.objects.ball_count; i++) {
+        uint8_t pool_index = game.objects.ball_indices[i];
+        GameObject* obj = &game.objects.pool[pool_index];
         
-        if (obj->active && obj->update != NULL) {
-            obj->update(obj);
+        if (obj->flags & OBJECT_ACTIVE) { // TODO - NEED TO RETHINK UPDATE, FUNC POINTER IS TOO SLOW
+           update_ball(obj);
         }
     }
 }
 
 // Loop through all the registered game objects and draw them
-void go_draw_all(void) {
-     for (uint8_t i = 0; i < indices.ball_count; i++) {
-        uint8_t pool_index = indices.ball_indices[i];
-        GameObject* obj = &game_object_pool[pool_index];
+
+
+void go_draw_all_balls(void) {
+
+    for (uint8_t i = 0; i < game.objects.ball_count; i++) {
+
+        uint8_t pool_index = game.objects.ball_indices[i]; // Grab object pool index from ball register
+        GameObject* obj = &game.objects.pool[pool_index];
         
-        if (obj->active) {
-            // Access the generic sprite struct
-            DRAW_SPRITE(&obj->sprite, obj->x, obj->y);
+        if ((obj->flags & (OBJECT_ACTIVE | RENDERER_ACTIVE)) == (OBJECT_ACTIVE | RENDERER_ACTIVE)) {
+            DRAW_SPRITE(&obj->renderer, obj->transform.x, obj->transform.y);
         }
     }
 }
 
-GameObject* go_return_ball(uint8_t index)
-{
-    if (index < MAX_BALLS)
-        return &game_object_pool[indices.ball_indices[index]];
-    
+GameObject* go_return_ball(uint8_t index) {
+    if (index < game.objects.ball_count) {
+        uint8_t pool_index = game.objects.ball_indices[index];
+        return &game.objects.pool[pool_index];
+    }
     return NULL;
-    
 }
 
 /* End of game_object.c */

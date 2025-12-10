@@ -6,86 +6,70 @@
 #include "game_object.h"
 
 
-GameObject* spawn_ball(uint8_t x, uint8_t y)
-{
-    // Create generic GameObject
-    GameObject* new_object = go_spawn_object(OBJ_BALL);
+GameObject* spawn_ball(uint8_t x, uint8_t y) {
 
-    // Assign update function to go
-    new_object->update = update_ball;
-    // New sprite
-    new_object->sprite = create_sprite(TILE_BALL);
-
-    // Initialise the ball specific data struct
-    init_ball(&new_object->data.ball, &new_object->sprite, x, y);
-
-    // Pass x,y back into generic obj
-    new_object->x = x;
-    new_object->y = y;
-
-    // Pass x,y back into generic obj
-    new_object->x = x;
-    new_object->y = y;
-
-    return new_object;
+    GameObject* obj = go_spawn_object(OBJ_BALL);
+    if (obj == NULL) return NULL;
+    
+    // Configure components
+    obj->flags |= (TRANSFORM_ACTIVE | PHYSICS_ACTIVE | RENDERER_ACTIVE);
+    
+    // Transform
+    obj->transform.x = x;
+    obj->transform.y = y;
+    
+    // Physics
+    obj->physics.vx = 0;
+    obj->physics.vy = 0;
+    obj->physics.fractional_vx = 0;
+    obj->physics.fractional_vy = 0;
+    obj->physics.collision_enabled = 1;
+    
+    // Render
+    GameSprite sprite = create_sprite(TILE_BALL);
+    obj->renderer.sprite_index = sprite.sprite_index;
+    obj->renderer.tile_index = sprite.tile_index;
+    obj->renderer.visible = 1;
+    
+    return obj;
 }
 
 
-void init_ball(Ball* ball, GameSprite* gfx_data, uint8_t ball_x, uint8_t ball_y)
-{
-    ball->x = ball_x;
-    ball->y = ball_y;
-    ball->vx = 0;
-    ball->vy = 0;
-    ball->fractional_x = 0;
-    ball->fractional_y = 0;
-}
-
-
-/** @todo
- * DO NOT CHECK COLLISIONS OR DRAW BALLS OFF-SCREEN
- * SWITCH CASE TILE COLLISION CHECK AND CHOOSE INTERACTION
- * Gameboy backgrounds are 360 x 8x8 tiles, a total of 360 tiles.
- * Only 256 unique tiles can be loaded into memory at once.
- */
 void update_ball(GameObject* obj) {
 
-    // Grab reference to ball type struct
-    Ball* ball = &obj->data.ball;
-
-    handle_ball_pin_collision(ball);
-
-    update_ball_position(ball);
-
-    // After updating, generic object needs updating to match any changes in the ball
-    obj->x = ball->x;
-    obj->y = ball->y;
+    // Quick validation
+    if (!(obj->flags & PHYSICS_ACTIVE)) return;
+    
+    // Handle collision (pass GameObject directly)
+    handle_ball_pin_collision(obj);
+    
+    // Update position (pass GameObject directly)
+    update_ball_position(obj);
+    
 }
 
-void reset_all_balls(void)
-{
-    // Iterate for each ball
-    for (uint8_t i = 0; i < MAX_BALLS; i++) {
+void reset_all_balls(void) {
 
-    GameObject* obj = go_return_ball(i);
+    for (uint8_t i = 0; i < game.objects.ball_count; i++) {
 
-    if (obj != NULL){
+        GameObject* obj = go_return_ball(i);
 
-        Ball* ball = &obj->data.ball;
-
-        // Set initial position based on index
-        if (i < 8) {
-            ball->x = 10 + i*8;
-            ball->y = 20;
+        if (obj == NULL) continue;
+        
+        // Reset position
+        if (i < NUM_BALLS >> 1) {
+            obj->transform.x = 10 + i * 8;
+            obj->transform.y = 20;
         } else {
-            ball->x  = 10 + (i-8)*8;
-            ball->y = 30;
+            obj->transform.x = 10 + (i - 8) * 8;
+            obj->transform.y = 30;
         }
-
-        // Give random horizontal speed
-        ball->vx = RANDOM_HORIZONTAL_VX[i];
-        }
-
+        
+        // Reset physics
+        obj->physics.vx = RANDOM_HORIZONTAL_VX[i];
+        obj->physics.vy = 0;
+        obj->physics.fractional_vx = 0;
+        obj->physics.fractional_vy = 0;
     }
 }
 
@@ -103,19 +87,8 @@ void launch_ball(Ball* ball, uint8_t from_x, uint8_t from_y, fixed_n launch_powe
     apply_impulse(ball, launch_power_x, launch_power_y);
 }
 */
+
 /*
-
-
-
-void reset_ball(Ball* ball)
-{
-    ball->vx = 0;
-    ball->vy = 0;
-    ball->sub_x = 0;
-    ball->sub_y = 0;
-}
-    
-
 
 Ball* find_lowest_ball(Ball* balls, uint8_t count)
 {

@@ -7,9 +7,7 @@
 #include "custom_types.h"
 #include "game_object.h"
 
-// Game Object list sizes
-#define NUM_BALLS 18 // HIGHER THAN 18 LAGS - DO NOT SET TO ODD NUMBER
-#define NUM_PINS 36
+// === GAME STATE SUB SYSTEMS ===
 
 typedef struct {
 
@@ -25,6 +23,7 @@ typedef struct {
     unsigned char *active_background_tiledata;
     unsigned char *active_sprite_sheet;
     uint16_t next_sprite_id;
+    uint8_t sprite_count;
 
 } Graphics;
 
@@ -33,25 +32,27 @@ typedef struct {
     GameObject pool[MAX_GAME_OBJECTS];
     uint8_t total_count;             // Total active objects
     
-    /** === REGISTRIES ===
-     * These registries are used to hold the index (location) of a certain type of GameObject
-     * On creation an object should register it's index in the main object pool into this array.
-     * This allows for parts of the game to iterate through only this object type without expensive object type checks
-     */
+    // Registries (indices into pool for fast iteration by type)
     uint8_t ball_indices[MAX_BALLS];
     uint8_t ball_count;
 
 } ObjectManager;
 
+// === GAME STATE ===
+
 typedef struct {
 
     System system;
     Graphics graphics;
+    ObjectManager objects;
 
 } GameState;
 
 
 extern GameState game;
+
+// Clean up the state ready for a new setup
+void clear_game_data(GameState game);
 
 
 #endif // GAME_DATA_H_

@@ -6,54 +6,32 @@
 #include <gb/gb.h>
 #include "custom_types.h"
 
-#define MAX_GAME_OBJECTS 32 
-#define MAX_BALLS 16
-#define MAX_PINS 16
+#define MAX_GAME_OBJECTS 40 
+#define MAX_BALLS 20
+#define MAX_PINS 20
 
 // Forward declaration for the function pointer
 typedef struct GameObject GameObject; 
 
-// Define function pointer type
-typedef void (*UpdateFunc)(GameObject *obj); 
-
-// Renamed Registry struct (Internal to the module)
-typedef struct {
-    uint8_t ball_indices[MAX_BALLS];
-    uint8_t ball_count;
-} ObjectIndices;
-
 struct GameObject {
-    // Position (Generic)
-    uint8_t x, y;
 
-    // Type
-    ObjectType object_type;
-    
-    // Active Flag
-    uint8_t active; 
+    uint8_t id;
+    uint8_t flags;
+    ObjectType type;
 
-    // Function pointer to update function (different depending on object type)
-    UpdateFunc update;
+    // Components
 
-    // Sprite Data
-    GameSprite sprite;
-
-    // Specific Data Union
-    union {
-        Ball ball;
-        Pin pin;
-    } data;
+    TransformComponent transform;
+    PhysicsComponent physics;
+    RenderComponent renderer;
 
 };
 
-
-void go_init_manager(void);
-
 GameObject* go_spawn_object(ObjectType type);
 
-void go_update_all(void);
+void go_update_all_balls(void);
 
-void go_draw_all(void);
+void go_draw_all_balls(void);
 
 // Return ball GameObject defined at position index using ball registry
 GameObject* go_return_ball(uint8_t index);
