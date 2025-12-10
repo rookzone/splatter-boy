@@ -6,13 +6,14 @@
 #include "game_object.h"
 
 
+
 GameObject* spawn_ball(uint8_t x, uint8_t y) {
 
     GameObject* obj = go_spawn_object(OBJ_BALL);
     if (obj == NULL) return NULL;
     
     // Configure components
-    obj->flags |= (COMP_TRANSFORM | COMP_PHYSICS | COMP_RENDER);
+    obj->flags |= (TRANSFORM_ACTIVE | PHYSICS_ACTIVE | RENDERER_ACTIVE);
     
     // Transform
     obj->transform.x = x;
@@ -38,7 +39,7 @@ GameObject* spawn_ball(uint8_t x, uint8_t y) {
 void update_ball(GameObject* obj) {
 
     // Quick validation
-    if (!(obj->flags & COMP_PHYSICS)) return;
+    if (!(obj->flags & PHYSICS_ACTIVE)) return;
     
     // Handle collision (pass GameObject directly)
     handle_ball_pin_collision(obj);
@@ -49,8 +50,11 @@ void update_ball(GameObject* obj) {
 }
 
 void reset_all_balls(void) {
+
     for (uint8_t i = 0; i < game.objects.ball_count; i++) {
+
         GameObject* obj = go_return_ball(i);
+
         if (obj == NULL) continue;
         
         // Reset position

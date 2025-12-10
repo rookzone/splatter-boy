@@ -31,7 +31,8 @@ void init_state(void)
     switch (game.system.current_state) 
     {
         case STATE_GAME_SCREEN:
-            init_game_screen();
+            clear_game_data(game); // Wipe game state for new load
+            init_game_screen(); // Init game screen code in states/
             break;
         case STATE_TITLE_SCREEN:
             //CODE

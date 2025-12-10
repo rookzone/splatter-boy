@@ -21,7 +21,7 @@ void update_ball_position(GameObject* ball)
     
     // Zero off the left-hand byte to leave us with the decimal
     ball->physics.fractional_vx &= 0xFF;
-    ball->physics.fractional_vx &= 0xFF;
+    ball->physics.fractional_vy &= 0xFF;
 
 }
 
@@ -73,7 +73,7 @@ void handle_ball_pin_collision(GameObject* ball)
     uint8_t pin_center_x = pin_tile_x + TILE_HALF_WIDTH;
     int8_t distance_x = ball_bottom_x - pin_center_x;
     
-    if (distance_x < -(PIN_HALF_WIDTH) || distance_x > (PIN_HALF_WIDTH))
+    if (distance_x < -(PIN_HALF_WIDTH+1) || distance_x > (PIN_HALF_WIDTH+1))
         return;
 
     // Calculate vertical distance so collision only happens when top of pin is hit

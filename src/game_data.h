@@ -7,9 +7,6 @@
 #include "custom_types.h"
 #include "game_object.h"
 
-#define NUM_BALLS 18
-#define NUM_PINS 36
-
 // === GAME STATE SUB SYSTEMS ===
 
 typedef struct {
@@ -53,6 +50,9 @@ typedef struct {
 
 
 extern GameState game;
+
+// Clean up the state ready for a new setup
+void clear_game_data(GameState game);
 
 
 #endif // GAME_DATA_H_

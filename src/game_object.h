@@ -6,9 +6,9 @@
 #include <gb/gb.h>
 #include "custom_types.h"
 
-#define MAX_GAME_OBJECTS 32 
-#define MAX_BALLS 16
-#define MAX_PINS 16
+#define MAX_GAME_OBJECTS 40 
+#define MAX_BALLS 20
+#define MAX_PINS 20
 
 // Forward declaration for the function pointer
 typedef struct GameObject GameObject; 
@@ -17,7 +17,6 @@ struct GameObject {
 
     uint8_t id;
     uint8_t flags;
-    uint8_t active;
     ObjectType type;
 
     // Components
@@ -28,13 +27,11 @@ struct GameObject {
 
 };
 
-void go_init_manager(void);
-
 GameObject* go_spawn_object(ObjectType type);
 
-void go_update_all(void);
+void go_update_all_balls(void);
 
-void go_draw_all(void);
+void go_draw_all_balls(void);
 
 // Return ball GameObject defined at position index using ball registry
 GameObject* go_return_ball(uint8_t index);

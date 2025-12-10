@@ -7,28 +7,22 @@
 
 // === GAME OBJECT HANDLING ===
 
-// Initialise the manager, reset the index values to 0 for re-writing
-void go_init_manager(void) {
-    game.objects.total_count = 0;
-    game.objects.ball_count = 0;
-}
-
 // Spawn an object of ObjectType.
 // Creates GameObject and assigns it to the pool
 // Registers the object with it's specific registry function to keep track of index values
 // Incriment index values ready for next object
 GameObject* go_spawn_object(ObjectType type) {
+
     if (game.objects.total_count >= MAX_GAME_OBJECTS) {
-        return NULL; // Pool full
+        return NULL; // Pool's closed
     }
 
     uint8_t pool_index = game.objects.total_count;
     GameObject* obj = &game.objects.pool[pool_index];
     
-    // Clear the object
-    obj->active = 1;
+    // Set up object values
     obj->id = pool_index;
-    obj->flags = COMP_ACTIVE;
+    obj->flags = OBJECT_ACTIVE;
     obj->type = type;
     
     // Register in type-specific registry
@@ -36,20 +30,22 @@ GameObject* go_spawn_object(ObjectType type) {
         game.objects.ball_indices[game.objects.ball_count] = pool_index;
         game.objects.ball_count++;
     }
+
+    // Change to switch case when more objects are built
     
     game.objects.total_count++;
     return obj;
 }
 
-void go_update_all(void) {
+void go_update_all_balls(void) {
 
     // Iterate through ball registry
     for (uint8_t i = 0; i < game.objects.ball_count; i++) {
         uint8_t pool_index = game.objects.ball_indices[i];
         GameObject* obj = &game.objects.pool[pool_index];
         
-        if (obj->active == 1) { // TODO - NEED TO RETHINK UPDATE, FUNC POINTER IS TOO SLOW
-           // obj->update(obj); UPDATE
+        if (obj->flags && OBJECT_ACTIVE) { // TODO - NEED TO RETHINK UPDATE, FUNC POINTER IS TOO SLOW
+           update_ball(obj);
         }
     }
 }
@@ -57,14 +53,14 @@ void go_update_all(void) {
 // Loop through all the registered game objects and draw them
 
 
-void go_draw_all(void) {
+void go_draw_all_balls(void) {
 
     for (uint8_t i = 0; i < game.objects.ball_count; i++) {
 
         uint8_t pool_index = game.objects.ball_indices[i]; // Grab object pool index from ball register
         GameObject* obj = &game.objects.pool[pool_index];
         
-        if ((obj->flags & (COMP_ACTIVE | COMP_RENDER)) == (COMP_ACTIVE | COMP_RENDER)) {
+        if ((obj->flags & (OBJECT_ACTIVE | RENDERER_ACTIVE)) == (OBJECT_ACTIVE | RENDERER_ACTIVE)) {
             DRAW_SPRITE(&obj->renderer, obj->transform.x, obj->transform.y);
         }
     }

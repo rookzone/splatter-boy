@@ -8,6 +8,8 @@
 #include "game_object.h"
 #include "game_data.h"
 
+#define NUM_BALLS 18
+
 #define LAUNCH_FORCE_X TO_FIXED(2)
 #define LAUNCH_FORCE_Y TO_FIXED(2)
 

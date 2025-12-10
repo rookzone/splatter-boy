@@ -36,10 +36,10 @@ typedef int16_t fixed_n;
 // === GAME OBJECT ===
 
 // === COMPONENT FLAGS ===
-#define COMP_ACTIVE    0x01  // Object is alive
-#define COMP_TRANSFORM 0x02  // Has position
-#define COMP_PHYSICS   0x04  // Has velocity/physics
-#define COMP_RENDER    0x08  // Has sprite/should render
+#define OBJECT_ACTIVE    0x01  // Object is alive
+#define TRANSFORM_ACTIVE 0x02  // Has position
+#define PHYSICS_ACTIVE   0x04  // Has velocity/physics
+#define RENDERER_ACTIVE    0x08  // Has sprite/should render
 
 // ** Components **
 typedef struct{

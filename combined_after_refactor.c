@@ -12,7 +12,7 @@ GameObject* spawn_ball(uint8_t x, uint8_t y) {
     if (obj == NULL) return NULL;
     
     // Configure components
-    obj->flags |= (COMP_TRANSFORM | COMP_PHYSICS | COMP_RENDER);
+    obj->flags |= (TRANSFORM_ACTIVE | PHYSICS_ACTIVE | RENDERER_ACTIVE);
     
     // Transform
     obj->transform.x = x;
@@ -38,7 +38,7 @@ GameObject* spawn_ball(uint8_t x, uint8_t y) {
 void update_ball(GameObject* obj) {
 
     // Quick validation
-    if (!(obj->flags & COMP_PHYSICS)) return;
+    if (!(obj->flags & PHYSICS_ACTIVE)) return;
     
     // Handle collision (pass GameObject directly)
     handle_ball_pin_collision(obj);
@@ -339,7 +339,7 @@ GameObject* go_spawn_object(ObjectType type) {
     // Clear the object
     obj->active = 1;
     obj->id = pool_index;
-    obj->flags = COMP_ACTIVE;
+    obj->flags = OBJECT_ACTIVE;
     obj->type = type;
     
     // Register in type-specific registry
@@ -352,7 +352,7 @@ GameObject* go_spawn_object(ObjectType type) {
     return obj;
 }
 
-void go_update_all(void) {
+void go_update_all_balls(void) {
 
     // Iterate through ball registry
     for (uint8_t i = 0; i < game.objects.ball_count; i++) {
@@ -368,14 +368,14 @@ void go_update_all(void) {
 // Loop through all the registered game objects and draw them
 
 
-void go_draw_all(void) {
+void go_draw_all_balls(void) {
 
     for (uint8_t i = 0; i < game.objects.ball_count; i++) {
 
         uint8_t pool_index = game.objects.ball_indices[i]; // Grab object pool index from ball register
         GameObject* obj = &game.objects.pool[pool_index];
         
-        if ((obj->flags & (COMP_ACTIVE | COMP_RENDER)) == (COMP_ACTIVE | COMP_RENDER)) {
+        if ((obj->flags & (OBJECT_ACTIVE | RENDERER_ACTIVE)) == (OBJECT_ACTIVE | RENDERER_ACTIVE)) {
             DRAW_SPRITE(&obj->renderer, obj->transform.x, obj->transform.y);
         }
     }
@@ -1065,10 +1065,10 @@ void update_game_screen(void)
     
     // Update all game objects
     // All ball update logic in associated source files. Check ball.c for ball update
-    go_update_all();
+    go_update_all_balls();
 
     // Draw all game objects
-    go_draw_all();
+    go_draw_all_balls();
         
     vsync();
 }
