@@ -7,9 +7,10 @@
 #include "custom_types.h"
 #include "game_object.h"
 
-// Game Object list sizes
-#define NUM_BALLS 18 // HIGHER THAN 18 LAGS - DO NOT SET TO ODD NUMBER
+#define NUM_BALLS 18
 #define NUM_PINS 36
+
+// === GAME STATE SUB SYSTEMS ===
 
 typedef struct {
 
@@ -26,6 +27,7 @@ typedef struct {
     unsigned char *active_sprite_sheet;
     uint16_t next_sprite_id;
     uint8_t sprite_count;
+
 } Graphics;
 
 typedef struct {
@@ -39,17 +41,13 @@ typedef struct {
 
 } ObjectManager;
 
+// === GAME STATE ===
 
 typedef struct {
 
     System system;
     Graphics graphics;
     ObjectManager objects;
-
-    // More subsystems to come, e.g.
-    // SoundManager sound;
-    // ScoreManager score;
-    // etc.
 
 } GameState;
 

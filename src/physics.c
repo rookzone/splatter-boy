@@ -4,56 +4,31 @@
 #include "physics.h"
 #include "graphics.h"
 
-void update_ball_position(Ball *ball)
+void update_ball_position(GameObject* ball)
 {
-    ball->vy += GRAVITY;
+    ball->physics.vy += GRAVITY;
 
-    if (ball->vy > MAX_SPEED)
-        ball->vy = MAX_SPEED;
+    if (ball->physics.vy > MAX_SPEED)
+        ball->physics.vy = MAX_SPEED;
     
     // Add our velocity to the fixed number fraction left over from last frame
-    ball->fractional_x += ball->vx;
-    ball->fractional_y += ball->vy;
+    ball->physics.fractional_vx += ball->physics.vx;
+    ball->physics.fractional_vy += ball->physics.vy;
 
     // Convert fixed value back to signed integer and apply to screen position
-    ball->x += (int8_t)(ball->fractional_x >> FIXED_SHIFT);
-    ball->y += (int8_t)(ball->fractional_y >> FIXED_SHIFT);
+    ball->transform.x += (int8_t)(ball->physics.fractional_vx >> FIXED_SHIFT);
+    ball->transform.y += (int8_t)(ball->physics.fractional_vy >> FIXED_SHIFT);
     
     // Zero off the left-hand byte to leave us with the decimal
-    ball->fractional_x &= 0xFF;
-    ball->fractional_y &= 0xFF;
+    ball->physics.fractional_vx &= 0xFF;
+    ball->physics.fractional_vx &= 0xFF;
 
 }
 
-void apply_impulse(Ball *ball, fixed_n impulse_magnitude_x, fixed_n impulse_magnitude_y)
+void apply_impulse(GameObject* obj, fixed_n impulse_magnitude_x, fixed_n impulse_magnitude_y)
 {
-    ball->vx += impulse_magnitude_x;
-    ball->vy += impulse_magnitude_y;
-}
-
-void check_ball_wall(Ball *ball, Wall *w) 
-{
-    if (ball->vy > 0) { 
-        uint8_t ball_bottom = ball->y + SPRITE_SIZE;
-
-        if (ball_bottom >= w->y) {
-
-            // Correct position
-            ball->y = w->y - SPRITE_SIZE;
-            ball->fractional_y = 0;
-            
-            // Bounce (50% energy retention)
-            ball->vy = -(ball->vy >> 1);
-            ball->vx = ball->vx - (ball->vx >> 2);
-            
-            // Stop if bounce is too weak (> 0.25 vx/y)
-            if (ball->vy > -FIXED_QUARTER) {
-                ball->vy = 0;
-                ball->vx = 0;
-                ball->fractional_x = 0;
-            }
-        }
-    }
+    obj->physics.vx += impulse_magnitude_x;
+    obj->physics.vy += impulse_magnitude_y;
 }
 
 /**
@@ -64,16 +39,16 @@ void check_ball_wall(Ball *ball, Wall *w)
  * Although filters work well, unlikely to be lots of balls in actual collision simultaeneousy
  * @param ball The Ball object reference to check 
  */
-void handle_ball_pin_collision(Ball* ball)
+void handle_ball_pin_collision(GameObject* ball)
 {
     
     // FILTER: Only handle collision if ball is moving downward
-    if (ball->vy <= 0)
+    if (ball->physics.vy <= 0)
         return;
 
     // Get ball's bottom-middle point
-    uint8_t ball_bottom_x = ball->x + TILE_HALF_WIDTH;
-    uint8_t ball_bottom_y = ball->y + TILE_WIDTH;
+    uint8_t ball_bottom_x = ball->transform.x + TILE_HALF_WIDTH;
+    uint8_t ball_bottom_y = ball->transform.x  + TILE_WIDTH;
 
     // Find which 8x8 tile the ball's bottom is in
     uint8_t col = PIXEL_TO_GRID(ball_bottom_x);
@@ -110,60 +85,46 @@ void handle_ball_pin_collision(Ball* ball)
         return;
 
     // Zero fractional velocity
-    ball->fractional_y = 0;
+    ball->physics.fractional_vy = 0;
 
-    if (ball->vy > FIXED_QUARTER) { 
+    if (ball->physics.vy > FIXED_QUARTER) { 
         // === BOUNCE ===
         
         // Vertical bounce (50% energy)
-        ball->vy = -(ball->vy >> 1);
+        ball->physics.vy = -(ball->physics.vy >> 1);
         
         // If ball moving right and hits left side (distance_x < 0), bounce left
         // If ball moving left and hits right side (distance_x > 0), bounce right
-        if ((ball->vx > 0 && distance_x < 0) || (ball->vx < 0 && distance_x > 0)) {
+        if ((ball->physics.vx > 0 && distance_x < 0) || (ball->physics.vx < 0 && distance_x > 0)) {
             // Hit the "wrong" side - reverse direction with damping
-            ball->vx = -(ball->vx >> 1);
+            ball->physics.vx = -(ball->physics.vx >> 1);
         } else {
             // Hit the "correct" side - keep direction but add deflection force
-            ball->vx = (ball->vx >> 1);
+            ball->physics.vx = (ball->physics.vx >> 1);
             
             // Add a nudge based on offset from center (scaled down)
             if (distance_x > 0) {
-                ball->vx += FIXED_EIGHTH;  // nudge right
+                ball->physics.vx += FIXED_EIGHTH;  // nudge right
             } else if (distance_x < 0) {
-                ball->vx -= FIXED_EIGHTH;  // nudge left
+                ball->physics.vx -= FIXED_EIGHTH;  // nudge left
             } else {
                 // Dead center hit - give it a small nudge to break symmetry
-                ball->vx += (ball->y & 1) ? FIXED_EIGHTH : -FIXED_EIGHTH;
+                ball->physics.vx += (ball->transform.y & 1) ? FIXED_EIGHTH : -FIXED_EIGHTH;
             }
         }
         
     } else { 
         // === ROLL ===
         
-        ball->vy = 0;
+        ball->physics.vy = 0;
         
         // Shift distance_x to scale it down
-        ball->vx += (distance_x >> 2);
+        ball->physics.vx += (distance_x >> 2);
         
         // Clamp horizontal speed
-        if (ball->vx > MAX_ROLL_SPEED) ball->vx = MAX_ROLL_SPEED;
-        else if (ball->vx < -MAX_ROLL_SPEED) ball->vx = -MAX_ROLL_SPEED;
+        if (ball->physics.vx > MAX_ROLL_SPEED) ball->physics.vx = MAX_ROLL_SPEED;
+        else if (ball->physics.vx < -MAX_ROLL_SPEED) ball->physics.vx = -MAX_ROLL_SPEED;
     }
-}
-
-void handle_ball_45_degree_wall_collision(Ball *ball, Wall *w)
-{
-    // Calculate visual point of collision for the "surface"
-
-    // Settle the velocity and sub pixel accumulator
-
-    // Determine if bounce or roll
-
-    // If roll, skip low-energy micro-bounce and apply force into rolling motion
-
-    // If bounce, apply basic axes swap
-
 }
 
 // Lookup tables

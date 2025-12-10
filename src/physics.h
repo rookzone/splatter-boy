@@ -14,6 +14,7 @@
 #define PHYSICS_H_
 
 #include "custom_types.h"
+#include "game_object.h"
 
 // Physics constants (8.8 fixed-point)
 #define GRAVITY     FIXED_TEENTH  // 256/16
@@ -22,24 +23,16 @@
 #define MAX_ROLL_SPEED TO_FIXED(1) // Max speed ball can go while rolling
 #define HORIZONTAL_PIN_FORCE FIXED_QUARTER // For bounce force on x-axis
 
-// Applies forces and updates ball position in fixed-point number space (does NOT render)
-void update_ball_position(Ball *ball);
-
 // === FORCE ===
 
 // Apply instant impulse force to ball
-void apply_impulse(Ball *ball, fixed_n impulse_magnitude_x, fixed_n impulse_magnitude_y);
+void apply_impulse(GameObject* obj, fixed_n impulse_magnitude_x, fixed_n impulse_magnitude_y);
 
-// === COLLISSION ===
+// === BALL PHYSICS ===
 
-// Handle collision between a Ball and Wall.
-void check_ball_wall(Ball *ball, Wall *w);
-
-// Handle collision between a Ball and Pin.
-void handle_ball_pin_collision(Ball *ball);
-
-// Reflects ball from wall or sets it "rolling" along wall at 45 degree angle
-void handle_ball_45_degree_wall_collision(Ball *ball, Wall *w);
+void update_ball_position(GameObject* obj);
+void apply_impulse(GameObject* obj, fixed_n impulse_x, fixed_n impulse_y);
+void handle_ball_pin_collision(GameObject* obj);
 
 // === LOOKUP TABLES ===
 

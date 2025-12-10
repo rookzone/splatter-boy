@@ -48,7 +48,7 @@ void init_game_screen(void)
         }
 
         // Give random horizontal speed
-        ball->data.ball.vx = RANDOM_HORIZONTAL_VX[i];
+        ball->physics.vx = RANDOM_HORIZONTAL_VX[i];
     }
 
     SHOW_BKG;

@@ -33,8 +33,7 @@ typedef int16_t fixed_n;
 #define FIXED_MUL(a,b) (((a) * (b)) >> FIXED_SHIFT)
 #define FIXED_DIV(a,b) (((a) << FIXED_SHIFT) / (b))
 
-
-// ##### GAME OBJECTS #####
+// === GAME OBJECT ===
 
 // === COMPONENT FLAGS ===
 #define COMP_ACTIVE    0x01  // Object is alive
@@ -42,20 +41,18 @@ typedef int16_t fixed_n;
 #define COMP_PHYSICS   0x04  // Has velocity/physics
 #define COMP_RENDER    0x08  // Has sprite/should render
 
-// === GAME OBJECT ===
-
 // ** Components **
 typedef struct{
 
     fixed_n vx, vy; // Velocity
-
     fixed_n fractional_vx, fractional_vy; // Velocity fractional accumulater (sub-pixel)
+    uint8_t collision_enabled; // 1 = enable collision, 0 = ignore collision
 
 } PhysicsComponent;
 
 typedef struct{
 
-    uint8_t sprite_index;
+    uint8_t sprite_index; // the index this sprite was initialised at
     uint8_t tile_index;
     uint8_t visible;
 

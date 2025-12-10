@@ -5,7 +5,6 @@
 
 #include <gb/gb.h>
 #include "custom_types.h"
-#include "game_data.h"
 
 #define MAX_GAME_OBJECTS 32 
 #define MAX_BALLS 16
@@ -16,6 +15,7 @@ typedef struct GameObject GameObject;
 
 struct GameObject {
 
+    uint8_t id;
     uint8_t flags;
     uint8_t active;
     ObjectType type;
