@@ -6,9 +6,8 @@
 #include <gb/gb.h>
 #include "custom_types.h"
 
-#define MAX_GAME_OBJECTS 40 
+#define MAX_GAME_OBJECTS 40
 #define MAX_BALLS 20
-#define MAX_PINS 20
 
 // Forward declaration for the function pointer
 typedef struct GameObject GameObject; 

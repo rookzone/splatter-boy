@@ -15,7 +15,7 @@
 
 // Map assets
 #include "../tiles/pachinkoTiles.h"
-#include "../maps/pachinkoMap.h"
+#include "../maps/game2Map.h"
 
 void init_game2_screen(void)
 {
@@ -24,7 +24,7 @@ void init_game2_screen(void)
 
     // Load in the sprite and background we want
     set_sprite_sheet(PanchinkoTiles);
-    set_game_background(PachinkoMap, PanchinkoTiles);
+    set_game_background(game2Map, PanchinkoTiles);
 
     // Spawn some balls in
     for (uint8_t i = 0; i < NUM_BALLS; i++) {
@@ -37,11 +37,11 @@ void init_game2_screen(void)
             uint8_t ball_x = 60 + i*8;
             uint8_t ball_y = 20;
             ball = spawn_ball(ball_x, ball_y);
-        } /*else {
+        } else {
             uint8_t ball_x  = 10 + (i-8)*8;
             uint8_t ball_y = 30;
             ball = spawn_ball(ball_x, ball_y);
-        }*/
+        }
 
         // Give random horizontal speed
         ball->physics.vx = RANDOM_HORIZONTAL_VX[i];

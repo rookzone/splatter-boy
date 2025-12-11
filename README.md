@@ -2,9 +2,9 @@
 
 ## About
 
-A fun little project where I mess around with C and GBDK. Attempt at a pachinko game with decent ball physics.
+A fun little project where I mess around with C and GBDK. Attempt at a pachinko-like "game" with decent ball physics.
 
-This is in __VERY EARLY__ stages.
+This is in **_VERY EARLY_** stages.
 
 ## Current Features
 
@@ -139,7 +139,6 @@ Optimisation will need looking at again.
 - Possible in-line asm optimisations
 - Versioning
 
-
 ## Dev Tools
 
 Useful command to combine source code into a single document.
@@ -169,7 +168,7 @@ Will output a tileset and background map that is ready to use.
 
 ## AI Usage
 
-There is no copy/paste AI code in this project (except the Makefiles...). AI has been used to suggest documentation, provide a basic review of the code, and assist with comments and commit messages. This is a concious choice by myself, AI code is ok so long as the contributer understands what the code does. An issue I found with AI and this sort of works is that AI tends to add lots of extraneous code, which for a performance critical project like this, becomes a hinderance quite quickly.
+There is no copy/paste AI code in this project (except the Makefiles...). AI has been used for documentation, comments, commit messages, and code reviews. Assuming anyone contributes, AI code is fine as long as they understand what it does. An issue I found with AI and a low-level project like this is that AI tends to add a lot of extraneous code, which for a performance critical project like this, becomes a problem quite rapidly.
 
 ## License
 
