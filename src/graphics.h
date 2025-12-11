@@ -36,6 +36,7 @@
 #define TILE_HALF_LENGTH 4
 #define PIN_HALF_WIDTH 3 // Half the width of the pin sprite.
 #define SPRITE_SIZE 8
+#define NUM_HW_sPRITES 40
 #define BACKGROUND_WIDTH_TILES 20
 #define BACKGROUND_HEIGHT_TILES 18
 #define BACKGROUND_WIDTH_PIXELS 160

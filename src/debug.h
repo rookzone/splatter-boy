@@ -5,11 +5,12 @@
 
 #include "custom_types.h"
 
+void debug_cls(void);
 
-// Pauses game - shows screen with values in GameState game (game_data.c/.h)
-void debug_print_data(void);
+void debug_print_page_system(void);
 
-//
-uint16_t get_execution_time(void);
+void debug_print_page_objects(void);
+
+void debug_print_page_graphics(void);
 
 #endif // DEBUG_H_

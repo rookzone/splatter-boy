@@ -44,11 +44,9 @@ void set_sprite_sheet(unsigned char *sprite_sheet)
 void gr_hide_all_sprites(void)
 {
     
-// Iterate through all 40 hardware sprites (OAM)
-    for (uint8_t i = 0; i < 40; i++) {
-        // Move the sprite to (0, 0), which is off the top-left corner
-        // (sprites must be drawn 8 pixels down and 8 pixels right to be visible).
-        // A position of (0, 0) hides the sprite.
+// Iterate through all 40 hardware sprites
+    for (uint8_t i = 0; i < NUM_HW_sPRITES; i++) {
+        // This removes any sprites from the screen, they can be reallocated.
         move_sprite(i, 0, 0); 
     }
 

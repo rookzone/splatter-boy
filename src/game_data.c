@@ -3,6 +3,7 @@
 #include "game_data.h"
 #include "graphics.h"
 #include <string.h>
+#include <stdio.h>
 
 GameState game;
 

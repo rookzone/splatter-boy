@@ -70,7 +70,12 @@ void update_game_screen(void)
     if ((game.system.keys & J_DOWN) && !(game.system.previous_keys & J_DOWN)) {
         set_state(STATE_GAME2_SCREEN);
     }
-    
+
+    if((game.system.keys & J_SELECT) && (game.system.keys & J_A) && !(game.system.previous_keys & (J_SELECT || J_A))) {
+        debug_print_page_graphics();
+    }
+
+
     // Update all balls
     go_update_all_balls();
 
