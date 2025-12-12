@@ -3,6 +3,8 @@
 #include "graphics.h"
 #include "game_data.h"
 
+#include <stdio.h>
+
 // Create sprite with a tracked VRAM number, assign tile, create and return GameSprite object
 GameSprite create_sprite(uint8_t tile_index)
 {
@@ -24,21 +26,24 @@ void plot_point_fixed(fixed_n x, fixed_n y)
 void set_game_background(unsigned char *background, unsigned char *tiles)
 {
     game.graphics.active_background_tilemap = background;
-    game.graphics.active_background_tile_sheet = tiles;
+    game.graphics.active_background_tileset = tiles;
 
     //uint8_t background_tileset_size = sizeof(game.graphics.active_background_tilemap);
 
-    uint8_t background_tileset_size = sizeof(tiles) / tiles[0];
+    size_t background_tileset_sizeof = sizeof(tiles) / sizeof(*tiles);
+
+    uint16_t background_tileset_size = (background_tileset_sizeof / 8);
+
+    set_bkg_data(game.graphics.next_background_slot, background_tileset_size, game.graphics.active_background_tileset);
 
     set_bkg_tiles(0, 0, BACKGROUND_WIDTH_TILES, BACKGROUND_HEIGHT_TILES, game.graphics.active_background_tilemap);
-    set_bkg_data(game.graphics.next_background_slot, background_tileset_size, game.graphics.active_background_tile_sheet);
-
+    
     game.graphics.next_background_slot += background_tileset_size;
 }
 
 void load_background_tiles(unsigned char *tiles)
 {
-    uint8_t background_tileset_size = sizeof(tiles) / tiles[0];
+    uint8_t background_tileset_size = sizeof(tiles) / sizeof(tiles[0]);
     set_bkg_data(game.graphics.next_background_slot ,background_tileset_size, tiles);
 }
 

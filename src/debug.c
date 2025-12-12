@@ -51,7 +51,7 @@ void debug_print_page_graphics(void) {
     
     // Show pointer addresses
     printf("Map Ptr:    %x\n", (uint16_t)game.graphics.active_background_tilemap); //
-    printf("Tile Ptr:   %x\n", (uint16_t)game.graphics.active_background_tile_sheet); //
+    printf("Tile Ptr:   %x\n", (uint16_t)game.graphics.active_background_tileset); //
 }
 
 /* End of debug.c */
