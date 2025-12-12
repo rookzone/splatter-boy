@@ -119,7 +119,7 @@ void handle_ball_pin_collision(GameObject* ball)
         ball->physics.vy = 0;
         
         // Shift distance_x to scale it down
-        ball->physics.vx += (distance_x >> 2);
+        ball->physics.vx += distance_x;
         
         // Clamp horizontal speed
         if (ball->physics.vx > MAX_ROLL_SPEED) ball->physics.vx = MAX_ROLL_SPEED;

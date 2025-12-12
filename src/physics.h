@@ -20,7 +20,7 @@
 #define GRAVITY     FIXED_TEENTH  // 256/16
 #define MAX_SPEED   TO_FIXED(2) // Max speed of balls in fixed-point number space
 #define ROLL_FORCE FIXED_QUARTER // Amount of force applied to ball to continue roll
-#define MAX_ROLL_SPEED TO_FIXED(1) // Max speed ball can go while rolling
+#define MAX_ROLL_SPEED TO_FIXED(2) // Max speed ball can go while rolling
 #define HORIZONTAL_PIN_FORCE FIXED_QUARTER // For bounce force on x-axis
 
 // === FORCE ===

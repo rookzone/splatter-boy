@@ -20,9 +20,10 @@ typedef struct {
 typedef struct {
     
     unsigned char *active_background_tilemap;
-    unsigned char *active_background_tiledata;
+    unsigned char *active_background_tile_sheet;
     unsigned char *active_sprite_sheet;
-    uint16_t next_sprite_id;
+    uint16_t next_sprite_slot;
+    uint16_t next_background_slot;
     uint8_t sprite_count;
 
 } Graphics;

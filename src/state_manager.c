@@ -67,7 +67,9 @@ void update_state(void)
 
 void cleanup_state(void)
 {
-    switch (game.system.current_state) 
+    uint8_t current_state = game.system.current_state;
+
+    switch (current_state) 
     {
         case STATE_GAME_SCREEN:
             // code

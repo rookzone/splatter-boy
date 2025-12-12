@@ -46,12 +46,12 @@ void debug_print_page_objects(void) {
 void debug_print_page_graphics(void) {
     debug_cls();
     printf("== GRAPHICS ==\n\n");
-    printf("Nxt Spr ID: %u\n", game.graphics.next_sprite_id); //
+    printf("Nxt Spr ID: %u\n", game.graphics.next_sprite_slot); //
     printf("Spr Count:  %u\n", game.graphics.sprite_count); //
     
     // Show pointer addresses
     printf("Map Ptr:    %x\n", (uint16_t)game.graphics.active_background_tilemap); //
-    printf("Tile Ptr:   %x\n", (uint16_t)game.graphics.active_background_tiledata); //
+    printf("Tile Ptr:   %x\n", (uint16_t)game.graphics.active_background_tile_sheet); //
 }
 
 /* End of debug.c */

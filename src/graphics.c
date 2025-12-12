@@ -7,10 +7,10 @@
 GameSprite create_sprite(uint8_t tile_index)
 {
     GameSprite new_sprite;
-    new_sprite.sprite_index = game.graphics.next_sprite_id;
+    new_sprite.sprite_index = game.graphics.next_sprite_slot;
     new_sprite.tile_index = tile_index;
-    set_sprite_tile(game.graphics.next_sprite_id, tile_index);
-    game.graphics.next_sprite_id++;
+    set_sprite_tile(game.graphics.next_sprite_slot, tile_index);
+    game.graphics.next_sprite_slot++;
 
     return new_sprite;
 }
@@ -24,16 +24,29 @@ void plot_point_fixed(fixed_n x, fixed_n y)
 void set_game_background(unsigned char *background, unsigned char *tiles)
 {
     game.graphics.active_background_tilemap = background;
-    game.graphics.active_background_tiledata = tiles;
+    game.graphics.active_background_tile_sheet = tiles;
 
-    set_bkg_tiles(0, 0, 20, 18, game.graphics.active_background_tilemap);
-    set_bkg_data(0, 255, game.graphics.active_background_tiledata);
+    //uint8_t background_tileset_size = sizeof(game.graphics.active_background_tilemap);
+
+    uint8_t background_tileset_size = sizeof(tiles) / tiles[0];
+
+    set_bkg_tiles(0, 0, BACKGROUND_WIDTH_TILES, BACKGROUND_HEIGHT_TILES, game.graphics.active_background_tilemap);
+    set_bkg_data(game.graphics.next_background_slot, background_tileset_size, game.graphics.active_background_tile_sheet);
+
+    game.graphics.next_background_slot += background_tileset_size;
+}
+
+void load_background_tiles(unsigned char *tiles)
+{
+    uint8_t background_tileset_size = sizeof(tiles) / tiles[0];
+    set_bkg_data(game.graphics.next_background_slot ,background_tileset_size, tiles);
 }
 
 unsigned char* get_game_background_tilemap(void)
 {
     return game.graphics.active_background_tilemap;
 }
+
 
 void set_sprite_sheet(unsigned char *sprite_sheet)
 {
@@ -51,5 +64,7 @@ void gr_hide_all_sprites(void)
     }
 
 }
+
+// ===  ===
 
 /* End of graphics.c */

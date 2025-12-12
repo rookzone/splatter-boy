@@ -12,6 +12,7 @@
 #include "../physics.h"
 #include "../ball.h"
 #include "../pins.h"
+#include "../debug.h"
 
 // Map assets
 #include "../tiles/pachinkoTiles.h"
@@ -24,7 +25,7 @@ void init_game_screen(void)
 
     // Load in the sprite and background we want
     set_sprite_sheet(PanchinkoTiles);
-    set_game_background(PachinkoMap, PanchinkoTiles);
+    set_game_background(game1Map, PanchinkoTiles);
 
     // Spawn some balls in
     for (uint8_t i = 0; i < NUM_BALLS; i++) {

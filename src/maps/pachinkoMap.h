@@ -22,6 +22,6 @@
 #define pachinko1Height 18
 #define pachinko1Bank 0
 
-extern unsigned char PachinkoMap[];
+extern unsigned char game1Map[];
 
 /* End of PACHINKOMAP.H */

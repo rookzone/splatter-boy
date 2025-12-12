@@ -41,6 +41,7 @@
 #define BACKGROUND_HEIGHT_TILES 18
 #define BACKGROUND_WIDTH_PIXELS 160
 #define BACKGROUND_HEIGHT_PIXELS 144
+#define BACKGROUND_TILESET_SIZE 16
 
 // Friendly name that corresponds with tile position in sprite sheet(s). 
 enum { TILE_BALL = 0, TILE_WALL = 1, TILE_PIN = 2 };
@@ -57,6 +58,8 @@ GameSprite create_sprite(uint8_t tile_index);
 void set_game_background(unsigned char *background, unsigned char *tiles);
 
 unsigned char* get_game_background_tilemap(void);
+
+void load_background_tiles(unsigned char *tiles);
 
 // Load in a sprite sheet
 void set_sprite_sheet(unsigned char *sprite_sheet);
