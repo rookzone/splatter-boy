@@ -1,4 +1,3 @@
-Here are the rapid development workflows tailored to your new Data-Oriented architecture. Keep these as a checklist to ensure you don't miss a connection when adding new features.
 
 ### 1. Workflow: New GameObject
 *Example: Adding a "Spinner" or "Flipper"*
