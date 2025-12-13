@@ -1,4 +1,3 @@
-Here are the rapid development workflows tailored to your new Data-Oriented architecture. Keep these as a checklist to ensure you don't miss a connection when adding new features.
 
 ### 1. Workflow: New GameObject
 *Example: Adding a "Spinner" or "Flipper"*
@@ -90,13 +89,3 @@ Here are the rapid development workflows tailored to your new Data-Oriented arch
     * In `init_game_screen()`:
         * `set_sprite_sheet(NewTiles);`
     * *Note:* Remember GBDK sprite limits (max 128 tiles in VRAM for sprites).
-
----
-
-### ⚠️ Architecture "Golden Rules"
-*Stick to these to maintain the stability of your refactor.*
-
-1.  **No Hidden State:** Never use `static int my_var` inside a function or `file.c` to store game state. Put it in `game_data.h` inside `GameState`.
-2.  **Flags are Key:** Always check `if (obj->flags & COMPONENT_ACTIVE)` before accessing that component's data in a system.
-3.  **Indices over Pointers:** When storing references to other objects (e.g., a ball following a parent), store the `obj->id` (uint8_t), not the pointer `GameObject*`. Pointers can become invalid if you sort the pool; IDs are safer to look up.
-4.  **Strict Init:** Always `memset` or fully initialize `game.objects` when entering a new State (`init_game_screen`) to prevent "ghost" data from the previous state.
