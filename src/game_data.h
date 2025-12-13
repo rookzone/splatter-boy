@@ -23,7 +23,7 @@ typedef struct {
     unsigned char *active_background_tileset;
     unsigned char *active_sprite_sheet;
     uint16_t next_sprite_slot;
-    uint16_t next_background_slot;
+    uint16_t next_background_tile_slot;
     uint8_t sprite_count;
 
 } Graphics;

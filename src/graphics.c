@@ -28,23 +28,16 @@ void set_game_background(unsigned char *background, unsigned char *tiles)
     game.graphics.active_background_tilemap = background;
     game.graphics.active_background_tileset = tiles;
 
-    //uint8_t background_tileset_size = sizeof(game.graphics.active_background_tilemap);
-
-    size_t background_tileset_sizeof = sizeof(tiles) / sizeof(*tiles);
-
-    uint16_t background_tileset_size = (background_tileset_sizeof / 8);
-
-    set_bkg_data(game.graphics.next_background_slot, background_tileset_size, game.graphics.active_background_tileset);
+    set_bkg_data(game.graphics.next_background_tile_slot, BACKGROUND_TILESET_SIZE, game.graphics.active_background_tileset);
 
     set_bkg_tiles(0, 0, BACKGROUND_WIDTH_TILES, BACKGROUND_HEIGHT_TILES, game.graphics.active_background_tilemap);
     
-    game.graphics.next_background_slot += background_tileset_size;
+    game.graphics.next_background_tile_slot += BACKGROUND_TILESET_SIZE;
 }
 
-void load_background_tiles(unsigned char *tiles)
+void load_background_tiles(unsigned char *tiles, uint16_t count)
 {
-    uint8_t background_tileset_size = sizeof(tiles) / sizeof(tiles[0]);
-    set_bkg_data(game.graphics.next_background_slot ,background_tileset_size, tiles);
+    set_bkg_data(game.graphics.next_background_tile_slot ,count, tiles);
 }
 
 unsigned char* get_game_background_tilemap(void)

@@ -2,7 +2,6 @@
 bin/
 dev-tools/
 emu/
-docs/
 lib/
 libexec/
 include/

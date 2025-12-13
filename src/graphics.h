@@ -59,7 +59,7 @@ void set_game_background(unsigned char *background, unsigned char *tiles);
 
 unsigned char* get_game_background_tilemap(void);
 
-void load_background_tiles(unsigned char *tiles);
+void load_background_tiles(unsigned char *tiles, uint16_t count);
 
 // Load in a sprite sheet
 void set_sprite_sheet(unsigned char *sprite_sheet);
