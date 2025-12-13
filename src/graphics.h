@@ -46,7 +46,7 @@
 
 // Tileset sizes
 #define BACKGROUND_TILESET_SIZE 16
-#define MENU_FONT_TILESET_SIZE 26
+#define MENU_FONT_TILESET_SIZE 36
 
 // Friendly name that corresponds with tile position in sprite sheet(s). 
 enum { TILE_BALL = 0, TILE_WALL = 1, TILE_PIN = 2 };
