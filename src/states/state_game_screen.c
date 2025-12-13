@@ -32,9 +32,6 @@ void init_game_screen(void)
     set_sprite_sheet(PanchinkoTiles);
     set_game_background(game1Map, PanchinkoTiles);
 
-    // Load font
-    load_background_tiles(menuFont, MENU_FONT_TILESET_SIZE);
-
     // Spawn some balls in
     for (uint8_t i = 0; i < NUM_BALLS; i++) {
 
@@ -59,6 +56,11 @@ void init_game_screen(void)
     SHOW_BKG;
     SHOW_SPRITES;
     DISPLAY_ON;
+
+    // Load upper case font
+    set_active_font_upper_case(menuFont, 26);
+
+    print_text("ABC");
 }
 
 void update_game_screen(void)
