@@ -1,12 +1,17 @@
 # No GBDK and tools
 bin/
-dev-tools/
-emu/
 lib/
 libexec/
 include/
 
-# Compiled files
+# Do not include platform specific tools
+dev-tools/
+emu/
+
+# Do not include build directory
+build/
+
+# Do not include any binaries or build files
 *.o
 *.exe
 *.gb
@@ -26,6 +31,3 @@ include/
 # OS-specific junk
 .DS_Store
 Thumbs.db
-
-## OS-specific makefile - copy Makefile_windows or Makefile_linux into your own makefile
-Makefile

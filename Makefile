@@ -2,19 +2,26 @@
 PROJECT_NAME = splatter-boy
 SRC_DIR = src
 BUILD_DIR = build
-BIN_DIR = bin
 
 # === Compiler Settings ===
-CC = ./bin/lcc.exe
+# Automatically detect GBDK compiler location
+ifeq ($(OS),Windows_NT)
+    CC = bin/lcc.exe
+    MKDIR = if not exist "$(1)" mkdir "$(1)"
+    RM = rmdir /s /q
+else
+    CC = lcc
+    MKDIR = mkdir -p $(1)
+    RM = rm -rf
+endif
 
 # === Source Files ===
 SRC = $(wildcard $(SRC_DIR)/*.c) \
-	$(wildcard $(SRC_DIR)/tiles/*.c) \
-	$(wildcard $(SRC_DIR)/maps/*.c) \
-	$(wildcard $(SRC_DIR)/states/*.c)
+      $(wildcard $(SRC_DIR)/tiles/*.c) \
+      $(wildcard $(SRC_DIR)/maps/*.c) \
+      $(wildcard $(SRC_DIR)/states/*.c)
 
 # === Output ===
-OBJ = $(patsubst $(SRC_DIR)/%.c,$(BUILD_DIR)/%.o,$(SRC))
 OUT = $(BUILD_DIR)/$(PROJECT_NAME).gb
 
 # === Compiler Flags ===
@@ -22,21 +29,20 @@ CFLAGS = -Wa-l -Wl-m -Wl-j -Iinclude
 
 # === Default Rule ===
 all: $(OUT)
-	@echo "Build complete: $(OUT)"
+	@echo Build complete: $(OUT)
 
-# NEW LINK RULE:
-# This .PHONY rule forces the linker to run every time, fixing the header dependency problem.
-.PHONY: $(OUT)
-$(OUT): $(SRC) $(wildCARD include/*.h) # Added dependency check to be safer, though .PHONY is the main fix
-	@if not exist "$(BUILD_DIR)" mkdir "$(BUILD_DIR)"
-	@if not exist "$(BIN_DIR)" mkdir "$(BIN_DIR)"
+# === Build Rule ===
+$(OUT): $(SRC) $(wildcard include/*.h)
+	@$(call MKDIR,$(BUILD_DIR))
 	$(CC) $(CFLAGS) -o $(OUT) $(SRC)
 
-# === Clean rule ===
+# === Clean Rule ===
 clean:
-	@echo "Cleaning build files..."
-	@rm -rf $(BUILD_DIR) $(BIN_DIR)
-	@echo "Done."
+	@echo Cleaning build files...
+	@$(RM) $(BUILD_DIR)
+	@echo Done.
 
-# === Rebuild rule ===
+# === Rebuild Rule ===
 rebuild: clean all
+
+.PHONY: all clean rebuild
