@@ -18,6 +18,11 @@
 #include "../tiles/pachinkoTiles.h"
 #include "../maps/pachinkoMap.h"
 
+// Font
+
+#include "../tiles/menuFont.h"
+
+
 void init_game_screen(void)
 {
     DISPLAY_OFF;
@@ -26,6 +31,9 @@ void init_game_screen(void)
     // Load in the sprite and background we want
     set_sprite_sheet(PanchinkoTiles);
     set_game_background(game1Map, PanchinkoTiles);
+
+    // Load font
+    load_background_tiles(menuFont, MENU_FONT_TILESET_SIZE);
 
     // Spawn some balls in
     for (uint8_t i = 0; i < NUM_BALLS; i++) {

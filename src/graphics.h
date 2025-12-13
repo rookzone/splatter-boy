@@ -34,14 +34,19 @@
 #define TILE_HALF_WIDTH 4
 #define TILE_HALF_HEIGHT 4
 #define TILE_HALF_LENGTH 4
+
 #define PIN_HALF_WIDTH 3 // Half the width of the pin sprite.
 #define SPRITE_SIZE 8
 #define NUM_HW_sPRITES 40
+
 #define BACKGROUND_WIDTH_TILES 20
 #define BACKGROUND_HEIGHT_TILES 18
 #define BACKGROUND_WIDTH_PIXELS 160
 #define BACKGROUND_HEIGHT_PIXELS 144
+
+// Tileset sizes
 #define BACKGROUND_TILESET_SIZE 16
+#define MENU_FONT_TILESET_SIZE 26
 
 // Friendly name that corresponds with tile position in sprite sheet(s). 
 enum { TILE_BALL = 0, TILE_WALL = 1, TILE_PIN = 2 };

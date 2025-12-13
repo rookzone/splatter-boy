@@ -37,7 +37,11 @@ void set_game_background(unsigned char *background, unsigned char *tiles)
 
 void load_background_tiles(unsigned char *tiles, uint16_t count)
 {
-    set_bkg_data(game.graphics.next_background_tile_slot ,count, tiles);
+    // Load tiles into vram at next available vram slot, size count, array tiles
+    set_bkg_data(game.graphics.next_background_tile_slot, count, tiles);
+
+    // Increment next available vram slot
+    game.graphics.next_background_tile_slot += count;
 }
 
 unsigned char* get_game_background_tilemap(void)
