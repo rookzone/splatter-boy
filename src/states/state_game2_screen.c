@@ -62,6 +62,10 @@ void update_game2_screen(void)
 
     // INPUT FUNCTIONS MISSING, ACCESSING GAMESTATE DIRECTLY
 
+        if (game.system.keys & J_RIGHT && !(game.system.previous_keys & J_RIGHT)){
+            launch_ball_random(find_lowest_ball(), 10, 80, LAUNCH_FORCE_X, -LAUNCH_FORCE_Y);
+    }
+
     if (game.system.keys & J_LEFT && !(game.system.previous_keys & J_LEFT)){
         launch_ball(find_lowest_ball(), 10, 80, LAUNCH_FORCE_X, -LAUNCH_FORCE_Y);
     }

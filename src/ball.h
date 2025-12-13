@@ -7,11 +7,14 @@
 #include "custom_types.h"
 #include "game_object.h"
 #include "game_data.h"
+#include <stdlib.h> // Required for rand()
 
 #define NUM_BALLS 18
 
 #define LAUNCH_FORCE_X TO_FIXED(2)
 #define LAUNCH_FORCE_Y TO_FIXED(2)
+
+void launch_ball_random(GameObject* ball, uint8_t from_x, uint8_t from_y, fixed_n base_power_x, fixed_n base_power_y);
 
 GameObject* spawn_ball(uint8_t x, uint8_t y);
 

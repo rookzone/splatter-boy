@@ -73,6 +73,38 @@ void reset_all_balls(void) {
     }
 }
 
+// ball.c
+
+// ... existing includes ...
+
+void launch_ball_random(GameObject* ball, uint8_t from_x, uint8_t from_y, fixed_n base_power_x, fixed_n base_power_y)
+{
+    // 1. Reset the ball (same logic as your standard launch)
+    ball->physics.vx = 0;
+    ball->physics.vy = 0;
+    ball->physics.fractional_vx = 0;
+    ball->physics.fractional_vy = 0;
+    
+    ball->transform.x = from_x;
+    ball->transform.y = from_y;
+
+    // 2. Calculate Jitter
+    // We want a variation of roughly +/- 0.25 (FIXED_QUARTER)
+    // 1.0 in your fixed point is 256 (FIXED_SHIFT 8)
+    // 0.25 is 64.
+    
+    // rand() & 0x7F gives a range of 0 to 127.
+    // Subtracting 64 shifts this range to -64 to +63.
+    // This creates a spread of roughly -0.25 to +0.25 fixed-point units.
+    
+    fixed_n jitter_x = (rand() & 0x7F) - 100; 
+    fixed_n jitter_y = (rand() & 0x7F) - 100; 
+
+    // 3. Apply the Impulse
+    // Add the jitter to the base power and apply using your physics engine
+    apply_impulse(ball, base_power_x + jitter_x, base_power_y + jitter_y);
+}
+
 
 void launch_ball(GameObject* ball, uint8_t from_x, uint8_t from_y, fixed_n launch_power_x, fixed_n launch_power_y)
 {

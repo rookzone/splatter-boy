@@ -58,9 +58,9 @@ void init_game_screen(void)
     DISPLAY_ON;
 
     // Load upper case font
-    set_active_font_upper_case(menuFont, 26);
+    //set_active_font_upper_case(menuFont, 26);
 
-    print_text("ABC");
+    //print_text("ABC");
 }
 
 void update_game_screen(void)
@@ -73,6 +73,11 @@ void update_game_screen(void)
     if (game.system.keys & J_LEFT && !(game.system.previous_keys & J_LEFT)){
         launch_ball(find_lowest_ball(), 10, 80, LAUNCH_FORCE_X, -LAUNCH_FORCE_Y);
     }
+
+    if (game.system.keys & J_RIGHT && !(game.system.previous_keys & J_RIGHT)){
+            launch_ball_random(find_lowest_ball(), 10, 80, LAUNCH_FORCE_X, -LAUNCH_FORCE_Y);
+    }
+
 
     if ((game.system.keys & J_UP) && !(game.system.previous_keys & J_UP)) {
         reset_all_balls();

@@ -9,16 +9,16 @@ This is in **_VERY EARLY_** stages.
 ## Current Features
 
 - **Custom 8.8 Fixed-Point Physics** Implements a fixed-point number system for sub-pixel movement and velocity
-- **Ball Physics:** Includes gravity, maximum speed enforcement, and functions for initial ball launch and instant velocity impulse application.
+- **Ball Physics:** Includes gravity, collision, bounce, rolling, and sub-pixel precision
 - **Ball-Pin Collision:** Logic supports two distinct interactions based on vertical velocity: **high-speed bounce** with velocity retention and **low-speed rolling** along the pin surface.
-- **Background-Mapped Collision:** Pin collision is detected by reading the background tilemap (`PIN_TILE_ID`), allowing for level designs where pins are part of the level geometry rather than individual sprites.
-- **Game State Management:** Finite state machine implementation and centralised structure
+- **Background-Mapped Collision:** Pin collision is detected by reading the background tilemap (`PIN_TILE_ID`), allowing for level designs where pins have "built-in" collision. This saves VRAM and a LOT of CPU
+- **Game State Management:** Finite state machine implementation and centralised game data structure. Allows for easy reset, save state, and change state (i.e. screen, level)
 
 ## Setup Developer Environment
 
 Dev environment is Win11 with VSCode using Make. Compiler is LCC.exe included with GBDK2020.
 
-_**note**: These are steps for Windows. For linux GBDK will need installing and a Makefile creating to compile. There is a `Makefile_linux` provided, but this might not be correct._
+_**note**: These are steps for Windows. The Makefile should work on Linux in theory, as long as LCC is in PATH, but I have not been able to test this yet. I have no reccomendations for an emulator on Linux, but I'm sure there are plenty of accurate ones with debug features_
 
 Follow these steps to get started:
 
@@ -77,11 +77,11 @@ Follow these steps to get started:
 
 ### Execution Flow
 
-![Basic structure flow](simple-overview-flow.png)
+![Basic structure flow](docs/simple-overview-flow.png)
 
 ### Data Layout
 
-![data diagram](data-storage.png)
+![data diagram](docs/data-storage.png)
 
 ## Programming Styles
 
@@ -125,11 +125,10 @@ https://www.kernel.org/doc/html/v4.10/process/coding-style.html
 
 ### Code
 
-- Expand on collisions and interactions by returning the tile IDs on the background and applying behaviour appropriate for those tiles.
-- build input system that is scalable.
+- Font loading and text display
+- build encapsulated input system
 - **Measure time between any two points** in the code execution would be useful.
 Optimisation will need looking at again.
-- Input system
 - Sound system
 
 ### Project
