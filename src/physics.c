@@ -2,6 +2,7 @@
 
 #include "physics.h"
 #include "graphics.h"
+#include <gb/gb.h>
 
 void update_ball_position(GameObject* ball)
 {
