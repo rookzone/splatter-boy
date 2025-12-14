@@ -1,5 +1,13 @@
 # TODO
 
+## Game
+- [ ] 
+
+## Performance and portability
+- [ ] Decouple GBDK functions from game code. Use macros for inline replacement (function calls are 5-10 frames)
+- [ ] Precompile script that flattens code, pulls functions into flat strucure. May require goto statements
+- [ ]
+
 ## **06/12/2025**
 
 Reset focus after Game Object and Game State architecture.
