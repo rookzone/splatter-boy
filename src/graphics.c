@@ -2,8 +2,9 @@
 
 #include "graphics.h"
 #include "game_data.h"
-
 #include <stdio.h>
+
+#include <gb/gb.h>
 
 // Create sprite with a tracked VRAM number, assign tile, create and return GameSprite object
 GameSprite create_sprite(uint8_t tile_index)

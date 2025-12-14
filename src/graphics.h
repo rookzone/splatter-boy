@@ -16,6 +16,8 @@
 #include <gb/drawing.h>
 #include "custom_types.h"
 
+#include <gb/gb.h>
+
 // Byte that represents the PIN. Used for collision checks 
 #define PIN_TILE_ID 0x02
 

@@ -1,6 +1,5 @@
 // states/state_game_screen.c
 
-#include <gb/gb.h>
 #include <stdio.h>
 
 #include "state_game_screen.h"
@@ -21,6 +20,8 @@
 // Font
 
 #include "../tiles/menuFont.h"
+
+#include <gb/gb.h>
 
 
 void init_game_screen(void)

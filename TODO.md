@@ -1,5 +1,9 @@
 # TODO
 
+# Decouple:
+
+- [ ] Search for "<gb/gb.h>". Any document with this in will have gbdk platform features
+
 ## Game
 - [ ] 
 

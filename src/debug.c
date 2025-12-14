@@ -2,7 +2,6 @@
 
 #include <gbdk/emu_debug.h>
 
-#include <gb/gb.h>
 #include <gbdk/console.h>
 #include <stdio.h>
 #include "debug.h"

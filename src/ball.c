@@ -4,7 +4,6 @@
 #include "graphics.h"
 #include "physics.h"
 #include "game_object.h"
-#include <gb/gb.h>
 
 
 GameObject* spawn_ball(uint8_t x, uint8_t y) {

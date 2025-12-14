@@ -3,7 +3,7 @@
 #ifndef CUSTOM_TYPES_H_
 #define CUSTOM_TYPES_H_
 
-#include <gb/gb.h>
+#include <stdint.h>
 
 typedef struct GameSprite GameSprite;
 

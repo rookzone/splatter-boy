@@ -3,7 +3,6 @@
 #ifndef GAME_DATA_H_
 #define GAME_DATA_H_
 
-#include <gb/gb.h>
 #include "custom_types.h"
 #include "game_object.h"
 

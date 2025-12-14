@@ -5,6 +5,8 @@
 #include <string.h>
 #include <stdio.h>
 
+#include <gb/gb.h>
+
 GameState game;
 
 
