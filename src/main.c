@@ -1,6 +1,5 @@
 ﻿// main.c
 
-#include <gb/gb.h>
 #include "state_manager.h"
 #include "debug.h"
 #include "game_data.h"

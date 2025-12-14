@@ -1,6 +1,5 @@
 ﻿// physics.c
 
-#include <gb/gb.h>
 #include "physics.h"
 #include "graphics.h"
 

@@ -3,8 +3,6 @@
 #ifndef CUSTOM_TYPES_H_
 #define CUSTOM_TYPES_H_
 
-#include <gb/gb.h>
-
 typedef struct GameSprite GameSprite;
 
 // ***** FIXED NUMBERS *****
