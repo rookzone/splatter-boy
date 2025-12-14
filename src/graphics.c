@@ -51,9 +51,10 @@ unsigned char* get_game_background_tilemap(void)
 
 void set_active_font_upper_case(unsigned char *font, uint16_t size)
 {
-    game.graphics.upper_case_font_vram_start_location = 128;
 
-    set_bkg_data(128, size, font);
+    game.graphics.upper_case_font_vram_start_location = game.graphics.next_background_tile_slot;
+
+    load_background_tiles(font, size);
 
     game.graphics.active_font = font;
 
@@ -62,6 +63,9 @@ void set_active_font_upper_case(unsigned char *font, uint16_t size)
 void print_text(char* str)
 {
     uint16_t index = 0;
+
+    uint16_t cursor_x = 1;
+    uint16_t cursor_y = 1;
 
     // if UPPER CASE
     while(str[index]!='\0'){
@@ -75,11 +79,9 @@ void print_text(char* str)
             game.graphics.upper_case_font_vram_start_location + 
             letter_position_in_alphabet;
         
-        // Put the char in buffer.
-        //get_bkg_data(letter_vram_location, 1, game.graphics.active_font);
-
-        printf("Letter position in alphabet: %u\n", letter_position_in_alphabet);
-        printf("Letter VRAM location: %u\n", letter_vram_location);
+        uint8_t *cursor_address = get_bkg_xy_addr(cursor_x, cursor_y);
+        set_vram_byte(cursor_address,letter_vram_location);
+        cursor_x++;
 
         index++;
     }

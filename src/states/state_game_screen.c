@@ -58,9 +58,8 @@ void init_game_screen(void)
     DISPLAY_ON;
 
     // Load upper case font
-    //set_active_font_upper_case(menuFont, 26);
-
-    //print_text("ABC");
+    set_active_font_upper_case(menuFont, 26);
+    print_text("AARON RODGERS");
 }
 
 void update_game_screen(void)
