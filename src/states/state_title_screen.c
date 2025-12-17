@@ -1,6 +1,6 @@
 // states/state_game_screen.c
 
-#include <gb/gb.h>
+#include "../platform/gb/platform.h"
 #include <stdio.h>
 
 #include "state_title_screen.h"

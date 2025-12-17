@@ -13,10 +13,8 @@
 #ifndef GRAPHICS_H_
 #define GRAPHICS_H_
 
-#include <gb/drawing.h>
 #include "custom_types.h"
-
-#include <gb/gb.h>
+#include "platform/gb/platform.h"
 
 // Byte that represents the PIN. Used for collision checks 
 #define PIN_TILE_ID 0x02
@@ -80,7 +78,7 @@ void set_sprite_sheet(unsigned char *sprite_sheet);
 // Fast sprite draw using GBDK in move_sprite routine. Pass pointer to GameSprite
 // Offsets are added here because Game Boy sprites are rendered at (x+8, y+16)
 #define DRAW_SPRITE(obj_ptr, x, y) \
-    move_sprite((obj_ptr)->sprite_index, x + 8, y + 16)
+    platform_move_sprite((obj_ptr)->sprite_index, x + 8, y + 16)
 
 // Plot a point at position in pixel space (int)
 void plot_point_fixed(fixed_n x, fixed_n y);

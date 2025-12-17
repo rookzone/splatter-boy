@@ -1,8 +1,6 @@
 // debug.c
 
-#include <gbdk/emu_debug.h>
-
-#include <gbdk/console.h>
+#include "platform/gb/platform.h"
 #include <stdio.h>
 #include "debug.h"
 #include "game_data.h"
@@ -10,7 +8,7 @@
 // Helper to clear screen and reset cursor
 void debug_cls(void) {
     printf("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n"); // Primitive but effective flush
-    gotoxy(0, 0);
+    platform_console_gotoxy(0, 0);
 }
 
 void debug_print_page_system(void) {

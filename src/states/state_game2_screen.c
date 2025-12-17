@@ -1,6 +1,6 @@
 // states/state_game_screen.c
 
-#include <gb/gb.h>
+#include "../platform/gb/platform.h"
 #include <stdio.h>
 
 #include "state_game2_screen.h"
@@ -21,8 +21,8 @@
 
 void init_game2_screen(void)
 {
-    DISPLAY_OFF;
-    SPRITES_8x8;
+    platform_display_off();
+    platform_sprites_8x8();
 
     // Load in the sprite and background we want
     set_sprite_sheet(PanchinkoTiles);
@@ -50,15 +50,15 @@ void init_game2_screen(void)
     }
 
     // Turn on our screen, sprites, and BG
-    SHOW_BKG;
-    SHOW_SPRITES;
-    DISPLAY_ON;
+    platform_show_background();
+    platform_show_sprites();
+    platform_display_on();
 }
 
 void update_game2_screen(void)
 {
     game.system.previous_keys = game.system.keys;
-    game.system.keys = joypad();
+    game.system.keys = platform_get_input();
 
     // INPUT FUNCTIONS MISSING, ACCESSING GAMESTATE DIRECTLY
 
@@ -84,14 +84,14 @@ void update_game2_screen(void)
     // Draw all balls
     go_draw_all_balls();
         
-    vsync();
+    platform_vsync();
 }
 
 void cleanup_game2_screen(void)
 {
     // Memset?
-    HIDE_SPRITES; 
-    HIDE_BKG;
+    platform_hide_sprites(); 
+    platform_hide_background();
 }
 
 /* End of states/state_game_screen.c */

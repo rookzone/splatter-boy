@@ -4,15 +4,14 @@
 #include "graphics.h"
 #include <string.h>
 #include <stdio.h>
-
-#include <gb/gb.h>
+#include "platform/gb/platform.h"
 
 GameState game;
 
 
 void clear_game_data(GameState* game)
 {
-    DISPLAY_OFF;
+    platform_display_off();
 
     gr_hide_all_sprites();
 
