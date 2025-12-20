@@ -12,7 +12,6 @@
 #include "../graphics.h"
 #include "../physics.h"
 #include "../ball.h"
-#include "../pins.h"
 #include "../debug.h"
 
 // Map assets
