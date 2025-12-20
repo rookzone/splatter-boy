@@ -1,5 +1,6 @@
 // graphics.c
 
+#include "custom_types.h"
 #include "graphics.h"
 #include "game_data.h"
 #include <stdio.h>
@@ -17,7 +18,7 @@ GameSprite create_sprite(uint8_t tile_index)
 }
 
 // Plot a point at position in fixed number space
-void plot_point_fixed(fixed_n x, fixed_n y)
+void plot_point_fixed(fixed_t x, fixed_t y)
 {
     platform_plot_point(FROM_FIXED(x), FROM_FIXED(y));
 }
@@ -59,31 +60,90 @@ void set_active_font_upper_case(unsigned char *font, uint16_t size)
 
 }
 
-void print_text(char* str)
+void print_text(char* str, uint8_t cursor_start_x, uint8_t cursor_start_y)
 {
+
     uint16_t index = 0;
 
-    uint16_t cursor_x = 1;
-    uint16_t cursor_y = 1;
+    uint16_t cursor_x = cursor_start_x;
+    uint16_t cursor_y = cursor_start_y;
 
-    // if UPPER CASE
+
     while(str[index]!='\0'){
 
-        // Grab position in alphabet of character
-        uint16_t letter_position_in_alphabet = 
-            ( (uint8_t)str[index] - UPPER_CASE_ASCII_OFFSET ); // upper case offset 97
 
-        // Tile position in vram is upper case start tile + alphabet position
+
+        // Auto new line if cursor reached edge of screen
+        if (cursor_x == BACKGROUND_WIDTH_TILES-2){
+
+            // draw a dash if previous index was NOT a space (as this is continuation of a word)
+            if ( index > 0 && str[index] != ' ' && str[index-1] != ' ' ){
+
+                uint8_t tile_offset = get_font_tile_index('-');
+
+                uint16_t letter_vram_location = 
+                    game.graphics.upper_case_font_vram_start_location + tile_offset;
+                
+                uint8_t *cursor_address = platform_get_bkg_xy_addr(cursor_x, cursor_y);
+                platform_set_vram_byte(cursor_address, letter_vram_location);
+
+            }
+
+            cursor_y++;
+            cursor_x = cursor_start_x;
+
+            continue;
+        }
+
+        // New line
+        if ((uint8_t)str[index] == 10){
+
+            cursor_y++;
+            cursor_x = cursor_start_x;
+            index++;
+            continue;
+
+        }
+
+        // We need to get the tile index based on the tileset rather than ascii
+        // Returns the equivalent location in the tileset of ascii value
+        uint8_t tile_offset = get_font_tile_index(str[index]);
+
         uint16_t letter_vram_location = 
-            game.graphics.upper_case_font_vram_start_location + 
-            letter_position_in_alphabet;
+            game.graphics.upper_case_font_vram_start_location + tile_offset;
         
         uint8_t *cursor_address = platform_get_bkg_xy_addr(cursor_x, cursor_y);
-        platform_set_vram_byte(cursor_address,letter_vram_location);
+        platform_set_vram_byte(cursor_address, letter_vram_location);
+
         cursor_x++;
 
         index++;
     }
+}
+
+uint8_t get_font_tile_index(char ascii_location) {
+
+    // Handle Uppercase (A-Z)
+    if (ascii_location >= 'A' && ascii_location <= 'Z') {
+        return (ascii_location - 'A'); // Returns 0-25
+    }
+
+    // Handle Lowercase (a-z)
+    if (ascii_location >= 'a' && ascii_location <= 'z') {
+        return (ascii_location - 'a'); // Returns 0-25
+    }
+    
+    // Handle Numbers (0-9)
+    if (ascii_location >= '0' && ascii_location <= '9') {
+        return (ascii_location - '0') + 26; // Returns 26-35
+    }
+
+    // Handle specific symbols
+    if (ascii_location == ' ') return 36;
+    if (ascii_location == '-') return 37;
+    
+    return 0; // Default to space or 'A'
+    
 }
 
 

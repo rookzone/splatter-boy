@@ -12,7 +12,7 @@ typedef struct GameSprite GameSprite;
 // We use a 16bit integer and shift the 8 bit integer to left byte
 // right byte represents a decimal in 1/256ths
 
-typedef int16_t fixed_n;   
+typedef int16_t fixed_t;   
 
 #define FIXED_SHIFT   8           // number of fractional bits
 #define FIXED_ONE     (1 << FIXED_SHIFT)   // 1.0 in fixed (256)
@@ -24,7 +24,7 @@ typedef int16_t fixed_n;
 
 
 // === CONVERSION HELPERS ===
-#define TO_FIXED(x)   ((fixed_n)((x) << FIXED_SHIFT))       // int -> fixed
+#define TO_FIXED(x)   ((fixed_t)((x) << FIXED_SHIFT))       // int -> fixed
 #define FROM_FIXED(x) ((x) >> FIXED_SHIFT)                // fixed -> int
 #define FIXED_ADD(a,b) ((a) + (b))
 #define FIXED_SUB(a,b) ((a) - (b))
@@ -44,8 +44,8 @@ typedef int16_t fixed_n;
 // ** Components **
 typedef struct{
 
-    fixed_n vx, vy; // Velocity
-    fixed_n fractional_vx, fractional_vy; // Velocity fractional accumulater (sub-pixel)
+    fixed_t vx, vy; // Velocity
+    fixed_t fractional_vx, fractional_vy; // Velocity fractional accumulater (sub-pixel)
     uint8_t collision_enabled; // 1 = enable collision, 0 = ignore collision
 
 } PhysicsComponent;

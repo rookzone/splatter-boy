@@ -4,7 +4,8 @@
 #include "graphics.h"
 #include "physics.h"
 #include "game_object.h"
-
+#include "game_data.h"
+#include <stdlib.h>
 
 GameObject* spawn_ball(uint8_t x, uint8_t y) {
 
@@ -77,7 +78,7 @@ void reset_all_balls(void) {
 
 // ... existing includes ...
 
-void launch_ball_random(GameObject* ball, uint8_t from_x, uint8_t from_y, fixed_n base_power_x, fixed_n base_power_y)
+void launch_ball_random(GameObject* ball, uint8_t from_x, uint8_t from_y, fixed_t base_power_x, fixed_t base_power_y)
 {
     // 1. Reset the ball (same logic as your standard launch)
     ball->physics.vx = 0;
@@ -97,8 +98,8 @@ void launch_ball_random(GameObject* ball, uint8_t from_x, uint8_t from_y, fixed_
     // Subtracting 64 shifts this range to -64 to +63.
     // This creates a spread of roughly -0.25 to +0.25 fixed-point units.
     
-    fixed_n jitter_x = (rand() & 0x7F) - 100; 
-    fixed_n jitter_y = (rand() & 0x7F) - 100; 
+    fixed_t jitter_x = (rand() & 0x7F) - 100; 
+    fixed_t jitter_y = (rand() & 0x7F) - 100; 
 
     // 3. Apply the Impulse
     // Add the jitter to the base power and apply using your physics engine
@@ -106,7 +107,7 @@ void launch_ball_random(GameObject* ball, uint8_t from_x, uint8_t from_y, fixed_
 }
 
 
-void launch_ball(GameObject* ball, uint8_t from_x, uint8_t from_y, fixed_n launch_power_x, fixed_n launch_power_y)
+void launch_ball(GameObject* ball, uint8_t from_x, uint8_t from_y, fixed_t launch_power_x, fixed_t launch_power_y)
 {
     ball->physics.vx = 0;
     ball->physics.vy = 0;

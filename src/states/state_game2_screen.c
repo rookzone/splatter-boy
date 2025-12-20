@@ -7,6 +7,7 @@
 
 #include "../state_manager.h" // State manager for switching states
 #include "../game_object.h" // GameObject manager
+#include "../game_data.h"
 // Game elements
 #include "../graphics.h"
 #include "../physics.h"
@@ -19,6 +20,10 @@
 #include "../tiles/pachinkoTiles.h"
 #include "../maps/game2Map.h"
 
+// Font
+
+#include "../tiles/menuFont.h"
+
 void init_game2_screen(void)
 {
     platform_display_off();
@@ -27,6 +32,10 @@ void init_game2_screen(void)
     // Load in the sprite and background we want
     set_sprite_sheet(PanchinkoTiles);
     set_game_background(game2Map, PanchinkoTiles);
+
+    // Load upper case font
+    set_active_font_upper_case(menuFont, 46);
+    print_text("This is the next level - this tests if it carries over ok",1 ,1);
 
     // Spawn some balls in
     for (uint8_t i = 0; i < NUM_BALLS; i++) {

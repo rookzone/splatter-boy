@@ -9,10 +9,9 @@
 /**
  * PLATFORM WRAPPERS (GBDK SPECIFIC)
  * These functions wrap GBDK calls to decouple game logic from the SDK.
- * Using static inline ensures zero overhead.
  */
 
-// --- System & Hardware ---
+// === System & Hardware ===
 
 static inline void platform_display_off(void) {
     DISPLAY_OFF;
@@ -54,7 +53,7 @@ static inline void platform_vsync(void) {
     vsync();
 }
 
-// --- Sprite Operations ---
+// === Sprite Operations ===
 
 static inline void platform_set_sprite_tile(uint8_t nb, uint8_t tile) {
     set_sprite_tile(nb, tile);
@@ -68,7 +67,7 @@ static inline void platform_move_sprite(uint8_t nb, uint8_t x, uint8_t y) {
     move_sprite(nb, x, y);
 }
 
-// --- Background & VRAM Operations ---
+// === Background & VRAM Operations ===
 
 static inline void platform_set_bkg_data(uint8_t first, uint8_t nb, unsigned char *data) {
     set_bkg_data(first, nb, data);
@@ -86,7 +85,7 @@ static inline uint8_t* platform_get_bkg_xy_addr(uint8_t x, uint8_t y) {
     return get_bkg_xy_addr(x, y);
 }
 
-// --- Drawing & Console ---
+// === Drawing & Console ===
 
 static inline void platform_plot_point(uint8_t x, uint8_t y) {
     plot_point(x, y);

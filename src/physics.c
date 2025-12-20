@@ -2,6 +2,7 @@
 
 #include "physics.h"
 #include "graphics.h"
+#include "game_object.h"
 
 void update_ball_position(GameObject* ball)
 {
@@ -24,7 +25,7 @@ void update_ball_position(GameObject* ball)
 
 }
 
-void apply_impulse(GameObject* obj, fixed_n impulse_magnitude_x, fixed_n impulse_magnitude_y)
+void apply_impulse(GameObject* obj, fixed_t impulse_magnitude_x, fixed_t impulse_magnitude_y)
 {
     obj->physics.vx += impulse_magnitude_x;
     obj->physics.vy += impulse_magnitude_y;
@@ -101,7 +102,7 @@ void handle_ball_pin_collision(GameObject* ball)
             // Hit the "correct" side - keep direction but add deflection force
             ball->physics.vx = (ball->physics.vx >> 1);
             
-            // Add a nudge based on offset from center (scaled down)
+            // Add a nudge based on offset from center
             if (distance_x > 0) {
                 ball->physics.vx += FIXED_EIGHTH;  // nudge right
             } else if (distance_x < 0) {
@@ -113,6 +114,7 @@ void handle_ball_pin_collision(GameObject* ball)
         }
         
     } else { 
+
         // === ROLL ===
         
         ball->physics.vy = 0;
@@ -123,12 +125,13 @@ void handle_ball_pin_collision(GameObject* ball)
         // Clamp horizontal speed
         if (ball->physics.vx > MAX_ROLL_SPEED) ball->physics.vx = MAX_ROLL_SPEED;
         else if (ball->physics.vx < -MAX_ROLL_SPEED) ball->physics.vx = -MAX_ROLL_SPEED;
+
     }
 }
 
 // Lookup tables
 
-const fixed_n RANDOM_HORIZONTAL_VX[20] = {
+const fixed_t RANDOM_HORIZONTAL_VX[20] = {
     50,    // +0.5
     -50,   // -0.5
     50,    // +0.5

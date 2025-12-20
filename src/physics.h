@@ -18,7 +18,7 @@
 
 // Physics constants (8.8 fixed-point)
 #define GRAVITY     FIXED_TEENTH  // 256/16
-#define MAX_SPEED   TO_FIXED(2) // Max speed of balls in fixed-point number space
+#define MAX_SPEED   TO_FIXED(10) // Max speed of balls in fixed-point number space
 #define ROLL_FORCE FIXED_QUARTER // Amount of force applied to ball to continue roll
 #define MAX_ROLL_SPEED TO_FIXED(2) // Max speed ball can go while rolling
 #define HORIZONTAL_PIN_FORCE FIXED_QUARTER // For bounce force on x-axis
@@ -26,17 +26,17 @@
 // === FORCE ===
 
 // Apply instant impulse force to ball
-void apply_impulse(GameObject* obj, fixed_n impulse_magnitude_x, fixed_n impulse_magnitude_y);
+void apply_impulse(GameObject* obj, fixed_t impulse_magnitude_x, fixed_t impulse_magnitude_y);
 
 // === BALL PHYSICS ===
 
 void update_ball_position(GameObject* obj);
-void apply_impulse(GameObject* obj, fixed_n impulse_x, fixed_n impulse_y);
+void apply_impulse(GameObject* obj, fixed_t impulse_x, fixed_t impulse_y);
 void handle_ball_pin_collision(GameObject* obj);
 
 // === LOOKUP TABLES ===
 
 // Random horizontal velocities for ball resets
-extern const fixed_n RANDOM_HORIZONTAL_VX[20];
+extern const fixed_t RANDOM_HORIZONTAL_VX[20];
 
 #endif // PHYSICS_H_

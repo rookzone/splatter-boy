@@ -81,7 +81,7 @@ void set_sprite_sheet(unsigned char *sprite_sheet);
     platform_move_sprite((obj_ptr)->sprite_index, x + 8, y + 16)
 
 // Plot a point at position in pixel space (int)
-void plot_point_fixed(fixed_n x, fixed_n y);
+void plot_point_fixed(fixed_t x, fixed_t y);
 
 void gr_hide_all_sprites(void);
 
@@ -91,7 +91,10 @@ void gr_hide_all_sprites(void);
 
 // === FONT AND TEXT ===
 
-void print_text(char* str);
+// Returns the tile index of the font as it does not map to ascii
+uint8_t get_font_tile_index(char c);
+
+void print_text(char* str, uint8_t cursor_start_x, uint8_t cursor_start_y);
 
 void set_active_font_upper_case(unsigned char *font, uint16_t size);
 

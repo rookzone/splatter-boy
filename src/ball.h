@@ -6,14 +6,14 @@
 #include "custom_types.h"
 #include "game_object.h"
 #include "game_data.h"
-#include <stdlib.h> // Required for rand()
+
 
 #define NUM_BALLS 18
 
 #define LAUNCH_FORCE_X TO_FIXED(2)
 #define LAUNCH_FORCE_Y TO_FIXED(2)
 
-void launch_ball_random(GameObject* ball, uint8_t from_x, uint8_t from_y, fixed_n base_power_x, fixed_n base_power_y);
+void launch_ball_random(GameObject* ball, uint8_t from_x, uint8_t from_y, fixed_t base_power_x, fixed_t base_power_y);
 
 GameObject* spawn_ball(uint8_t x, uint8_t y);
 
@@ -21,7 +21,7 @@ void update_ball(GameObject* obj);
 
 void reset_all_balls(void);
 
-void launch_ball(GameObject* ball, uint8_t from_x, uint8_t from_y, fixed_n launch_power_x, fixed_n launch_power_y);
+void launch_ball(GameObject* ball, uint8_t from_x, uint8_t from_y, fixed_t launch_power_x, fixed_t launch_power_y);
 
 GameObject* find_lowest_ball(void);
 
