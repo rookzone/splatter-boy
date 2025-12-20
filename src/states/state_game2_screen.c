@@ -14,7 +14,7 @@
 #include "../ball.h"
 #include "../pins.h"
 #include "../debug.h"
-
+#include "../input.h"
 
 // Map assets
 #include "../tiles/pachinkoTiles.h"
@@ -71,19 +71,19 @@ void update_game2_screen(void)
 
     // INPUT FUNCTIONS MISSING, ACCESSING GAMESTATE DIRECTLY
 
-        if (game.system.keys & J_RIGHT && !(game.system.previous_keys & J_RIGHT)){
-            launch_ball_random(find_lowest_ball(), 10, 80, LAUNCH_FORCE_X, -LAUNCH_FORCE_Y);
-    }
-
-    if (game.system.keys & J_LEFT && !(game.system.previous_keys & J_LEFT)){
+    if (get_key_down(J_LEFT))
         launch_ball(find_lowest_ball(), 10, 80, LAUNCH_FORCE_X, -LAUNCH_FORCE_Y);
-    }
 
-    if ((game.system.keys & J_UP) && !(game.system.previous_keys & J_UP)) {
+    if (get_key_down(J_RIGHT))
+        launch_ball_random(find_lowest_ball(), 10, 80, LAUNCH_FORCE_X, -LAUNCH_FORCE_Y);
+
+    if (get_key_down(J_UP))
         reset_all_balls();
-    }
 
-    if((game.system.keys & J_SELECT) && (game.system.keys & J_A) && !(game.system.previous_keys & (J_SELECT || J_A))) {
+    if (get_key_down(J_DOWN))
+        set_state(STATE_GAME_SCREEN);
+
+    if(get_key_down(J_SELECT) && get_key_down(J_A)) {
         debug_print_page_graphics();
     }
     

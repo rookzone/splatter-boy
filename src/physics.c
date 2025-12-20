@@ -1,8 +1,9 @@
 ﻿// physics.c
 
-#include "physics.h"
+
 #include "graphics.h"
 #include "game_object.h"
+#include "physics.h"
 
 void update_ball_position(GameObject* ball)
 {

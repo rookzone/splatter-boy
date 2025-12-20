@@ -19,7 +19,7 @@ endif
 SRC = $(wildcard $(SRC_DIR)/*.c) \
       $(wildcard $(SRC_DIR)/tiles/*.c) \
       $(wildcard $(SRC_DIR)/maps/*.c) \
-      $(wildcard $(SRC_DIR)/states/*.c)
+      $(wildcard $(SRC_DIR)/states/*.c) \
 
 # === Output ===
 OUT = $(BUILD_DIR)/$(PROJECT_NAME).gb
