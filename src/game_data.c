@@ -8,7 +8,6 @@
 
 GameState game;
 
-
 void clear_game_data(GameState* game)
 {
     platform_display_off();

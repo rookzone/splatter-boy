@@ -41,6 +41,59 @@ typedef int16_t fixed_t;
 #define PHYSICS_ACTIVE   0x04  // Has velocity/physics
 #define RENDERER_ACTIVE    0x08  // Has sprite/should render
 
+// Constants THIS IS REALLY BAD LOL
+
+#define NUM_BALLS 18
+
+#define LAUNCH_FORCE_X TO_FIXED(2)
+#define LAUNCH_FORCE_Y TO_FIXED(2)
+
+#define MAX_GAME_OBJECTS 40
+#define MAX_BALLS 20
+
+// Tile and sprite sizes
+#define TILE_WIDTH          8
+#define TILE_LENGTH         8
+#define TILE_HALF_WIDTH     4
+#define TILE_HALF_HEIGHT    4
+#define TILE_HALF_LENGTH    4
+
+#define PIN_HALF_WIDTH  3
+#define SPRITE_SIZE     8
+#define NUM_HW_sPRITES  40
+
+#define BACKGROUND_WIDTH_TILES      20
+#define BACKGROUND_HEIGHT_TILES     18
+#define BACKGROUND_WIDTH_PIXELS     160
+#define BACKGROUND_HEIGHT_PIXELS    144
+
+// Tileset sizes
+#define BACKGROUND_TILESET_SIZE     16
+#define MENU_FONT_TILESET_SIZE      36
+
+// Offsets for font data
+#define LOWER_CASE_ASCII_OFFSET 'a'
+#define UPPER_CASE_ASCII_OFFSET 'A'
+#define NUMBER_ASCII_OFFSET '0'
+
+// Friendly name that corresponds with tile position in sprite sheet(s). 
+enum { TILE_BALL = 0, TILE_WALL = 1, TILE_PIN = 2 };
+
+// === STATES ===
+
+#define STATE_TITLE_SCREEN 0
+#define STATE_GAME_SCREEN 1
+#define STATE_GAME2_SCREEN 2
+#define STATE_SCORE_SCREEN 3
+#define STATE_DEMO_SCREEN 4
+
+// Physics constants (8.8 fixed-point)
+#define GRAVITY     FIXED_TEENTH  // 256/16
+#define MAX_SPEED   TO_FIXED(2) // Max speed of balls in fixed-point number space
+#define ROLL_FORCE FIXED_QUARTER // Amount of force applied to ball to continue roll
+#define MAX_ROLL_SPEED TO_FIXED(2) // Max speed ball can go while rolling
+#define HORIZONTAL_PIN_FORCE FIXED_QUARTER // For bounce force on x-axis
+
 // ** Components **
 typedef struct{
 
@@ -96,59 +149,59 @@ typedef struct {
 
 } GameObject;
 
+// == GAME STATE ==
 
-// Constants THIS IS REALLY BAD LOL
+// === GAME STATE SUB SYSTEMS ===
 
-#define NUM_BALLS 18
+typedef struct {
 
-#define LAUNCH_FORCE_X TO_FIXED(2)
-#define LAUNCH_FORCE_Y TO_FIXED(2)
+    uint8_t current_state;
+    uint8_t keys;
+    uint8_t previous_keys;
 
-#define MAX_GAME_OBJECTS 40
-#define MAX_BALLS 20
+} System;
 
-// Tile and sprite sizes
-#define TILE_WIDTH          8
-#define TILE_LENGTH         8
-#define TILE_HALF_WIDTH     4
-#define TILE_HALF_HEIGHT    4
-#define TILE_HALF_LENGTH    4
+typedef struct {
+    
+    // === GRAPHICS DATA ===
+    unsigned char *active_background_tilemap;
+    unsigned char *active_background_tileset;
+    unsigned char *active_sprite_sheet;
+    unsigned char *active_font;
 
-#define PIN_HALF_WIDTH  3
-#define SPRITE_SIZE     8
-#define NUM_HW_sPRITES  40
+    // === MEMORY TRACKING ===
+    // fonts
+    uint16_t upper_case_font_vram_start_location;
+    uint16_t lower_case_font_vram_start_location;
+    uint16_t numbers_font_vram_start_location;
+    // Sprites
+    uint16_t next_sprite_slot;
+    uint8_t sprite_count;
+    // Background
+    uint16_t next_background_tile_slot;
 
-#define BACKGROUND_WIDTH_TILES      20
-#define BACKGROUND_HEIGHT_TILES     18
-#define BACKGROUND_WIDTH_PIXELS     160
-#define BACKGROUND_HEIGHT_PIXELS    144
+} Graphics;
 
-// Tileset sizes
-#define BACKGROUND_TILESET_SIZE     16
-#define MENU_FONT_TILESET_SIZE      36
+typedef struct {
+    // Object pool (all game objects live here)
+    GameObject pool[MAX_GAME_OBJECTS];
+    uint8_t total_count;             // Total active objects
+    
+    // Registries (indices into pool for fast iteration by type)
+    uint8_t ball_indices[MAX_BALLS];
+    uint8_t ball_count;
 
-// Offsets for font data
-#define LOWER_CASE_ASCII_OFFSET 'a'
-#define UPPER_CASE_ASCII_OFFSET 'A'
-#define NUMBER_ASCII_OFFSET '0'
+} ObjectManager;
 
-// Friendly name that corresponds with tile position in sprite sheet(s). 
-enum { TILE_BALL = 0, TILE_WALL = 1, TILE_PIN = 2 };
+// === GAME STATE ===
 
-// === STATES ===
+typedef struct {
 
-#define STATE_TITLE_SCREEN 0
-#define STATE_GAME_SCREEN 1
-#define STATE_GAME2_SCREEN 2
-#define STATE_SCORE_SCREEN 3
-#define STATE_DEMO_SCREEN 4
+    System system;
+    Graphics graphics;
+    ObjectManager objects;
 
-// Physics constants (8.8 fixed-point)
-#define GRAVITY     FIXED_TEENTH  // 256/16
-#define MAX_SPEED   TO_FIXED(2) // Max speed of balls in fixed-point number space
-#define ROLL_FORCE FIXED_QUARTER // Amount of force applied to ball to continue roll
-#define MAX_ROLL_SPEED TO_FIXED(2) // Max speed ball can go while rolling
-#define HORIZONTAL_PIN_FORCE FIXED_QUARTER // For bounce force on x-axis
+} GameState;
 
 
 #endif // types_H_
