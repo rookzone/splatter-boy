@@ -3,8 +3,8 @@
 #ifndef GAME_DATA_H_
 #define GAME_DATA_H_
 
-#include "custom_types.h"
-#include "game_object.h"
+#include "types.h"
+#include <stdint.h>
 
 // === GAME STATE SUB SYSTEMS ===
 
@@ -57,7 +57,6 @@ typedef struct {
     ObjectManager objects;
 
 } GameState;
-
 
 extern GameState game;
 

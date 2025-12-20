@@ -3,7 +3,7 @@
 #ifndef DEBUG_H_
 #define DEBUG_H_
 
-#include "custom_types.h"
+#include "types.h"
 
 void debug_cls(void);
 

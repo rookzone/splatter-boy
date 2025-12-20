@@ -10,16 +10,7 @@
 #ifndef STATE_MANAGER_H_
 #define STATE_MANAGER_H_
 
-#include "custom_types.h"
-
-// === STATES ===
-
-#define STATE_TITLE_SCREEN 0
-#define STATE_GAME_SCREEN 1
-#define STATE_GAME2_SCREEN 2
-#define STATE_SCORE_SCREEN 3
-#define STATE_DEMO_SCREEN 4
-
+#include "types.h"
 
 void set_state(uint8_t state);
 

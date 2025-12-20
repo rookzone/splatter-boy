@@ -7,6 +7,7 @@
 
 #include "../state_manager.h" // State manager for switching states
 #include "../game_object.h" // GameObject manager
+#include "../game_data.h"
 
 // Game elements
 #include "../graphics.h"

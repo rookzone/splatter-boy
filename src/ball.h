@@ -3,15 +3,7 @@
 #ifndef BALL_H_
 #define BALL_H_
 
-#include "custom_types.h"
-#include "game_object.h"
-#include "game_data.h"
-
-
-#define NUM_BALLS 18
-
-#define LAUNCH_FORCE_X TO_FIXED(2)
-#define LAUNCH_FORCE_Y TO_FIXED(2)
+#include "types.h"
 
 void launch_ball_random(GameObject* ball, uint8_t from_x, uint8_t from_y, fixed_t base_power_x, fixed_t base_power_y);
 

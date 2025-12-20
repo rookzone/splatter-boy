@@ -13,7 +13,7 @@
 #ifndef GRAPHICS_H_
 #define GRAPHICS_H_
 
-#include "custom_types.h"
+#include "types.h"
 #include "platform/gb/platform.h"
 
 // Byte that represents the PIN. Used for collision checks 
@@ -26,35 +26,7 @@
 #define GRID_TO_PIXEL(x) ((x) << 3)
 
 // Get tilemap Array Index from Col/Row (Row * Width + Col)
-#define GET_TILE_INDEX(col, row) (((uint16_t)(row) * BACKGROUND_WIDTH_TILES) + (col))
-
-// Tile and sprite sizes
-#define TILE_WIDTH          8
-#define TILE_LENGTH         8
-#define TILE_HALF_WIDTH     4
-#define TILE_HALF_HEIGHT    4
-#define TILE_HALF_LENGTH    4
-
-#define PIN_HALF_WIDTH  3
-#define SPRITE_SIZE     8
-#define NUM_HW_sPRITES  40
-
-#define BACKGROUND_WIDTH_TILES      20
-#define BACKGROUND_HEIGHT_TILES     18
-#define BACKGROUND_WIDTH_PIXELS     160
-#define BACKGROUND_HEIGHT_PIXELS    144
-
-// Tileset sizes
-#define BACKGROUND_TILESET_SIZE     16
-#define MENU_FONT_TILESET_SIZE      36
-
-// Offsets for font data
-#define LOWER_CASE_ASCII_OFFSET 'a'
-#define UPPER_CASE_ASCII_OFFSET 'A'
-#define NUMBER_ASCII_OFFSET '0'
-
-// Friendly name that corresponds with tile position in sprite sheet(s). 
-enum { TILE_BALL = 0, TILE_WALL = 1, TILE_PIN = 2 };
+#define GET_TILE_INDEX(col, row) ((((uint16_t)(row) << 4) + ((uint16_t)(row) << 2)) + (col))
 
 // === SPRITE HANDLING ===
 

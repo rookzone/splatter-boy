@@ -3,27 +3,7 @@
 #ifndef GAME_OBJECT_H_
 #define GAME_OBJECT_H_
 
-#include "custom_types.h"
-
-#define MAX_GAME_OBJECTS 40
-#define MAX_BALLS 20
-
-// Forward declaration for the function pointer
-typedef struct GameObject GameObject; 
-
-struct GameObject {
-
-    uint8_t id;
-    uint8_t flags;
-    ObjectType type;
-
-    // Components
-
-    TransformComponent transform;
-    PhysicsComponent physics;
-    RenderComponent renderer;
-
-};
+#include "types.h"
 
 GameObject* go_spawn_object(ObjectType type);
 

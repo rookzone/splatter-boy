@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include "debug.h"
 #include "game_data.h"
+#include "game_object.h"
 
 // Helper to clear screen and reset cursor
 void debug_cls(void) {

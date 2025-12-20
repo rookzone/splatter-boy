@@ -1,11 +1,12 @@
 // ball.c
 
+#include <stdlib.h>
+#include <stdint.h>
 #include "ball.h"
 #include "graphics.h"
 #include "physics.h"
 #include "game_object.h"
 #include "game_data.h"
-#include <stdlib.h>
 
 GameObject* spawn_ball(uint8_t x, uint8_t y) {
 
@@ -36,16 +37,16 @@ GameObject* spawn_ball(uint8_t x, uint8_t y) {
 }
 
 
-void update_ball(GameObject* obj) {
+void update_ball(GameObject* object) {
 
     // Quick validation
-    if (!(obj->flags & PHYSICS_ACTIVE)) return;
+    if (!(object->flags & PHYSICS_ACTIVE)) return;
     
-    // Handle collision (pass GameObject directly)
-    handle_ball_pin_collision(obj);
+    // Handle collision
+    handle_ball_pin_collision(object);
     
-    // Update position (pass GameObject directly)
-    update_ball_position(obj);
+    // Update position
+    update_ball_position(object);
     
 }
 
@@ -74,13 +75,9 @@ void reset_all_balls(void) {
     }
 }
 
-// ball.c
-
-// ... existing includes ...
 
 void launch_ball_random(GameObject* ball, uint8_t from_x, uint8_t from_y, fixed_t base_power_x, fixed_t base_power_y)
 {
-    // 1. Reset the ball (same logic as your standard launch)
     ball->physics.vx = 0;
     ball->physics.vy = 0;
     ball->physics.fractional_vx = 0;
@@ -89,20 +86,9 @@ void launch_ball_random(GameObject* ball, uint8_t from_x, uint8_t from_y, fixed_
     ball->transform.x = from_x;
     ball->transform.y = from_y;
 
-    // 2. Calculate Jitter
-    // We want a variation of roughly +/- 0.25 (FIXED_QUARTER)
-    // 1.0 in your fixed point is 256 (FIXED_SHIFT 8)
-    // 0.25 is 64.
-    
-    // rand() & 0x7F gives a range of 0 to 127.
-    // Subtracting 64 shifts this range to -64 to +63.
-    // This creates a spread of roughly -0.25 to +0.25 fixed-point units.
-    
     fixed_t jitter_x = (rand() & 0x7F) - 100; 
     fixed_t jitter_y = (rand() & 0x7F) - 100; 
 
-    // 3. Apply the Impulse
-    // Add the jitter to the base power and apply using your physics engine
     apply_impulse(ball, base_power_x + jitter_x, base_power_y + jitter_y);
 }
 
@@ -123,6 +109,7 @@ void launch_ball(GameObject* ball, uint8_t from_x, uint8_t from_y, fixed_t launc
 GameObject* find_lowest_ball(void)
 {
     GameObject* lowest_ball = &game.objects.pool[game.objects.ball_indices[0]];
+    // increase in y is decrease in height
     uint8_t highest_y = game.objects.pool[game.objects.ball_indices[0]].transform.y;
 
     for (uint8_t i = 1; i < game.objects.ball_count; i++) {
@@ -135,5 +122,28 @@ GameObject* find_lowest_ball(void)
 
     return lowest_ball;
 }
+
+extern const fixed_t RANDOM_HORIZONTAL_VX[20] = {
+    50,    // +0.5
+    -50,   // -0.5
+    50,    // +0.5
+    50,    // +0.5
+    -50,   // -0.5
+    -50,   // -0.5
+    50,    // +0.5
+    -50,   // -0.5
+    50,    // +0.5
+    -50,   // -0.5
+    50,    // +0.5
+    -50,   // -0.5
+    50,    // +0.5
+    50,    // +0.5
+    -50,   // -0.5
+    -50,   // -0.5
+    50,    // +0.5
+    -50,   // -0.5
+    50,    // +0.5
+    -50    // -0.5
+};
 
 /* End of ball.c */

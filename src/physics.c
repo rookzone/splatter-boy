@@ -1,8 +1,6 @@
 ﻿// physics.c
 
-
 #include "graphics.h"
-#include "game_object.h"
 #include "physics.h"
 
 void update_ball_position(GameObject* ball)
@@ -129,30 +127,5 @@ void handle_ball_pin_collision(GameObject* ball)
 
     }
 }
-
-// Lookup tables
-
-const fixed_t RANDOM_HORIZONTAL_VX[20] = {
-    50,    // +0.5
-    -50,   // -0.5
-    50,    // +0.5
-    50,    // +0.5
-    -50,   // -0.5
-    -50,   // -0.5
-    50,    // +0.5
-    -50,   // -0.5
-    50,    // +0.5
-    -50,   // -0.5
-    50,    // +0.5
-    -50,   // -0.5
-    50,    // +0.5
-    50,    // +0.5
-    -50,   // -0.5
-    -50,   // -0.5
-    50,    // +0.5
-    -50,   // -0.5
-    50,    // +0.5
-    -50    // -0.5
-};
 
 /* End of physics.c */
