@@ -61,16 +61,12 @@ void init_game_screen(void)
     platform_display_on();
 
     // Load upper case font
-    set_active_font_upper_case(menuFont, 38);
-    print_text("Steelers are the best team ever and will win the super bowl 0 - 100\nthis is all lower case",1 ,1);
+    set_active_basic_font(menuFont, BASIC_FONT_TILESET_SIZE);
+    print_text("Steelers are the best team ever, and will win the super bowl 0 - 100!!!\nthis is all lower case, in the code that is.",1 ,1);
 }
 
 void update_game_screen(void)
 {
-    game.system.previous_keys = game.system.keys;
-    game.system.keys = platform_get_input();
-
-    // INPUT FUNCTIONS MISSING, ACCESSING GAMESTATE DIRECTLY
 
     if (get_key_down(J_LEFT))
         launch_ball(find_lowest_ball(), 10, 80, LAUNCH_FORCE_X, -LAUNCH_FORCE_Y);
@@ -94,8 +90,7 @@ void update_game_screen(void)
 
     // Draw all balls
     go_draw_all_balls();
-        
-    platform_vsync();
+    
 }
 
 void cleanup_game_screen(void)

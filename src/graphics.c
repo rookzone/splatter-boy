@@ -49,10 +49,10 @@ unsigned char* get_game_background_tilemap(void)
     return game.graphics.active_background_tilemap;
 }
 
-void set_active_font_upper_case(unsigned char *font, uint16_t size)
+void set_active_basic_font(unsigned char *font, uint16_t size)
 {
 
-    game.graphics.upper_case_font_vram_start_location = game.graphics.next_background_tile_slot;
+    game.graphics.basic_font_vram_start_location = game.graphics.next_background_tile_slot;
 
     load_background_tiles(font, size);
 
@@ -79,7 +79,7 @@ void print_text(char* str, uint8_t cursor_start_x, uint8_t cursor_start_y)
                 uint8_t tile_offset = get_font_tile_index('-');
 
                 uint16_t letter_vram_location = 
-                    game.graphics.upper_case_font_vram_start_location + tile_offset;
+                    game.graphics.basic_font_vram_start_location + tile_offset;
                 
                 uint8_t *cursor_address = platform_get_bkg_xy_addr(cursor_x, cursor_y);
                 platform_set_vram_byte(cursor_address, letter_vram_location);
@@ -99,7 +99,7 @@ void print_text(char* str, uint8_t cursor_start_x, uint8_t cursor_start_y)
             cursor_x = cursor_start_x;
             index++;
             continue;
-            
+
         }
 
         // We need to get the tile index based on the tileset rather than ascii
@@ -107,7 +107,7 @@ void print_text(char* str, uint8_t cursor_start_x, uint8_t cursor_start_y)
         uint8_t tile_offset = get_font_tile_index(str[index]);
 
         uint16_t letter_vram_location = 
-            game.graphics.upper_case_font_vram_start_location + tile_offset;
+            game.graphics.basic_font_vram_start_location + tile_offset;
         
         uint8_t *cursor_address = platform_get_bkg_xy_addr(cursor_x, cursor_y);
         platform_set_vram_byte(cursor_address, letter_vram_location);
@@ -138,6 +138,10 @@ uint8_t get_font_tile_index(char ascii_location) {
     // Handle specific symbols
     if (ascii_location == ' ') return 36;
     if (ascii_location == '-') return 37;
+    if (ascii_location == ',') return 38;
+    if (ascii_location == '.') return 39;
+    if (ascii_location == '!') return 40;
+    if (ascii_location == '?') return 41;
     
     return 0; // Default to space or 'A'
     

@@ -26,9 +26,7 @@ typedef struct {
 
     // === MEMORY TRACKING ===
     // fonts
-    uint16_t upper_case_font_vram_start_location;
-    uint16_t lower_case_font_vram_start_location;
-    uint16_t numbers_font_vram_start_location;
+    uint16_t basic_font_vram_start_location;
     // Sprites
     uint16_t next_sprite_slot;
     uint8_t sprite_count;

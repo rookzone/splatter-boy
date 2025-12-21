@@ -33,8 +33,8 @@ void init_game2_screen(void)
     set_game_background(game2Map, PanchinkoTiles);
 
     // Load upper case font
-    set_active_font_upper_case(menuFont, 46);
-    print_text("This is the next level - this tests if it carries over ok",1 ,1);
+    set_active_basic_font(menuFont, BASIC_FONT_TILESET_SIZE);
+    print_text("a, b, c, d, e, f, g, h, i... 1,2,3,4,5-10...\n what is all this supposed to mean??? !!! --- ...",1 ,1);
 
     // Spawn some balls in
     for (uint8_t i = 0; i < NUM_BALLS; i++) {
@@ -65,9 +65,6 @@ void init_game2_screen(void)
 
 void update_game2_screen(void)
 {
-    game.system.previous_keys = game.system.keys;
-    game.system.keys = platform_get_input();
-
     // INPUT FUNCTIONS MISSING, ACCESSING GAMESTATE DIRECTLY
 
     if (get_key_down(J_LEFT))
@@ -92,7 +89,6 @@ void update_game2_screen(void)
     // Draw all balls
     go_draw_all_balls();
         
-    platform_vsync();
 }
 
 void cleanup_game2_screen(void)
