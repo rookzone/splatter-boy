@@ -119,6 +119,16 @@ void print_text(char* str, uint8_t cursor_start_x, uint8_t cursor_start_y)
     }
 }
 
+
+void text_clear_screen(void)
+{
+
+    for (uint8_t i = 1; i <= DEVICE_SCREEN_HEIGHT; i++){
+        print_text("                    ",1,i);
+    }
+
+}
+
 uint8_t get_font_tile_index(char ascii_location) {
 
     // Handle Uppercase (A-Z)

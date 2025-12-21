@@ -68,6 +68,8 @@ uint8_t get_font_tile_index(char c);
 
 void print_text(char* str, uint8_t cursor_start_x, uint8_t cursor_start_y);
 
+void text_clear_screen(void);
+
 void set_active_basic_font(unsigned char *font, uint16_t size);
 
 #endif // GRAPHICS_H_
