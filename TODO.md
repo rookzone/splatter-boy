@@ -1,16 +1,18 @@
 # TODO
 
+- [ ] Title screen state. Consider boilerplate code that could be factored out
+  The state is supposed to be just game logic, messing about with hardware should be put elsewhere
+
 # Decouple:
 
-- [ ] Search for "<gb/gb.h>". Any document with this in will have gbdk platform features
+- [x] Search for "<gb/gb.h>". Any document with this in will have gbdk platform features
 
 ## Game
 - [ ] 
 
 ## Performance and portability
-- [ ] Decouple GBDK functions from game code. Use macros for inline replacement (function calls are 5-10 frames)
+- [x] Decouple GBDK functions from game code. Use macros for inline replacement (function calls are 5-10 frames)
 - [ ] Precompile script that flattens code, pulls functions into flat strucure. May require goto statements
-- [ ]
 
 ## **06/12/2025**
 
