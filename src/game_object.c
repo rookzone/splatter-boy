@@ -31,7 +31,7 @@ GameObject* go_spawn_object(ObjectType type) {
     
     // Register in type-specific registry
     if (type == OBJ_BALL && game.objects.ball_count < MAX_BALLS) {
-        game.objects.ball_indices[game.objects.ball_count] = pool_index;
+        game.objects.ball_pointers[game.objects.ball_count] =  &game.objects.pool[pool_index];
         game.objects.ball_count++;
     }
 
@@ -45,10 +45,10 @@ void go_update_all_balls(void) {
 
     // Iterate through ball registry
     for (uint8_t i = 0; i < game.objects.ball_count; i++) {
-        uint8_t pool_index = game.objects.ball_indices[i];
-        GameObject* obj = &game.objects.pool[pool_index];
         
-        if (obj->flags & OBJECT_ACTIVE) { // TODO - NEED TO RETHINK UPDATE, FUNC POINTER IS TOO SLOW
+        GameObject* obj = game.objects.ball_pointers[i];
+        
+        if (obj->flags & OBJECT_ACTIVE) {
            update_ball(obj);
         }
     }
@@ -61,8 +61,7 @@ void go_draw_all_balls(void) {
 
     for (uint8_t i = 0; i < game.objects.ball_count; i++) {
 
-        uint8_t pool_index = game.objects.ball_indices[i]; // Grab object pool index from ball register
-        GameObject* obj = &game.objects.pool[pool_index];
+        GameObject* obj = game.objects.ball_pointers[i];
         
         if ((obj->flags & (OBJECT_ACTIVE | RENDERER_ACTIVE)) == (OBJECT_ACTIVE | RENDERER_ACTIVE)) {
             DRAW_SPRITE(&obj->renderer, obj->transform.x, obj->transform.y);
@@ -71,9 +70,9 @@ void go_draw_all_balls(void) {
 }
 
 GameObject* go_return_ball(uint8_t index) {
-    if (index < game.objects.ball_count) {
-        uint8_t pool_index = game.objects.ball_indices[index];
-        return &game.objects.pool[pool_index];
+
+    if (index <= game.objects.ball_count) {
+        return game.objects.ball_pointers[index];
     }
     return NULL;
 }

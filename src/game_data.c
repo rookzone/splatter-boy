@@ -18,7 +18,6 @@ void clear_game_data(GameState* game)
     memset(&game->objects, 0, sizeof(ObjectManager));
     memset(&game->graphics, 0, sizeof(Graphics));
 
-    // Preserve system as this holds state information.
 }
 
 /* End of game_data.c */

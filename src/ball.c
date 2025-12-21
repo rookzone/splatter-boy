@@ -47,7 +47,6 @@ void update_ball(GameObject* object) {
     
     // Update position
     update_ball_position(object);
-    
 }
 
 void reset_all_balls(void) {
@@ -108,22 +107,22 @@ void launch_ball(GameObject* ball, uint8_t from_x, uint8_t from_y, fixed_t launc
 
 GameObject* find_lowest_ball(void)
 {
-    GameObject* lowest_ball = &game.objects.pool[game.objects.ball_indices[0]];
+    GameObject* lowest_ball = game.objects.ball_pointers[0];
     // increase in y is decrease in height
-    uint8_t highest_y = game.objects.pool[game.objects.ball_indices[0]].transform.y;
+    uint8_t highest_y = game.objects.ball_pointers[0]->transform.y;
 
     for (uint8_t i = 1; i < game.objects.ball_count; i++) {
         // Compare the current ball's y-coordinate with the maximum found so far
-        if (game.objects.pool[game.objects.ball_indices[i]].transform.y > highest_y) {
-            highest_y = game.objects.pool[game.objects.ball_indices[i]].transform.y;
-            lowest_ball = &game.objects.pool[game.objects.ball_indices[i]];
+        if (game.objects.ball_pointers[i]->transform.y > highest_y) {
+            highest_y = game.objects.ball_pointers[i]->transform.y;
+            lowest_ball = game.objects.ball_pointers[i];
         }
     }
 
     return lowest_ball;
 }
 
-extern const fixed_t RANDOM_HORIZONTAL_VX[20] = {
+extern const fixed_t RANDOM_HORIZONTAL_VX[30] = {
     50,    // +0.5
     -50,   // -0.5
     50,    // +0.5
@@ -139,11 +138,21 @@ extern const fixed_t RANDOM_HORIZONTAL_VX[20] = {
     50,    // +0.5
     50,    // +0.5
     -50,   // -0.5
+    -50,   // -0.5
+    50,    // +0.5
+    -50,   // -0.5
+    50,    // +0.5
+    -50,    // -0.5
     -50,   // -0.5
     50,    // +0.5
     -50,   // -0.5
     50,    // +0.5
     -50    // -0.5
+    -50,   // -0.5
+    50,    // +0.5
+    50,    // +0.5
+    -50,   // -0.5
+    -50   // -0.5
 };
 
 /* End of ball.c */

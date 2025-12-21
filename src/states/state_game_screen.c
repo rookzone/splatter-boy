@@ -61,7 +61,7 @@ void init_game_screen(void)
     platform_display_on();
 
     // Load upper case font
-    set_active_font_upper_case(menuFont, 46);
+    set_active_font_upper_case(menuFont, 38);
     print_text("Steelers are the best team ever and will win the super bowl 0 - 100\nthis is all lower case",1 ,1);
 }
 

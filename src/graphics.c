@@ -68,10 +68,7 @@ void print_text(char* str, uint8_t cursor_start_x, uint8_t cursor_start_y)
     uint16_t cursor_x = cursor_start_x;
     uint16_t cursor_y = cursor_start_y;
 
-
     while(str[index]!='\0'){
-
-
 
         // Auto new line if cursor reached edge of screen
         if (cursor_x == BACKGROUND_WIDTH_TILES-2){
@@ -96,13 +93,13 @@ void print_text(char* str, uint8_t cursor_start_x, uint8_t cursor_start_y)
         }
 
         // New line
-        if ((uint8_t)str[index] == 10){
+        if ((uint8_t)str[index] == '\n'){
 
             cursor_y++;
             cursor_x = cursor_start_x;
             index++;
             continue;
-
+            
         }
 
         // We need to get the tile index based on the tileset rather than ascii

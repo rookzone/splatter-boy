@@ -16,23 +16,30 @@ else
 endif
 
 # === Source Files ===
+
 SRC = $(wildcard $(SRC_DIR)/*.c) \
       $(wildcard $(SRC_DIR)/tiles/*.c) \
       $(wildcard $(SRC_DIR)/maps/*.c) \
-      $(wildcard $(SRC_DIR)/states/*.c) \
+      $(wildcard $(SRC_DIR)/states/*.c)
+
+# This now includes the root src/ folder headers explicitly
+HEADERS = $(wildcard $(SRC_DIR)/*.h) \
+          $(wildcard $(SRC_DIR)/tiles/*.h) \
+          $(wildcard $(SRC_DIR)/maps/*.h) \
+          $(wildcard $(SRC_DIR)/states/*.h) \
+          $(wildcard $(SRC_DIR)/platform/gb/*.h)
 
 # === Output ===
 OUT = $(BUILD_DIR)/$(PROJECT_NAME).gb
 
 # === Compiler Flags ===
-CFLAGS = -Wa-l -Wl-m -Wl-j -Iinclude
-
-# === Default Rule ===
-all: $(OUT)
-	@echo Build complete: $(OUT)
+# Note: Removed '-Iinclude' and added '-Isrc' so the compiler 
+# can find headers referenced as #include "ball.h"
+CFLAGS = -Wa-l -Wl-m -Wl-j
 
 # === Build Rule ===
-$(OUT): $(SRC) $(wildcard include/*.h)
+# Now the .gb file depends on both .c and .h files
+$(OUT): $(SRC) $(HEADERS)
 	@$(call MKDIR,$(BUILD_DIR))
 	$(CC) $(CFLAGS) -o $(OUT) $(SRC)
 
