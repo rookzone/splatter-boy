@@ -51,12 +51,13 @@ unsigned char* get_game_background_tilemap(void)
 
 void set_active_basic_font(unsigned char *font, uint16_t size)
 {
+    if(!game.graphics.active_font){
 
-    game.graphics.basic_font_vram_start_location = game.graphics.next_background_tile_slot;
+        game.graphics.basic_font_vram_start_location = game.graphics.next_background_tile_slot;
+        load_background_tiles(font, size);
+        game.graphics.active_font = font;
 
-    load_background_tiles(font, size);
-
-    game.graphics.active_font = font;
+    }
 
 }
 

@@ -12,6 +12,9 @@ int game_paused = 0;
 
 void print_pause_text()
 {
+    // Load upper case font
+    set_active_basic_font(menuFont, BASIC_FONT_TILESET_SIZE);
+
     if (game_paused == 1){
         print_text("GAME PAUSED...",3 ,8);
     } else if (game_paused == 0) {
