@@ -71,7 +71,7 @@ void go_draw_all_balls(void) {
 
 GameObject* go_return_ball(uint8_t index) {
 
-    if (index <= game.objects.ball_count) {
+    if (index < game.objects.ball_count) {
         return game.objects.ball_pointers[index];
     }
     return NULL;
