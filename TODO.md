@@ -2,6 +2,12 @@
 
 - [ ] Title screen state. Consider boilerplate code that could be factored out
   The state is supposed to be just game logic, messing about with hardware should be put elsewhere
+- [ ] Refactor text output to "input.h", it's a bit messy in graphics.h (keep the bg vram add in graphics though)
+- [ ] Set font functions should wipe and write over existing font tiles, rather than append to vram
+- [ ] Clear all text function
+- [ ] Delete text function
+- [ ] Text scrolling animation option for print_text
+- [ ] Experiment with window rendering!
 
 # Decouple:
 
