@@ -18,8 +18,7 @@ void print_pause_text(void)
     if (game_paused == 1){
         print_text("GAME PAUSED...",3 ,8);
     } else if (game_paused == 0) {
-        //print_text("              ",3 ,8);
-        text_clear_screen();
+        print_text("              ",3 ,8);
     }
 }
 
