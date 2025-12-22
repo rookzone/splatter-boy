@@ -9,6 +9,11 @@
 - [ ] Text scrolling animation option for print_text
 - [ ] Experiment with window rendering!
 
+- [ ] Remove all GBDK
+- [ ] Create .bat which sets up make, downloads gbdk
+- [ ] linux bash (installs specific linux files and make file)
+- [ ] Proper testing on linux build.
+
 # Decouple:
 
 - [x] Search for "<gb/gb.h>". Any document with this in will have gbdk platform features

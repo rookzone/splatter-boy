@@ -25,6 +25,9 @@ build/
 *.bak
 *.swp
 
+# Feature branch docs
+feature-todo.md
+
 # VSCode settings
 .vscode/
 
