@@ -20,13 +20,13 @@ endif
 SRC = $(wildcard $(SRC_DIR)/*.c) \
       $(wildcard $(SRC_DIR)/tiles/*.c) \
       $(wildcard $(SRC_DIR)/maps/*.c) \
-      $(wildcard $(SRC_DIR)/states/*.c)
+      $(wildcard $(SRC_DIR)/scenes/*.c)
 
 # This now includes the root src/ folder headers explicitly
 HEADERS = $(wildcard $(SRC_DIR)/*.h) \
           $(wildcard $(SRC_DIR)/tiles/*.h) \
           $(wildcard $(SRC_DIR)/maps/*.h) \
-          $(wildcard $(SRC_DIR)/states/*.h) \
+          $(wildcard $(SRC_DIR)/scenes/*.h) \
           $(wildcard $(SRC_DIR)/platform/gb/*.h)
 
 # === Output ===

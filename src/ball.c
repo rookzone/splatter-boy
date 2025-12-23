@@ -6,7 +6,7 @@
 #include "graphics.h"
 #include "physics.h"
 #include "game_object.h"
-#include "game_data.h"
+#include "game_state.h"
 
 GameObject* spawn_ball(uint8_t x, uint8_t y) {
 
@@ -147,7 +147,7 @@ extern const fixed_t RANDOM_HORIZONTAL_VX[30] = {
     50,    // +0.5
     -50,   // -0.5
     50,    // +0.5
-    -50    // -0.5
+    -50,    // -0.5
     -50,   // -0.5
     50,    // +0.5
     50,    // +0.5

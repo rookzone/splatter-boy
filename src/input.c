@@ -1,6 +1,6 @@
 // input.c
 
-#include "game_data.h"
+#include "game_state.h"
 #include "input.h"
 
 

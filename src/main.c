@@ -1,8 +1,8 @@
 ﻿// main.c
 
-#include "state_manager.h"
+#include "scene_manager.h"
 #include "debug.h"
-#include "game_data.h"
+#include "game_state.h"
 #include "input.h"
 #include "graphics.h"
 #include "platform/gb/platform.h"
@@ -25,7 +25,7 @@ void print_pause_text(void)
 
 void main(void) 
 {
-    set_state(STATE_GAME_SCREEN); 
+    set_scene(SCENE_GAME); 
     
     while (1) {
 
@@ -40,7 +40,7 @@ void main(void)
         }
 
         if (!game_paused) {
-            update_state(); 
+            update_scene(); 
         } else {
             
         }

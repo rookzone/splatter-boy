@@ -1,6 +1,6 @@
 // game_data.c
 
-#include "game_data.h"
+#include "game_state.h"
 #include "graphics.h"
 #include <string.h>
 #include <stdio.h>
@@ -8,7 +8,7 @@
 
 GameState game;
 
-void clear_game_data(GameState* game)
+void clear_game_state(GameState* game)
 {
     platform_display_off();
 
