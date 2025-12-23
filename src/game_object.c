@@ -1,7 +1,7 @@
 // game_object.c
 
 #include "game_object.h"
-#include "game_data.h"
+#include "game_state.h"
 #include "graphics.h"
 #include "ball.h"
 #include <string.h>

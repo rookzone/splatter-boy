@@ -1,7 +1,7 @@
 // game_data.h
 
-#ifndef GAME_DATA_H_
-#define GAME_DATA_H_
+#ifndef GAME_STATE_H_
+#define GAME_STATE_H_
 
 #include "types.h"
 #include <stdint.h>
@@ -10,9 +10,10 @@
 
 typedef struct {
 
-    uint8_t current_state;
+    uint8_t current_scene;
     uint8_t keys;
     uint8_t previous_keys;
+    uint8_t paused;
 
 } System;
 
@@ -60,7 +61,7 @@ typedef struct {
 extern GameState game;
 
 // Clean up the state ready for a new setup
-void clear_game_data(GameState* game);
+void clear_game_state(GameState* game);
 
 
-#endif // GAME_DATA_H_
+#endif // GAME_STATE_H_

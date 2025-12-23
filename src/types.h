@@ -42,13 +42,13 @@ typedef int16_t fixed_t;
 #define PHYSICS_ACTIVE   0x04  // Has velocity/physics
 #define RENDERER_ACTIVE    0x08  // Has sprite/should render
 
-// === STATES ===
+// === SCENES ===
 
-#define STATE_TITLE_SCREEN 0
-#define STATE_GAME_SCREEN 1
-#define STATE_GAME2_SCREEN 2
-#define STATE_SCORE_SCREEN 3
-#define STATE_DEMO_SCREEN 4
+#define SCENE_TITLE_SCREEN 0
+#define SCENE_GAME 1
+#define SCENE_GAME2 2
+#define SCENE_SCORE_SCREEN 3
+#define SCENE_DEMO_SCREEN 4
 
 // ** Components **
 typedef struct{

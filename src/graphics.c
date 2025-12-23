@@ -2,7 +2,7 @@
 
 #include "types.h"
 #include "graphics.h"
-#include "game_data.h"
+#include "game_state.h"
 #include <stdio.h>
 
 // Create sprite with a tracked VRAM number, assign tile, create and return GameSprite object
