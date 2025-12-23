@@ -28,6 +28,7 @@ void handle_ball_pin_collision(GameObject* obj);
 
 // === LOOKUP TABLES ===
 
+
 // Random horizontal velocities for ball resets
 extern const fixed_t RANDOM_HORIZONTAL_VX[30];
 

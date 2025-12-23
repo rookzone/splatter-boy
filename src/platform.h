@@ -11,9 +11,9 @@
 #define PLATFORM PLATFORM_GB
 
 // Include the appropriate platform implementation
-#if defined(PLATFORM_GB)
+#if PLATFORM == PLATFORM_GB
     #include "platform/gb/platform_gb.h"
-#elif defined(PLATFORM_GBA)
+#elif PLATFORM == PLATFORM_GBA
     #include "platform/gba/platform_gba.h"
 #else
     // Default to Game Boy if nothing specified
