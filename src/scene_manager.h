@@ -12,6 +12,8 @@ void init_scene(void);
 
 void update_scene(void);
 
+void pause_scene(void);
+
 void cleanup_scene(void);
 
 #endif // SCENE_MANAGER_H_

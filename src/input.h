@@ -3,7 +3,7 @@
 
 #include "types.h"
 
-static inline uint8_t get_key_press(uint8_t key)
+static inline uint8_t get_key_pressed_down(uint8_t key)
 {
     return(game.system.keys & key && !(game.system.previous_keys & key));
 }

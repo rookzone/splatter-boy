@@ -44,6 +44,9 @@ void init_scene(void)
 
 void update_scene(void)
 {
+    if (game.system.paused == 1)
+        return;
+
     switch (game.system.current_scene) 
     {
         case SCENE_GAME:
@@ -60,7 +63,6 @@ void update_scene(void)
             // Handle unknown scene
             break;
     }
-    
 }
 
 void cleanup_scene(void)
