@@ -13,6 +13,7 @@ typedef struct {
     uint8_t current_scene;
     uint8_t keys;
     uint8_t previous_keys;
+    uint8_t paused;
 
 } System;
 
