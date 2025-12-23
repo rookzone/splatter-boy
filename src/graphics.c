@@ -123,8 +123,6 @@ void print_text(char* str, uint8_t cursor_start_x, uint8_t cursor_start_y)
 void text_clear_screen(void)
 {
 
-    
-
     for (uint8_t i = 1; i <= DEVICE_SCREEN_HEIGHT; i++){
         print_text("                    ",1,i);
     }
@@ -147,16 +145,39 @@ uint8_t get_font_tile_index(char ascii_location) {
     if (ascii_location >= '0' && ascii_location <= '9') {
         return (ascii_location - '0') + 26; // Returns 26-35
     }
-
-    // Handle specific symbols
-    if (ascii_location == ' ') return 36;
-    if (ascii_location == '-') return 37;
-    if (ascii_location == ',') return 38;
-    if (ascii_location == '.') return 39;
-    if (ascii_location == '!') return 40;
-    if (ascii_location == '?') return 41;
     
-    return 0; // Default to space or 'A'
+    switch (ascii_location){
+
+        case ' ':
+            return 36;
+        break;
+
+        case '-':
+            return 37;
+        break;
+
+        case ',':
+            return 38;
+        break;
+
+        case '.':
+            return 39;
+        break;
+
+        case '!':
+            return 40;
+        break;
+
+        case '?':
+            return 41;
+        break;
+        
+        default:
+            return 36;
+
+    }
+    
+    return 36; // Default to ' '
     
 }
 
