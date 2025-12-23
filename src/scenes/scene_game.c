@@ -20,6 +20,7 @@
 // Map assets
 #include "../tiles/pachinkoTiles.h"
 #include "../maps/pachinkoMap.h"
+#include "../maps/image.h"
 
 // Font
 #include "../tiles/menuFont.h"
@@ -31,8 +32,14 @@ void init_game_scene(void)
     platform_sprites_8x8();
 
     // Load in the sprite and background we want
+    // IN CONSTANTS THE BG SIZE NEEDS CHANGING TO SIZE IT SAYS
+    // IN THE ACTUAL .C.H IMAGE FILES FROM PNG2ASSET
+    // NEED TO CREATE A FUNCTION TO ACTUALLY READ THAT SIZE
+    // AND THEN IN GRAPHICS HAVE A CURRENT_BG_TILESET_SIZE
+    // AND USE THAT TO DYNAMICALLY STORE THE SIZE...
+    // MAYBE FUNCTION SET_GAME_BACKGROUND COULD DO THIS??
     set_sprite_sheet(PanchinkoTiles);
-    set_game_background(game1Map, PanchinkoTiles);
+    set_game_background(image_map, image_tiles);
 
     // Spawn some balls in
     for (uint8_t i = 0; i < NUM_BALLS; i++) {
