@@ -38,6 +38,7 @@ void init_game_scene(void)
     // AND THEN IN GRAPHICS HAVE A CURRENT_BG_TILESET_SIZE
     // AND USE THAT TO DYNAMICALLY STORE THE SIZE...
     // MAYBE FUNCTION SET_GAME_BACKGROUND COULD DO THIS??
+    // MOVE PNG2ASSET VERSION FROM BIN ON LAPTOP TO HERE...
     set_sprite_sheet(PanchinkoTiles);
     set_game_background(image_map, image_tiles);
 
