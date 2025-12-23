@@ -4,7 +4,7 @@
 
 #include "scene_game.h"
 
-#include "../platform/gb/platform.h"
+#include "../platform.h"
 
 #include "../scene_manager.h" // scene manager for switching scenes
 #include "../game_object.h" // GameObject manager
@@ -22,7 +22,6 @@
 #include "../maps/pachinkoMap.h"
 
 // Font
-
 #include "../tiles/menuFont.h"
 
 

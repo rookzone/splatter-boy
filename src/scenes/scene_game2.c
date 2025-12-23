@@ -1,6 +1,6 @@
 // scenes/scene_game_screen.c
 
-#include "../platform/gb/platform.h"
+#include "../platform.h"
 #include <stdio.h>
 
 #include "scene_game2.h"

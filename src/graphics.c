@@ -171,9 +171,6 @@ uint8_t get_font_tile_index(char ascii_location) {
         case '?':
             return 41;
         break;
-        
-        default:
-            return 36;
 
     }
     

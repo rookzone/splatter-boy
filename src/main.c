@@ -5,7 +5,7 @@
 #include "game_state.h"
 #include "input.h"
 #include "graphics.h"
-#include "platform/gb/platform.h"
+#include "platform.h"
 #include "tiles/menuFont.h"
 
 void print_pause_text(void)

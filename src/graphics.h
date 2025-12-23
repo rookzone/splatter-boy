@@ -14,7 +14,7 @@
 #define GRAPHICS_H_
 
 #include "types.h"
-#include "platform/gb/platform.h"
+#include "platform.h"
 
 // Byte that represents the PIN. Used for collision checks 
 #define PIN_TILE_ID 0x02

@@ -4,10 +4,14 @@
 #include "graphics.h"
 #include <string.h>
 #include <stdio.h>
-#include "platform/gb/platform.h"
+#include "platform.h"
 
 GameState game;
 
+/**
+ * @todo Allow a mask to be passed for fine control over
+ * any parts of the state that should persist
+ */
 void clear_game_state(GameState* game)
 {
     platform_display_off();
