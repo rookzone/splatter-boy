@@ -158,6 +158,8 @@ This is super useful for turning images into PNGs compatible with Game Boy
 
 [Image to GB](https://github.com/systemoflevers/image_to_gb)
 
+Download the image in .bin format. b2c.py can convert the .bin into .c and .h files
+
 Check out png2Asset in gbdk bin directory. Pass an image (Generated from above).
 Will output a tileset and background map that is ready to use.
 

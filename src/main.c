@@ -8,27 +8,25 @@
 #include "platform.h"
 #include "tiles/menuFont.h"
 
-void print_pause_text(void); // prototype
+// Forward declarations
+void print_pause_text(void);
 
 void main(void) 
 {
+    // Load first "game" scene
     set_scene(SCENE_GAME);
-    game.system.paused = 0;
 
     while (1) {
 
-        // Refresh key press values
-        game.system.previous_keys = game.system.keys;
-        game.system.keys = platform_get_input();
-
+        // Pause on start
         if (get_key_pressed_down(J_START)){
             game.system.paused = !game.system.paused;
-            print_pause_text();
+            print_pause_text(); // Update text showing if paused
         }
 
-        update_scene();
+        update_scene(); // Update game scene
 
-        platform_vsync();
+        platform_vsync(); // Await frame end
 
     }
 }

@@ -2,6 +2,7 @@
 
 #include "scene_manager.h"
 #include "game_state.h"
+#include "platform.h"
 
 // Scene headers
 #include "scenes/scene_title_screen.h"
@@ -13,6 +14,7 @@ void set_scene(uint8_t new_scene)
 {
     if (game.system.current_scene != new_scene) {
 
+        game.system.paused = 0; // Make sure game isn't paused
         game.system.current_scene = new_scene;
 
         init_scene();
@@ -44,7 +46,11 @@ void init_scene(void)
 
 void update_scene(void)
 {
-    if (game.system.paused == 1)
+    // Refresh key press values
+    game.system.previous_keys = game.system.keys;
+    game.system.keys = platform_get_input();
+    
+    if (game.system.paused == 1) // Do not update scene if game paused
         return;
 
     switch (game.system.current_scene) 
