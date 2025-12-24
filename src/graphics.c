@@ -29,7 +29,6 @@ void set_game_background(unsigned char *background, unsigned char *tiles)
     game.graphics.active_background_tileset = tiles;
 
     platform_set_bkg_data(game.graphics.next_background_tile_slot, BACKGROUND_TILESET_SIZE, game.graphics.active_background_tileset);
-
     platform_set_bkg_tiles(0, 0, BACKGROUND_WIDTH_TILES, BACKGROUND_HEIGHT_TILES, game.graphics.active_background_tilemap);
     
     game.graphics.next_background_tile_slot += BACKGROUND_TILESET_SIZE;
@@ -56,14 +55,11 @@ void set_active_basic_font(unsigned char *font, uint16_t size)
         game.graphics.basic_font_vram_start_location = game.graphics.next_background_tile_slot;
         load_background_tiles(font, size);
         game.graphics.active_font = font;
-
     }
-
 }
 
 void print_text(char* str, uint8_t cursor_start_x, uint8_t cursor_start_y)
 {
-
     uint16_t index = 0;
 
     uint16_t cursor_x = cursor_start_x;
@@ -122,11 +118,9 @@ void print_text(char* str, uint8_t cursor_start_x, uint8_t cursor_start_y)
 
 void text_clear_screen(void)
 {
-
     for (uint8_t i = 1; i <= DEVICE_SCREEN_HEIGHT; i++){
         print_text("                    ",1,i);
     }
-
 }
 
 uint8_t get_font_tile_index(char ascii_location) {
@@ -145,7 +139,7 @@ uint8_t get_font_tile_index(char ascii_location) {
     if (ascii_location >= '0' && ascii_location <= '9') {
         return (ascii_location - '0') + 26; // Returns 26-35
     }
-    
+
     switch (ascii_location){
 
         case ' ':
@@ -175,7 +169,6 @@ uint8_t get_font_tile_index(char ascii_location) {
     }
     
     return 36; // Default to ' '
-    
 }
 
 
@@ -185,15 +178,13 @@ void set_sprite_sheet(unsigned char *sprite_sheet)
     platform_set_sprite_data(0, 16, game.graphics.active_sprite_sheet);
 }
 
-void gr_hide_all_sprites(void)
-{
-    
+void hide_all_sprites(void)
+{ 
 // Iterate through all 40 hardware sprites
     for (uint8_t i = 0; i < NUM_HW_SPRITES; i++) {
         // This removes any sprites from the screen, they can be reallocated.
         platform_move_sprite(i, 0, 0); 
     }
-
 }
 
 // ===  ===

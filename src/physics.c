@@ -31,14 +31,6 @@ void apply_impulse(GameObject* obj, fixed_t impulse_magnitude_x, fixed_t impulse
     obj->physics.vy += impulse_magnitude_y;
 }
 
-/**
- * @brief Checks a Ball for any collisions with pins, if so applies a bounce
- *  @todo Order of checks could be optimised
- * Change the pins so they are at the top of the tile...
- * My god this likely needs optimising the hell out of.
- * Although filters work well, unlikely to be lots of balls in actual collision simultaeneousy
- * @param ball The Ball object reference to check 
- */
 void check_ball_pin_collision(GameObject* ball)
 {
     

@@ -16,7 +16,7 @@ void clear_game_state(GameState* game)
 {
     platform_display_off();
 
-    gr_hide_all_sprites();
+    hide_all_sprites();
 
     // Wipe GameObjects and Graphics.
     memset(&game->objects, 0, sizeof(ObjectManager));

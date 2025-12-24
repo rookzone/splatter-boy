@@ -45,7 +45,7 @@ void update_ball(GameObject* object) {
     if (!(object->flags & PHYSICS_ACTIVE)) return;
     
     // Handle collision (use system time counter to check for frame skip)
-    if (!(game.system.system_time & COLLISION_FRAME_SKIP))
+    if (!(game.system.system_time & COLLISION_FRAME_SKIP) || object->physics.vy > MAX_SPEED >> 1)
         check_ball_pin_collision(object);
     
     // Update position

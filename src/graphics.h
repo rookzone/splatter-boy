@@ -45,6 +45,8 @@ void load_background_tiles(unsigned char *tiles, uint16_t count);
 // Load in a sprite sheet
 void set_sprite_sheet(unsigned char *sprite_sheet);
 
+void hide_all_sprites(void);
+
 // === DRAWING ===
 
 // Draw sprite at obj->sprite_index
@@ -53,8 +55,6 @@ void set_sprite_sheet(unsigned char *sprite_sheet);
 
 // Plot a point at position in pixel space (int)
 void plot_point_fixed(fixed_t x, fixed_t y);
-
-void gr_hide_all_sprites(void);
 
 // === FONT AND TEXT ===
 
