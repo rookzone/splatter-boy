@@ -36,7 +36,7 @@ GameSprite create_sprite(uint8_t tile_index);
 // === BACKGROUNDS ===
 
 // Loads background tiles and map into memory
-void set_game_background(unsigned char *background, unsigned char *tiles);
+void set_game_background(unsigned char *background, unsigned char *tiles, uint16_t tileset_size);
 
 unsigned char* get_game_background_tilemap(void);
 

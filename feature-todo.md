@@ -1,7 +1,6 @@
 # TODO
 
 
-
 ## Refactor
 
 Factor out text / font code to seperate files

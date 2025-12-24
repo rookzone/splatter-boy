@@ -42,6 +42,14 @@
 // Friendly name that corresponds with tile position in sprite sheet(s). 
 enum { TILE_BALL = 0, TILE_WALL = 1, TILE_PIN = 2 };
 
+// === SCENES ===
+
+#define SCENE_TITLE_SCREEN 1
+#define SCENE_GAME 2
+#define SCENE_GAME2 3
+#define SCENE_SCORE_SCREEN 4
+#define SCENE_DEMO_SCREEN 5
+
 // Physics constants
 
 // Check collision every other frame (0 for every frame)

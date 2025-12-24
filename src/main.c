@@ -14,7 +14,7 @@ void print_pause_text(void);
 void main(void) 
 {
     // Load first "game" scene
-    set_scene(SCENE_GAME);
+    set_scene(SCENE_TITLE_SCREEN);
 
     while (1) {
 

@@ -36,6 +36,7 @@ void init_scene(void)
             break;
         case SCENE_TITLE_SCREEN:
             clear_game_state(&game);
+            init_title_scene();
             break;
 
         default:
@@ -58,7 +59,7 @@ void update_scene(void)
             update_game2_scene();
             break;
         case SCENE_TITLE_SCREEN:
-            //CODE
+            update_title_scene();
             break;
 
         default:
@@ -74,13 +75,13 @@ void cleanup_scene(void)
     switch (current_scene) 
     {
         case SCENE_GAME:
-            // code
+            cleanup_game_scene();
             break;
         case SCENE_GAME2:
-            // code
+            cleanup_game2_scene();
             break;
         case SCENE_TITLE_SCREEN:
-            //CODE
+            cleanup_title_scene();
             break;
 
         default:

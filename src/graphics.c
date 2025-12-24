@@ -23,15 +23,16 @@ void plot_point_fixed(fixed_t x, fixed_t y)
     platform_plot_point(FROM_FIXED(x), FROM_FIXED(y));
 }
 
-void set_game_background(unsigned char *background, unsigned char *tiles)
+void set_game_background(unsigned char *background, unsigned char *tiles, uint16_t tileset_size)
 {
     game.graphics.active_background_tilemap = background;
     game.graphics.active_background_tileset = tiles;
+    game.graphics.active_background_tileset_size = tileset_size; 
 
-    platform_set_bkg_data(game.graphics.next_background_tile_slot, BACKGROUND_TILESET_SIZE, game.graphics.active_background_tileset);
+    platform_set_bkg_data(game.graphics.next_background_tile_slot, game.graphics.active_background_tileset_size, game.graphics.active_background_tileset);
     platform_set_bkg_tiles(0, 0, BACKGROUND_WIDTH_TILES, BACKGROUND_HEIGHT_TILES, game.graphics.active_background_tilemap);
     
-    game.graphics.next_background_tile_slot += BACKGROUND_TILESET_SIZE;
+    game.graphics.next_background_tile_slot += game.graphics.active_background_tileset_size;
 }
 
 void load_background_tiles(unsigned char *tiles, uint16_t count)

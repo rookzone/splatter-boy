@@ -34,6 +34,7 @@ typedef struct {
     uint8_t sprite_count;
     // Background
     uint16_t next_background_tile_slot;
+    uint16_t active_background_tileset_size;
 
 } Graphics;
 

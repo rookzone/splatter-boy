@@ -30,9 +30,9 @@ void init_game2_scene(void)
 
     // Load in the sprite and background we want
     set_sprite_sheet(PanchinkoTiles);
-    set_game_background(game2Map, PanchinkoTiles);
+    set_game_background(game2Map, PanchinkoTiles, 16);
 
-    // Load upper case font
+    // Load basic font
     set_active_basic_font(menuFont, BASIC_FONT_TILESET_SIZE);
     print_text("a, b, c, d, e, f, g, h, i... 1,2,3,4,5-10...\n what is all this supposed to mean??? !!! --- ...",1 ,1);
 
