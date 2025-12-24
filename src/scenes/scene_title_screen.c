@@ -56,8 +56,13 @@ void update_title_scene(void)
         set_scene(SCENE_GAME);
 
     if (get_key_pressed_down(J_DOWN)){
+
         print_text(" start game...",3 ,15);
-        print_text(">credits",3 ,16);
+        // Add blinking cursor...
+        //if (!(game.system.system_time & COLLISION_FRAME_SKIP))
+            print_text(">credits",3 ,16);
+        //else
+
         option_selected = CREDITS;
     }
 
