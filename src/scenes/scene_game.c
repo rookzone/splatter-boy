@@ -20,7 +20,6 @@
 // Map assets
 #include "../tiles/pachinkoTiles.h"
 #include "../maps/pachinkoMap.h"
-#include "../maps/image.h"
 
 // Font
 #include "../tiles/menuFont.h"
@@ -40,7 +39,7 @@ void init_game_scene(void)
     // MAYBE FUNCTION SET_GAME_BACKGROUND COULD DO THIS??
     // MOVE PNG2ASSET VERSION FROM BIN ON LAPTOP TO HERE...
     set_sprite_sheet(PanchinkoTiles);
-    set_game_background(image_map, image_tiles);
+    set_game_background(game1Map, PanchinkoTiles);
 
     // Spawn some balls in
     for (uint8_t i = 0; i < NUM_BALLS; i++) {

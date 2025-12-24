@@ -2,6 +2,7 @@
 
 #include "graphics.h"
 #include "physics.h"
+#include "game_state.h"
 
 void update_ball_position(GameObject* ball)
 {
@@ -38,7 +39,7 @@ void apply_impulse(GameObject* obj, fixed_t impulse_magnitude_x, fixed_t impulse
  * Although filters work well, unlikely to be lots of balls in actual collision simultaeneousy
  * @param ball The Ball object reference to check 
  */
-void handle_ball_pin_collision(GameObject* ball)
+void check_ball_pin_collision(GameObject* ball)
 {
     
     // FILTER: Only handle collision if ball is moving downward
@@ -61,7 +62,7 @@ void handle_ball_pin_collision(GameObject* ball)
     uint16_t tilemap_index = GET_TILE_INDEX(col, row);
 
     // FILTER: Check the tile in the map at that index, if it's a pin tile we need to collide
-    if (get_game_background_tilemap()[tilemap_index] != PIN_TILE_ID)
+    if (game.graphics.active_background_tilemap[tilemap_index] != PIN_TILE_ID)
         return;
             
     // Get coords of pin tile
@@ -72,15 +73,16 @@ void handle_ball_pin_collision(GameObject* ball)
     uint8_t pin_center_x = pin_tile_x + TILE_HALF_WIDTH;
     int8_t distance_x = ball_bottom_x - pin_center_x;
     
-    if (distance_x < -(PIN_HALF_WIDTH+1) || distance_x > (PIN_HALF_WIDTH+1))
+    // FILTER: check if ball is within horizontal collision bounds
+    if (distance_x < -(PIN_HALF_WIDTH) || distance_x > (PIN_HALF_WIDTH))
         return;
 
-    // Calculate vertical distance so collision only happens when top of pin is hit
-    uint8_t pin_visual_top = pin_tile_y + PIN_HALF_WIDTH;
-    int8_t vertical_dist = ball_bottom_y - pin_visual_top;
+    // Calculate vertical distance so collision only happens from above
+    uint8_t pin_center_y = pin_tile_y + PIN_HALF_WIDTH;
+    int8_t distance_y = ball_bottom_y - pin_center_y;
     
-    // Distance for collision is 0 - 4, so anything above 4 or less than 0 SKIP
-    if (vertical_dist < 0 || vertical_dist > TILE_HALF_WIDTH)
+    // FILTER: check if ball is within verticle collision bounds (ignore collision from below)
+    if (distance_y < 0 || distance_y > TILE_HALF_WIDTH)
         return;
 
     // Zero fractional velocity

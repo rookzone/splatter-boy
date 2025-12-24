@@ -10,8 +10,10 @@
 
 GameObject* spawn_ball(uint8_t x, uint8_t y) {
 
-    GameObject* obj = go_spawn_object(OBJ_BALL);
-    if (obj == NULL) return NULL;
+    GameObject* obj = go_new_game_object(OBJ_BALL);
+
+    if (obj == NULL)
+        return NULL;
     
     // Configure components
     obj->flags |= (TRANSFORM_ACTIVE | PHYSICS_ACTIVE | RENDERER_ACTIVE);
@@ -42,8 +44,9 @@ void update_ball(GameObject* object) {
     // Quick validation
     if (!(object->flags & PHYSICS_ACTIVE)) return;
     
-    // Handle collision
-    handle_ball_pin_collision(object);
+    // Handle collision (use system time counter to check for frame skip)
+    if (!(game.system.system_time & COLLISION_FRAME_SKIP))
+        check_ball_pin_collision(object);
     
     // Update position
     update_ball_position(object);

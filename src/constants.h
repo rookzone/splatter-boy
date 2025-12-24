@@ -5,13 +5,12 @@
 
 // Game object limits (defines fixed array size)
 #define MAX_GAME_OBJECTS    40
-#define MAX_BALLS           30
 
 // How many to spawn in
-#define NUM_BALLS 10
+#define NUM_BALLS 18
 
 // Hardware values for GB
-#define NUM_HW_sPRITES  40
+#define NUM_HW_SPRITES  40
 
 // Tile measurements in px
 #define TILE_WIDTH          8
@@ -43,7 +42,10 @@
 // Friendly name that corresponds with tile position in sprite sheet(s). 
 enum { TILE_BALL = 0, TILE_WALL = 1, TILE_PIN = 2 };
 
-// Physics constants (8.8 fixed-point)
+// Physics constants
+
+// Check collision every other frame (0 for every frame)
+#define COLLISION_FRAME_SKIP 1
 
 // Ball launcher
 #define LAUNCH_FORCE_X  TO_FIXED(2)

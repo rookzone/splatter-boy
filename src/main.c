@@ -18,6 +18,9 @@ void main(void)
 
     while (1) {
 
+        // Update state, required every frame
+        update_game_state();
+
         // Pause on start
         if (get_key_pressed_down(J_START)){
             game.system.paused = !game.system.paused;

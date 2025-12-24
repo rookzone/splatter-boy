@@ -12,10 +12,13 @@
 // Creates GameObject and assigns it to the pool
 // Registers the object with it's specific registry function to keep track of index values
 // Incriment index values ready for next object
-GameObject* go_spawn_object(ObjectType type) {
+GameObject* go_new_game_object(ObjectType type) {
 
+    /**
+     * @todo handle max objects
+     */
     if (game.objects.total_count >= MAX_GAME_OBJECTS) {
-        return NULL; // Pool's closed
+        return NULL; 
     }
 
     uint8_t pool_index = game.objects.total_count;
@@ -29,10 +32,16 @@ GameObject* go_spawn_object(ObjectType type) {
     obj->flags = OBJECT_ACTIVE;
     obj->type = type;
     
-    // Register in type-specific registry
-    if (type == OBJ_BALL && game.objects.ball_count < MAX_BALLS) {
+    // Register objects in their type specific registries
+    if (type == OBJ_BALL && game.objects.ball_count < MAX_GAME_OBJECTS) {
         game.objects.ball_pointers[game.objects.ball_count] =  &game.objects.pool[pool_index];
         game.objects.ball_count++;
+    }
+
+    // Register in type-specific registry
+    if (type == OBJ_GENERIC && game.objects.generic_count < MAX_GAME_OBJECTS) {
+        game.objects.generic_pointers[game.objects.generic_count] =  &game.objects.pool[pool_index];
+        game.objects.generic_count++;
     }
 
     // Change to switch case when more objects are built
@@ -45,17 +54,11 @@ void go_update_all_balls(void) {
 
     // Iterate through ball registry
     for (uint8_t i = 0; i < game.objects.ball_count; i++) {
-        
-        GameObject* obj = game.objects.ball_pointers[i];
-        
-        if (obj->flags & OBJECT_ACTIVE) {
-           update_ball(obj);
-        }
+           update_ball(game.objects.ball_pointers[i]);
     }
 }
 
 // Loop through all the registered game objects and draw them
-
 
 void go_draw_all_balls(void) {
 
@@ -63,7 +66,7 @@ void go_draw_all_balls(void) {
 
         GameObject* obj = game.objects.ball_pointers[i];
         
-        if ((obj->flags & (OBJECT_ACTIVE | RENDERER_ACTIVE)) == (OBJECT_ACTIVE | RENDERER_ACTIVE)) {
+        if ((obj->flags & RENDERER_ACTIVE) == RENDERER_ACTIVE) {
             DRAW_SPRITE(&obj->renderer, obj->transform.x, obj->transform.y);
         }
     }

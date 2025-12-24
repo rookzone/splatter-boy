@@ -46,10 +46,6 @@ void init_scene(void)
 
 void update_scene(void)
 {
-    // Refresh key press values
-    game.system.previous_keys = game.system.keys;
-    game.system.keys = platform_get_input();
-    
     if (game.system.paused == 1) // Do not update scene if game paused
         return;
 

@@ -14,6 +14,7 @@ typedef struct {
     uint8_t keys;
     uint8_t previous_keys;
     uint8_t paused;
+    uint16_t system_time;
 
 } System;
 
@@ -39,11 +40,14 @@ typedef struct {
 typedef struct {
     // Object pool (all game objects live here)
     GameObject pool[MAX_GAME_OBJECTS];
-    uint8_t total_count;             // Total active objects
+    uint8_t total_count;
     
-    // Registries (indices into pool for fast iteration by type)
-    GameObject* ball_pointers[MAX_BALLS];
+    // Game object pointer registries
+    GameObject* ball_pointers[MAX_GAME_OBJECTS];
     uint8_t ball_count;
+
+    GameObject* generic_pointers[MAX_GAME_OBJECTS];
+    uint8_t generic_count;
 
 } ObjectManager;
 
@@ -62,6 +66,8 @@ extern GameState game;
 
 // Clean up the state ready for a new setup
 void clear_game_state(GameState* game);
+
+void update_game_state(void);
 
 
 #endif // GAME_STATE_H_

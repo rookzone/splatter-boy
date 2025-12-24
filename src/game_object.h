@@ -5,7 +5,7 @@
 
 #include "types.h"
 
-GameObject* go_spawn_object(ObjectType type);
+GameObject* go_new_game_object(ObjectType type);
 
 void go_update_all_balls(void);
 

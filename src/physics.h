@@ -24,7 +24,7 @@ void apply_impulse(GameObject* obj, fixed_t impulse_magnitude_x, fixed_t impulse
 
 void update_ball_position(GameObject* obj);
 void apply_impulse(GameObject* obj, fixed_t impulse_x, fixed_t impulse_y);
-void handle_ball_pin_collision(GameObject* obj);
+void check_ball_pin_collision(GameObject* obj);
 
 // === LOOKUP TABLES ===
 

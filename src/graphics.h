@@ -47,8 +47,7 @@ void set_sprite_sheet(unsigned char *sprite_sheet);
 
 // === DRAWING ===
 
-// Fast sprite draw using GBDK in move_sprite routine. Pass pointer to GameSprite
-// Offsets are added here because Game Boy sprites are rendered at (x+8, y+16)
+// Draw sprite at obj->sprite_index
 #define DRAW_SPRITE(obj_ptr, x, y) \
     platform_move_sprite((obj_ptr)->sprite_index, x + 8, y + 16)
 
@@ -56,10 +55,6 @@ void set_sprite_sheet(unsigned char *sprite_sheet);
 void plot_point_fixed(fixed_t x, fixed_t y);
 
 void gr_hide_all_sprites(void);
-
-// === ANIMATIONS ===
-
-
 
 // === FONT AND TEXT ===
 

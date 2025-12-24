@@ -5,13 +5,13 @@
 1.  **Define Type:**
     * In `custom_types.h`: Add `OBJ_SPINNER` to the `ObjectType` enum.
 2.  **Update Data Storage:**
-    * In `game_data.h`: Add a registry array to `ObjectManager`.
+    * In `game_state.h`: Add a registry array to `ObjectManager`.
         * `uint8_t spinner_indices[MAX_SPINNERS];`
         * `uint8_t spinner_count;`
 3.  **Create Logic Module:**
     * Create `spinner.c` and `spinner.h`.
     * **Spawn Function:** Create `spawn_spinner(x, y)`.
-        * Call `go_spawn_object(OBJ_SPINNER)`.
+        * Call `go_new_game_object(OBJ_SPINNER)`.
         * Set Flags: `obj->flags |= (TRANSFORM_ACTIVE | RENDERER_ACTIVE);`
         * Initialize components (`obj->transform.x = x`, etc.).
     * **Update Function:** Create `update_spinner(GameObject* obj)`.

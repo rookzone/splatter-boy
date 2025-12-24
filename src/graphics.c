@@ -189,7 +189,7 @@ void gr_hide_all_sprites(void)
 {
     
 // Iterate through all 40 hardware sprites
-    for (uint8_t i = 0; i < NUM_HW_sPRITES; i++) {
+    for (uint8_t i = 0; i < NUM_HW_SPRITES; i++) {
         // This removes any sprites from the screen, they can be reallocated.
         platform_move_sprite(i, 0, 0); 
     }

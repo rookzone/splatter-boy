@@ -50,6 +50,17 @@ typedef int16_t fixed_t;
 #define SCENE_SCORE_SCREEN 3
 #define SCENE_DEMO_SCREEN 4
 
+// === GAME OBJECT ===
+
+// Create definitions for the different object types
+typedef enum {
+    OBJ_BALL,
+    OBJ_PIN,
+    OBJ_SLANTED_WALL,
+    OBJ_GENERIC,
+    OBJ_SPINNER
+} ObjectType;
+
 // ** Components **
 typedef struct{
 
@@ -73,24 +84,6 @@ typedef struct {
     
 } TransformComponent;
 
-// ** Flags and Settings **
-
-// Create definitions for the different object types
-typedef enum {
-    OBJ_BALL,
-    OBJ_PIN,
-    OBJ_SLANTED_WALL,
-    OBJ_GENERAL,
-    OBJ_SPINNER
-} ObjectType;
-
-// === Graphics ===
-
-struct GameSprite {
-    uint8_t sprite_index;
-    uint8_t tile_index;
-};
-
 typedef struct {
 
     uint8_t id;
@@ -104,5 +97,12 @@ typedef struct {
     RenderComponent renderer;
 
 } GameObject;
+
+// === Graphics ===
+
+struct GameSprite {
+    uint8_t sprite_index;
+    uint8_t tile_index;
+};
 
 #endif // types_H_
