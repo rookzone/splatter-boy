@@ -158,10 +158,12 @@ This is super useful for turning images into PNGs compatible with Game Boy
 
 [Image to GB](https://github.com/systemoflevers/image_to_gb)
 
-Download the image in .bin format. b2c.py can convert the .bin into .c and .h files
-
-Check out png2Asset in gbdk bin directory. Pass an image (Generated from above).
-Will output a tileset and background map that is ready to use.
+Use a tool like Image to GB to generate a 4 colour png at 144x160.
+Use `png2asset <filename> -map` to generate a background.
+Place output into src
+Remove includes and make sure both tile arrays are of type `unsigned char`
+Pass tiles and map + number of tiles to set bg e.g...
+`set_game_background(game2Map, PanchinkoTiles, 16);`
 
 ### Sound Tools
 
