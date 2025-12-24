@@ -9,7 +9,7 @@
 #include "tiles/menuFont.h"
 
 // Forward declarations
-void print_pause_text(void);
+void pause_game(void);
 
 void main(void) 
 {
@@ -23,8 +23,7 @@ void main(void)
 
         // Pause on start
         if (get_key_pressed_down(J_START)){
-            game.system.paused = !game.system.paused;
-            print_pause_text(); // Update text showing if paused
+            pause_game(); // Update text showing if paused
         }
 
         update_scene(); // Update game scene
@@ -34,8 +33,14 @@ void main(void)
     }
 }
 
-void print_pause_text(void)
+void pause_game(void)
 {
+
+    if(game.system.current_scene == SCENE_TITLE_SCREEN)
+        return; // Do not pause on title screen
+
+    game.system.paused = !game.system.paused;
+
     // Load upper case font
     set_active_basic_font(menuFont, BASIC_FONT_TILESET_SIZE);
 

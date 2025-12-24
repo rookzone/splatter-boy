@@ -167,6 +167,10 @@ uint8_t get_font_tile_index(char ascii_location) {
             return 41;
         break;
 
+        case '>':
+            return 42;
+        break;
+
     }
     
     return 36; // Default to ' '

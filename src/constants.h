@@ -31,8 +31,8 @@
 
 // Tileset sizes
 #define BACKGROUND_TILESET_SIZE     16
-#define MENU_FONT_TILESET_SIZE      42
-#define BASIC_FONT_TILESET_SIZE     42
+#define MENU_FONT_TILESET_SIZE      43
+#define BASIC_FONT_TILESET_SIZE     43
 
 // Offsets for font data
 #define LOWER_CASE_ASCII_OFFSET     'a'

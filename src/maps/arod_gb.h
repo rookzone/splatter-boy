@@ -7,7 +7,7 @@
 #define arod_gb_TILE_H 8
 #define arod_gb_WIDTH 160
 #define arod_gb_HEIGHT 144
-#define arod_gb_TILE_COUNT 225
+#define arod_gb_TILE_COUNT 200
 #define arod_gb_PALETTE_COUNT 1
 #define arod_gb_COLORS_PER_PALETTE 4
 #define arod_gb_TOTAL_COLORS 4

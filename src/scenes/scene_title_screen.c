@@ -22,6 +22,13 @@
 // Font
 #include "../tiles/menuFont.h"
 
+// Menu options
+#define START_GAME  1
+#define CREDITS     2
+
+// Stores menu selection (default start game)
+uint8_t option_selected = START_GAME;
+
 
 void init_title_scene(void)
 {
@@ -31,13 +38,10 @@ void init_title_scene(void)
 
     set_game_background(arod_gb_map, arod_gb_tiles, arod_gb_TILE_COUNT);
 
-    /**
-     * @todo fix up font to use different vram slot...
-     * 
-     */
-    //
-    //set_active_basic_font(menuFont, BASIC_FONT_TILESET_SIZE);
-    //print_text("Aaron Rodgers Ball Simulator",3 ,15);
+    set_active_basic_font(menuFont, BASIC_FONT_TILESET_SIZE);
+    print_text("Aaron\nRodgers\nBall\nSimulator",1 ,3);
+    print_text(">start game...",3 ,15);
+    print_text(" credits",3 ,16);
 
     // Turn on our screen, sprites, and BG
     platform_show_background();
@@ -48,8 +52,22 @@ void init_title_scene(void)
 
 void update_title_scene(void)
 {
-    if (get_key_pressed_down(J_DOWN))
+    if (get_key_pressed_down(J_START) && option_selected == START_GAME)
         set_scene(SCENE_GAME);
+
+    if (get_key_pressed_down(J_DOWN)){
+        print_text(" start game...",3 ,15);
+        print_text(">credits",3 ,16);
+        option_selected = CREDITS;
+    }
+
+    if (get_key_pressed_down(J_UP)){
+        print_text(">start game...",3 ,15);
+        print_text(" credits",3 ,16);
+        option_selected = START_GAME;
+    }
+
+
 }
 
 void cleanup_title_scene(void)
