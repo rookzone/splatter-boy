@@ -1,6 +1,6 @@
 /*
 
- PACHINKOMAP.H
+ GAME1MAP.H
 
  Map Include File.
 
@@ -18,10 +18,10 @@
 
 */
 
-#define pachinko1Width 20
-#define pachinko1Height 18
-#define pachinko1Bank 0
+#define game1MapWidth 20
+#define game1MapHeight 18
+#define game1MapBank 0
 
 extern unsigned char game1Map[];
 
-/* End of PACHINKOMAP.H */
+/* End of GAME1MAP.H */

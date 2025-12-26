@@ -23,11 +23,9 @@ void apply_impulse(GameObject* obj, fixed_t impulse_magnitude_x, fixed_t impulse
 // === BALL PHYSICS ===
 
 void update_ball_position(GameObject* obj);
-void apply_impulse(GameObject* obj, fixed_t impulse_x, fixed_t impulse_y);
 void check_ball_pin_collision(GameObject* obj);
 
 // === LOOKUP TABLES ===
-
 
 // Random horizontal velocities for ball resets
 extern const fixed_t RANDOM_HORIZONTAL_VX[30];

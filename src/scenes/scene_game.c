@@ -19,7 +19,7 @@
 
 // Map assets
 #include "../tiles/pachinkoTiles.h"
-#include "../maps/pachinkoMap.h"
+#include "../maps/game1Map.h"
 
 // Font
 #include "../tiles/menuFont.h"
@@ -33,7 +33,7 @@ void init_game_scene(void)
     // Load in the sprite and background we want
     set_sprite_sheet(PanchinkoTiles);
 
-    set_game_background(game1Map, PanchinkoTiles, 16);
+    set_game_background(game1Map, game1Tiles, 16);
 
     // Spawn some balls in
     for (uint8_t i = 0; i < NUM_BALLS; i++) {
