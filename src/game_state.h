@@ -4,7 +4,6 @@
 #define GAME_STATE_H_
 
 #include "types.h"
-#include <stdint.h>
 
 // === GAME STATE SUB SYSTEMS ===
 

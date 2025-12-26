@@ -9,10 +9,10 @@
 #define PLATFORM_GB     1
 #define PLATFORM_GBA    2
 
-#define PLATFORM PLATFORM_GB
+#define TARGET_PLATFORM PLATFORM_GB
 
 // Include the appropriate platform implementation
-#if PLATFORM == PLATFORM_GB
+#if TARGET_PLATFORM == PLATFORM_GB
     #include "platform/gb/platform_gb.h"
 #elif PLATFORM == PLATFORM_GBA
     #include "platform/gba/platform_gba.h"
