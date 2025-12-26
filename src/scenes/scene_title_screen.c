@@ -17,7 +17,7 @@
 #include "../input.h"
 
 // background
-#include "../maps/arod_gb.h"
+#include "../backgrounds/arod_gb.h"
 
 // Font
 #include "../tiles/menuFont.h"

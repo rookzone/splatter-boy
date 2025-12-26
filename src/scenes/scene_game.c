@@ -19,7 +19,7 @@
 
 // Map assets
 #include "../tiles/pachinkoTiles.h"
-#include "../maps/game1Map.h"
+#include "../backgrounds/game1Map.h"
 
 // Font
 #include "../tiles/menuFont.h"

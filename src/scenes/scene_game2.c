@@ -17,7 +17,7 @@
 
 // Map assets
 #include "../tiles/pachinkoTiles.h"
-#include "../maps/game2Map.h"
+#include "../backgrounds/game2Map.h"
 
 // Font
 

@@ -38,7 +38,6 @@ GameObject* spawn_ball(uint8_t x, uint8_t y) {
     return obj;
 }
 
-
 void update_ball(GameObject* object) {
 
     // Quick validation

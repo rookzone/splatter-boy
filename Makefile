@@ -18,19 +18,10 @@ endif
 # === Source Files ===
 
 SRC = $(wildcard $(SRC_DIR)/*.c) \
-      $(wildcard $(SRC_DIR)/tiles/*.c) \
-      $(wildcard $(SRC_DIR)/maps/*.c) \
-      $(wildcard $(SRC_DIR)/scenes/*.c) \
-      $(wildcard $(SRC_DIR)/platform/*.c) \
-      $(wildcard $(SRC_DIR)/platform/gb/*.c) \
-      $(wildcard $(SRC_DIR)/platform/gba/*.c)
+      $(wildcard $(SRC_DIR)/*/*.c)
 
 HEADERS = $(wildcard $(SRC_DIR)/*.h) \
-          $(wildcard $(SRC_DIR)/tiles/*.h) \
-          $(wildcard $(SRC_DIR)/maps/*.h) \
-          $(wildcard $(SRC_DIR)/scenes/*.h) \
-          $(wildcard $(SRC_DIR)/platform/gb/*.h) \
-          $(wildcard $(SRC_DIR)/platform/gba/*.h)
+          $(wildcard $(SRC_DIR)/*/*.h)
 
 # === Output ===
 OUT = $(BUILD_DIR)/$(PROJECT_NAME).gb
