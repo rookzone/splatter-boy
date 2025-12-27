@@ -3,6 +3,7 @@ bin/
 lib/
 libexec/
 include/
+examples/
 
 # Do not include platform specific tools
 dev-tools/
