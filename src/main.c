@@ -41,8 +41,9 @@ void pause_game(void)
 
     game.system.paused = !game.system.paused;
 
-    // Load upper case font
-    set_active_basic_font(menuFont, BASIC_FONT_TILESET_SIZE);
+    // Load font if required.
+    if (!game.graphics.active_font)
+        set_active_basic_font(menuFont, BASIC_FONT_TILESET_SIZE);
 
     if (game.system.paused == 1){
         platform_hide_sprites();

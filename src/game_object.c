@@ -54,25 +54,12 @@ void go_update_all_balls(void) {
 
     // Iterate through ball registry
     for (uint8_t i = 0; i < game.objects.ball_count; i++) {
-           update_ball(game.objects.ball_pointers[i]);
+        update_ball(game.objects.ball_pointers[i]);
     }
 }
 
-// Loop through all the registered game objects and draw them
 
-void go_draw_all_balls(void) {
-
-    for (uint8_t i = 0; i < game.objects.ball_count; i++) {
-
-        GameObject* obj = game.objects.ball_pointers[i];
-        
-        if ((obj->flags & RENDERER_ACTIVE) == RENDERER_ACTIVE) {
-            DRAW_SPRITE(&obj->renderer, obj->transform.x, obj->transform.y);
-        }
-    }
-}
-
-GameObject* go_return_ball(uint8_t index) {
+GameObject* go_get_ball(uint8_t index) {
 
     if (index < game.objects.ball_count) {
         return game.objects.ball_pointers[index];

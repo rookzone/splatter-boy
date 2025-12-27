@@ -38,26 +38,33 @@ GameObject* spawn_ball(uint8_t x, uint8_t y) {
     return obj;
 }
 
-void update_ball(GameObject* object) {
+void update_ball(GameObject* obj) {
 
     // Quick validation
-    if (!(object->flags & PHYSICS_ACTIVE)) return;
+    if (!(obj->flags & PHYSICS_ACTIVE)) return;
     
     // Handle collision (use system time counter to check for frame skip)
-    if (!(game.system.system_time & COLLISION_FRAME_SKIP) || object->physics.vy > MAX_SPEED >> 1)
-        check_ball_pin_collision(object);
+    if (!(game.system.system_time & COLLISION_FRAME_SKIP) || obj->physics.vy > MAX_SPEED >> 1)
+        check_ball_pin_collision(obj);
     
     // Update position
-    update_ball_position(object);
+    update_ball_position(obj);
+
+    // Draw at updated position
+    if ((obj->flags & RENDERER_ACTIVE) == RENDERER_ACTIVE)
+        DRAW_SPRITE(&obj->renderer, obj->transform.x, obj->transform.y);
+    
 }
 
+// This is for testing purposes
 void reset_all_balls(void) {
 
     for (uint8_t i = 0; i < game.objects.ball_count; i++) {
 
-        GameObject* obj = go_return_ball(i);
+        GameObject* obj = go_get_ball(i);
 
-        if (obj == NULL) continue;
+        if (obj == NULL)
+            continue;
         
         // Reset position
         if (i < NUM_BALLS >> 1) {
