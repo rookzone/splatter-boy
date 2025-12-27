@@ -75,9 +75,6 @@ void update_game_scene(void)
 
     // Update all balls
     go_update_all_balls();
-
-    // Draw all balls
-    go_draw_all_balls();
     
 }
 

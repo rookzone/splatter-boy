@@ -16,10 +16,6 @@
 #include "types.h"
 #include "platform.h"
 
-// Byte that represents the PIN. Used for collision checks 
-#define PIN_TILE_ID 0x02
-#define WALL_TILE_ID 0x03
-
 // Convert Pixel coordinate to Grid coordinate (Divide by 8)
 #define PIXEL_TO_GRID(x) ((x) >> 3)
 

@@ -50,13 +50,17 @@ GameObject* go_new_game_object(ObjectType type) {
     return obj;
 }
 
-void go_update_all_balls(void) {
+// Update all registered GameObjects
 
+void go_update_all_balls(void) {
     // Iterate through ball registry
     for (uint8_t i = 0; i < game.objects.ball_count; i++) {
         update_ball(game.objects.ball_pointers[i]);
     }
 }
+
+// void go_update_all_walls
+// void go_update_all_spinners
 
 
 GameObject* go_get_ball(uint8_t index) {

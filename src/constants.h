@@ -55,6 +55,10 @@ enum { TILE_BALL = 0, TILE_WALL = 1, TILE_PIN = 2 };
 // Check collision every other frame (0 for every frame)
 #define COLLISION_FRAME_SKIP 1
 
+// Byte that represents collidable objects
+#define PIN_TILE_ID 0x02
+#define WALL_TILE_ID 0x03
+
 // Ball launcher
 #define LAUNCH_FORCE_X  TO_FIXED(2)
 #define LAUNCH_FORCE_Y  TO_FIXED(2)

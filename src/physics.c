@@ -54,7 +54,7 @@ void check_ball_pin_collision(GameObject* ball)
     uint16_t tilemap_index = GET_TILE_INDEX(col, row);
 
     // FILTER: Check the tile in the map at that index, if it's a pin tile we need to collide
-    if (game.graphics.active_background_tilemap[tilemap_index] != PIN_TILE_ID || 
+    if (game.graphics.active_background_tilemap[tilemap_index] != PIN_TILE_ID && 
     game.graphics.active_background_tilemap[tilemap_index] != WALL_TILE_ID)
         return;
             
