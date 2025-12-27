@@ -21,10 +21,6 @@
 #include "../tiles/pachinkoTiles.h"
 #include "../backgrounds/game1Map.h"
 
-// Font
-#include "../tiles/menuFont.h"
-
-
 void init_game_scene(void)
 {
     platform_display_off();
