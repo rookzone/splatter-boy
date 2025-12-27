@@ -45,9 +45,12 @@ void pause_game(void)
     set_active_basic_font(menuFont, BASIC_FONT_TILESET_SIZE);
 
     if (game.system.paused == 1){
+        platform_hide_sprites();
         print_text("GAME PAUSED...",3 ,8);
     } else if (game.system.paused == 0) {
-        print_text("              ",3 ,8);
+        // Clear text
+        reload_active_background();
+        platform_show_sprites();
     }
 }
 

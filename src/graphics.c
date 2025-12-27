@@ -27,12 +27,23 @@ void set_game_background(unsigned char *background, unsigned char *tiles, uint16
 {
     game.graphics.active_background_tilemap = background;
     game.graphics.active_background_tileset = tiles;
-    game.graphics.active_background_tileset_size = tileset_size; 
+    game.graphics.active_background_tileset_size = tileset_size;
+    game.graphics.background_vram_start_location = game.graphics.next_background_tile_slot;
 
-    platform_set_bkg_data(game.graphics.next_background_tile_slot, game.graphics.active_background_tileset_size, game.graphics.active_background_tileset);
+    platform_set_bkg_data(
+        game.graphics.background_vram_start_location,
+        game.graphics.active_background_tileset_size,
+        game.graphics.active_background_tileset
+    );
+
     platform_set_bkg_tiles(0, 0, BACKGROUND_WIDTH_TILES, BACKGROUND_HEIGHT_TILES, game.graphics.active_background_tilemap);
     
     game.graphics.next_background_tile_slot += game.graphics.active_background_tileset_size;
+}
+
+void reload_active_background(void)
+{
+    platform_set_bkg_tiles(0, 0, BACKGROUND_WIDTH_TILES, BACKGROUND_HEIGHT_TILES, game.graphics.active_background_tilemap);
 }
 
 void load_background_tiles(unsigned char *tiles, uint16_t count)

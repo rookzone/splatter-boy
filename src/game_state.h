@@ -36,6 +36,7 @@ typedef struct {
     // Background
     uint16_t next_background_tile_slot;
     uint16_t active_background_tileset_size;
+    uint16_t background_vram_start_location;
 
 } Graphics;
 
