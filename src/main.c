@@ -12,6 +12,43 @@
 #include <gb/gb.h>
 #include "_types.h"
 #include <stdio.h>
+#include <stdlib.h>
+
+
+void bresenham_line(int8_t start_x, int8_t start_y, int8_t end_x, int8_t end_y, uint8_t colour)
+{
+    int8_t delta_x = abs(end_x - start_x);
+    int8_t delta_y = abs(end_y - start_y);
+
+    int8_t step_x = (start_x < end_x) ? 1 : -1;
+    int8_t step_y = (start_y < end_y) ? 1 : -1;
+
+    int8_t error_term = delta_x - delta_y;
+
+    while (1)
+    {
+        plot(start_x, start_y,colour,SOLID);
+
+        if (start_x == end_x && start_y == end_y)
+            break;
+
+        int doubled_error = error_term << 1;  // 2 * error_term using bitshift
+
+        if (doubled_error > -delta_y)
+        {
+            error_term -= delta_y;
+            start_x += step_x;
+        }
+
+        if (doubled_error < delta_x)
+        {
+            error_term += delta_x;
+            start_y += step_y;
+        }
+    }
+}
+
+
 
 
 
