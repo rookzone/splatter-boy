@@ -1,6 +1,6 @@
 // graphics.c
 
-#include "types.h"
+#include "_types.h"
 #include "graphics.h"
 #include "game_state.h"
 #include <stdio.h>

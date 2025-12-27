@@ -3,7 +3,7 @@
 #ifndef BALL_H_
 #define BALL_H_
 
-#include "types.h"
+#include "_types.h"
 
 void launch_ball_random(GameObject* ball, uint8_t from_x, uint8_t from_y, fixed_t base_power_x, fixed_t base_power_y);
 

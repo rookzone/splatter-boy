@@ -1,7 +1,7 @@
 #ifndef INPUT_H_
 #define INPUT_H_
 
-#include "types.h"
+#include "_types.h"
 
 static inline uint8_t get_key_pressed_down(uint8_t key)
 {

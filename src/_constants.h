@@ -1,4 +1,4 @@
-// constants.h
+// __constants.h
 
 #ifndef CONSTANTS_H_
 #define CONSTANTS_H_
@@ -44,11 +44,11 @@ enum { TILE_BALL = 0, TILE_WALL = 1, TILE_PIN = 2 };
 
 // === SCENES ===
 
-#define SCENE_TITLE_SCREEN 1
-#define SCENE_GAME 2
-#define SCENE_GAME2 3
-#define SCENE_SCORE_SCREEN 4
-#define SCENE_DEMO_SCREEN 5
+#define SCENE_TITLE_SCREEN  1
+#define SCENE_GAME          2
+#define SCENE_GAME2         3
+#define SCENE_SCORE_SCREEN  4
+#define SCENE_CUBE          5
 
 // Physics constants
 

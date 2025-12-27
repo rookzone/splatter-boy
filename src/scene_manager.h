@@ -4,7 +4,7 @@
 #ifndef SCENE_MANAGER_H_
 #define SCENE_MANAGER_H_
 
-#include "types.h"
+#include "_types.h"
 
 void set_scene(uint8_t scene);
 

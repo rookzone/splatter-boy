@@ -3,7 +3,7 @@
 #ifndef GAME_STATE_H_
 #define GAME_STATE_H_
 
-#include "types.h"
+#include "_types.h"
 
 // === GAME STATE SUB SYSTEMS ===
 

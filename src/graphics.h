@@ -13,7 +13,7 @@
 #ifndef GRAPHICS_H_
 #define GRAPHICS_H_
 
-#include "types.h"
+#include "_types.h"
 #include "platform.h"
 
 // Byte that represents the PIN. Used for collision checks 

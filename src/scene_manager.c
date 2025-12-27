@@ -8,6 +8,7 @@
 #include "scenes/scene_title_screen.h"
 #include "scenes/scene_game.h"
 #include "scenes/scene_game2.h"
+#include "scenes/cube_scene.h"
 
 
 void set_scene(uint8_t new_scene)
@@ -38,6 +39,10 @@ void init_scene(void)
             clear_game_state(&game);
             init_title_scene();
             break;
+        case SCENE_CUBE:
+            clear_game_state(&game);
+            init_cube_scene();
+            break;
 
         default:
             // Handle unknown scene - back to title?zx
@@ -61,6 +66,9 @@ void update_scene(void)
         case SCENE_TITLE_SCREEN:
             update_title_scene();
             break;
+        case SCENE_CUBE:
+            update_cube_scene();
+            break;
 
         default:
             // Handle unknown scene
@@ -83,6 +91,10 @@ void cleanup_scene(void)
         case SCENE_TITLE_SCREEN:
             cleanup_title_scene();
             break;
+        case SCENE_CUBE:
+            cleanup_cube_scene();
+            break;
+
 
         default:
             // Handle unknown scene

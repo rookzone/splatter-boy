@@ -1,9 +1,9 @@
-// types.h
+// _types.h
 
 #ifndef types_H_
 #define types_H_
 
-#include "constants.h"
+#include "_constants.h"
 #include <stdint.h>
 
 typedef struct GameSprite GameSprite;
