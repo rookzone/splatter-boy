@@ -72,10 +72,6 @@ const uint16_t inv_z_table[256] = {
 void init_cube_scene(void)
 {
 
-    set_active_basic_font(menuFont, BASIC_FONT_TILESET_SIZE);
-    print_text("Hello",1 ,1);
-    //color(WHITE, WHITE, SOLID);
-    //box(0, 0, 159, 143, M_FILL); // Clear once at start
 
 }
 
@@ -119,7 +115,7 @@ void update_cube_scene(void) {
     }
 
     vsync();
-
+    
     // 3. ERASE PREVIOUS FRAME
     if (!first_frame) {
         for (uint8_t e_idx = 0; e_idx < 12; e_idx++) {

@@ -73,4 +73,6 @@ void set_active_basic_font(unsigned char *font, uint16_t size);
 
 void bresenham_line(uint8_t start_x, uint8_t start_y, uint8_t end_x, uint8_t end_y, uint8_t colour);
 
+void fast_line_xor(uint8_t x0, uint8_t y0, uint8_t x1, uint8_t y1);
+
 #endif // GRAPHICS_H_
