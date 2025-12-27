@@ -69,4 +69,8 @@ void text_clear_screen(void);
 
 void set_active_basic_font(unsigned char *font, uint16_t size);
 
+// === MISC RENDERING ===
+
+void bresenham_line(uint8_t start_x, uint8_t start_y, uint8_t end_x, uint8_t end_y, uint8_t colour);
+
 #endif // GRAPHICS_H_

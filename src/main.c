@@ -15,119 +15,13 @@
 #include <stdlib.h>
 
 
-void bresenham_line(int8_t start_x, int8_t start_y, int8_t end_x, int8_t end_y, uint8_t colour)
-{
-    int8_t delta_x = abs(end_x - start_x);
-    int8_t delta_y = abs(end_y - start_y);
-
-    int8_t step_x = (start_x < end_x) ? 1 : -1;
-    int8_t step_y = (start_y < end_y) ? 1 : -1;
-
-    int8_t error_term = delta_x - delta_y;
-
-    while (1)
-    {
-        plot(start_x, start_y,colour,SOLID);
-
-        if (start_x == end_x && start_y == end_y)
-            break;
-
-        int doubled_error = error_term << 1;  // 2 * error_term using bitshift
-
-        if (doubled_error > -delta_y)
-        {
-            error_term -= delta_y;
-            start_x += step_x;
-        }
-
-        if (doubled_error < delta_x)
-        {
-            error_term += delta_x;
-            start_y += step_y;
-        }
-    }
-}
-
-
-
-
-
-
-void render_rotating_cube() {
-    uint8_t i;
-    int16_t sx[8], sy[8]; 
-    
-    // 1. ERASE PREVIOUS FRAME
-    // Instead of clearing the whole screen, we redraw the old lines in XOR mode.
-    color(WHITE,WHITE,SOLID);
-    if (!first_frame) {
-        for (i = 0; i < 12; i++) {
-            line(old_sx[cube_edges[i][0]], old_sy[cube_edges[i][0]],
-                 old_sx[cube_edges[i][1]], old_sy[cube_edges[i][1]]);
-        }
-    }
-
-    // 2. CALCULATE NEW ROTATION
-    cube_angle = (cube_angle + 1) & 63; 
-    fixed_t s = get_sin(cube_angle);
-    fixed_t c = get_cos(cube_angle);
-
-    // Pre-scale sin/cos by 0.25 (shift by 2) to avoid vertex multiplication
-    fixed_t sc = c >> 2; 
-    fixed_t ss = s >> 2;
-
-    for (i = 0; i < 8; i++) {
-        // Use the vertex index 'i' to determine signs based on your cube.js data
-        // x is -64 for 1,2,5,6. z is -64 for 4,5,6,7. y is -64 for 2,3,6,7.
-        int16_t x_comp = (i == 1 || i == 2 || i == 5 || i == 6) ? -sc : sc;
-        int16_t z_comp = (i >= 4) ? -ss : ss;
-        
-        // rx = (x*c - z*s) >> 8  ==> (x/256)*c - (z/256)*s
-        int16_t rx = x_comp - z_comp;
-        // rz = (x*s + z*c) >> 8
-        int16_t rz = ((i == 1 || i == 2 || i == 5 || i == 6) ? -ss : ss) + 
-                     ((i >= 4) ? -sc : sc);
-        
-        int16_t ry = (i == 2 || i == 3 || i == 6 || i == 7) ? -64 : 64;
-        int16_t pz = rz + cube_dz;
-
-        // 3. PROJECT WITH BITSHIFTS
-        // Replacing (rx * 80) with (rx << 6) + (rx << 4) [64 + 16 = 80]
-        // Replacing (ry * 70) with (ry << 6) + (ry << 2) + (ry << 1) [64 + 4 + 2 = 70]
-        sx[i] = (((rx << 6) + (rx << 4)) / pz) + 80;
-        sy[i] = 72 - (((ry << 6) + (ry << 2) + (ry << 1)) / pz);
-    }
-
-    color(BLACK,WHITE,SOLID);
-    // 4. DRAW NEW FRAME
-    for (i = 0; i < 12; i++) {
-        line(sx[cube_edges[i][0]], sy[cube_edges[i][0]],
-             sx[cube_edges[i][1]], sy[cube_edges[i][1]]);
-    }
-
-    // 5. SAVE COORDINATES FOR NEXT FRAME
-    for (i = 0; i < 8; i++) {
-        old_sx[i] = sx[i];
-        old_sy[i] = sy[i];
-    }
-    first_frame = 0;
-}
-
 // Forward declarations
 void pause_game(void);
 
 void main(void) 
 {
     // Load first "game" scene
-    //set_scene(SCENE_TITLE_SCREEN);
-
-    color(WHITE, WHITE, SOLID);
-    box(0, 0, 159, 143, M_FILL); // Clear once at start
-    
-    while(1) {
-
-    }
-
+    set_scene(SCENE_CUBE);
 
     while (1) {
 
