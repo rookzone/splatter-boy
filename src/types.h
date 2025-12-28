@@ -13,7 +13,14 @@ typedef struct GameSprite GameSprite;
 // We use a 16bit integer and shift the 8 bit integer to left byte
 // right byte represents a decimal in 1/256ths
 
-typedef int16_t fixed_t;   
+typedef int16_t fixed_t;
+
+// Fractional fixed-point increment (1/256 resolution).
+// Represents only magnitude.
+// Intended to be added to or subtracted from a signed fixed_t
+// accumulator (positional_accumulator_x,y) for sub-pixel motion.
+typedef uint8_t fraction_t;
+
 
 #define FIXED_SHIFT   8           // number of fractional bits
 #define FIXED_ONE     (1 << FIXED_SHIFT)   // 1.0 in fixed (256)
@@ -33,6 +40,8 @@ typedef int16_t fixed_t;
 // === SLOW MATHS ===
 #define FIXED_MUL(a,b) (((a) * (b)) >> FIXED_SHIFT)
 #define FIXED_DIV(a,b) (((a) << FIXED_SHIFT) / (b))
+
+
 
 // === GAME OBJECT ===
 
@@ -57,7 +66,7 @@ typedef enum {
 typedef struct{
 
     fixed_t vx, vy; // Velocity
-    fixed_t fractional_vx, fractional_vy; // Velocity fractional accumulater (sub-pixel)
+    fixed_t position_accumulator_x, position_accumulator_y; // Velocity fractional accumulater (sub-pixel)
     uint8_t collision_enabled; // 1 = enable collision, 0 = ignore collision
 
 } PhysicsComponent;

@@ -11,17 +11,18 @@ void update_ball_position(GameObject* ball)
     if (ball->physics.vy > MAX_SPEED)
         ball->physics.vy = MAX_SPEED;
     
-    // Add our velocity to the fixed number fraction left over from last frame
-    ball->physics.fractional_vx += ball->physics.vx;
-    ball->physics.fractional_vy += ball->physics.vy;
+    // Add the velocity (rate of change) into the positional accumulator
+    ball->physics.position_accumulator_x += ball->physics.vx;
+    ball->physics.position_accumulator_y += ball->physics.vy;
 
-    // Convert fixed value back to signed integer and apply to screen position
-    ball->transform.x += (int8_t)(ball->physics.fractional_vx >> FIXED_SHIFT);
-    ball->transform.y += (int8_t)(ball->physics.fractional_vy >> FIXED_SHIFT);
+    // Shifts whole number part of accumulator to right-hand byte and applies to screen position
+    ball->transform.x += (int8_t)(ball->physics.position_accumulator_x >> FIXED_SHIFT);
+    ball->transform.y += (int8_t)(ball->physics.position_accumulator_y >> FIXED_SHIFT);
     
-    // Zero off the left-hand byte to leave us with the decimal
-    ball->physics.fractional_vx &= 0xFF;
-    ball->physics.fractional_vy &= 0xFF;
+    // Now chop off left-hand byte as that whole number has already been added to the screen position
+    // This leaves us with just the fractional part, ready for the next frame!
+    ball->physics.position_accumulator_x &= 0xFF;
+    ball->physics.position_accumulator_y &= 0xFF;
 
 }
 
@@ -79,7 +80,7 @@ void check_ball_pin_collision(GameObject* ball)
         return;
 
     // Zero fractional velocity
-    ball->physics.fractional_vy = 0;
+    ball->physics.position_accumulator_y = 0;
 
     if (ball->physics.vy > FIXED_QUARTER) { 
         // === BOUNCE ===

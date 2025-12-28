@@ -25,8 +25,8 @@ GameObject* spawn_ball(uint8_t x, uint8_t y) {
     // Physics
     obj->physics.vx = 0;
     obj->physics.vy = 0;
-    obj->physics.fractional_vx = 0;
-    obj->physics.fractional_vy = 0;
+    obj->physics.position_accumulator_x = 0;
+    obj->physics.position_accumulator_y = 0;
     obj->physics.collision_enabled = 1;
     
     // Render
@@ -78,8 +78,8 @@ void reset_all_balls(void) {
         // Reset physics
         obj->physics.vx = RANDOM_HORIZONTAL_VX[i];
         obj->physics.vy = 0;
-        obj->physics.fractional_vx = 0;
-        obj->physics.fractional_vy = 0;
+        obj->physics.position_accumulator_x = 0;
+        obj->physics.position_accumulator_y = 0;
     }
 }
 
@@ -88,8 +88,8 @@ void launch_ball_random(GameObject* ball, uint8_t from_x, uint8_t from_y, fixed_
 {
     ball->physics.vx = 0;
     ball->physics.vy = 0;
-    ball->physics.fractional_vx = 0;
-    ball->physics.fractional_vy = 0;
+    ball->physics.position_accumulator_x = 0;
+    ball->physics.position_accumulator_y = 0;
     
     ball->transform.x = from_x;
     ball->transform.y = from_y;
@@ -105,10 +105,13 @@ void launch_ball(GameObject* ball, uint8_t from_x, uint8_t from_y, fixed_t launc
 {
     ball->physics.vx = 0;
     ball->physics.vy = 0;
-    ball->physics.fractional_vx = 0;
-    ball->physics.fractional_vy = 0;
+
+    ball->physics.position_accumulator_x = 0;
+    ball->physics.position_accumulator_y = 0;
+
     ball->transform.x = from_x;
     ball->transform.y = from_y;
+
     apply_impulse(ball, launch_power_x, launch_power_y);
 }
 
