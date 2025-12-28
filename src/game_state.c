@@ -1,4 +1,4 @@
-// game_data.c
+// game_state.c
 
 #include "game_state.h"
 #include "graphics.h"

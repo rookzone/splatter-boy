@@ -12,13 +12,11 @@ typedef struct GameSprite GameSprite;
 // These are a way to represent decimal numbers
 // We use a 16bit integer and shift the 8 bit integer to left byte
 // right byte represents a decimal in 1/256ths
-
 typedef int16_t fixed_t;
 
-// Fractional fixed-point increment (1/256 resolution).
-// Represents only magnitude.
-// Intended to be added to or subtracted from a signed fixed_t
-// accumulator (positional_accumulator_x,y) for sub-pixel motion.
+// Fractional-only fixed-point increment (1/256).
+// Cannot represent whole units on its own.
+// Designed to be accumulated into a fixed_t value for sub-pixel motion.
 typedef uint8_t fraction_t;
 
 
@@ -66,7 +64,7 @@ typedef enum {
 typedef struct{
 
     fixed_t vx, vy; // Velocity
-    fixed_t position_accumulator_x, position_accumulator_y; // Velocity fractional accumulater (sub-pixel)
+    fixed_t position_accumulator_x, position_accumulator_y; // Position accumulator (sub-pixel)
     uint8_t collision_enabled; // 1 = enable collision, 0 = ignore collision
 
 } PhysicsComponent;
