@@ -8,7 +8,7 @@
 
 // How many to spawn in
 #define NUM_BALLS 15
-#define MAX_BALLS 15
+#define MAX_BALLS 25
 
 // Hardware values for GB
 #define NUM_HW_SPRITES  40

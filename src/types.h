@@ -14,6 +14,7 @@ typedef struct GameSprite GameSprite;
 // right byte represents a decimal in 1/256ths
 typedef int16_t fixed_t;
 
+
 // Fractional-only fixed-point increment (1/256).
 // Cannot represent whole units on its own.
 // Designed to be accumulated into a fixed_t value for sub-pixel motion.
