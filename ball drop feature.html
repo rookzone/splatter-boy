@@ -20,8 +20,15 @@
 
 <div id="screen-container">
     <canvas id="gbCanvas" width="160" height="144"></canvas>
+    
     <div id="histogram"></div>
+    
+    <div id="histLabels" style="display:flex; position:relative; height:12px; margin-top:2px; border-top:1px solid #8bac0f;">
+        </div>
+    
     <div style="font-size: 10px; text-align: center; margin-top: 5px; color: #8bac0f;">EXIT PROBABILITY DISTRIBUTION</div>
+    
+    <button onclick="exportToCSV()" style="margin-top:10px; background:#0f380f; color:#8bac0f; border:1px solid #8bac0f; font-size:10px;">💾 EXPORT DISTRIBUTION TO CSV</button>
 </div>
 
 <div class="panel">
@@ -227,15 +234,50 @@ class GBBall {
     }
 }
 
-function runSimulation() {
-    const jitter = parseInt(document.getElementById('jitter').value);
+function addNewZone(x, y) {
+    // We create the object with explicit default values here
+    const newZone = {
+        x: x,
+        y: y,
+        count: 25,   // Default Count
+        jitter: 40,  // Default Jitter
+        vx: 10,       // Default Force VX
+        vy: 10        // Default Force VY
+    };
     
+    dropZones.push(newZone);
+    updateZonesUI(); // This forces the HTML to redraw with the data above
+}
+
+function runSimulation() {
     dropZones.forEach(zone => {
         for (let i = 0; i < zone.count; i++) {
-            const jX = (Math.random() * jitter * 2) - jitter;
-            balls.push(new GBBall(zone.x, zone.y, jX, 0));
+            // Apply jitter to horizontal launch
+            const jX = (Math.random() * zone.jitter * 2) - zone.jitter;
+            balls.push(new GBBall(zone.x, zone.y, zone.vx + jX, zone.vy));
         }
     });
+}
+
+function exportToCSV() {
+    const total = exitPositions.reduce((a, b) => a + b, 0);
+    if (total === 0) return alert("No simulation data to export!");
+
+    let csv = "X_Pixel,Count,Probability\n";
+    exitPositions.forEach((count, x) => {
+        const prob = (count / total).toFixed(6);
+        csv += `${x},${count},${prob}\n`;
+    });
+
+    const blob = new Blob([csv], { type: 'text/csv' });
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.setAttribute('hidden', '');
+    a.setAttribute('href', url);
+    a.setAttribute('download', `gb_pachinko_dist_${Date.now()}.csv`);
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
 }
 
 function updateHistogram() {
@@ -250,6 +292,17 @@ function resetData() {
     exitPositions.fill(0);
     balls = [];
     updateHistogram();
+}
+
+function initLabels() {
+    const labelContainer = document.getElementById('histLabels');
+    labelContainer.innerHTML = '';
+    for (let i = 0; i <= 160; i += 16) { // Every 16px (2 tiles) for clarity
+        const label = document.createElement('span');
+        label.innerText = i;
+        label.style.cssText = `position:absolute; left:${(i/160)*100}%; transform:translateX(-50%); font-size:8px; color:#8bac0f;`;
+        labelContainer.appendChild(label);
+    }
 }
 
 function loop() {
@@ -345,17 +398,31 @@ function updateZonesUI() {
     dropZones.forEach((zone, index) => {
         const zoneEl = document.createElement('div');
         zoneEl.className = 'control-group';
-        zoneEl.style.margin = '5px 0';
-        zoneEl.style.padding = '5px';
-        zoneEl.style.background = 'rgba(15, 56, 15, 0.2)';
+        zoneEl.style.cssText = 'margin:5px 0; padding:8px; background:rgba(15, 56, 15, 0.2); border:1px solid #8bac0f;';
         
         zoneEl.innerHTML = `
-            <div style="display:flex; justify-content:space-between; align-items:center;">
-                <span style="font-size:10px;">ZONE ${index + 1} (${zone.x},${zone.y})</span>
-                <button onclick="removeZone(${index})" style="width:20px; padding:2px; background:#ff4444; color:white;">X</button>
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:5px;">
+                <span style="font-size:10px; font-weight:bold;">ZONE ${index + 1} (${zone.x},${zone.y})</span>
+                <button onclick="removeZone(${index})" style="width:20px; height:20px; padding:0; background:#ff4444; color:white; border:none;">×</button>
             </div>
-            <label>Ball Count</label>
-            <input type="number" value="${zone.count}" onchange="dropZones[${index}].count = parseInt(this.value)">
+            <div style="display:grid; grid-template-columns: 1fr 1fr; gap:5px;">
+                <div>
+                    <label style="font-size:9px;">Count</label>
+                    <input type="number" value="${zone.count}" onchange="dropZones[${index}].count = parseInt(this.value)">
+                </div>
+                <div>
+                    <label style="font-size:9px;">Jitter</label>
+                    <input type="number" value="${zone.jitter}" onchange="dropZones[${index}].jitter = parseInt(this.value)">
+                </div>
+                <div>
+                    <label style="font-size:9px;">Force VX</label>
+                    <input type="number" value="${zone.vx}" onchange="dropZones[${index}].vx = parseInt(this.value)">
+                </div>
+                <div>
+                    <label style="font-size:9px;">Force VY</label>
+                    <input type="number" value="${zone.vy}" onchange="dropZones[${index}].vy = parseInt(this.value)">
+                </div>
+            </div>
         `;
         container.appendChild(zoneEl);
     });
@@ -372,18 +439,15 @@ canvas.addEventListener('mousedown', () => {
     if (mousePixelX < 0) return;
 
     if (isSelectingSpawn) {
-        // Add new zone to the list
-        dropZones.push({
-            x: mousePixelX,
-            y: mousePixelY,
-            count: 25 // Default count
-        });
-        updateZonesUI();
-        toggleSpawnSelection(); // Auto-untoggle as requested
+        // CALL the function that sets the defaults
+        addNewZone(mousePixelX, mousePixelY); 
+        toggleSpawnSelection(); 
     } else {
         const index = hoverY * 20 + hoverX;
-        tilemap[index] = (tilemap[index] === PIN_TILE_ID) ? 0 : PIN_TILE_ID;
-        resetData();
+        if (index >= 0 && index < 360) {
+            tilemap[index] = (tilemap[index] === PIN_TILE_ID) ? 0 : PIN_TILE_ID;
+            resetData();
+        }
     }
 });
 
