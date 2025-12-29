@@ -42,29 +42,17 @@
     </div>
 
     <div class="control-group">
-        <label>Simulation Params</label>
-        <div style="display:flex; gap:10px;">
-            <div style="flex:1">
-                <label>Spawn X</label>
-                <input type="number" id="launchX" value="80">
+        <label>Spawn Management</label>
+        <button id="spawnPickerBtn" onclick="toggleSpawnSelection()" style="margin-top:10px; border: 1px dashed #0f380f;">+ ADD DROP ZONE</button>
+        
+        <div id="zonesList" style="margin-top: 10px; max-height: 200px; overflow-y: auto;">
             </div>
-            <div style="flex:1">
-                <label>Spawn Y</label>
-                <input type="number" id="launchY" value="10">
-            </div>
+
+        <div style="border-top: 1px solid #8bac0f; margin-top: 10px; padding-top: 10px;">
+            <label>Global Jitter</label>
+            <input type="number" id="jitter" value="40">
+            <button onclick="runSimulation()" style="background: #e0f8d0; margin-top: 10px;">RUN ALL ZONES</button>
         </div>
-        <div style="display:flex; gap:10px; margin-top:5px;">
-            <div style="flex:1">
-                <label>Jitter</label>
-                <input type="number" id="jitter" value="40">
-            </div>
-            <div style="flex:1">
-                <label>Batch Size</label>
-                <input type="number" id="batchSize" value="25">
-            </div>
-        </div>
-        <button id="spawnPickerBtn" onclick="toggleSpawnSelection()" style="margin-top:10px; border: 1px dashed #0f380f;">SELECT DROP ZONE</button>
-        <button onclick="runSimulation()" style="background: #e0f8d0;">RUN SIMULATION</button>
     </div>
 
     <button onclick="resetData()" style="background:#0f380f; color:#8bac0f; border:1px solid #8bac0f;">CLEAR RESULTS</button>
@@ -93,6 +81,8 @@ let balls = [];
 let exitPositions = new Array(160).fill(0);
 let frameCounter = 0;
 let tilemap = new Uint8Array(20 * 18);
+
+
 
 // === PIN GENERATOR REGISTRY ===
 // ADD YOUR OWN GENERATORS HERE!
@@ -238,15 +228,14 @@ class GBBall {
 }
 
 function runSimulation() {
-    const count = parseInt(document.getElementById('batchSize').value);
-    const sX = parseInt(document.getElementById('launchX').value);
-    const sY = parseInt(document.getElementById('launchY').value);
     const jitter = parseInt(document.getElementById('jitter').value);
-
-    for (let i = 0; i < count; i++) {
-        const jX = (Math.random() * jitter * 2) - jitter;
-        balls.push(new GBBall(sX, sY, jX, 0));
-    }
+    
+    dropZones.forEach(zone => {
+        for (let i = 0; i < zone.count; i++) {
+            const jX = (Math.random() * jitter * 2) - jitter;
+            balls.push(new GBBall(zone.x, zone.y, jX, 0));
+        }
+    });
 }
 
 function updateHistogram() {
@@ -265,121 +254,161 @@ function resetData() {
 
 function loop() {
     frameCounter++;
-    ctx.fillStyle = '#8bac0f'; // Background color
+    
+    // 1. Clear Screen
+    ctx.fillStyle = '#8bac0f'; 
     ctx.fillRect(0, 0, 160, 144);
 
-    // Draw tiles
-    ctx.fillStyle = '#306230'; // Pin/Wall color
+    // 2. Draw Tiles (Pins)
+    ctx.fillStyle = '#306230'; 
     for (let i = 0; i < 360; i++) {
         if (tilemap[i] === PIN_TILE_ID) {
             ctx.fillRect(((i % 20) << 3) + 2, (Math.floor(i / 20) << 3) + 2, 4, 4);
         }
     }
 
-    // === DRAW HIGHLIGHTER ===
-    if (hoverX >= 0 && hoverX < 20 && hoverY >= 0 && hoverY < 18) {
-        ctx.strokeStyle = '#306230'; // Use the dark green palette color
+    // 3. Draw Tile Highlighter (Only if NOT placing a spawn point)
+    if (mousePixelX !== -1 && !isSelectingSpawn) {
+        ctx.strokeStyle = '#306230';
         ctx.lineWidth = 0.5;
-        ctx.setLineDash([2, 2]); // Create the dashed effect
-        // strokeRect at +0.5 to align with pixel grid edges
+        ctx.setLineDash([2, 2]);
         ctx.strokeRect(hoverX * 8 + 0.5, hoverY * 8 + 0.5, 7, 7);
-        ctx.setLineDash([]); // Always reset line dash for other drawing
+        ctx.setLineDash([]);
     }
 
-    const curX = parseInt(document.getElementById('launchX').value) || 0;
-    const curY = parseInt(document.getElementById('launchY').value) || 0;
+    // 4. Draw All Saved Drop Zones
+    dropZones.forEach((zone, index) => {
+        ctx.save();
+        ctx.globalAlpha = 0.6; // Transparentish style
+        ctx.fillStyle = '#0f380f';
+        
+        // Draw the point
+        ctx.beginPath();
+        ctx.arc(zone.x, zone.y, 2, 0, Math.PI * 2);
+        ctx.fill();
+        
+        // Draw the Zone Number Label
+        ctx.globalAlpha = 1.0;
+        ctx.font = '6px monospace';
+        ctx.fillText(index + 1, zone.x + 4, zone.y - 2);
+        ctx.restore();
+    });
 
-    ctx.save();
-    ctx.globalAlpha = 0.5;
-    ctx.fillStyle = '#0f380f';
-    
-    // Draw crosshair or point at spawn location
-    ctx.beginPath();
-    ctx.arc(curX, curY, 2, 0, Math.PI * 2);
-    ctx.fill();
-
-    // Draw preview if in selection mode
-    if (isSelectingSpawn && hoverX !== -1) {
-        // Convert grid hover back to pixel hover for the cursor preview
-        // Or track raw mouse X/Y if you prefer pixel-smooth preview
+    // 5. Draw Placement Preview (Crosshairs)
+    if (isSelectingSpawn && mousePixelX !== -1) {
+        ctx.save();
         ctx.strokeStyle = '#0f380f';
         ctx.setLineDash([1, 1]);
         ctx.beginPath();
-        ctx.moveTo(0, curY); ctx.lineTo(160, curY); // Horizontal guide
-        ctx.moveTo(curX, 0); ctx.lineTo(curX, 144); // Vertical guide
+        // Horizontal guide following mouse
+        ctx.moveTo(0, mousePixelY); ctx.lineTo(160, mousePixelY); 
+        // Vertical guide following mouse
+        ctx.moveTo(mousePixelX, 0); ctx.lineTo(mousePixelX, 144); 
         ctx.stroke();
+        
+        // Preview dot at mouse
+        ctx.beginPath();
+        ctx.arc(mousePixelX, mousePixelY, 2, 0, Math.PI * 2);
+        ctx.stroke();
+        ctx.restore();
     }
-    ctx.restore();
 
-    // Update and draw balls
+    // 6. Update and Draw Balls
     balls = balls.filter(b => b.active);
-    balls.forEach(b => { b.update(); b.draw(); });
+    balls.forEach(b => { 
+        b.update(); 
+        b.draw(); 
+    });
 
-    document.getElementById('stats').innerText = `Active: ${balls.length} | Total Samples: ${exitPositions.reduce((a,b)=>a+b,0)}`;
+    // 7. Update Stats UI
+    const totalSamples = exitPositions.reduce((a, b) => a + b, 0);
+    document.getElementById('stats').innerText = `Active: ${balls.length} | Total Samples: ${totalSamples}`;
+    
     requestAnimationFrame(loop);
 }
 
 // === SPAWN POINT STATE ===
-let launchX = 80;
-let launchY = 10;
+let dropZones = []; // Array of {x, y, count}
 let isSelectingSpawn = false;
 
 function toggleSpawnSelection() {
     isSelectingSpawn = !isSelectingSpawn;
     const btn = document.getElementById('spawnPickerBtn');
-    if (isSelectingSpawn) {
-        btn.innerText = "CLICK ON CANVAS TO PLACE";
-        btn.style.background = "#e0f8d0";
-    } else {
-        btn.innerText = "SELECT DROP ZONE";
-        btn.style.background = "#8bac0f";
-    }
+    btn.innerText = isSelectingSpawn ? "CLICK CANVAS TO PLACE" : "+ ADD DROP ZONE";
+    btn.style.background = isSelectingSpawn ? "#e0f8d0" : "#8bac0f";
+}
+
+function updateZonesUI() {
+    const container = document.getElementById('zonesList');
+    container.innerHTML = '';
+    
+    dropZones.forEach((zone, index) => {
+        const zoneEl = document.createElement('div');
+        zoneEl.className = 'control-group';
+        zoneEl.style.margin = '5px 0';
+        zoneEl.style.padding = '5px';
+        zoneEl.style.background = 'rgba(15, 56, 15, 0.2)';
+        
+        zoneEl.innerHTML = `
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+                <span style="font-size:10px;">ZONE ${index + 1} (${zone.x},${zone.y})</span>
+                <button onclick="removeZone(${index})" style="width:20px; padding:2px; background:#ff4444; color:white;">X</button>
+            </div>
+            <label>Ball Count</label>
+            <input type="number" value="${zone.count}" onchange="dropZones[${index}].count = parseInt(this.value)">
+        `;
+        container.appendChild(zoneEl);
+    });
+}
+
+function removeZone(index) {
+    dropZones.splice(index, 1);
+    updateZonesUI();
 }
 
 // === INTERACTIVE EDITOR ===
-canvas.addEventListener('mousedown', (e) => {
-    const rect = canvas.getBoundingClientRect();
-    const x = Math.floor((e.clientX - rect.left) * (canvas.width / rect.width));
-    const y = Math.floor((e.clientY - rect.top) * (canvas.height / rect.height));
+// Update Mouse Down to push to array
+canvas.addEventListener('mousedown', () => {
+    if (mousePixelX < 0) return;
 
     if (isSelectingSpawn) {
-        // Pixel-perfect placement mode
-        launchX = x;
-        launchY = y;
-        document.getElementById('launchX').value = x;
-        document.getElementById('launchY').value = y;
-        toggleSpawnSelection(); // Turn off mode after placing
+        // Add new zone to the list
+        dropZones.push({
+            x: mousePixelX,
+            y: mousePixelY,
+            count: 25 // Default count
+        });
+        updateZonesUI();
+        toggleSpawnSelection(); // Auto-untoggle as requested
     } else {
-        // Existing Tile-snapping mode
-        const gridX = Math.floor(x / 8);
-        const gridY = Math.floor(y / 8);
-        const index = gridY * 20 + gridX;
-        if (gridX >= 0 && gridX < 20 && gridY >= 0 && gridY < 18) {
-            tilemap[index] = (tilemap[index] === PIN_TILE_ID) ? 0 : PIN_TILE_ID;
-            resetData();
-        }
+        const index = hoverY * 20 + hoverX;
+        tilemap[index] = (tilemap[index] === PIN_TILE_ID) ? 0 : PIN_TILE_ID;
+        resetData();
     }
 });
 
-// === HIGHLIGHTER STATE ===
+// === EDITOR STATE ===
+let mousePixelX = -1; 
+let mousePixelY = -1;
 let hoverX = -1;
 let hoverY = -1;
 
 canvas.addEventListener('mousemove', (e) => {
     const rect = canvas.getBoundingClientRect();
-    // Scale mouse coordinates to internal 160x144 resolution
-    const x = (e.clientX - rect.left) * (canvas.width / rect.width);
-    const y = (e.clientY - rect.top) * (canvas.height / rect.height);
+    // Calculate and save raw pixel coordinates for spawn placement
+    mousePixelX = Math.floor((e.clientX - rect.left) * (canvas.width / rect.width));
+    mousePixelY = Math.floor((e.clientY - rect.top) * (canvas.height / rect.height));
     
-    // Map to 8x8 grid
-    hoverX = Math.floor(x / 8);
-    hoverY = Math.floor(y / 8);
+    // Calculate grid coordinates for pin placement
+    hoverX = Math.floor(mousePixelX / 8);
+    hoverY = Math.floor(mousePixelY / 8);
 });
 
-// Reset highlight when mouse leaves canvas
 canvas.addEventListener('mouseleave', () => {
     hoverX = -1;
     hoverY = -1;
+    mousePixelX = -1;
+    mousePixelY = -1;
 });
 
 // Init
