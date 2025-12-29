@@ -255,22 +255,78 @@ function resetData() {
 
 function loop() {
     frameCounter++;
-    ctx.fillStyle = '#8bac0f';
+    ctx.fillStyle = '#8bac0f'; // Background color
     ctx.fillRect(0, 0, 160, 144);
 
-    ctx.fillStyle = '#306230';
+    // Draw tiles
+    ctx.fillStyle = '#306230'; // Pin/Wall color
     for (let i = 0; i < 360; i++) {
         if (tilemap[i] === PIN_TILE_ID) {
             ctx.fillRect(((i % 20) << 3) + 2, (Math.floor(i / 20) << 3) + 2, 4, 4);
         }
     }
 
+    // === DRAW HIGHLIGHTER ===
+    if (hoverX >= 0 && hoverX < 20 && hoverY >= 0 && hoverY < 18) {
+        ctx.strokeStyle = '#306230'; // Use the dark green palette color
+        ctx.lineWidth = 0.5;
+        ctx.setLineDash([2, 2]); // Create the dashed effect
+        // strokeRect at +0.5 to align with pixel grid edges
+        ctx.strokeRect(hoverX * 8 + 0.5, hoverY * 8 + 0.5, 7, 7);
+        ctx.setLineDash([]); // Always reset line dash for other drawing
+    }
+
+    // Update and draw balls
     balls = balls.filter(b => b.active);
     balls.forEach(b => { b.update(); b.draw(); });
 
     document.getElementById('stats').innerText = `Active: ${balls.length} | Total Samples: ${exitPositions.reduce((a,b)=>a+b,0)}`;
     requestAnimationFrame(loop);
 }
+
+// === INTERACTIVE EDITOR ===
+canvas.addEventListener('mousedown', (e) => {
+    const rect = canvas.getBoundingClientRect();
+    
+    // 1. Get mouse position relative to canvas
+    // 2. Scale it to the internal 160x144 resolution
+    const x = (e.clientX - rect.left) * (canvas.width / rect.width);
+    const y = (e.clientY - rect.top) * (canvas.height / rect.height);
+    
+    // 3. Convert pixel coordinates to grid coordinates (8x8 tiles)
+    const gridX = Math.floor(x / 8);
+    const gridY = Math.floor(y / 8);
+    const index = gridY * 20 + gridX;
+
+    if (gridX >= 0 && gridX < 20 && gridY >= 0 && gridY < 18) {
+        // 4. Toggle: If it's a pin, make it empty (0). Otherwise, make it a pin.
+        tilemap[index] = (tilemap[index] === PIN_TILE_ID) ? 0 : PIN_TILE_ID;
+        
+        // 5. Optional: Clear simulation data so the histogram matches the new layout
+        resetData();
+    }
+});
+
+// === HIGHLIGHTER STATE ===
+let hoverX = -1;
+let hoverY = -1;
+
+canvas.addEventListener('mousemove', (e) => {
+    const rect = canvas.getBoundingClientRect();
+    // Scale mouse coordinates to internal 160x144 resolution
+    const x = (e.clientX - rect.left) * (canvas.width / rect.width);
+    const y = (e.clientY - rect.top) * (canvas.height / rect.height);
+    
+    // Map to 8x8 grid
+    hoverX = Math.floor(x / 8);
+    hoverY = Math.floor(y / 8);
+});
+
+// Reset highlight when mouse leaves canvas
+canvas.addEventListener('mouseleave', () => {
+    hoverX = -1;
+    hoverY = -1;
+});
 
 // Init
 updateGeneratorUI();
