@@ -10,7 +10,7 @@
 
 // Spawn an object of ObjectType.
 // Creates GameObject and assigns it to the pool
-// Registers the object with it's specific registry function to keep track of index values
+// Registers the object with it's specific registry function to keep track of their pointers
 // Incriment index values ready for next object
 GameObject* go_new_game_object(ObjectType type) {
 
