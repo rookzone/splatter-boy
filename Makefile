@@ -27,7 +27,8 @@ HEADERS = $(wildcard $(SRC_DIR)/*.h) \
 OUT = $(BUILD_DIR)/$(PROJECT_NAME).gb
 
 # === Compiler Flags ===
-CFLAGS = -Wa-l -Wl-m -Wl-j
+#CFLAGS = -Wf--no-cleanup-opt -Wa-l -Wl-m -Wl-j
+CFLAGS = -std-c11 -Wf--fverbose-asm
 
 # === Build Rule ===
 $(OUT): $(SRC) $(HEADERS)

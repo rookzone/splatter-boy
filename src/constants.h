@@ -7,7 +7,7 @@
 #define MAX_GAME_OBJECTS    40
 
 // How many to spawn in
-#define NUM_BALLS 15
+#define NUM_BALLS 18
 #define MAX_BALLS 25
 
 // Hardware values for GB

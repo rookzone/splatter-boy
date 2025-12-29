@@ -22,7 +22,29 @@ void apply_impulse(GameObject* obj, fixed_t impulse_magnitude_x, fixed_t impulse
 
 // === BALL PHYSICS ===
 
-void update_ball_position(GameObject* obj);
+// INLINED FOR SPEED
+static inline void update_ball_position(GameObject* ball)
+{
+    ball->physics.vy += GRAVITY;
+
+    if (ball->physics.vy > MAX_SPEED)
+        ball->physics.vy = MAX_SPEED;
+    
+    // Add the velocity (rate of change) into the positional accumulator
+    ball->physics.position_accumulator_x += ball->physics.vx;
+    ball->physics.position_accumulator_y += ball->physics.vy;
+
+    // Shifts whole number part of accumulator to right-hand byte and applies to screen position
+    ball->transform.x += (int8_t)(ball->physics.position_accumulator_x >> FIXED_SHIFT);
+    ball->transform.y += (int8_t)(ball->physics.position_accumulator_y >> FIXED_SHIFT);
+    
+    // Now chop off left-hand byte as that whole number has already been added to the screen position
+    // This leaves us with just the fractional part, ready for the next frame!
+    ball->physics.position_accumulator_x &= 0xFF;
+    ball->physics.position_accumulator_y &= 0xFF;
+
+}
+
 void check_ball_pin_collision(GameObject* obj);
 
 // === LOOKUP TABLES ===
