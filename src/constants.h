@@ -8,6 +8,7 @@
 
 // How many to spawn in
 #define NUM_BALLS 15
+#define MAX_BALLS 15
 
 // Hardware values for GB
 #define NUM_HW_SPRITES  40
@@ -22,6 +23,9 @@
 // Sprite values
 #define PIN_HALF_WIDTH  3
 #define SPRITE_SIZE     8
+#define BALL_WHITESPACE 2
+#define BALL_HEIGHT     4
+#define BALL_WIDTH      4
 
 // Background px and tiles for GB
 #define BACKGROUND_WIDTH_TILES      20

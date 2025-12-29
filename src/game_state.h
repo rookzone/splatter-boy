@@ -13,8 +13,7 @@ typedef struct {
     uint8_t keys;
     uint8_t previous_keys;
     uint8_t paused;
-    uint16_t system_time;
-    uint16_t sys_time_since_state_load;
+    uint8_t system_time;
 
 
 } System;
