@@ -6,6 +6,8 @@ A fun little project where I mess around with C and GBDK. Attempt at a pachinko-
 
 This is in **_VERY EARLY_** stages.
 
+GDD is google doc here[https://docs.google.com/document/d/1b7yYHS2PwsaXc8w60WU_YoptCUdReH6eddsxONNQ60Y/].
+
 ## Current Features
 
 - **Custom 8.8 Fixed-Point Physics** Implements a fixed-point number system for sub-pixel movement and velocity
@@ -125,10 +127,11 @@ https://www.kernel.org/doc/html/v4.10/process/coding-style.html
 
 ### Code
 
-- Font loading and text display
-- build encapsulated input system
-- **Measure time between any two points** in the code execution would be useful.
-Optimisation will need looking at again.
+-~~Font loading and text display~~
+- ~~build encapsulated input system~~
+- **Measure time between any two points** ~~in the code execution would be useful.~~
+  - Check BGB emu functions...
+~~Optimisation will need looking at again.~~
 - Sound system
 
 ### Project
