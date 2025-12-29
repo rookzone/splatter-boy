@@ -20,6 +20,7 @@
 // Map assets
 #include "../tiles/pachinkoTiles.h"
 #include "../backgrounds/game1Map.h"
+#include "../tiles/pinballTiles.h"
 
 void init_game_scene(void)
 {
@@ -27,12 +28,15 @@ void init_game_scene(void)
     platform_sprites_8x8();
 
     // Load in the sprite and background we want
-    set_sprite_sheet(PanchinkoTiles);
+    set_sprite_sheet(PinballTiles);
 
     set_game_background(game1Map, game1Tiles, 16);
 
     // Spawn some balls in
     for (uint8_t i = 0; i < NUM_BALLS; i++) {
+
+        if (i == MAX_BALLS)
+            break;
 
         GameObject* ball;
 

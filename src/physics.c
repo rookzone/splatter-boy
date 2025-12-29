@@ -34,29 +34,30 @@ void apply_impulse(GameObject* obj, fixed_t impulse_magnitude_x, fixed_t impulse
 
 void check_ball_pin_collision(GameObject* ball)
 {
-    
     // FILTER: Only handle collision if ball is moving downward
     if (ball->physics.vy <= 0)
         return;
 
     // Get ball's bottom-middle point
     uint8_t ball_bottom_x = ball->transform.x + TILE_HALF_WIDTH;
-    uint8_t ball_bottom_y = ball->transform.y  + TILE_WIDTH;
+    uint8_t ball_bottom_y = ball->transform.y  + BALL_WHITESPACE + BALL_HEIGHT;
 
     // Find which 8x8 tile the ball's bottom is in
     uint8_t col = PIXEL_TO_GRID(ball_bottom_x);
     uint8_t row = PIXEL_TO_GRID(ball_bottom_y);
 
+    uint16_t tile_idx = GET_TILE_INDEX(col, row);
+    uint8_t tile_type = game.graphics.active_background_tilemap[tile_idx];
+    
+    if (tile_type == 0x00)
+        return;
+
     // FILTER: Outside screen, do not collide
     if (col >= BACKGROUND_WIDTH_TILES || row >= BACKGROUND_HEIGHT_TILES)
         return;
 
-    // Grab the tiles index value
-    uint16_t tilemap_index = GET_TILE_INDEX(col, row);
-
     // FILTER: Check the tile in the map at that index, if it's a pin tile we need to collide
-    if (game.graphics.active_background_tilemap[tilemap_index] != PIN_TILE_ID && 
-    game.graphics.active_background_tilemap[tilemap_index] != WALL_TILE_ID)
+    if (tile_type != PIN_TILE_ID)
         return;
             
     // Get coords of pin tile

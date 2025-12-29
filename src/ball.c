@@ -47,13 +47,14 @@ void update_ball(GameObject* obj) {
     // Handle collision (use system time counter to check for frame skip)
     if (!(game.system.system_time & COLLISION_FRAME_SKIP) || obj->physics.vy > MAX_SPEED >> 1)
         check_ball_pin_collision(obj);
-    
+
     // Update position
     update_ball_position(obj);
 
     // Draw at updated position
     if ((obj->flags & RENDERER_ACTIVE) == RENDERER_ACTIVE)
         DRAW_SPRITE(&obj->renderer, obj->transform.x, obj->transform.y);
+
     
 }
 

@@ -29,9 +29,7 @@ void update_game_state(void)
     // Refresh system values
     game.system.previous_keys = game.system.keys;
     game.system.keys = platform_get_input();
-    game.system.system_time = platform_get_sys_time();
-
-    game.system.sys_time_since_state_load++;
+    game.system.system_time++;
 }
 
 /* End of game_data.c */
