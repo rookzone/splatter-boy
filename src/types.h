@@ -40,15 +40,13 @@ typedef uint8_t fraction_t;
 #define FIXED_MUL(a,b) (((a) * (b)) >> FIXED_SHIFT)
 #define FIXED_DIV(a,b) (((a) << FIXED_SHIFT) / (b))
 
-
-
 // === GAME OBJECT ===
 
 // === COMPONENT FLAGS ===
-#define OBJECT_ACTIVE    0x01  // Object is alive
-#define TRANSFORM_ACTIVE 0x02  // Has position
-#define PHYSICS_ACTIVE   0x04  // Has velocity/physics
-#define RENDERER_ACTIVE    0x08  // Has sprite/should render
+#define OBJECT_ACTIVE       0x01  // Object is alive
+#define TRANSFORM_ACTIVE    0x02  // Has position
+#define PHYSICS_ACTIVE      0x04  // Has velocity/physics
+#define RENDERER_ACTIVE     0x08  // Has sprite/should render
 
 // === GAME OBJECT ===
 

@@ -197,7 +197,7 @@ class GBBall {
 
     checkCollision() {
         if (this.vy <= 0) return;
-        let bx = this.x + 4, by = this.y + 8;
+        let bx = this.x + 4, by = this.y + 6;
         let col = bx >> 3, row = by >> 3;
         if (col >= 20 || row >= 18) return;
 
@@ -229,7 +229,7 @@ class GBBall {
     draw() {
         ctx.fillStyle = '#0f380f';
         ctx.beginPath();
-        ctx.arc(this.x + 4, this.y + 4, 3, 0, Math.PI * 2);
+        ctx.arc(this.x + 4, this.y + 4, 2, 0, Math.PI * 2);
         ctx.fill();
     }
 }
@@ -316,7 +316,7 @@ function loop() {
     ctx.fillStyle = '#306230'; 
     for (let i = 0; i < 360; i++) {
         if (tilemap[i] === PIN_TILE_ID) {
-            ctx.fillRect(((i % 20) << 3) + 2, (Math.floor(i / 20) << 3) + 2, 4, 4);
+            ctx.fillRect(((i % 20) << 3) + 2.5, (Math.floor(i / 20) << 3) + 2.5, 3, 3);
         }
     }
 

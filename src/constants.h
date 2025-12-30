@@ -27,7 +27,7 @@
 
 
 // Sprite values
-#define PIN_HALF_WIDTH  3
+#define PIN_HALF_WIDTH  2
 #define SPRITE_SIZE     8
 #define BALL_WHITESPACE 2
 #define BALL_HEIGHT     4
@@ -68,6 +68,7 @@ enum { TILE_BALL = 0, TILE_WALL = 1, TILE_PIN = 2 };
 // Byte that represents collidable objects
 #define PIN_TILE_ID     0x02
 #define WALL_TILE_ID    0x03
+#define BLANK_TILE_ID   0x0F
 
 // Ball launcher
 #define LAUNCH_FORCE_X  TO_FIXED(2)

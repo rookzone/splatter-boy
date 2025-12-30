@@ -18,12 +18,10 @@
 
 */
 
-#define game1MapWidth   20
-#define game1MapHeight  18
-#define game1MapBank    0
-#define game1TilesBank  0
+#define game1MapWidth 20
+#define game1MapHeight 18
+#define game1MapBank 0
 
 extern unsigned char game1Map[];
 extern unsigned char game1Tiles[];
-
 /* End of GAME1MAP.H */

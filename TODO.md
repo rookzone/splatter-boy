@@ -1,6 +1,6 @@
 # TODO
 
-- [ ] Title screen state.
+- [x] Title screen state.
 - [ ] Consider boilerplate code that could be factored out
   The state is supposed to be just game logic, messing about with hardware should be put elsewhere
 - [ ] Refactor text output to "input.h", it's a bit messy in graphics.h (keep the bg vram add in graphics though)
@@ -10,7 +10,7 @@
 - [ ] Text scrolling animation option for print_text
 - [ ] Experiment with window rendering!
 
-- [ ] Remove all GBDK
+- [x] Remove all GBDK
 - [ ] Create .bat which sets up make, downloads gbdk
 - [ ] linux bash (installs specific linux files and make file)
 - [ ] Proper testing on linux build.

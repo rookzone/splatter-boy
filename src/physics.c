@@ -28,7 +28,8 @@ void check_ball_pin_collision(GameObject* ball)
     uint16_t tile_idx = GET_TILE_INDEX(col, row);
     uint8_t tile_type = game.graphics.active_background_tilemap[tile_idx];
     
-    if (tile_type == 0x00)
+    // FILTER: We are on a blank bg tile, skip.
+    if (tile_type == BLANK_TILE_ID)
         return;
 
     // FILTER: Outside screen, do not collide
@@ -77,7 +78,6 @@ void check_ball_pin_collision(GameObject* ball)
             // Hit the "correct" side - keep direction but add deflection force
             ball->physics.vx = (ball->physics.vx >> 1);
             
-            // Add a nudge based on offset from center
             if (distance_x > 0) {
                 ball->physics.vx += FIXED_EIGHTH;  // nudge right
             } else if (distance_x < 0) {
