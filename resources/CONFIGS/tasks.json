@@ -1,0 +1,32 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Build GameBoy ROM",
+      "type": "shell",
+      "command": "make",
+      "args": [
+      ],
+      "group": {
+        "kind": "build",
+        "isDefault": false
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Run in Emulator",
+      "type": "shell",
+      "command": "powershell",
+      "args": [
+        "-Command",
+        "& 'emu\\BGB\\bgb.exe' 'build\\splatter-boy.gb'"
+      ],
+      "dependsOn": "Build GameBoy ROM",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "problemMatcher": []
+    }
+  ]
+}

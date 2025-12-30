@@ -1,0 +1,13 @@
+{
+    "files.associations": {
+        "stdint.h": "c",
+        "physics.h": "c",
+        "graphics.h": "c",
+        "gb.h": "c",
+        "pins.h": "c",
+        "ball.h": "c",
+        "customtypes.h": "c",
+        "pachinkoonebg.h": "c"
+    },
+    "makefile.configureOnOpen": false
+}
