@@ -7,8 +7,10 @@
 #include "physics.h"
 #include "game_object.h"
 #include "game_state.h"
+#include <gbdk/emu_debug.h>
 
 GameObject* spawn_ball(uint8_t x, uint8_t y) {
+
 
     // Pass OBJ_BALL so object manager will put it in ball registry
     GameObject* obj = go_new_game_object(OBJ_BALL);
@@ -44,18 +46,23 @@ void update_ball(GameObject* obj) {
     // Quick validation
     if (!(obj->flags & PHYSICS_ACTIVE)) return;
     
+    EMU_PROFILE_BEGIN("COLLISION CHECK ")
     if ((obj->id & COLLISION_FRAME_SKIP) == (game.system.system_time & COLLISION_FRAME_SKIP) )
     {
         check_ball_pin_collision(obj);
     }
+    EMU_PROFILE_END("COLLISION CHECK ")
 
+    EMU_PROFILE_BEGIN("UPDATE POSITION VALUES ")
     // Update position
     update_ball_position(obj);
+    EMU_PROFILE_END("UPDATE POSITION VALUES ")
 
     // Draw at updated position
+    EMU_PROFILE_BEGIN("ACTUAL DRAWING ")
     if ((obj->flags & RENDERER_ACTIVE) == RENDERER_ACTIVE)
         DRAW_SPRITE(&obj->renderer, obj->transform.x, obj->transform.y);
-
+    EMU_PROFILE_END("ACTUAL DRAWING ")
     
 }
 

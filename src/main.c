@@ -7,6 +7,7 @@
 #include "graphics.h"
 #include "platform.h"
 #include "tiles/menuFont.h"
+#include <gbdk/emu_debug.h>
 
 // Forward declarations
 void pause_game(void);
@@ -18,6 +19,7 @@ void main(void)
 
     while (1) {
 
+        EMU_PROFILE_BEGIN("MAIN LOOP ")
         // Update state, required every frame
         update_game_state();
 
@@ -28,7 +30,10 @@ void main(void)
 
         update_scene(); // Update game scene
 
+        EMU_PROFILE_END("MAIN LOOP ")
+        EMU_PROFILE_BEGIN("VSYNC CALL ")
         platform_vsync(); // Await frame end
+        EMU_PROFILE_END("VSYNC CALL ")
 
     }
 }
