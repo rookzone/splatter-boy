@@ -11,7 +11,6 @@
 
 GameObject* spawn_ball(uint8_t x, uint8_t y) {
 
-
     // Pass OBJ_BALL so object manager will put it in ball registry
     GameObject* obj = go_new_game_object(OBJ_BALL);
 
