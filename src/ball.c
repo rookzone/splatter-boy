@@ -58,11 +58,13 @@ void update_ball(GameObject* obj) {
     update_ball_position(obj);
     EMU_PROFILE_END("UPDATE POSITION VALUES ")
 
-    // Draw at updated position
-    EMU_PROFILE_BEGIN("ACTUAL DRAWING ")
-    if ((obj->flags & RENDERER_ACTIVE) == RENDERER_ACTIVE)
-        DRAW_SPRITE(&obj->renderer, obj->transform.x, obj->transform.y);
-    EMU_PROFILE_END("ACTUAL DRAWING ")
+    // Pull these into local 8-bit registers before calling the draw
+    uint8_t x = obj->transform.x + 8;
+    uint8_t y = obj->transform.y + 16;
+    uint8_t idx = obj->renderer.sprite_index;
+
+    move_sprite(idx, x, y); // The compiler will handle this much faster
+
     
 }
 
