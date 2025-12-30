@@ -43,28 +43,25 @@ GameObject* spawn_ball(uint8_t x, uint8_t y) {
 
 void update_ball(GameObject* obj) {
 
-    // Quick validation
-    if (!(obj->flags & PHYSICS_ACTIVE)) return;
+    if (!(obj->flags & PHYSICS_ACTIVE))
+        return;
     
-    EMU_PROFILE_BEGIN("COLLISION CHECK ")
+    // EMU_PROFILE_BEGIN("COLLISION CHECK ")
     if ((obj->id & COLLISION_FRAME_SKIP) == (game.system.system_time & COLLISION_FRAME_SKIP) )
-    {
         check_ball_pin_collision(obj);
-    }
-    EMU_PROFILE_END("COLLISION CHECK ")
 
-    EMU_PROFILE_BEGIN("UPDATE POSITION VALUES ")
-    // Update position
+    // EMU_PROFILE_END("COLLISION CHECK ")
+
+    // EMU_PROFILE_BEGIN("UPDATE POSITION VALUES ")
     update_ball_position(obj);
-    EMU_PROFILE_END("UPDATE POSITION VALUES ")
+    // EMU_PROFILE_END("UPDATE POSITION VALUES ")
 
-    EMU_PROFILE_BEGIN("REDRAW SPRITE ")
-    uint8_t x = obj->transform.x + 8;
-    uint8_t y = obj->transform.y + 16;
+    // EMU_PROFILE_BEGIN("REDRAW SPRITE ")
+    uint8_t x = obj->transform.x + SCREEN_COORD_OFFSET_X;
+    uint8_t y = obj->transform.y + SCREEN_COORD_OFFSET_Y;
     uint8_t idx = obj->renderer.sprite_index;
-
-    move_sprite(idx, x, y);
-    EMU_PROFILE_END("REDRAW SPRITE ")
+    platform_move_sprite(idx, x, y);
+    // EMU_PROFILE_END("REDRAW SPRITE ")
     
 }
 

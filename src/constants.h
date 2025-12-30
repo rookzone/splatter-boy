@@ -7,7 +7,7 @@
 #define MAX_GAME_OBJECTS    40
 
 // How many to spawn in
-#define NUM_BALLS 25
+#define NUM_BALLS 15
 #define MAX_BALLS 25
 
 // Hardware values for GB
@@ -19,6 +19,12 @@
 #define TILE_HALF_WIDTH     4
 #define TILE_HALF_HEIGHT    4
 #define TILE_HALF_LENGTH    4
+
+// The coords on screen are different from game coords
+// Must add these when referencing screen coords
+#define SCREEN_COORD_OFFSET_X 8
+#define SCREEN_COORD_OFFSET_Y 16
+
 
 // Sprite values
 #define PIN_HALF_WIDTH  3

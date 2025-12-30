@@ -1,0 +1,2137 @@
+COLLISION CHECK 
+COLLISION CHECK 282
+UPDATE POSITION VALUES 
+Add velocity to accumulators 
+Add velocity to accumulators 144
+cast to array 
+cast to array 4C
+apply to transform 
+apply to transform D6
+zero 
+zero 2A
+UPDATE POSITION VALUES 32
+REDRAW SPRITE 
+REDRAW SPRITE 7E
+COLLISION CHECK 
+COLLISION CHECK 2E
+UPDATE POSITION VALUES 
+Add velocity to accumulators 
+Add velocity to accumulators 144
+cast to array 
+cast to array 4C
+apply to transform 
+apply to transform D6
+zero 
+zero 2A
+UPDATE POSITION VALUES 32
+REDRAW SPRITE 
+REDRAW SPRITE 7E
+UPDATE ALL BALLSB8
+MAIN LOOP C8
+VSYNC CALL 
+VSYNC CALL 7CD8
+MAIN LOOP 
+UPDATE ALL BALLS
+COLLISION CHECK 
+COLLISION CHECK 230
+UPDATE POSITION VALUES 
+Add velocity to accumulators 
+Add velocity to accumulators 144
+cast to array 
+cast to array 4C
+apply to transform 
+apply to transform D6
+zero 
+zero 2A
+UPDATE POSITION VALUES 32
+REDRAW SPRITE 
+REDRAW SPRITE 7E
+COLLISION CHECK 
+COLLISION CHECK 2E
+UPDATE POSITION VALUES 
+Add velocity to accumulators 
+Add velocity to accumulators 144
+cast to array 
+cast to array 4C
+apply to transform 
+apply to transform D6
+zero 
+zero 2A
+UPDATE POSITION VALUES 32
+REDRAW SPRITE 
+REDRAW SPRITE 7E
+COLLISION CHECK 
+COLLISION CHECK 230
+UPDATE POSITION VALUES 
+Add velocity to accumulators 
+Add velocity to accumulators 144
+cast to array 
+cast to array 4C
+apply to transform 
+apply to transform D6
+zero 
+zero 2A
+UPDATE POSITION VALUES 32
+REDRAW SPRITE 
+REDRAW SPRITE 7E
+COLLISION CHECK 
+COLLISION CHECK 2E
+UPDATE POSITION VALUES 
+Add velocity to accumulators 
+Add velocity to accumulators 144
+cast to array 
+cast to array 4C
+apply to transform 
+apply to transform D6
+zero 
+zero 2A
+UPDATE POSITION VALUES 32
+REDRAW SPRITE 
+REDRAW SPRITE 7E
+COLLISION CHECK 
+COLLISION CHECK 230
+UPDATE POSITION VALUES 
+Add velocity to accumulators 
+Add velocity to accumulators 144
+cast to array 
+cast to array 4C
+apply to transform 
+apply to transform D6
+zero 
+zero 2A
+UPDATE POSITION VALUES 32
+REDRAW SPRITE 
+REDRAW SPRITE 7E
+COLLISION CHECK 
+COLLISION CHECK 2E
+UPDATE POSITION VALUES 
+Add velocity to accumulators 
+Add velocity to accumulators 144
+cast to array 
+cast to array 4C
+apply to transform 
+apply to transform D6
+zero 
+zero 2A
+UPDATE POSITION VALUES 32
+REDRAW SPRITE 
+REDRAW SPRITE 7E
+COLLISION CHECK 
+COLLISION CHECK 230
+UPDATE POSITION VALUES 
+Add velocity to accumulators 
+Add velocity to accumulators 144
+cast to array 
+cast to array 4C
+apply to transform 
+apply to transform D6
+zero 
+zero 2A
+UPDATE POSITION VALUES 32
+REDRAW SPRITE 
+REDRAW SPRITE 7E
+COLLISION CHECK 
+COLLISION CHECK 2E
+UPDATE POSITION VALUES 
+Add velocity to accumulators 
+Add velocity to accumulators 144
+cast to array 
+cast to array 4C
+apply to transform 
+apply to transform D6
+zero 
+zero 2A
+UPDATE POSITION VALUES 32
+REDRAW SPRITE 
+REDRAW SPRITE 7E
+COLLISION CHECK 
+COLLISION CHECK 230
+UPDATE POSITION VALUES 
+Add velocity to accumulators 
+Add velocity to accumulators 144
+cast to array 
+cast to array 4C
+apply to transform 
+apply to transform D6
+zero 
+zero 2A
+UPDATE POSITION VALUES 32
+REDRAW SPRITE 
+REDRAW SPRITE 7E
+COLLISION CHECK 
+COLLISION CHECK 2E
+UPDATE POSITION VALUES 
+Add velocity to accumulators 
+Add velocity to accumulators 144
+cast to array 
+cast to array 4C
+apply to transform 
+apply to transform D6
+zero 
+zero 2A
+UPDATE POSITION VALUES 32
+REDRAW SPRITE 
+REDRAW SPRITE 7E
+COLLISION CHECK 
+COLLISION CHECK 282
+UPDATE POSITION VALUES 
+Add velocity to accumulators 
+Add velocity to accumulators 144
+cast to array 
+cast to array 4C
+apply to transform 
+apply to transform D6
+zero 
+zero 2A
+UPDATE POSITION VALUES 32
+REDRAW SPRITE 
+REDRAW SPRITE 7E
+COLLISION CHECK 
+COLLISION CHECK 2E
+UPDATE POSITION VALUES 
+Add velocity to accumulators 
+Add velocity to accumulators 144
+cast to array 
+cast to array 4C
+apply to transform 
+apply to transform D6
+zero 
+zero 2A
+UPDATE POSITION VALUES 32
+REDRAW SPRITE 
+REDRAW SPRITE 7E
+COLLISION CHECK 
+COLLISION CHECK 230
+UPDATE POSITION VALUES 
+Add velocity to accumulators 
+Add velocity to accumulators 144
+cast to array 
+cast to array 4C
+apply to transform 
+apply to transform D6
+zero 
+zero 2A
+UPDATE POSITION VALUES 32
+REDRAW SPRITE 
+REDRAW SPRITE 7E
+COLLISION CHECK 
+COLLISION CHECK 2E
+UPDATE POSITION VALUES 
+Add velocity to accumulators 
+Add velocity to accumulators 144
+cast to array 
+cast to array 4C
+apply to transform 
+apply to transform D6
+zero 
+zero 2A
+UPDATE POSITION VALUES 32
+REDRAW SPRITE 
+REDRAW SPRITE 7E
+COLLISION CHECK 
+COLLISION CHECK D2
+UPDATE POSITION VALUES 
+Add velocity to accumulators 
+Add velocity to accumulators 144
+cast to array 
+cast to array 4C
+apply to transform 
+apply to transform D6
+zero 
+zero 2A
+UPDATE POSITION VALUES 32
+REDRAW SPRITE 
+REDRAW SPRITE 7E
+COLLISION CHECK 
+COLLISION CHECK 2E
+UPDATE POSITION VALUES 
+Add velocity to accumulators 
+Add velocity to accumulators 144
+cast to array 
+cast to array 4C
+apply to transform 
+apply to transform D6
+zero 
+zero 2A
+UPDATE POSITION VALUES 32
+REDRAW SPRITE 
+REDRAW SPRITE 7E
+COLLISION CHECK 
+COLLISION CHECK 230
+UPDATE POSITION VALUES 
+Add velocity to accumulators 
+Add velocity to accumulators 144
+cast to array 
+cast to array 4C
+apply to transform 
+apply to transform D6
+zero 
+zero 2A
+UPDATE POSITION VALUES 32
+REDRAW SPRITE 
+REDRAW SPRITE 7E
+COLLISION CHECK 
+COLLISION CHECK 2E
+UPDATE POSITION VALUES 
+Add velocity to accumulators 
+Add velocity to accumulators 144
+cast to array 
+cast to array 4C
+apply to transform 
+apply to transform D6
+zero 
+zero 2A
+UPDATE POSITION VALUES 32
+REDRAW SPRITE 
+REDRAW SPRITE 7E
+COLLISION CHECK 
+COLLISION CHECK 230
+UPDATE POSITION VALUES 
+Add velocity to accumulators 
+Add velocity to accumulators 144
+cast to array 
+cast to array 4C
+apply to transform 
+apply to transform D6
+zero 
+zero 2A
+UPDATE POSITION VALUES 32
+REDRAW SPRITE 
+REDRAW SPRITE 7E
+COLLISION CHECK 
+COLLISION CHECK 2E
+UPDATE POSITION VALUES 
+Add velocity to accumulators 
+Add velocity to accumulators 144
+cast to array 
+cast to array 4C
+apply to transform 
+apply to transform D6
+zero 
+zero 2A
+UPDATE POSITION VALUES 32
+REDRAW SPRITE 
+REDRAW SPRITE 7E
+COLLISION CHECK 
+COLLISION CHECK 230
+UPDATE POSITION VALUES 
+Add velocity to accumulators 
+Add velocity to accumulators 144
+cast to array 
+cast to array 4C
+apply to transform 
+apply to transform D6
+zero 
+zero 2A
+UPDATE POSITION VALUES 32
+REDRAW SPRITE 
+REDRAW SPRITE 7E
+COLLISION CHECK 
+COLLISION CHECK 2E
+UPDATE POSITION VALUES 
+Add velocity to accumulators 
+Add velocity to accumulators 144
+cast to array 
+cast to array 4C
+apply to transform 
+apply to transform D6
+zero 
+zero 2A
+UPDATE POSITION VALUES 32
+REDRAW SPRITE 
+REDRAW SPRITE 7E
+COLLISION CHECK 
+COLLISION CHECK 45C
+UPDATE POSITION VALUES 
+Add velocity to accumulators 
+Add velocity to accumulators 144
+cast to array 
+cast to array 4C
+apply to transform 
+apply to transform D6
+zero 
+zero 2A
+UPDATE POSITION VALUES 32
+REDRAW SPRITE 
+REDRAW SPRITE 7E
+COLLISION CHECK 
+COLLISION CHECK 2E
+UPDATE POSITION VALUES 
+Add velocity to accumulators 
+Add velocity to accumulators 144
+cast to array 
+cast to array 4C
+apply to transform 
+apply to transform D6
+zero 
+zero 2A
+UPDATE POSITION VALUES 32
+REDRAW SPRITE 
+REDRAW SPRITE 7E
+COLLISION CHECK 
+COLLISION CHECK 230
+UPDATE POSITION VALUES 
+Add velocity to accumulators 
+Add velocity to accumulators 144
+cast to array 
+cast to array 4C
+apply to transform 
+apply to transform D6
+zero 
+zero 2A
+UPDATE POSITION VALUES 32
+REDRAW SPRITE 
+REDRAW SPRITE 7E
+UPDATE ALL BALLSB8
+MAIN LOOP C8
+VSYNC CALL 
+VSYNC CALL 78CA
+MAIN LOOP 
+UPDATE ALL BALLS
+COLLISION CHECK 
+COLLISION CHECK 2E
+UPDATE POSITION VALUES 
+Add velocity to accumulators 
+Add velocity to accumulators 144
+cast to array 
+cast to array 4C
+apply to transform 
+apply to transform D6
+zero 
+zero 2A
+UPDATE POSITION VALUES 32
+REDRAW SPRITE 
+REDRAW SPRITE 7E
+COLLISION CHECK 
+COLLISION CHECK 230
+UPDATE POSITION VALUES 
+Add velocity to accumulators 
+Add velocity to accumulators 144
+cast to array 
+cast to array 4C
+apply to transform 
+apply to transform D6
+zero 
+zero 2A
+UPDATE POSITION VALUES 32
+REDRAW SPRITE 
+REDRAW SPRITE 7E
+COLLISION CHECK 
+COLLISION CHECK 2E
+UPDATE POSITION VALUES 
+Add velocity to accumulators 
+Add velocity to accumulators 144
+cast to array 
+cast to array 4C
+apply to transform 
+apply to transform D6
+zero 
+zero 2A
+UPDATE POSITION VALUES 32
+REDRAW SPRITE 
+REDRAW SPRITE 7E
+COLLISION CHECK 
+COLLISION CHECK 230
+UPDATE POSITION VALUES 
+Add velocity to accumulators 
+Add velocity to accumulators 144
+cast to array 
+cast to array 4C
+apply to transform 
+apply to transform D6
+zero 
+zero 2A
+UPDATE POSITION VALUES 32
+REDRAW SPRITE 
+REDRAW SPRITE 7E
+COLLISION CHECK 
+COLLISION CHECK 2E
+UPDATE POSITION VALUES 
+Add velocity to accumulators 
+Add velocity to accumulators 144
+cast to array 
+cast to array 4C
+apply to transform 
+apply to transform D6
+zero 
+zero 2A
+UPDATE POSITION VALUES 32
+REDRAW SPRITE 
+REDRAW SPRITE 7E
+COLLISION CHECK 
+COLLISION CHECK 230
+UPDATE POSITION VALUES 
+Add velocity to accumulators 
+Add velocity to accumulators 144
+cast to array 
+cast to array 4C
+apply to transform 
+apply to transform D6
+zero 
+zero 2A
+UPDATE POSITION VALUES 32
+REDRAW SPRITE 
+REDRAW SPRITE 7E
+COLLISION CHECK 
+COLLISION CHECK 2E
+UPDATE POSITION VALUES 
+Add velocity to accumulators 
+Add velocity to accumulators 144
+cast to array 
+cast to array 4C
+apply to transform 
+apply to transform D6
+zero 
+zero 2A
+UPDATE POSITION VALUES 32
+REDRAW SPRITE 
+REDRAW SPRITE 7E
+COLLISION CHECK 
+COLLISION CHECK D2
+UPDATE POSITION VALUES 
+Add velocity to accumulators 
+Add velocity to accumulators 144
+cast to array 
+cast to array 4C
+apply to transform 
+apply to transform D6
+zero 
+zero 2A
+UPDATE POSITION VALUES 32
+REDRAW SPRITE 
+REDRAW SPRITE 7E
+COLLISION CHECK 
+COLLISION CHECK 2E
+UPDATE POSITION VALUES 
+Add velocity to accumulators 
+Add velocity to accumulators 144
+cast to array 
+cast to array 4C
+apply to transform 
+apply to transform D6
+zero 
+zero 2A
+UPDATE POSITION VALUES 32
+REDRAW SPRITE 
+REDRAW SPRITE 7E
+COLLISION CHECK 
+COLLISION CHECK 230
+UPDATE POSITION VALUES 
+Add velocity to accumulators 
+Add velocity to accumulators 144
+cast to array 
+cast to array 4C
+apply to transform 
+apply to transform D6
+zero 
+zero 2A
+UPDATE POSITION VALUES 32
+REDRAW SPRITE 
+REDRAW SPRITE 7E
+COLLISION CHECK 
+COLLISION CHECK 2E
+UPDATE POSITION VALUES 
+Add velocity to accumulators 
+Add velocity to accumulators 144
+cast to array 
+cast to array 4C
+apply to transform 
+apply to transform D6
+zero 
+zero 2A
+UPDATE POSITION VALUES 32
+REDRAW SPRITE 
+REDRAW SPRITE 7E
+COLLISION CHECK 
+COLLISION CHECK 230
+UPDATE POSITION VALUES 
+Add velocity to accumulators 
+Add velocity to accumulators 144
+cast to array 
+cast to array 4C
+apply to transform 
+apply to transform D6
+zero 
+zero 2A
+UPDATE POSITION VALUES 32
+REDRAW SPRITE 
+REDRAW SPRITE 7E
+COLLISION CHECK 
+COLLISION CHECK 2E
+UPDATE POSITION VALUES 
+Add velocity to accumulators 
+Add velocity to accumulators 144
+cast to array 
+cast to array 4C
+apply to transform 
+apply to transform D6
+zero 
+zero 2A
+UPDATE POSITION VALUES 32
+REDRAW SPRITE 
+REDRAW SPRITE 7E
+COLLISION CHECK 
+COLLISION CHECK D2
+UPDATE POSITION VALUES 
+Add velocity to accumulators 
+Add velocity to accumulators 144
+cast to array 
+cast to array 4C
+apply to transform 
+apply to transform D6
+zero 
+zero 2A
+UPDATE POSITION VALUES 32
+REDRAW SPRITE 
+REDRAW SPRITE 7E
+COLLISION CHECK 
+COLLISION CHECK 2E
+UPDATE POSITION VALUES 
+Add velocity to accumulators 
+Add velocity to accumulators 144
+cast to array 
+cast to array 4C
+apply to transform 
+apply to transform D6
+zero 
+zero 2A
+UPDATE POSITION VALUES 32
+REDRAW SPRITE 
+REDRAW SPRITE 7E
+COLLISION CHECK 
+COLLISION CHECK D2
+UPDATE POSITION VALUES 
+Add velocity to accumulators 
+Add velocity to accumulators 144
+cast to array 
+cast to array 4C
+apply to transform 
+apply to transform D6
+zero 
+zero 2A
+UPDATE POSITION VALUES 32
+REDRAW SPRITE 
+REDRAW SPRITE 7E
+COLLISION CHECK 
+COLLISION CHECK 2E
+UPDATE POSITION VALUES 
+Add velocity to accumulators 
+Add velocity to accumulators 144
+cast to array 
+cast to array 4C
+apply to transform 
+apply to transform D6
+zero 
+zero 2A
+UPDATE POSITION VALUES 32
+REDRAW SPRITE 
+REDRAW SPRITE 7E
+COLLISION CHECK 
+COLLISION CHECK 230
+UPDATE POSITION VALUES 
+Add velocity to accumulators 
+Add velocity to accumulators 144
+cast to array 
+cast to array 4C
+apply to transform 
+apply to transform D6
+zero 
+zero 2A
+UPDATE POSITION VALUES 32
+REDRAW SPRITE 
+REDRAW SPRITE 7E
+COLLISION CHECK 
+COLLISION CHECK 2E
+UPDATE POSITION VALUES 
+Add velocity to accumulators 
+Add velocity to accumulators 144
+cast to array 
+cast to array 4C
+apply to transform 
+apply to transform D6
+zero 
+zero 2A
+UPDATE POSITION VALUES 32
+REDRAW SPRITE 
+REDRAW SPRITE 7E
+COLLISION CHECK 
+COLLISION CHECK 604
+UPDATE POSITION VALUES 
+Add velocity to accumulators 
+Add velocity to accumulators 144
+cast to array 
+cast to array 4C
+apply to transform 
+apply to transform D6
+zero 
+zero 2A
+UPDATE POSITION VALUES 32
+REDRAW SPRITE 
+REDRAW SPRITE 7E
+COLLISION CHECK 
+COLLISION CHECK 2E
+UPDATE POSITION VALUES 
+Add velocity to accumulators 
+Add velocity to accumulators 144
+cast to array 
+cast to array 4C
+apply to transform 
+apply to transform D6
+zero 
+zero 2A
+UPDATE POSITION VALUES 32
+REDRAW SPRITE 
+REDRAW SPRITE 7E
+COLLISION CHECK 
+COLLISION CHECK 230
+UPDATE POSITION VALUES 
+Add velocity to accumulators 
+Add velocity to accumulators 144
+cast to array 
+cast to array 4C
+apply to transform 
+apply to transform D6
+zero 
+zero 2A
+UPDATE POSITION VALUES 32
+REDRAW SPRITE 
+REDRAW SPRITE 7E
+COLLISION CHECK 
+COLLISION CHECK 2E
+UPDATE POSITION VALUES 
+Add velocity to accumulators 
+Add velocity to accumulators 370
+cast to array 
+cast to array 4C
+apply to transform 
+apply to transform D6
+zero 
+zero 2A
+UPDATE POSITION VALUES 32
+REDRAW SPRITE 
+REDRAW SPRITE 7E
+COLLISION CHECK 
+COLLISION CHECK 282
+UPDATE POSITION VALUES 
+Add velocity to accumulators 
+Add velocity to accumulators 144
+cast to array 
+cast to array 4C
+apply to transform 
+apply to transform D6
+zero 
+zero 2A
+UPDATE POSITION VALUES 32
+REDRAW SPRITE 
+REDRAW SPRITE 7E
+COLLISION CHECK 
+COLLISION CHECK 2E
+UPDATE POSITION VALUES 
+Add velocity to accumulators 
+Add velocity to accumulators 144
+cast to array 
+cast to array 4C
+apply to transform 
+apply to transform D6
+zero 
+zero 2A
+UPDATE POSITION VALUES 32
+REDRAW SPRITE 
+REDRAW SPRITE 7E
+UPDATE ALL BALLSB8
+MAIN LOOP C8
+VSYNC CALL 
+VSYNC CALL 79B0
+MAIN LOOP 
+UPDATE ALL BALLS
+COLLISION CHECK 
+COLLISION CHECK 230
+UPDATE POSITION VALUES 
+Add velocity to accumulators 
+Add velocity to accumulators 144
+cast to array 
+cast to array 4C
+apply to transform 
+apply to transform D6
+zero 
+zero 2A
+UPDATE POSITION VALUES 32
+REDRAW SPRITE 
+REDRAW SPRITE 7E
+COLLISION CHECK 
+COLLISION CHECK 2E
+UPDATE POSITION VALUES 
+Add velocity to accumulators 
+Add velocity to accumulators 144
+cast to array 
+cast to array 4C
+apply to transform 
+apply to transform D6
+zero 
+zero 2A
+UPDATE POSITION VALUES 32
+REDRAW SPRITE 
+REDRAW SPRITE 7E
+COLLISION CHECK 
+COLLISION CHECK 230
+UPDATE POSITION VALUES 
+Add velocity to accumulators 
+Add velocity to accumulators 144
+cast to array 
+cast to array 4C
+apply to transform 
+apply to transform D6
+zero 
+zero 2A
+UPDATE POSITION VALUES 32
+REDRAW SPRITE 
+REDRAW SPRITE 7E
+COLLISION CHECK 
+COLLISION CHECK 2E
+UPDATE POSITION VALUES 
+Add velocity to accumulators 
+Add velocity to accumulators 144
+cast to array 
+cast to array 4C
+apply to transform 
+apply to transform D6
+zero 
+zero 2A
+UPDATE POSITION VALUES 32
+REDRAW SPRITE 
+REDRAW SPRITE 7E
+COLLISION CHECK 
+COLLISION CHECK 230
+UPDATE POSITION VALUES 
+Add velocity to accumulators 
+Add velocity to accumulators 144
+cast to array 
+cast to array 4C
+apply to transform 
+apply to transform D6
+zero 
+zero 2A
+UPDATE POSITION VALUES 32
+REDRAW SPRITE 
+REDRAW SPRITE 7E
+COLLISION CHECK 
+COLLISION CHECK 2E
+UPDATE POSITION VALUES 
+Add velocity to accumulators 
+Add velocity to accumulators 144
+cast to array 
+cast to array 4C
+apply to transform 
+apply to transform D6
+zero 
+zero 2A
+UPDATE POSITION VALUES 32
+REDRAW SPRITE 
+REDRAW SPRITE 7E
+COLLISION CHECK 
+COLLISION CHECK 230
+UPDATE POSITION VALUES 
+Add velocity to accumulators 
+Add velocity to accumulators 144
+cast to array 
+cast to array 4C
+apply to transform 
+apply to transform D6
+zero 
+zero 2A
+UPDATE POSITION VALUES 32
+REDRAW SPRITE 
+REDRAW SPRITE 7E
+COLLISION CHECK 
+COLLISION CHECK 2E
+UPDATE POSITION VALUES 
+Add velocity to accumulators 
+Add velocity to accumulators 144
+cast to array 
+cast to array 4C
+apply to transform 
+apply to transform D6
+zero 
+zero 2A
+UPDATE POSITION VALUES 32
+REDRAW SPRITE 
+REDRAW SPRITE 7E
+COLLISION CHECK 
+COLLISION CHECK 230
+UPDATE POSITION VALUES 
+Add velocity to accumulators 
+Add velocity to accumulators 144
+cast to array 
+cast to array 4C
+apply to transform 
+apply to transform D6
+zero 
+zero 2A
+UPDATE POSITION VALUES 32
+REDRAW SPRITE 
+REDRAW SPRITE 7E
+COLLISION CHECK 
+COLLISION CHECK 2E
+UPDATE POSITION VALUES 
+Add velocity to accumulators 
+Add velocity to accumulators 144
+cast to array 
+cast to array 4C
+apply to transform 
+apply to transform D6
+zero 
+zero 2A
+UPDATE POSITION VALUES 32
+REDRAW SPRITE 
+REDRAW SPRITE 7E
+COLLISION CHECK 
+COLLISION CHECK 282
+UPDATE POSITION VALUES 
+Add velocity to accumulators 
+Add velocity to accumulators 144
+cast to array 
+cast to array 4C
+apply to transform 
+apply to transform D6
+zero 
+zero 2A
+UPDATE POSITION VALUES 32
+REDRAW SPRITE 
+REDRAW SPRITE 7E
+COLLISION CHECK 
+COLLISION CHECK 2E
+UPDATE POSITION VALUES 
+Add velocity to accumulators 
+Add velocity to accumulators 144
+cast to array 
+cast to array 4C
+apply to transform 
+apply to transform D6
+zero 
+zero 2A
+UPDATE POSITION VALUES 32
+REDRAW SPRITE 
+REDRAW SPRITE 7E
+COLLISION CHECK 
+COLLISION CHECK 230
+UPDATE POSITION VALUES 
+Add velocity to accumulators 
+Add velocity to accumulators 144
+cast to array 
+cast to array 4C
+apply to transform 
+apply to transform D6
+zero 
+zero 2A
+UPDATE POSITION VALUES 32
+REDRAW SPRITE 
+REDRAW SPRITE 7E
+COLLISION CHECK 
+COLLISION CHECK 2E
+UPDATE POSITION VALUES 
+Add velocity to accumulators 
+Add velocity to accumulators 144
+cast to array 
+cast to array 4C
+apply to transform 
+apply to transform D6
+zero 
+zero 2A
+UPDATE POSITION VALUES 32
+REDRAW SPRITE 
+REDRAW SPRITE 7E
+COLLISION CHECK 
+COLLISION CHECK D2
+UPDATE POSITION VALUES 
+Add velocity to accumulators 
+Add velocity to accumulators 144
+cast to array 
+cast to array 4C
+apply to transform 
+apply to transform D6
+zero 
+zero 2A
+UPDATE POSITION VALUES 32
+REDRAW SPRITE 
+REDRAW SPRITE 7E
+COLLISION CHECK 
+COLLISION CHECK 2E
+UPDATE POSITION VALUES 
+Add velocity to accumulators 
+Add velocity to accumulators 144
+cast to array 
+cast to array 4C
+apply to transform 
+apply to transform D6
+zero 
+zero 2A
+UPDATE POSITION VALUES 32
+REDRAW SPRITE 
+REDRAW SPRITE 7E
+COLLISION CHECK 
+COLLISION CHECK 230
+UPDATE POSITION VALUES 
+Add velocity to accumulators 
+Add velocity to accumulators 144
+cast to array 
+cast to array 4C
+apply to transform 
+apply to transform D6
+zero 
+zero 2A
+UPDATE POSITION VALUES 32
+REDRAW SPRITE 
+REDRAW SPRITE 7E
+COLLISION CHECK 
+COLLISION CHECK 2E
+UPDATE POSITION VALUES 
+Add velocity to accumulators 
+Add velocity to accumulators 144
+cast to array 
+cast to array 4C
+apply to transform 
+apply to transform D6
+zero 
+zero 2A
+UPDATE POSITION VALUES 32
+REDRAW SPRITE 
+REDRAW SPRITE 7E
+COLLISION CHECK 
+COLLISION CHECK 230
+UPDATE POSITION VALUES 
+Add velocity to accumulators 
+Add velocity to accumulators 144
+cast to array 
+cast to array 4C
+apply to transform 
+apply to transform D6
+zero 
+zero 2A
+UPDATE POSITION VALUES 32
+REDRAW SPRITE 
+REDRAW SPRITE 7E
+COLLISION CHECK 
+COLLISION CHECK 2E
+UPDATE POSITION VALUES 
+Add velocity to accumulators 
+Add velocity to accumulators 144
+cast to array 
+cast to array 4C
+apply to transform 
+apply to transform D6
+zero 
+zero 2A
+UPDATE POSITION VALUES 32
+REDRAW SPRITE 
+REDRAW SPRITE 7E
+COLLISION CHECK 
+COLLISION CHECK 2E0
+UPDATE POSITION VALUES 
+Add velocity to accumulators 
+Add velocity to accumulators 144
+cast to array 
+cast to array 4C
+apply to transform 
+apply to transform D6
+zero 
+zero 2A
+UPDATE POSITION VALUES 32
+REDRAW SPRITE 
+REDRAW SPRITE 7E
+COLLISION CHECK 
+COLLISION CHECK 2E
+UPDATE POSITION VALUES 
+Add velocity to accumulators 
+Add velocity to accumulators 144
+cast to array 
+cast to array 4C
+apply to transform 
+apply to transform D6
+zero 
+zero 2A
+UPDATE POSITION VALUES 32
+REDRAW SPRITE 
+REDRAW SPRITE 7E
+COLLISION CHECK 
+COLLISION CHECK 45C
+UPDATE POSITION VALUES 
+Add velocity to accumulators 
+Add velocity to accumulators 144
+cast to array 
+cast to array 4C
+apply to transform 
+apply to transform D6
+zero 
+zero 2A
+UPDATE POSITION VALUES 32
+REDRAW SPRITE 
+REDRAW SPRITE 7E
+COLLISION CHECK 
+COLLISION CHECK 2E
+UPDATE POSITION VALUES 
+Add velocity to accumulators 
+Add velocity to accumulators 144
+cast to array 
+cast to array 4C
+apply to transform 
+apply to transform D6
+zero 
+zero 2A
+UPDATE POSITION VALUES 32
+REDRAW SPRITE 
+REDRAW SPRITE 7E
+COLLISION CHECK 
+COLLISION CHECK 230
+UPDATE POSITION VALUES 
+Add velocity to accumulators 
+Add velocity to accumulators 144
+cast to array 
+cast to array 4C
+apply to transform 
+apply to transform D6
+zero 
+zero 2A
+UPDATE POSITION VALUES 32
+REDRAW SPRITE 
+REDRAW SPRITE 7E
+UPDATE ALL BALLSB8
+MAIN LOOP C8
+VSYNC CALL 
+VSYNC CALL 77DE
+MAIN LOOP 
+UPDATE ALL BALLS
+COLLISION CHECK 
+COLLISION CHECK 2E
+UPDATE POSITION VALUES 
+Add velocity to accumulators 
+Add velocity to accumulators 144
+cast to array 
+cast to array 4C
+apply to transform 
+apply to transform D6
+zero 
+zero 2A
+UPDATE POSITION VALUES 32
+REDRAW SPRITE 
+REDRAW SPRITE 7E
+COLLISION CHECK 
+COLLISION CHECK 230
+UPDATE POSITION VALUES 
+Add velocity to accumulators 
+Add velocity to accumulators 144
+cast to array 
+cast to array 4C
+apply to transform 
+apply to transform D6
+zero 
+zero 2A
+UPDATE POSITION VALUES 32
+REDRAW SPRITE 
+REDRAW SPRITE 7E
+COLLISION CHECK 
+COLLISION CHECK 2E
+UPDATE POSITION VALUES 
+Add velocity to accumulators 
+Add velocity to accumulators 144
+cast to array 
+cast to array 4C
+apply to transform 
+apply to transform D6
+zero 
+zero 2A
+UPDATE POSITION VALUES 32
+REDRAW SPRITE 
+REDRAW SPRITE 7E
+COLLISION CHECK 
+COLLISION CHECK 230
+UPDATE POSITION VALUES 
+Add velocity to accumulators 
+Add velocity to accumulators 144
+cast to array 
+cast to array 4C
+apply to transform 
+apply to transform D6
+zero 
+zero 2A
+UPDATE POSITION VALUES 32
+REDRAW SPRITE 
+REDRAW SPRITE 7E
+COLLISION CHECK 
+COLLISION CHECK 2E
+UPDATE POSITION VALUES 
+Add velocity to accumulators 
+Add velocity to accumulators 144
+cast to array 
+cast to array 4C
+apply to transform 
+apply to transform D6
+zero 
+zero 2A
+UPDATE POSITION VALUES 32
+REDRAW SPRITE 
+REDRAW SPRITE 7E
+COLLISION CHECK 
+COLLISION CHECK 230
+UPDATE POSITION VALUES 
+Add velocity to accumulators 
+Add velocity to accumulators 144
+cast to array 
+cast to array 4C
+apply to transform 
+apply to transform D6
+zero 
+zero 2A
+UPDATE POSITION VALUES 32
+REDRAW SPRITE 
+REDRAW SPRITE 7E
+COLLISION CHECK 
+COLLISION CHECK 2E
+UPDATE POSITION VALUES 
+Add velocity to accumulators 
+Add velocity to accumulators 144
+cast to array 
+cast to array 4C
+apply to transform 
+apply to transform D6
+zero 
+zero 2A
+UPDATE POSITION VALUES 32
+REDRAW SPRITE 
+REDRAW SPRITE 7E
+COLLISION CHECK 
+COLLISION CHECK D2
+UPDATE POSITION VALUES 
+Add velocity to accumulators 
+Add velocity to accumulators 144
+cast to array 
+cast to array 4C
+apply to transform 
+apply to transform D6
+zero 
+zero 2A
+UPDATE POSITION VALUES 32
+REDRAW SPRITE 
+REDRAW SPRITE 7E
+COLLISION CHECK 
+COLLISION CHECK 2E
+UPDATE POSITION VALUES 
+Add velocity to accumulators 
+Add velocity to accumulators 144
+cast to array 
+cast to array 4C
+apply to transform 
+apply to transform D6
+zero 
+zero 2A
+UPDATE POSITION VALUES 32
+REDRAW SPRITE 
+REDRAW SPRITE 7E
+COLLISION CHECK 
+COLLISION CHECK 230
+UPDATE POSITION VALUES 
+Add velocity to accumulators 
+Add velocity to accumulators 144
+cast to array 
+cast to array 4C
+apply to transform 
+apply to transform D6
+zero 
+zero 2A
+UPDATE POSITION VALUES 32
+REDRAW SPRITE 
+REDRAW SPRITE 7E
+COLLISION CHECK 
+COLLISION CHECK 2E
+UPDATE POSITION VALUES 
+Add velocity to accumulators 
+Add velocity to accumulators 144
+cast to array 
+cast to array 4C
+apply to transform 
+apply to transform D6
+zero 
+zero 2A
+UPDATE POSITION VALUES 32
+REDRAW SPRITE 
+REDRAW SPRITE 7E
+COLLISION CHECK 
+COLLISION CHECK 230
+UPDATE POSITION VALUES 
+Add velocity to accumulators 
+Add velocity to accumulators 144
+cast to array 
+cast to array 4C
+apply to transform 
+apply to transform D6
+zero 
+zero 2A
+UPDATE POSITION VALUES 32
+REDRAW SPRITE 
+REDRAW SPRITE 7E
+COLLISION CHECK 
+COLLISION CHECK 2E
+UPDATE POSITION VALUES 
+Add velocity to accumulators 
+Add velocity to accumulators 144
+cast to array 
+cast to array 4C
+apply to transform 
+apply to transform D6
+zero 
+zero 2A
+UPDATE POSITION VALUES 32
+REDRAW SPRITE 
+REDRAW SPRITE 7E
+COLLISION CHECK 
+COLLISION CHECK D2
+UPDATE POSITION VALUES 
+Add velocity to accumulators 
+Add velocity to accumulators 144
+cast to array 
+cast to array 4C
+apply to transform 
+apply to transform D6
+zero 
+zero 2A
+UPDATE POSITION VALUES 32
+REDRAW SPRITE 
+REDRAW SPRITE 7E
+COLLISION CHECK 
+COLLISION CHECK 2E
+UPDATE POSITION VALUES 
+Add velocity to accumulators 
+Add velocity to accumulators 144
+cast to array 
+cast to array 4C
+apply to transform 
+apply to transform D6
+zero 
+zero 2A
+UPDATE POSITION VALUES 32
+REDRAW SPRITE 
+REDRAW SPRITE 7E
+COLLISION CHECK 
+COLLISION CHECK D2
+UPDATE POSITION VALUES 
+Add velocity to accumulators 
+Add velocity to accumulators 144
+cast to array 
+cast to array 4C
+apply to transform 
+apply to transform D6
+zero 
+zero 2A
+UPDATE POSITION VALUES 32
+REDRAW SPRITE 
+REDRAW SPRITE 7E
+COLLISION CHECK 
+COLLISION CHECK 2E
+UPDATE POSITION VALUES 
+Add velocity to accumulators 
+Add velocity to accumulators 144
+cast to array 
+cast to array 4C
+apply to transform 
+apply to transform D6
+zero 
+zero 2A
+UPDATE POSITION VALUES 32
+REDRAW SPRITE 
+REDRAW SPRITE 7E
+COLLISION CHECK 
+COLLISION CHECK 230
+UPDATE POSITION VALUES 
+Add velocity to accumulators 
+Add velocity to accumulators 144
+cast to array 
+cast to array 4C
+apply to transform 
+apply to transform D6
+zero 
+zero 2A
+UPDATE POSITION VALUES 32
+REDRAW SPRITE 
+REDRAW SPRITE 7E
+COLLISION CHECK 
+COLLISION CHECK 2E
+UPDATE POSITION VALUES 
+Add velocity to accumulators 
+Add velocity to accumulators 144
+cast to array 
+cast to array 4C
+apply to transform 
+apply to transform D6
+zero 
+zero 2A
+UPDATE POSITION VALUES 32
+REDRAW SPRITE 
+REDRAW SPRITE 7E
+COLLISION CHECK 
+COLLISION CHECK D2
+UPDATE POSITION VALUES 
+Add velocity to accumulators 
+Add velocity to accumulators 144
+cast to array 
+cast to array 4C
+apply to transform 
+apply to transform D6
+zero 
+zero 2A
+UPDATE POSITION VALUES 32
+REDRAW SPRITE 
+REDRAW SPRITE 7E
+COLLISION CHECK 
+COLLISION CHECK 2E
+UPDATE POSITION VALUES 
+Add velocity to accumulators 
+Add velocity to accumulators 144
+cast to array 
+cast to array 4C
+apply to transform 
+apply to transform D6
+zero 
+zero 2A
+UPDATE POSITION VALUES 32
+REDRAW SPRITE 
+REDRAW SPRITE 7E
+COLLISION CHECK 
+COLLISION CHECK 230
+UPDATE POSITION VALUES 
+Add velocity to accumulators 
+Add velocity to accumulators 144
+cast to array 
+cast to array 4C
+apply to transform 
+apply to transform D6
+zero 
+zero 2A
+UPDATE POSITION VALUES 32
+REDRAW SPRITE 
+REDRAW SPRITE 7E
+COLLISION CHECK 
+COLLISION CHECK 2E
+UPDATE POSITION VALUES 
+Add velocity to accumulators 
+Add velocity to accumulators 144
+cast to array 
+cast to array 4C
+apply to transform 
+apply to transform D6
+zero 
+zero 2A
+UPDATE POSITION VALUES 32
+REDRAW SPRITE 
+REDRAW SPRITE 7E
+COLLISION CHECK 
+COLLISION CHECK 4AE
+UPDATE POSITION VALUES 
+Add velocity to accumulators 
+Add velocity to accumulators 144
+cast to array 
+cast to array 4C
+apply to transform 
+apply to transform D6
+zero 
+zero 2A
+UPDATE POSITION VALUES 32
+REDRAW SPRITE 
+REDRAW SPRITE 7E
+COLLISION CHECK 
+COLLISION CHECK 2E
+UPDATE POSITION VALUES 
+Add velocity to accumulators 
+Add velocity to accumulators 144
+cast to array 
+cast to array 4C
+apply to transform 
+apply to transform D6
+zero 
+zero 2A
+UPDATE POSITION VALUES 32
+REDRAW SPRITE 
+REDRAW SPRITE 7E
+UPDATE ALL BALLSB8
+MAIN LOOP C8
+VSYNC CALL 
+VSYNC CALL 7EAA
+MAIN LOOP 
+UPDATE ALL BALLS
+COLLISION CHECK 
+COLLISION CHECK 230
+UPDATE POSITION VALUES 
+Add velocity to accumulators 
+Add velocity to accumulators 144
+cast to array 
+cast to array 4C
+apply to transform 
+apply to transform D6
+zero 
+zero 2A
+UPDATE POSITION VALUES 32
+REDRAW SPRITE 
+REDRAW SPRITE 7E
+COLLISION CHECK 
+COLLISION CHECK 2E
+UPDATE POSITION VALUES 
+Add velocity to accumulators 
+Add velocity to accumulators 144
+cast to array 
+cast to array 4C
+apply to transform 
+apply to transform D6
+zero 
+zero 2A
+UPDATE POSITION VALUES 32
+REDRAW SPRITE 
+REDRAW SPRITE 7E
+COLLISION CHECK 
+COLLISION CHECK 230
+UPDATE POSITION VALUES 
+Add velocity to accumulators 
+Add velocity to accumulators 144
+cast to array 
+cast to array 4C
+apply to transform 
+apply to transform D6
+zero 
+zero 2A
+UPDATE POSITION VALUES 32
+REDRAW SPRITE 
+REDRAW SPRITE 7E
+COLLISION CHECK 
+COLLISION CHECK 2E
+UPDATE POSITION VALUES 
+Add velocity to accumulators 
+Add velocity to accumulators 144
+cast to array 
+cast to array 4C
+apply to transform 
+apply to transform D6
+zero 
+zero 2A
+UPDATE POSITION VALUES 32
+REDRAW SPRITE 
+REDRAW SPRITE 7E
+COLLISION CHECK 
+COLLISION CHECK 230
+UPDATE POSITION VALUES 
+Add velocity to accumulators 
+Add velocity to accumulators 144
+cast to array 
+cast to array 4C
+apply to transform 
+apply to transform D6
+zero 
+zero 2A
+UPDATE POSITION VALUES 32
+REDRAW SPRITE 
+REDRAW SPRITE 7E
+COLLISION CHECK 
+COLLISION CHECK 2E
+UPDATE POSITION VALUES 
+Add velocity to accumulators 
+Add velocity to accumulators 144
+cast to array 
+cast to array 4C
+apply to transform 
+apply to transform D6
+zero 
+zero 2A
+UPDATE POSITION VALUES 32
+REDRAW SPRITE 
+REDRAW SPRITE 7E
+COLLISION CHECK 
+COLLISION CHECK 230
+UPDATE POSITION VALUES 
+Add velocity to accumulators 
+Add velocity to accumulators 144
+cast to array 
+cast to array 4C
+apply to transform 
+apply to transform D6
+zero 
+zero 2A
+UPDATE POSITION VALUES 32
+REDRAW SPRITE 
+REDRAW SPRITE 7E
+COLLISION CHECK 
+COLLISION CHECK 2E
+UPDATE POSITION VALUES 
+Add velocity to accumulators 
+Add velocity to accumulators 144
+cast to array 
+cast to array 4C
+apply to transform 
+apply to transform D6
+zero 
+zero 2A
+UPDATE POSITION VALUES 32
+REDRAW SPRITE 
+REDRAW SPRITE 7E
+COLLISION CHECK 
+COLLISION CHECK 230
+UPDATE POSITION VALUES 
+Add velocity to accumulators 
+Add velocity to accumulators 144
+cast to array 
+cast to array 4C
+apply to transform 
+apply to transform D6
+zero 
+zero 2A
+UPDATE POSITION VALUES 32
+REDRAW SPRITE 
+REDRAW SPRITE 7E
+COLLISION CHECK 
+COLLISION CHECK 2E
+UPDATE POSITION VALUES 
+Add velocity to accumulators 
+Add velocity to accumulators 144
+cast to array 
+cast to array 4C
+apply to transform 
+apply to transform D6
+zero 
+zero 2A
+UPDATE POSITION VALUES 32
+REDRAW SPRITE 
+REDRAW SPRITE 7E
+COLLISION CHECK 
+COLLISION CHECK 230
+UPDATE POSITION VALUES 
+Add velocity to accumulators 
+Add velocity to accumulators 144
+cast to array 
+cast to array 4C
+apply to transform 
+apply to transform D6
+zero 
+zero 2A
+UPDATE POSITION VALUES 32
+REDRAW SPRITE 
+REDRAW SPRITE 7E
+COLLISION CHECK 
+COLLISION CHECK 2E
+UPDATE POSITION VALUES 
+Add velocity to accumulators 
+Add velocity to accumulators 144
+cast to array 
+cast to array 4C
+apply to transform 
+apply to transform D6
+zero 
+zero 2A
+UPDATE POSITION VALUES 32
+REDRAW SPRITE 
+REDRAW SPRITE 7E
+COLLISION CHECK 
+COLLISION CHECK 230
+UPDATE POSITION VALUES 
+Add velocity to accumulators 
+Add velocity to accumulators 144
+cast to array 
+cast to array 4C
+apply to transform 
+apply to transform D6
+zero 
+zero 2A
+UPDATE POSITION VALUES 32
+REDRAW SPRITE 
+REDRAW SPRITE 7E
+COLLISION CHECK 
+COLLISION CHECK 2E
+UPDATE POSITION VALUES 
+Add velocity to accumulators 
+Add velocity to accumulators 144
+cast to array 
+cast to array 4C
+apply to transform 
+apply to transform D6
+zero 
+zero 2A
+UPDATE POSITION VALUES 32
+REDRAW SPRITE 
+REDRAW SPRITE 7E
+COLLISION CHECK 
+COLLISION CHECK 230
+UPDATE POSITION VALUES 
+Add velocity to accumulators 
+Add velocity to accumulators 144
+cast to array 
+cast to array 4C
+apply to transform 
+apply to transform D6
+zero 
+zero 2A
+UPDATE POSITION VALUES 32
+REDRAW SPRITE 
+REDRAW SPRITE 7E
+COLLISION CHECK 
+COLLISION CHECK 2E
+UPDATE POSITION VALUES 
+Add velocity to accumulators 
+Add velocity to accumulators 144
+cast to array 
+cast to array 4C
+apply to transform 
+apply to transform D6
+zero 
+zero 2A
+UPDATE POSITION VALUES 32
+REDRAW SPRITE 
+REDRAW SPRITE 7E
+COLLISION CHECK 
+COLLISION CHECK 230
+UPDATE POSITION VALUES 
+Add velocity to accumulators 
+Add velocity to accumulators 144
+cast to array 
+cast to array 4C
+apply to transform 
+apply to transform D6
+zero 
+zero 2A
+UPDATE POSITION VALUES 32
+REDRAW SPRITE 
+REDRAW SPRITE 7E
+COLLISION CHECK 
+COLLISION CHECK 2E
+UPDATE POSITION VALUES 
+Add velocity to accumulators 
+Add velocity to accumulators 144
+cast to array 
+cast to array 4C
+apply to transform 
+apply to transform D6
+zero 
+zero 2A
+UPDATE POSITION VALUES 32
+REDRAW SPRITE 
+REDRAW SPRITE 7E
+COLLISION CHECK 
+COLLISION CHECK 230
+UPDATE POSITION VALUES 
+Add velocity to accumulators 
+Add velocity to accumulators 144
+cast to array 
+cast to array 4C
+apply to transform 
+apply to transform D6
+zero 
+zero 2A
+UPDATE POSITION VALUES 32
+REDRAW SPRITE 
+REDRAW SPRITE 7E
+COLLISION CHECK 
+COLLISION CHECK 2E
+UPDATE POSITION VALUES 
+Add velocity to accumulators 
+Add velocity to accumulators 144
+cast to array 
+cast to array 4C
+apply to transform 
+apply to transform D6
+zero 
+zero 2A
+UPDATE POSITION VALUES 32
+REDRAW SPRITE 
+REDRAW SPRITE 7E
+COLLISION CHECK 
+COLLISION CHECK 604
+UPDATE POSITION VALUES 
+Add velocity to accumulators 
+Add velocity to accumulators 144
+cast to array 
+cast to array 4C
+apply to transform 
+apply to transform D6
+zero 
+zero 2A
+UPDATE POSITION VALUES 32
+REDRAW SPRITE 
+REDRAW SPRITE 7E
+COLLISION CHECK 
+COLLISION CHECK 2E
+UPDATE POSITION VALUES 
+Add velocity to accumulators 
+Add velocity to accumulators 370
+cast to array 
+cast to array 4C
+apply to transform 
+apply to transform D6
+zero 
+zero 2A
+UPDATE POSITION VALUES 32
+REDRAW SPRITE 
+REDRAW SPRITE 7E
+COLLISION CHECK 
+COLLISION CHECK 282
+UPDATE POSITION VALUES 
+Add velocity to accumulators 
+Add velocity to accumulators 144
+cast to array 
+cast to array 4C
+apply to transform 
+apply to transform D6
+zero 
+zero 2A
+UPDATE POSITION VALUES 32
+REDRAW SPRITE 
+REDRAW SPRITE 7E
+COLLISION CHECK 
+COLLISION CHECK 2E
+UPDATE POSITION VALUES 
+Add velocity to accumulators 
+Add velocity to accumulators 144
+cast to array 
+cast to array 4C
+apply to transform 
+apply to transform D6
+zero 
+zero 2A
+UPDATE POSITION VALUES 32
+REDRAW SPRITE 
+REDRAW SPRITE 7E
+COLLISION CHECK 
+COLLISION CHECK 230
+UPDATE POSITION VALUES 
+Add velocity to accumulators 
+Add velocity to accumulators 144
+cast to array 
+cast to array 4C
+apply to transform 
+apply to transform D6
+zero 
+zero 2A
+UPDATE POSITION VALUES 32
+REDRAW SPRITE 
+REDRAW SPRITE 7E
+UPDATE ALL BALLSB8
+MAIN LOOP C8
+VSYNC CALL 
+VSYNC CALL 7360
+MAIN LOOP 
+UPDATE ALL BALLS
+COLLISION CHECK 
+COLLISION CHECK 2E
+UPDATE POSITION VALUES 
+Add velocity to accumulators 
+Add velocity to accumulators 144
+cast to array 
+cast to array 4C
+apply to transform 
+apply to transform D6
+zero 
+zero 2A
+UPDATE POSITION VALUES 32
+REDRAW SPRITE 
+REDRAW SPRITE 7E
+COLLISION CHECK 
+COLLISION CHECK 230
+UPDATE POSITION VALUES 
+Add velocity to accumulators 
+Add velocity to accumulators 144
+cast to array 
+cast to array 4C
+apply to transform 
+apply to transform D6
+zero 
+zero 2A
+UPDATE POSITION VALUES 32
+REDRAW SPRITE 
+REDRAW SPRITE 7E
+COLLISION CHECK 
+COLLISION CHECK 2E
+UPDATE POSITION VALUES 
+Add velocity to accumulators 
+Add velocity to accumulators 144
+cast to array 
+cast to array 4C
+apply to transform 
+apply to transform D6
+zero 
+zero 2A
+UPDATE POSITION VALUES 32
+REDRAW SPRITE 
+REDRAW SPRITE 7E
+COLLISION CHECK 
+COLLISION CHECK 230
+UPDATE POSITION VALUES 
+Add velocity to accumulators 
+Add velocity to accumulators 144
+cast to array 
+cast to array 4C
+apply to transform 
+apply to transform D6
+zero 
+zero 2A
+UPDATE POSITION VALUES 32
+REDRAW SPRITE 
+REDRAW SPRITE 7E
+COLLISION CHECK 
+COLLISION CHECK 2E
+UPDATE POSITION VALUES 
+Add velocity to accumulators 
+Add velocity to accumulators 144
+cast to array 
+cast to array 4C
+apply to transform 
+apply to transform D6
+zero 
+zero 2A
+UPDATE POSITION VALUES 32
+REDRAW SPRITE 
+REDRAW SPRITE 7E
+COLLISION CHECK 
+COLLISION CHECK 230
+UPDATE POSITION VALUES 
+Add velocity to accumulators 
+Add velocity to accumulators 144
+cast to array 
+cast to array 4C
+apply to transform 
+apply to transform D6
+zero 
+zero 2A
+UPDATE POSITION VALUES 32
+REDRAW SPRITE 
+REDRAW SPRITE 7E
+COLLISION CHECK 
+COLLISION CHECK 2E
+UPDATE POSITION VALUES 
+Add velocity to accumulators 
+Add velocity to accumulators 144
+cast to array 
+cast to array 4C
+apply to transform 
+apply to transform D6
+zero 
+zero 2A
+UPDATE POSITION VALUES 32
+REDRAW SPRITE 
+REDRAW SPRITE 7E
+COLLISION CHECK 
+COLLISION CHECK D2
+UPDATE POSITION VALUES 
+Add velocity to accumulators 
+Add velocity to accumulators 144
+cast to array 
+cast to array 4C
+apply to transform 
+apply to transform D6
+zero 
+zero 2A
+UPDATE POSITION VALUES 32
+REDRAW SPRITE 
+REDRAW SPRITE 7E
+COLLISION CHECK 
+COLLISION CHECK 2E
+UPDATE POSITION VALUES 
+Add velocity to accumulators 
+Add velocity to accumulators 144
+cast to array 
+cast to array 4C
+apply to transform 
+apply to transform D6
+zero 
+zero 2A
+UPDATE POSITION VALUES 32
+REDRAW SPRITE 
+REDRAW SPRITE 7E
+COLLISION CHECK 
+COLLISION CHECK 230
+UPDATE POSITION VALUES 
+Add velocity to accumulators 
+Add velocity to accumulators 144
+cast to array 
+cast to array 4C
+apply to transform 
+apply to transform D6
+zero 
+zero 2A
+UPDATE POSITION VALUES 32
+REDRAW SPRITE 
+REDRAW SPRITE 7E
+COLLISION CHECK 
+COLLISION CHECK 2E
+UPDATE POSITION VALUES 
+Add velocity to accumulators 
+Add velocity to accumulators 144
+cast to array 
+cast to array 4C
+apply to transform 
+apply to transform D6
+zero 
+zero 2A
+UPDATE POSITION VALUES 32
+REDRAW SPRITE 
+REDRAW SPRITE 7E
+COLLISION CHECK 
+COLLISION CHECK 230
+UPDATE POSITION VALUES 
+Add velocity to accumulators 
+Add velocity to accumulators 144
+cast to array 
+cast to array 4C
+apply to transform 
+apply to transform D6
+zero 
+zero 2A
+UPDATE POSITION VALUES 32
+REDRAW SPRITE 
+REDRAW SPRITE 7E
+COLLISION CHECK 
+COLLISION CHECK 2E
+UPDATE POSITION VALUES 
+Add velocity to accumulators 
+Add velocity to accumulators 144
+cast to array 
+cast to array 4C
+apply to transform 
+apply to transform D6
+zero 
+zero 2A
+UPDATE POSITION VALUES 32
+REDRAW SPRITE 
+REDRAW SPRITE 7E
+COLLISION CHECK 
+COLLISION CHECK CE
+UPDATE POSITION VALUES 
+Add velocity to accumulators 
+Add velocity to accumulators 144
+cast to array 
+cast to array 4C
+apply to transform 
+apply to transform D6
+zero 
+zero 2A
+UPDATE POSITION VALUES 32
+REDRAW SPRITE 
+REDRAW SPRITE 7E
+COLLISION CHECK 
+COLLISION CHECK 2E
+UPDATE POSITION VALUES 
+Add velocity to accumulators 
+Add velocity to accumulators 144
+cast to array 
+cast to array 4C
+apply to transform 
+apply to transform D6
+zero 
+zero 2A
+UPDATE POSITION VALUES 32
+REDRAW SPRITE 
+REDRAW SPRITE 7E
+COLLISION CHECK 
+COLLISION CHECK CE
+UPDATE POSITION VALUES 
+Add velocity to accumulators 
+Add velocity to accumulators 144
+cast to array 
+cast to array 4C
+apply to transform 
+apply to transform D6
+zero 
+zero 2A
+UPDATE POSITION VALUES 32
+REDRAW SPRITE 
+REDRAW SPRITE 7E
+COLLISION CHECK 
+COLLISION CHECK 2E
+UPDATE POSITION VALUES 
+Add velocity to accumulators 
+Add velocity to accumulators 144
+cast to array 
+cast to array 4C
+apply to transform 
+apply to transform D6
+zero 
+zero 2A
+UPDATE POSITION VALUES 32
+REDRAW SPRITE 
+REDRAW SPRITE 7E
+COLLISION CHECK 
+COLLISION CHECK 230
+UPDATE POSITION VALUES 
+Add velocity to accumulators 
+Add velocity to accumulators 144
+cast to array 
+cast to array 4C
+apply to transform 
+apply to transform D6
+zero 
+zero 2A
+UPDATE POSITION VALUES 32
+REDRAW SPRITE 
+REDRAW SPRITE 7E
+COLLISION CHECK 
+COLLISION CHECK 2E
+UPDATE POSITION VALUES 
+Add velocity to accumulators 
+Add velocity to accumulators 144
+cast to array 
+cast to array 4C
+apply to transform 
+apply to transform D6
+zero 
+zero 2A
+UPDATE POSITION VALUES 32
+REDRAW SPRITE 
+REDRAW SPRITE 7E
+COLLISION CHECK 
+COLLISION CHECK D2
+UPDATE POSITION VALUES 
+Add velocity to accumulators 
+Add velocity to accumulators 144
+cast to array 
+cast to array 4C
+apply to transform 
+apply to transform D6
+zero 
+zero 2A
+UPDATE POSITION VALUES 32
+REDRAW SPRITE 
+REDRAW SPRITE 7E
+COLLISION CHECK 
+COLLISION CHECK 2E
+UPDATE POSITION VALUES 
+Add velocity to accumulators 
+Add velocity to accumulators 144
+cast to array 
+cast to array 4C
+apply to transform 
+apply to transform D6
+zero 
+zero 2A
+UPDATE POSITION VALUES 32
+REDRAW SPRITE 
+REDRAW SPRITE 7E
+COLLISION CHECK 
+COLLISION CHECK 230
+UPDATE POSITION VALUES 
+Add velocity to accumulators 
+Add velocity to accumulators 144
+cast to array 
+cast to array 4C
+apply to transform 
+apply to transform D6
+zero 
+zero 2A
+UPDATE POSITION VALUES 32
+REDRAW SPRITE 
+REDRAW SPRITE 7E
+COLLISION CHECK 
+COLLISION CHECK 2E
+UPDATE POSITION VALUES 
+Add velocity to accumulators 
+Add velocity to accumulators 144
+cast to array 
+cast to array 4C
+apply to transform 
+apply to transform D6
+zero 
+zero 2A
+UPDATE POSITION VALUES 32
+REDRAW SPRITE 
+REDRAW SPRITE 7E
+COLLISION CHECK 

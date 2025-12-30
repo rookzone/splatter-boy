@@ -5,7 +5,6 @@
 #include "game_state.h"
 
 
-
 void apply_impulse(GameObject* obj, fixed_t impulse_magnitude_x, fixed_t impulse_magnitude_y)
 {
     obj->physics.vx += impulse_magnitude_x;

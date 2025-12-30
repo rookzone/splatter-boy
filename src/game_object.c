@@ -54,12 +54,12 @@ GameObject* go_new_game_object(ObjectType type) {
 // Update all registered GameObjects
 
 void go_update_all_balls(void) {
-    EMU_PROFILE_BEGIN("UPDATE ALL BALLS")
+    // EMU_PROFILE_BEGIN("UPDATE ALL BALLS")
     // Iterate through ball registry
     for (uint8_t i = 0; i < game.objects.ball_count; i++) {
         update_ball(game.objects.ball_pointers[i]);
     }
-    EMU_PROFILE_END("UPDATE ALL BALLS")
+    // EMU_PROFILE_END("UPDATE ALL BALLS")
 }
 
 // void go_update_all_walls

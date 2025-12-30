@@ -25,26 +25,23 @@ void apply_impulse(GameObject* obj, fixed_t impulse_magnitude_x, fixed_t impulse
 // INLINED FOR SPEED
 static inline void update_ball_position(GameObject* ball)
 {
-    ball->physics.vy += GRAVITY;
+    PhysicsComponent* phys = &ball->physics;
 
-    if (ball->physics.vy > MAX_SPEED)
-        ball->physics.vy = MAX_SPEED;
-    
-    // Add velocity to accumulators
-    ball->physics.position_accumulator_x += ball->physics.vx;
-    ball->physics.position_accumulator_y += ball->physics.vy;
+    phys->vy += GRAVITY;
 
-    // Cast 16 bit fixed_t into an array of 8-bit ints to pull l/r bytes
-    int8_t* acc_x_bytes = (int8_t*)&ball->physics.position_accumulator_x;
-    int8_t* acc_y_bytes = (int8_t*)&ball->physics.position_accumulator_y;
+    if (phys->vy > MAX_SPEED)
+        phys->vy = MAX_SPEED;
 
-    // Apply right-hand byte
-    ball->transform.x += acc_x_bytes[1];
-    ball->transform.y += acc_y_bytes[1];
-    
-    // Zero the High Byte (Whole Pixel part) but keep the Low Byte (Fraction)
-    acc_x_bytes[1] = 0;
-    acc_y_bytes[1] = 0;
+    phys->position_accumulator_x += phys->vx;
+    phys->position_accumulator_y += phys->vy;
+
+    // Apply the int component to screen position (left / high byte)
+    ball->transform.x += ((int8_t*)&phys->position_accumulator_x)[1];
+    ball->transform.y += ((int8_t*)&phys->position_accumulator_y)[1];
+
+    // Zero out the whole number, keep the sub pixel decimal section for next loop
+    ((int8_t*)&phys->position_accumulator_x)[1] = 0;
+    ((int8_t*)&phys->position_accumulator_y)[1] = 0;
 }
 
 void check_ball_pin_collision(GameObject* obj);

@@ -19,7 +19,7 @@ void main(void)
 
     while (1) {
 
-        EMU_PROFILE_BEGIN("MAIN LOOP ")
+        // EMU_PROFILE_BEGIN("MAIN LOOP ")
         // Update state, required every frame
         update_game_state();
 
@@ -30,10 +30,10 @@ void main(void)
 
         update_scene(); // Update game scene
 
-        EMU_PROFILE_END("MAIN LOOP ")
-        EMU_PROFILE_BEGIN("VSYNC CALL ")
+        // EMU_PROFILE_END("MAIN LOOP ")
+        // EMU_PROFILE_BEGIN("VSYNC CALL ")
         platform_vsync(); // Await frame end
-        EMU_PROFILE_END("VSYNC CALL ")
+        // EMU_PROFILE_END("VSYNC CALL ")
 
     }
 }
