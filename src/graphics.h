@@ -66,4 +66,33 @@ void text_clear_screen(void);
 
 void set_active_basic_font(unsigned char *font, uint16_t size);
 
+
+// === GUI ===
+
+
+
+#define BAR_LENGTH          6 // Length of bar in 8x8 tiles
+#define BAR_STEPS_PER_TILE  4 // Number of steps represented in one tile
+
+/**
+ * Tiles for steps per bar tile
+ * 0:   Full tile  |***|
+ * 1:   1/3 filled |*..|
+ * 2:   1/2 filled |**..|
+ * 3:   2/3 filled |**.|
+ */
+unsigned char bar_tiles[4];
+
+/**
+ * Draws a 6x6 bar on window
+ * x,y for draw position
+ * fill_value determines how full the bar should be (0-239)
+ * 240-255 can be used as an overfill / "boost" amount
+ * E.g. 120 will fill bar half way
+ * |xx|xx|xx|  |  |  |
+ * 60:
+ * |xx|x.|  |  |  |  |
+ */
+void draw_bar(uint8_t x, uint8_t y, uint8_t fill_value);
+
 #endif // GRAPHICS_H_

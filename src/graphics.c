@@ -203,6 +203,6 @@ void hide_all_sprites(void)
     }
 }
 
-// ===  ===
+// === GUI ===
 
 /* End of graphics.c */
