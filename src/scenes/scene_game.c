@@ -61,6 +61,9 @@ void init_game_scene(void)
     platform_display_on();
 }
 
+
+uint8_t fill_amount = 0;
+
 void update_game_scene(void)
 {
 
@@ -75,6 +78,12 @@ void update_game_scene(void)
 
     if (get_key_pressed_down(J_DOWN))
         set_scene(SCENE_GAME2);
+
+    
+    if (game.system.system_time % 2 == 0){
+        update_fill_bar(fill_amount);
+        fill_amount++;
+    }
 
 
     // Update all balls

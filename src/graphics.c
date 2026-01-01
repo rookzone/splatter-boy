@@ -4,6 +4,7 @@
 #include "graphics.h"
 #include "game_state.h"
 #include <stdio.h>
+#include "tiles/fillBarTiles.h"
 
 // Create sprite with a tracked VRAM number, assign tile, create and return GameSprite object
 GameSprite create_sprite(uint8_t tile_index)
@@ -204,5 +205,58 @@ void hide_all_sprites(void)
 }
 
 // === GUI ===
+
+// Load into vram and draw on window layer
+void init_fill_bar(uint8_t x, uint8_t y)
+{
+    // Load tiles in
+    //load_background_tiles(bar,BAR_LENGTH_TILES);
+    // Draw on window at xy
+    
+}
+
+//char* bar_tile_graphics[] = {'0','1','2','3','4'};
+
+unsigned char bar_tile_graphics[] =
+{
+  0xFF,0xFF,0x00,0xFF,0x00,0xFF,0x00,0xFF,
+  0x00,0xFF,0x00,0xFF,0x00,0xFF,0xFF,0xFF,
+  0xFF,0xFF,0x00,0xC0,0x00,0xC0,0x00,0xC0,
+  0x00,0xC0,0x00,0xC0,0x00,0xC0,0xFF,0xFF,
+  0xFF,0xFF,0x00,0xF0,0x00,0xF0,0x00,0xF0,
+  0x00,0xF0,0x00,0xF0,0x00,0xF0,0xFF,0xFF,
+  0xFF,0xFF,0x00,0xFC,0x00,0xFC,0x00,0xFC,
+  0x00,0xFC,0x00,0xFC,0x00,0xFC,0xFF,0xFF,
+  0xFF,0xFF,0x00,0x00,0x00,0x00,0x00,0x00,
+  0x00,0x00,0x00,0x00,0x00,0x00,0xFF,0xFF
+};
+// How do I address the above??
+
+void update_fill_bar(uint8_t fill_value)
+{
+
+    gotoxy(1,1);
+    // Create actual fill bar on screen and in VRAM
+    //if (!bar_tiles)
+       // init_fill_bar(POWER_BAR_X, POWER_BAR_Y);
+
+    // Calculate number of increments or steps the bar is to be filled by
+    uint8_t fill_steps = fill_value / 10; //
+    uint8_t full_tiles = fill_steps / BAR_STEPS_PER_TILE;
+    uint8_t remainder = fill_steps % BAR_STEPS_PER_TILE; 
+
+
+    for (uint8_t i = 0; i < full_tiles; i++) {
+    
+        //bar_tiles[i] = bar_tile_graphics[tile_to_draw];
+        printf("%d", 0);
+        //print_text(bar_tile_graphics[tile_to_draw], i, 2);
+    }
+        //bar_tiles[tiles_to_fill] = bar_tile_graphics[fill_steps];
+       // print_text(bar_tile_graphics[fill_steps], tiles_to_fill, 2);
+       if (remainder != 0)
+        printf("%d", remainder);
+
+}
 
 /* End of graphics.c */
