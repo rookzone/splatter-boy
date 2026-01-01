@@ -206,16 +206,6 @@ void hide_all_sprites(void)
 
 // === GUI ===
 
-// Load into vram and draw on window layer
-void init_fill_bar(uint8_t x, uint8_t y)
-{
-    // Load tiles in
-    //load_background_tiles(bar,BAR_LENGTH_TILES);
-    // Draw on window at xy
-    
-}
-
-//char* bar_tile_graphics[] = {'0','1','2','3','4'};
 
 unsigned char bar_tile_graphics[] =
 {
@@ -230,6 +220,26 @@ unsigned char bar_tile_graphics[] =
   0xFF,0xFF,0x00,0x00,0x00,0x00,0x00,0x00,
   0x00,0x00,0x00,0x00,0x00,0x00,0xFF,0xFF
 };
+
+// Load into vram and draw on window layer
+/**
+ * Tiles for steps per bar tile
+* 0:    Full tile  |****|
+* 1:    1/4 filled |*...|
+* 2:    2/4 filled |**..|
+* 3:    3/4 filled |***.|
+* 4:    Empty tile |....|
+*/
+void init_fill_bar(uint8_t x, uint8_t y)
+{
+    // Load tiles in
+    load_background_tiles(bar_tile_graphics,5);
+    
+    
+}
+
+//char* bar_tile_graphics[] = {'0','1','2','3','4'};
+
 // How do I address the above??
 
 void update_fill_bar(uint8_t fill_value)
