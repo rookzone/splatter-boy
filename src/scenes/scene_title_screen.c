@@ -52,10 +52,10 @@ void init_title_scene(void)
 
 void update_title_scene(void)
 {
-    if (get_key_pressed_down(J_START) && option_selected == START_GAME)
+    if (get_key_pressed(J_START) && option_selected == START_GAME)
         set_scene(SCENE_GAME);
 
-    if (get_key_pressed_down(J_DOWN)){
+    if (get_key_pressed(J_DOWN)){
 
         print_text(" start game...",3 ,15);
         // Add blinking cursor...
@@ -66,7 +66,7 @@ void update_title_scene(void)
         option_selected = CREDITS;
     }
 
-    if (get_key_pressed_down(J_UP)){
+    if (get_key_pressed(J_UP)){
         print_text(">start game...",3 ,15);
         print_text(" credits",3 ,16);
         option_selected = START_GAME;

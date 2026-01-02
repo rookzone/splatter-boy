@@ -69,26 +69,24 @@ uint8_t fill_amount = 0;
 void update_game_scene(void)
 {
 
-    if (get_key_pressed_down(J_LEFT))
+    if (get_key_pressed(J_LEFT))
         launch_ball(find_lowest_ball(), 10, 80, LAUNCH_FORCE_X, -LAUNCH_FORCE_Y);
 
-    if (get_key_pressed_down(J_RIGHT))
+    if (get_key_pressed(J_RIGHT))
         launch_ball_random(find_lowest_ball(), 10, 80, LAUNCH_FORCE_X, -LAUNCH_FORCE_Y);
 
-    if (get_key_pressed_down(J_UP))
+    if (get_key_pressed(J_UP))
         reset_all_balls();
 
-    if (get_key_pressed_down(J_DOWN))
+    if (get_key_pressed(J_DOWN))
         set_scene(SCENE_GAME2);
 
-    
-    if (game.system.system_time % 2 == 0){
+    if (get_key_held(J_A)) {
         update_fill_bar(fill_amount);
         fill_amount++;
     }
 
-
-    // Update all balls
+    
     go_update_all_balls();
     
 }

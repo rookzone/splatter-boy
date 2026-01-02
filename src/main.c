@@ -24,7 +24,7 @@ void main(void)
         update_game_state();
 
         // Pause on start
-        if (get_key_pressed_down(J_START)){
+        if (get_key_pressed(J_START)){
             pause_game(); // Update text showing if paused
         }
 

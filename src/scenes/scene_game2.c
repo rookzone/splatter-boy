@@ -66,16 +66,16 @@ void init_game2_scene(void)
 void update_game2_scene(void)
 {
 
-    if (get_key_pressed_down(J_LEFT))
+    if (get_key_pressed(J_LEFT))
         launch_ball(find_lowest_ball(), 10, 80, LAUNCH_FORCE_X, -LAUNCH_FORCE_Y);
 
-    if (get_key_pressed_down(J_RIGHT))
+    if (get_key_pressed(J_RIGHT))
         launch_ball_random(find_lowest_ball(), 10, 80, LAUNCH_FORCE_X, -LAUNCH_FORCE_Y);
 
-    if (get_key_pressed_down(J_UP))
+    if (get_key_pressed(J_UP))
         reset_all_balls();
 
-    if (get_key_pressed_down(J_DOWN))
+    if (get_key_pressed(J_DOWN))
         set_scene(SCENE_GAME);
 
     
