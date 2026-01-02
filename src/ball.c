@@ -46,7 +46,7 @@ void update_ball(GameObject* obj) {
         return;
     
     // EMU_PROFILE_BEGIN("COLLISION CHECK ")
-    if ((obj->id & COLLISION_FRAME_SKIP) == (game.system.system_time & COLLISION_FRAME_SKIP) ){}
+    if ((obj->id & COLLISION_FRAME_SKIP) == (game.system.system_time & COLLISION_FRAME_SKIP) )
         check_ball_pin_collision(obj);
     // EMU_PROFILE_END("COLLISION CHECK ")
 
