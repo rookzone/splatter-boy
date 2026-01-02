@@ -55,6 +55,8 @@ void init_game_scene(void)
         ball->physics.vx = RANDOM_HORIZONTAL_VX[i];
     }
 
+    init_fill_bar();
+
     // Turn on our screen, sprites, and BG
     platform_show_background();
     platform_show_sprites();

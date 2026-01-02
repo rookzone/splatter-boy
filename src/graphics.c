@@ -230,42 +230,54 @@ unsigned char bar_tile_graphics[] =
 * 3:    3/4 filled |***.|
 * 4:    Empty tile |....|
 */
-void init_fill_bar(uint8_t x, uint8_t y)
+uint16_t fill_bar_vram_index = 0;
+// @todo can I create a register of start indices for diff background objects?
+// Have it for bkg and font, why not others?
+
+void init_fill_bar(void)
 {
+    // Set the vram start index location
+    fill_bar_vram_index = game.graphics.next_background_tile_slot;
     // Load tiles in
     load_background_tiles(bar_tile_graphics,5);
-    
-    
+
+    // Draw tiles
+    for (uint8_t i = 0; i < BAR_WIDTH_TILES; i++) {
+        uint8_t *xy_address = platform_get_bkg_xy_addr(POWER_BAR_X+i, POWER_BAR_Y);
+        platform_set_vram_byte(xy_address, fill_bar_vram_index+4);
+    }
+
 }
-
-//char* bar_tile_graphics[] = {'0','1','2','3','4'};
-
-// How do I address the above??
 
 void update_fill_bar(uint8_t fill_value)
 {
-
-    gotoxy(1,1);
-    // Create actual fill bar on screen and in VRAM
-    //if (!bar_tiles)
-       // init_fill_bar(POWER_BAR_X, POWER_BAR_Y);
 
     // Calculate number of increments or steps the bar is to be filled by
     uint8_t fill_steps = fill_value / 10; //
     uint8_t full_tiles = fill_steps / BAR_STEPS_PER_TILE;
     uint8_t remainder = fill_steps % BAR_STEPS_PER_TILE; 
 
+    // set bar tiles...
+    for (uint8_t i = 0; i < BAR_WIDTH_TILES; i++) {
 
-    for (uint8_t i = 0; i < full_tiles; i++) {
-    
-        //bar_tiles[i] = bar_tile_graphics[tile_to_draw];
-        printf("%d", 0);
-        //print_text(bar_tile_graphics[tile_to_draw], i, 2);
+        // Full tiles
+        if(i < full_tiles){
+            uint8_t *xy_address = platform_get_bkg_xy_addr(POWER_BAR_X+i, POWER_BAR_Y);
+            platform_set_vram_byte(xy_address, fill_bar_vram_index);
+            continue;
+        }
+
+        // set to a partially filled tile as per any remaining steps
+        if (remainder != 0 && i == full_tiles){
+            uint8_t *xy_address = platform_get_bkg_xy_addr(POWER_BAR_X+full_tiles, POWER_BAR_Y);
+            platform_set_vram_byte(xy_address, fill_bar_vram_index+remainder);
+            continue;
+        }
+
+        // Fill remaining with empty bar tiles
+        uint8_t *xy_address = platform_get_bkg_xy_addr(POWER_BAR_X+i, POWER_BAR_Y);
+        platform_set_vram_byte(xy_address, fill_bar_vram_index+4);
     }
-        //bar_tiles[tiles_to_fill] = bar_tile_graphics[fill_steps];
-       // print_text(bar_tile_graphics[fill_steps], tiles_to_fill, 2);
-       if (remainder != 0)
-        printf("%d", remainder);
 
 }
 

@@ -89,17 +89,13 @@ void set_active_basic_font(unsigned char *font, uint16_t size);
 * |****|**..|....|....|....|....|
 */
 
-#define BAR_WIDTH_TILES          6 // Length of bar in 8x8 tiles
+#define BAR_WIDTH_TILES     7 // Length of bar in 8x8 tiles
 #define BAR_STEPS_PER_TILE  4 // Number of steps represented in one tile
 
-#define POWER_BAR_X 16
-#define POWER_BAR_Y 4
+#define POWER_BAR_X 2
+#define POWER_BAR_Y 2
 
-//unsigned char* bar; // Actual bar
-//char bar_tile_graphics[5];
-
-void init_fill_bar(uint8_t x, uint8_t y);
+void init_fill_bar(void);
 void update_fill_bar(uint8_t fill_value);
-
 
 #endif // GRAPHICS_H_
