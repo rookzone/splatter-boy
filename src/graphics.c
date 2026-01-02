@@ -257,6 +257,8 @@ void init_fill_bar(void)
  * 
  * calculate the starting address once and simply increment it, or
  * use set_bkg_tiles(x, y, w, 1, array) to update the whole row in one go
+ * 
+ * PASS X,Y INTO IT INSTEAD OF CONST
  */
 void update_fill_bar(uint8_t fill_value)
 {
