@@ -249,9 +249,17 @@ void init_fill_bar(void)
 
 }
 
+/**
+ * @todo optimise
+ * Store the previous_fill_value and only run the loop if fill_value != previous_fill_value
+ * 
+ * bit-shift (e.g., fill_value >> 3 for division by 8)
+ * 
+ * calculate the starting address once and simply increment it, or
+ * use set_bkg_tiles(x, y, w, 1, array) to update the whole row in one go
+ */
 void update_fill_bar(uint8_t fill_value)
 {
-
     // Calculate number of increments or steps the bar is to be filled by
     uint8_t fill_steps = fill_value / 10; //
     uint8_t full_tiles = fill_steps / BAR_STEPS_PER_TILE;
@@ -278,7 +286,6 @@ void update_fill_bar(uint8_t fill_value)
         uint8_t *xy_address = platform_get_bkg_xy_addr(POWER_BAR_X+i, POWER_BAR_Y);
         platform_set_vram_byte(xy_address, fill_bar_vram_index+4);
     }
-
 }
 
 /* End of graphics.c */
