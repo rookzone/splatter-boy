@@ -14,7 +14,7 @@ void apply_impulse(GameObject* obj, fixed_t impulse_magnitude_x, fixed_t impulse
 void check_ball_pin_collision(GameObject* ball)
 {
     // FILTER: Only handle collision if ball is moving downward
-    if (ball->physics.vy <= 0)
+    if (ball->physics.vy <= -1)
         return;
 
     // Get ball's bottom-middle point

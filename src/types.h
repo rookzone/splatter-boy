@@ -22,12 +22,13 @@ typedef uint8_t fraction_t;
 
 
 #define FIXED_SHIFT   8           // number of fractional bits
-#define FIXED_ONE     (1 << FIXED_SHIFT)   // 1.0 in fixed (256)
-#define FIXED_HALF    (1 << (FIXED_SHIFT - 1)) // 0.5 (128)     << 7
-#define FIXED_QUARTER (1 << (FIXED_SHIFT - 2)) // 0.25 (64)     << 6
-#define FIXED_EIGHTH  (1 << (FIXED_SHIFT - 3)) // 0.125 (32)    << 5
-#define FIXED_TEENTH  (1 << (FIXED_SHIFT - 4)) // (16)          << 4
-#define FIXED_TENBAG  (1 << (FIXED_SHIFT - 5)) // (8)           << 3
+#define FIXED_ONE     (1 << 8)   // 1.0 in fixed (256)
+#define FIXED_HALF    (1 << (7)) // 0.5 (128)     << 7
+#define FIXED_QUARTER (1 << (6)) // 0.25 (64)     << 6
+#define FIXED_EIGHTH  (1 << (5)) // 0.125 (32)    << 5
+#define FIXED_TEENTH  (1 << (4)) // (16)          << 4
+#define FIXED_TENBAG  (1 << (3)) // (8)           << 3
+#define FIXED_TINY  (1 << (3)) // (8)   
 
 
 // === CONVERSION HELPERS ===
