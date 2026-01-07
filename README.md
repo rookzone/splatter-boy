@@ -31,49 +31,7 @@ Follow these steps to get started:
 5. Install [make for windows](https://gnuwin32.sourceforge.net/packages/make.htm)
 6. Download [BGB emulator](https://bgb.bircd.org) and place in `emu/BGB` (_BGB is used as it has certain debugging features that interact with GBDK_)
 7. `make` and it will create the .gb file in the `build/` directory
-8. Use below in .vscode/tasks.json. This will set it up to build and then launch straight into BGB on CTRL+SHIFT+B
-
-**.vscode tasks.json**
-
-```JSON
-{
-  "version": "2.0.0",
-  "tasks": [
-    {
-      "label": "Build GameBoy ROM",
-      "type": "shell",
-      "command": "make",
-      "group": {
-        "kind": "build",
-        "isDefault": false
-      },
-      "problemMatcher": [],
-      "options": {
-        "cwd": "${workspaceFolder}"
-      }
-    },
-    {
-      "label": "Run in Emulator",
-      "type": "shell",
-      "command": "powershell",
-      "args": [
-        "-Command",
-        "& '${workspaceFolder}/emu/BGB/bgb.exe' '${workspaceFolder}/build/splatter-boy.gb'"
-      ],
-      "dependsOn": "Build GameBoy ROM",
-      "group": {
-        "kind": "build",
-        "isDefault": true
-      },
-      "problemMatcher": [],
-      "options": {
-        "cwd": "${workspaceFolder}"
-      }
-    }
-  ]
-}
-
-```
+8. Use configs in these project files at `resources/configs`, place them in `.vscode/` This will set it up to build and then launch straight into BGB on CTRL+SHIFT+B
 
 ## Structure
 
