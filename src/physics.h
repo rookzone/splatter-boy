@@ -39,7 +39,7 @@ static inline void update_ball_position(GameObject* ball)
     ball->transform.x += ((int8_t*)&phys->position_accumulator_x)[1];
     ball->transform.y += ((int8_t*)&phys->position_accumulator_y)[1];
 
-    // Zero out the whole number, keep the sub pixel decimal section for next loop
+    // Zero out the whole number, keep the sub pixel decimal remainder for next loop
     ((int8_t*)&phys->position_accumulator_x)[1] = 0;
     ((int8_t*)&phys->position_accumulator_y)[1] = 0;
 }
