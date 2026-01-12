@@ -7,7 +7,7 @@
 #define MAX_GAME_OBJECTS    40
 
 // How many to spawn in
-#define NUM_BALLS 20
+#define NUM_BALLS 15
 #define MAX_BALLS 25
 
 // Hardware values for GB
@@ -71,10 +71,10 @@ enum { TILE_BALL = 0, TILE_WALL = 1, TILE_PIN = 2 };
 #define BLANK_TILE_ID   0x0F
 
 // Ball launcher
-#define LAUNCH_FORCE_X  TO_FIXED(2)
-#define LAUNCH_FORCE_Y  TO_FIXED(2)
+#define LAUNCH_FORCE_X  TO_FIXED(1)
+#define LAUNCH_FORCE_Y  TO_FIXED(1)
 
-#define GRAVITY     FIXED_TENBAG+FIXED_TINY  // 256/32
+#define GRAVITY     FIXED_TENBAG  // 256/32
 #define MAX_SPEED   TO_FIXED(2) // Max speed of balls in fixed-point number space
 
 // Ball physics
