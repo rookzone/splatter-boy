@@ -91,8 +91,7 @@ void print_text(char* str, uint8_t cursor_start_x, uint8_t cursor_start_y)
                 uint16_t letter_vram_location = 
                     game.graphics.basic_font_vram_start_location + tile_offset;
                 
-                uint8_t *cursor_address = platform_get_bkg_xy_addr(cursor_x, cursor_y);
-                platform_set_vram_byte(cursor_address, letter_vram_location);
+                platform_set_bkg_tiles(cursor_x, cursor_y, 1, 1, &letter_vram_location);
 
             }
 
