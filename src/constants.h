@@ -27,7 +27,7 @@
 
 
 // Sprite values
-#define PIN_HALF_WIDTH  2
+#define PIN_HALF_WIDTH  3
 #define SPRITE_SIZE     8
 #define BALL_WHITESPACE 2
 #define BALL_HEIGHT     4

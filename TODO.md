@@ -1,55 +1,18 @@
 # TODO
 
-- [x] Title screen state.
-- [ ] Consider boilerplate code that could be factored out
-  The state is supposed to be just game logic, messing about with hardware should be put elsewhere
-- [ ] Refactor text output to "input.h", it's a bit messy in graphics.h (keep the bg vram add in graphics though)
-- [ ] Set font functions should wipe and write over existing font tiles, rather than append to vram
-- [ ] Clear all text function
-- [ ] Delete text function
-- [ ] Text scrolling animation option for print_text
-- [ ] Experiment with window rendering!
+## **17-01-25m -TODO:**
 
-- [x] Remove all GBDK
-- [ ] Create .bat which sets up make, downloads gbdk
-- [ ] linux bash (installs specific linux files and make file)
-- [ ] Proper testing on linux build.
 
-# Decouple:
+- [ ] Ball animation for spinning.
+- [ ] Add power bar graphics into background. Something to put the basic bar on top of.
+- [ ] Hook up ball power to power bar.
+- [ ] Create score source files. Add scoring for pin hits. Add score display to game screen.
+- [ ] Add collision sound when hitting pin.
+- [ ] Add particle effect for pin collision.
+- [ ] Add score buckets.
+- [ ] Add animation system.
+- [ ] Add win condition
 
-- [x] Search for "<gb/gb.h>". Any document with this in will have gbdk platform features
-
-## Game
-- [ ] 
-
-## Performance and portability
-- [x] Decouple GBDK functions from game code. Use macros for inline replacement (function calls are 5-10 frames)
-- [ ] Precompile script that flattens code, pulls functions into flat strucure. May require goto statements
-
-## **06/12/2025**
-
-Reset focus after Game Object and Game State architecture.
-
-**Title screen with text and state transition**
-
-- [ ] Ball and pin arrays need handling functions to ensure no overflow or overwrites take place
-    - [ ] Re-use slot ball despawn order, prioritise which can be despawned if too many
-- [ ] Handling for sprite_index, no more than 39. Will need to reassign indices to corresponding object (or inverse)
-- [ ] Wall collision can be checked with masks, as nothing is behind the wall
-
-**Score and "window" sprites**
-
-- [ ] Add a way of scoring... move the game beyond a tech demo...
-Number of balls, ball speed, ball weight change? Things on map
-and things that can be controlled wiht buttons would be cool
-Even power ups wuould be so good, can be showing with a window bg
-
-- [ ] Create collision check function which returns the tile index(indices) (int) of tile ball is touching
-- [ ] 45 degree wall collision
-
-**bounce**
-
-- [ ] Add a bit of randomness to balls on bounce (very small amount)
 
 ---
 
