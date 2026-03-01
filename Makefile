@@ -7,8 +7,14 @@ BUILD_DIR = build
 # Automatically detect GBDK compiler location
 ifeq ($(OS),Windows_NT)
     CC = bin/lcc.exe
-    MKDIR = if not exist "$(1)" mkdir "$(1)"
-    RM = rmdir /s /q
+    # Make may be using /bin/sh on Windows (e.g., MSYS/MinGW); use sh-compatible cmds then.
+    ifneq (,$(findstring sh,$(SHELL)))
+        MKDIR = mkdir -p $(1)
+        RM = rm -rf
+    else
+        MKDIR = if not exist "$(1)" mkdir "$(1)"
+        RM = rmdir /s /q
+    endif
 else
     CC = lcc
     MKDIR = mkdir -p $(1)

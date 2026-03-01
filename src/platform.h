@@ -1,7 +1,7 @@
 // platform.h
 
-#ifndef PLATFORM_H_
-#define PLATFORM_H_
+#ifndef PLATFORM_H
+#define PLATFORM_H
 
 #include <stdint.h>
 
@@ -22,4 +22,4 @@
     #include "platform/gb/platform_gb.h"
 #endif
 
-#endif // PLATFORM_H_
+#endif // PLATFORM_H

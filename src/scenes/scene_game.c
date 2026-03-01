@@ -11,11 +11,12 @@
 #include "../game_state.h"
 
 // Game elements
-#include "../graphics.h"
-#include "../physics.h"
-#include "../ball.h"
+#include "../modules/graphics.h"
+#include "../modules/physics.h"
+#include "../modules/ball.h"
 #include "../debug.h"
-#include "../input.h"
+#include "../modules/input.h"
+#include "../modules/sound.h"
 
 // Map assets
 #include "../tiles/pachinkoTiles.h"
@@ -87,7 +88,7 @@ void update_game_scene(void)
     }
 
     
-    go_update_all_balls();
+    ball_update_all();
     
 }
 

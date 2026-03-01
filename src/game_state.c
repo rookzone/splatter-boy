@@ -1,7 +1,7 @@
 // game_state.c
 
 #include "game_state.h"
-#include "graphics.h"
+#include "modules/graphics.h"
 #include <string.h>
 #include <stdio.h>
 #include "platform.h"
@@ -21,14 +21,13 @@ void clear_game_state(GameState* game)
     // Wipe GameObjects and Graphics.
     memset(&game->objects, 0, sizeof(ObjectManager));
     memset(&game->graphics, 0, sizeof(Graphics));
+    memset(&game->world, 0, sizeof(World));
 
 }
 
 void update_game_state(void)
 {
-    // Refresh system values
-    game.system.previous_keys = game.system.keys;
-    game.system.keys = platform_get_input();
+    // Advance system time (input is handled by the input module)
     game.system.system_time++;
 }
 

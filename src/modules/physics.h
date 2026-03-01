@@ -10,10 +10,13 @@
  * The update_position functions will convert the numbers back to integer and set x,y.
  * * @defgroup Physics
  */
-#ifndef PHYSICS_H_
-#define PHYSICS_H_
+#ifndef PHYSICS_H
+#define PHYSICS_H
 
-#include "types.h"
+#include "../types.h"
+
+// Module: Physics
+// Dependencies: core (world collision map, grid, types/constants)
 
 // === FORCE ===
 
@@ -51,4 +54,9 @@ void check_ball_pin_collision(GameObject* obj);
 // Random horizontal velocities for ball resets
 extern const fixed_t RANDOM_HORIZONTAL_VX[30];
 
-#endif // PHYSICS_H_
+// === MODULE WRAPPER ===
+void module_physics_init(void);
+void module_physics_update(void);
+void module_physics_shutdown(void);
+
+#endif // PHYSICS_H

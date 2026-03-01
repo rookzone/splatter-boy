@@ -10,20 +10,15 @@
  * * @defgroup Graphics
  */
 
-#ifndef GRAPHICS_H_
-#define GRAPHICS_H_
+#ifndef GRAPHICS_H
+#define GRAPHICS_H
 
-#include "types.h"
-#include "platform.h"
+#include "../types.h"
+#include "../platform.h"
+#include "../grid.h"
 
-// Convert Pixel coordinate to Grid coordinate (Divide by 8)
-#define PIXEL_TO_GRID(x) ((x) >> 3)
-
-// Convert Grid coordinate to Pixel coordinate (Multiply by 8)
-#define GRID_TO_PIXEL(x) ((x) << 3)
-
-// Get tilemap Array Index from Col/Row (Row * Width + Col)
-#define GET_TILE_INDEX(col, row) ((((uint16_t)(row) << 4) + ((uint16_t)(row) << 2)) + (col))
+// Module: Graphics
+// Dependencies: core (game_state, platform, grid)
 
 // === SPRITE HANDLING ===
 
@@ -97,4 +92,9 @@ void set_active_basic_font(unsigned char *font, uint16_t size);
 void init_fill_bar(void);
 void update_fill_bar(uint8_t fill_value);
 
-#endif // GRAPHICS_H_
+// === MODULE WRAPPER ===
+void module_graphics_init(void);
+void module_graphics_update(void);
+void module_graphics_shutdown(void);
+
+#endif // GRAPHICS_H

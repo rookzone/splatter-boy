@@ -1,7 +1,7 @@
 // types.h
 
-#ifndef types_H_
-#define types_H_
+#ifndef types_H
+#define types_H
 
 #include "constants.h"
 #include <stdint.h>
@@ -104,4 +104,4 @@ struct GameSprite {
     uint8_t tile_index;
 };
 
-#endif // types_H_
+#endif // types_H

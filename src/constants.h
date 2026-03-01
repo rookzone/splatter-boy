@@ -1,7 +1,7 @@
 // constants.h
 
-#ifndef CONSTANTS_H_
-#define CONSTANTS_H_
+#ifndef CONSTANTS_H
+#define CONSTANTS_H
 
 // Game object limits (defines fixed array size)
 #define MAX_GAME_OBJECTS    40
@@ -82,4 +82,4 @@ enum { TILE_BALL = 0, TILE_WALL = 1, TILE_PIN = 2 };
 #define MAX_ROLL_SPEED          TO_FIXED(2) // Max speed ball can go while rolling
 #define HORIZONTAL_PIN_FORCE    FIXED_QUARTER // For bounce force on x-axis
 
-#endif // CONSTANTS_H_
+#endif // CONSTANTS_H

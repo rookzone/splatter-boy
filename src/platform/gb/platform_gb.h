@@ -1,7 +1,7 @@
 // platform/gb/platform_gb.h
 
-#ifndef PLATFORM_GB_H_
-#define PLATFORM_GB_H_
+#ifndef PLATFORM_GB_H
+#define PLATFORM_GB_H
 
 #include <gb/gb.h>
 #include <gb/drawing.h>
@@ -121,4 +121,4 @@ static inline void platform_console_gotoxy(uint8_t x, uint8_t y)
     gotoxy(x, y);
 }
 
-#endif // PLATFORM_GB_H_
+#endif // PLATFORM_GB_H

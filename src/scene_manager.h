@@ -1,8 +1,8 @@
 //scene_manager.h
 
 
-#ifndef SCENE_MANAGER_H_
-#define SCENE_MANAGER_H_
+#ifndef SCENE_MANAGER_H
+#define SCENE_MANAGER_H
 
 #include "types.h"
 
@@ -14,4 +14,4 @@ void update_scene(void);
 
 void cleanup_scene(void);
 
-#endif // SCENE_MANAGER_H_
+#endif // SCENE_MANAGER_H

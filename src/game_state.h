@@ -1,14 +1,14 @@
 // game_state.h
 
-#ifndef GAME_STATE_H_
-#define GAME_STATE_H_
+#ifndef GAME_STATE_H
+#define GAME_STATE_H
 
 #include "types.h"
 
 // === GAME STATE SUB SYSTEMS ===
 
 typedef struct {
-
+    
     uint8_t current_scene;
     uint8_t keys;
     uint8_t previous_keys;
@@ -53,6 +53,11 @@ typedef struct {
 
 } ObjectManager;
 
+typedef struct {
+    // Collision tilemap used by physics (set by scenes/modules)
+    const unsigned char *collision_tilemap;
+} World;
+
 // === GAME STATE ===
 
 typedef struct {
@@ -60,6 +65,7 @@ typedef struct {
     System system;
     Graphics graphics;
     ObjectManager objects;
+    World world;
 
 } GameState;
 
@@ -72,4 +78,4 @@ void clear_game_state(GameState* game);
 void update_game_state(void);
 
 
-#endif // GAME_STATE_H_
+#endif // GAME_STATE_H

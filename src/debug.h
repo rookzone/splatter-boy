@@ -1,8 +1,8 @@
 // debug.h
 
-#ifndef DEBUG_H_
-#define DEBUG_H_
+#ifndef DEBUG_H
+#define DEBUG_H
 
 #include "types.h"
 
-#endif // DEBUG_H_
+#endif // DEBUG_H

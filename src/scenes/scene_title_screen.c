@@ -10,11 +10,12 @@
 #include "../game_state.h"
 
 // Game elements
-#include "../graphics.h"
-#include "../physics.h"
-#include "../ball.h"
+#include "../modules/graphics.h"
+#include "../modules/physics.h"
+#include "../modules/ball.h"
 #include "../debug.h"
-#include "../input.h"
+#include "../modules/input.h"
+#include "../modules/sound.h"
 
 // background
 #include "../backgrounds/arod_gb.h"
@@ -52,10 +53,13 @@ void init_title_scene(void)
 
 void update_title_scene(void)
 {
-    if (get_key_pressed(J_START) && option_selected == START_GAME)
+    if (get_key_pressed(J_START) && option_selected == START_GAME) {
+        sound_play_square1(660, SOUND_DUTY_50, 12, SOUND_ENV_DOWN, 2, 20);
         set_scene(SCENE_GAME);
+    }
 
     if (get_key_pressed(J_DOWN)){
+        sound_play_square2(880, SOUND_DUTY_25, 10, SOUND_ENV_DOWN, 2, 14);
 
         print_text(" start game...",3 ,15);
         // Add blinking cursor...
@@ -67,6 +71,7 @@ void update_title_scene(void)
     }
 
     if (get_key_pressed(J_UP)){
+        sound_play_square2(740, SOUND_DUTY_25, 10, SOUND_ENV_DOWN, 2, 14);
         print_text(">start game...",3 ,15);
         print_text(" credits",3 ,16);
         option_selected = START_GAME;

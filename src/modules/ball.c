@@ -5,8 +5,8 @@
 #include "ball.h"
 #include "graphics.h"
 #include "physics.h"
-#include "game_object.h"
-#include "game_state.h"
+#include "../game_object.h"
+#include "../game_state.h"
 #include <gbdk/emu_debug.h>
 
 GameObject* spawn_ball(uint8_t x, uint8_t y) {
@@ -61,6 +61,13 @@ void update_ball(GameObject* obj) {
     platform_move_sprite(idx, x, y);
     // EMU_PROFILE_END("REDRAW SPRITE ")
     
+}
+
+void ball_update_all(void)
+{
+    for (uint8_t i = 0; i < game.objects.ball_count; i++) {
+        update_ball(game.objects.ball_pointers[i]);
+    }
 }
 
 // This is for testing purposes
@@ -173,5 +180,22 @@ extern const fixed_t RANDOM_HORIZONTAL_VX[30] = {
     -50,   // -0.5
     -50   // -0.5
 };
+
+// === MODULE WRAPPER ===
+
+void module_ball_init(void)
+{
+    // No-op for now (kept for module parity)
+}
+
+void module_ball_update(void)
+{
+    // No-op: gameplay modules are updated explicitly by scenes.
+}
+
+void module_ball_shutdown(void)
+{
+    // No-op for now (kept for module parity)
+}
 
 /* End of ball.c */

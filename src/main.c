@@ -3,8 +3,9 @@
 #include "scene_manager.h"
 #include "debug.h"
 #include "game_state.h"
-#include "input.h"
-#include "graphics.h"
+#include "modules/modules_registry.h"
+#include "modules/input.h"
+#include "modules/graphics.h"
 #include "platform.h"
 #include "tiles/menuFont.h"
 #include <gbdk/emu_debug.h>
@@ -14,6 +15,8 @@ void pause_game(void);
 
 void main(void) 
 {
+    modules_init();
+
     // Load first "game" scene
     set_scene(SCENE_TITLE_SCREEN);
 
@@ -21,6 +24,7 @@ void main(void)
 
         // EMU_PROFILE_BEGIN("MAIN LOOP ")
         // Update state, required every frame
+        modules_update();
         update_game_state();
 
         // Pause on start

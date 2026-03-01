@@ -9,11 +9,11 @@
 #include "../game_object.h" // GameObject manager
 #include "../game_state.h"
 // Game elements
-#include "../graphics.h"
-#include "../physics.h"
-#include "../ball.h"
+#include "../modules/graphics.h"
+#include "../modules/physics.h"
+#include "../modules/ball.h"
 #include "../debug.h"
-#include "../input.h"
+#include "../modules/input.h"
 
 // Map assets
 #include "../tiles/pachinkoTiles.h"
@@ -80,7 +80,7 @@ void update_game2_scene(void)
 
     
     // Update all balls
-    go_update_all_balls();
+    ball_update_all();
         
 }
 

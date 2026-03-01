@@ -2,9 +2,10 @@
 
 #include "types.h"
 #include "graphics.h"
-#include "game_state.h"
+#include "../game_state.h"
+#include "../world.h"
 #include <stdio.h>
-#include "tiles/fillBarTiles.h"
+#include "../tiles/fillBarTiles.h"
 
 // Create sprite with a tracked VRAM number, assign tile, create and return GameSprite object
 GameSprite create_sprite(uint8_t tile_index)
@@ -40,6 +41,9 @@ void set_game_background(unsigned char *background, unsigned char *tiles, uint16
     platform_set_bkg_tiles(0, 0, BACKGROUND_WIDTH_TILES, BACKGROUND_HEIGHT_TILES, game.graphics.active_background_tilemap);
     
     game.graphics.next_background_tile_slot += game.graphics.active_background_tileset_size;
+
+    // Default collision map to the background tilemap
+    world_set_collision_tilemap(background);
 }
 
 void reload_active_background(void)
@@ -287,6 +291,23 @@ void update_fill_bar(uint8_t fill_value)
         uint8_t *xy_address = platform_get_bkg_xy_addr(POWER_BAR_X+i, POWER_BAR_Y);
         platform_set_vram_byte(xy_address, fill_bar_vram_index+4);
     }
+}
+
+// === MODULE WRAPPER ===
+
+void module_graphics_init(void)
+{
+    // No-op for now (kept for module parity)
+}
+
+void module_graphics_update(void)
+{
+    // No-op for now (kept for module parity)
+}
+
+void module_graphics_shutdown(void)
+{
+    // No-op for now (kept for module parity)
 }
 
 /* End of graphics.c */

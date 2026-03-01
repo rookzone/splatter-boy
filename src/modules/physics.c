@@ -1,8 +1,10 @@
 ﻿// physics.c
 
-#include "graphics.h"
 #include "physics.h"
-#include "game_state.h"
+#include "../game_state.h"
+#include "../grid.h"
+#include "../world.h"
+#include <stddef.h>
 
 
 void apply_impulse(GameObject* obj, fixed_t impulse_magnitude_x, fixed_t impulse_magnitude_y)
@@ -25,8 +27,12 @@ void check_ball_pin_collision(GameObject* ball)
     uint8_t col = PIXEL_TO_GRID(ball_bottom_x);
     uint8_t row = PIXEL_TO_GRID(ball_bottom_y);
 
+    const unsigned char* tilemap = world_get_collision_tilemap();
+    if (tilemap == NULL)
+        return;
+
     uint16_t tile_idx = GET_TILE_INDEX(col, row);
-    uint8_t tile_type = game.graphics.active_background_tilemap[tile_idx];
+    uint8_t tile_type = tilemap[tile_idx];
     
     // FILTER: We are on a blank bg tile, skip.
     if (tile_type == BLANK_TILE_ID)
@@ -102,6 +108,23 @@ void check_ball_pin_collision(GameObject* ball)
         else if (ball->physics.vx < -MAX_ROLL_SPEED) ball->physics.vx = -MAX_ROLL_SPEED;
 
     }
+}
+
+// === MODULE WRAPPER ===
+
+void module_physics_init(void)
+{
+    // No-op for now (kept for module parity)
+}
+
+void module_physics_update(void)
+{
+    // No-op for now (kept for module parity)
+}
+
+void module_physics_shutdown(void)
+{
+    // No-op for now (kept for module parity)
 }
 
 /* End of physics.c */
