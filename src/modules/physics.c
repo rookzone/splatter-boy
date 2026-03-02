@@ -4,6 +4,7 @@
 #include "../game_state.h"
 #include "../grid.h"
 #include "../world.h"
+#include "../events.h"
 #include <stddef.h>
 
 
@@ -45,6 +46,9 @@ void check_ball_pin_collision(GameObject* ball)
     // FILTER: Check the tile in the map at that index, if it's a pin tile we need to collide
     if (tile_type != PIN_TILE_ID)
         return;
+
+    // Emit a collision event for gameplay/audio (one per detected collision)
+    events_push(EVENT_BALL_PIN_COLLISION, ball, col, row);
             
     // Get coords of pin tile
     uint8_t pin_tile_x = GRID_TO_PIXEL(col);

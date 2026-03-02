@@ -44,12 +44,8 @@ typedef struct {
     GameObject pool[MAX_GAME_OBJECTS];
     uint8_t total_count;
     
-    // Game object pointer registries
-    GameObject* ball_pointers[MAX_GAME_OBJECTS];
-    uint8_t ball_count;
-
-    GameObject* generic_pointers[MAX_GAME_OBJECTS];
-    uint8_t generic_count;
+    // Game object registries by type
+    ObjectRegistry registries[OBJ_TYPE_COUNT];
 
 } ObjectManager;
 

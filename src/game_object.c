@@ -2,6 +2,7 @@
 
 #include "game_object.h"
 #include "game_state.h"
+#include <stddef.h>
 #include <string.h>
 #include <gbdk/emu_debug.h>
 
@@ -31,30 +32,19 @@ GameObject* go_new_game_object(ObjectType type) {
     obj->flags = OBJECT_ACTIVE;
     obj->type = type;
     
-    // Register objects in their type specific registries
-    if (type == OBJ_BALL && game.objects.ball_count < MAX_GAME_OBJECTS) {
-        game.objects.ball_pointers[game.objects.ball_count] =  &game.objects.pool[pool_index];
-        game.objects.ball_count++;
-    }
-
-    // Register in type-specific registry
-    if (type == OBJ_GENERIC && game.objects.generic_count < MAX_GAME_OBJECTS) {
-        game.objects.generic_pointers[game.objects.generic_count] =  &game.objects.pool[pool_index];
-        game.objects.generic_count++;
+    // Register object in type-specific registry (generic)
+    if (type < OBJ_TYPE_COUNT) {
+        ObjectRegistry* reg = &game.objects.registries[type];
+        if (reg->count < MAX_GAME_OBJECTS) {
+            reg->pointers[reg->count] = &game.objects.pool[pool_index];
+            reg->count++;
+        }
     }
 
     // Change to switch case when more objects are built
     
     game.objects.total_count++;
     return obj;
-}
-
-GameObject* go_get_ball(uint8_t index) {
-
-    if (index < game.objects.ball_count) {
-        return game.objects.ball_pointers[index];
-    }
-    return NULL;
 }
 
 /* End of game_object.c */

@@ -69,6 +69,16 @@ Dependencies are declared in `src/modules/modules_registry.c` and noted in each 
 5) In `cleanup_<name>_scene()`:
    - hide sprites/background and release any transient state
 
+## Events (core)
+
+Core provides a tiny, fixed-size event queue for cross-module signals:
+
+- `events_clear()` is called at the start of each frame
+- Modules can push events (e.g., physics collision)
+- Scenes can poll and react (e.g., play sounds)
+
+See `src/events.h` and the example in `src/scenes/scene_game.c`.
+
 ## Collision map note (physics)
 
 Physics reads collision tiles from `world_get_collision_tilemap()`.  

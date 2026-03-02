@@ -57,7 +57,8 @@ typedef enum {
     OBJ_PIN,
     OBJ_SLANTED_WALL,
     OBJ_GENERIC,
-    OBJ_SPINNER
+    OBJ_SPINNER,
+    OBJ_TYPE_COUNT
 } ObjectType;
 
 // ** Components **
@@ -96,6 +97,11 @@ typedef struct {
     RenderComponent renderer;
 
 } GameObject;
+
+typedef struct {
+    GameObject* pointers[MAX_GAME_OBJECTS];
+    uint8_t count;
+} ObjectRegistry;
 
 // === Graphics ===
 

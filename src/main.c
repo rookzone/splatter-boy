@@ -6,6 +6,7 @@
 #include "modules/modules_registry.h"
 #include "modules/input.h"
 #include "modules/graphics.h"
+#include "events.h"
 #include "platform.h"
 #include "tiles/menuFont.h"
 #include <gbdk/emu_debug.h>
@@ -21,6 +22,7 @@ void main(void)
     set_scene(SCENE_TITLE_SCREEN);
 
     while (1) {
+        events_clear();
 
         // EMU_PROFILE_BEGIN("MAIN LOOP ")
         // Update state, required every frame

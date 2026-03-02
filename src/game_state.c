@@ -1,7 +1,6 @@
 // game_state.c
 
 #include "game_state.h"
-#include "modules/graphics.h"
 #include <string.h>
 #include <stdio.h>
 #include "platform.h"
@@ -16,7 +15,10 @@ void clear_game_state(GameState* game)
 {
     platform_display_off();
 
-    hide_all_sprites();
+    // Clear any sprites from the screen (core should not depend on graphics module)
+    for (uint8_t i = 0; i < NUM_HW_SPRITES; i++) {
+        platform_move_sprite(i, 0, 0);
+    }
 
     // Wipe GameObjects and Graphics.
     memset(&game->objects, 0, sizeof(ObjectManager));

@@ -8,6 +8,7 @@
 #include "scenes/scene_title_screen.h"
 #include "scenes/scene_game.h"
 #include "scenes/scene_game2.h"
+#include "scenes/scene_demo.h"
 
 
 void set_scene(uint8_t new_scene)
@@ -38,6 +39,10 @@ void init_scene(void)
             clear_game_state(&game);
             init_title_scene();
             break;
+        case SCENE_DEMO_SCREEN:
+            clear_game_state(&game);
+            init_demo_scene();
+            break;
 
         default:
             // Handle unknown scene - back to title?zx
@@ -61,6 +66,9 @@ void update_scene(void)
         case SCENE_TITLE_SCREEN:
             update_title_scene();
             break;
+        case SCENE_DEMO_SCREEN:
+            update_demo_scene();
+            break;
 
         default:
             // Handle unknown scene
@@ -82,6 +90,9 @@ void cleanup_scene(void)
             break;
         case SCENE_TITLE_SCREEN:
             cleanup_title_scene();
+            break;
+        case SCENE_DEMO_SCREEN:
+            cleanup_demo_scene();
             break;
 
         default:

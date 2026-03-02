@@ -2,6 +2,7 @@
 
 #include <stdlib.h>
 #include <stdint.h>
+#include <rand.h>
 #include "ball.h"
 #include "graphics.h"
 #include "physics.h"
@@ -65,20 +66,21 @@ void update_ball(GameObject* obj) {
 
 void ball_update_all(void)
 {
-    for (uint8_t i = 0; i < game.objects.ball_count; i++) {
-        update_ball(game.objects.ball_pointers[i]);
+    ObjectRegistry* reg = go_get_registry(OBJ_BALL);
+
+    for (uint8_t i = 0; i < reg->count; i++) {
+        update_ball(reg->pointers[i]);
     }
 }
 
 // This is for testing purposes
 void reset_all_balls(void) {
 
-    for (uint8_t i = 0; i < game.objects.ball_count; i++) {
+    ObjectRegistry* reg = go_get_registry(OBJ_BALL);
 
-        GameObject* obj = go_get_ball(i);
+    for (uint8_t i = 0; i < reg->count; i++) {
 
-        if (obj == NULL)
-            continue;
+        GameObject* obj = reg->pointers[i];
         
         // Reset position
         if (i < NUM_BALLS >> 1) {
@@ -133,15 +135,19 @@ void launch_ball(GameObject* ball, uint8_t from_x, uint8_t from_y, fixed_t launc
 
 GameObject* find_lowest_ball(void)
 {
-    GameObject* lowest_ball = game.objects.ball_pointers[0];
-    // increase in y is decrease in height
-    uint8_t highest_y = game.objects.ball_pointers[0]->transform.y;
+    ObjectRegistry* reg = go_get_registry(OBJ_BALL);
+    if (reg->count == 0)
+        return NULL;
 
-    for (uint8_t i = 1; i < game.objects.ball_count; i++) {
+    GameObject* lowest_ball = reg->pointers[0];
+    // increase in y is decrease in height
+    uint8_t highest_y = reg->pointers[0]->transform.y;
+
+    for (uint8_t i = 1; i < reg->count; i++) {
         // Compare the current ball's y-coordinate with the maximum found so far
-        if (game.objects.ball_pointers[i]->transform.y > highest_y) {
-            highest_y = game.objects.ball_pointers[i]->transform.y;
-            lowest_ball = game.objects.ball_pointers[i];
+        if (reg->pointers[i]->transform.y > highest_y) {
+            highest_y = reg->pointers[i]->transform.y;
+            lowest_ball = reg->pointers[i];
         }
     }
 

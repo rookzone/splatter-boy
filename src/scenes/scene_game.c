@@ -16,7 +16,11 @@
 #include "../modules/ball.h"
 #include "../debug.h"
 #include "../modules/input.h"
+#include "../events.h"
+#include "../modules/modules_enabled.h"
+#if MODULE_SOUND_ENABLED
 #include "../modules/sound.h"
+#endif
 
 // Map assets
 #include "../tiles/pachinkoTiles.h"
@@ -87,9 +91,18 @@ void update_game_scene(void)
         fill_amount++;
     }
 
-    
     ball_update_all();
-    
+
+    // Example: respond to collision events with a sound effect
+    Event evt;
+    while (events_poll(&evt)) {
+        if (evt.type == EVENT_BALL_PIN_COLLISION) {
+#if MODULE_SOUND_ENABLED
+            sound_play_noise(10, SOUND_ENV_DOWN, 2, SOUND_NOISE_POLY(3, 5, 1), 8);
+#endif
+        }
+    }
+
 }
 
 void cleanup_game_scene(void)
