@@ -263,6 +263,7 @@ void init_fill_bar(void)
  * 
  * PASS X,Y INTO IT INSTEAD OF CONST
  */
+#pragma disable_warning 110
 void update_fill_bar(uint8_t fill_value)
 {
     // Calculate number of increments or steps the bar is to be filled by
@@ -272,24 +273,18 @@ void update_fill_bar(uint8_t fill_value)
 
     // set bar tiles...
     for (uint8_t i = 0; i < BAR_WIDTH_TILES; i++) {
+        uint8_t tile = fill_bar_vram_index + 4;
 
         // Full tiles
-        if(i < full_tiles){
-            uint8_t *xy_address = platform_get_bkg_xy_addr(POWER_BAR_X+i, POWER_BAR_Y);
-            platform_set_vram_byte(xy_address, fill_bar_vram_index);
-            continue;
+        if (i < full_tiles) {
+            tile = fill_bar_vram_index;
+        } else if (remainder != 0 && i == full_tiles) {
+            // Partially filled tile
+            tile = (uint8_t)(fill_bar_vram_index + remainder);
         }
 
-        // set to a partially filled tile as per any remaining steps
-        if (remainder != 0 && i == full_tiles){
-            uint8_t *xy_address = platform_get_bkg_xy_addr(POWER_BAR_X+full_tiles, POWER_BAR_Y);
-            platform_set_vram_byte(xy_address, fill_bar_vram_index+remainder);
-            continue;
-        }
-
-        // Fill remaining with empty bar tiles
-        uint8_t *xy_address = platform_get_bkg_xy_addr(POWER_BAR_X+i, POWER_BAR_Y);
-        platform_set_vram_byte(xy_address, fill_bar_vram_index+4);
+        uint8_t *xy_address = platform_get_bkg_xy_addr(POWER_BAR_X + i, POWER_BAR_Y);
+        platform_set_vram_byte(xy_address, tile);
     }
 }
 

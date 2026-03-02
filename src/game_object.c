@@ -47,4 +47,25 @@ GameObject* go_new_game_object(ObjectType type) {
     return obj;
 }
 
+ObjectRegistry* go_get_registry(ObjectType type)
+{
+    if (type >= OBJ_TYPE_COUNT)
+        return NULL;
+    return &game.objects.registries[type];
+}
+
+uint8_t go_get_count(ObjectType type)
+{
+    ObjectRegistry* reg = go_get_registry(type);
+    return reg ? reg->count : 0;
+}
+
+GameObject* go_get_by_type(ObjectType type, uint8_t index)
+{
+    ObjectRegistry* reg = go_get_registry(type);
+    if (!reg || index >= reg->count)
+        return NULL;
+    return reg->pointers[index];
+}
+
 /* End of game_object.c */

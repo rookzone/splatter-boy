@@ -67,6 +67,8 @@ void update_ball(GameObject* obj) {
 void ball_update_all(void)
 {
     ObjectRegistry* reg = go_get_registry(OBJ_BALL);
+    if (reg == NULL)
+        return;
 
     for (uint8_t i = 0; i < reg->count; i++) {
         update_ball(reg->pointers[i]);
@@ -77,6 +79,8 @@ void ball_update_all(void)
 void reset_all_balls(void) {
 
     ObjectRegistry* reg = go_get_registry(OBJ_BALL);
+    if (reg == NULL)
+        return;
 
     for (uint8_t i = 0; i < reg->count; i++) {
 
@@ -136,7 +140,7 @@ void launch_ball(GameObject* ball, uint8_t from_x, uint8_t from_y, fixed_t launc
 GameObject* find_lowest_ball(void)
 {
     ObjectRegistry* reg = go_get_registry(OBJ_BALL);
-    if (reg->count == 0)
+    if (reg == NULL || reg->count == 0)
         return NULL;
 
     GameObject* lowest_ball = reg->pointers[0];

@@ -43,7 +43,6 @@ void init_title_scene(void)
     print_text("Aaron\nRodgers\nBall\nSimulator",1 ,3);
     print_text(">start game...",3 ,15);
     print_text(" credits",3 ,16);
-    print_text("select=demo",3 ,18);
 
     // Turn on our screen, sprites, and BG
     platform_show_background();
@@ -58,9 +57,6 @@ void update_title_scene(void)
         sound_play_square1(660, SOUND_DUTY_50, 12, SOUND_ENV_DOWN, 2, 20);
         set_scene(SCENE_GAME);
     }
-
-    if (get_key_pressed(J_SELECT))
-        set_scene(SCENE_DEMO_SCREEN);
 
     if (get_key_pressed(J_DOWN)){
         sound_play_square2(880, SOUND_DUTY_25, 10, SOUND_ENV_DOWN, 2, 14);
