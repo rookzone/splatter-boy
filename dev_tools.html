@@ -1,0 +1,553 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Splatter Boy Dev Tools</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body { font-family: monospace; margin: 20px; background: #f7f7f7; color: #111; }
+    h1 { font-size: 20px; margin: 0 0 12px; }
+    h2 { font-size: 16px; margin: 18px 0 6px; }
+    .row { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+    input, select, button, textarea { font-family: monospace; font-size: 14px; }
+    input, select { padding: 4px 6px; }
+    button { padding: 4px 8px; cursor: pointer; }
+    textarea { width: 100%; height: 140px; }
+    .box { background: #fff; border: 1px solid #ddd; padding: 10px; margin-top: 8px; }
+    .muted { color: #666; }
+    .ok { color: #0a6; }
+    .warn { color: #a60; }
+    .err { color: #a00; }
+    .spacer { height: 6px; }
+  </style>
+</head>
+<body>
+  <h1>Splatter Boy Dev Tools</h1>
+  <div class="box">
+    <div class="row">
+      <button id="pickRoot">Pick Project Folder</button>
+      <span id="rootStatus" class="muted">No folder selected</span>
+    </div>
+    <div class="spacer"></div>
+    <div class="row">
+      <button id="refreshSettings">Reload Settings</button>
+      <span id="settingsStatus" class="muted"></span>
+    </div>
+  </div>
+
+  <h2>Scenes</h2>
+  <div class="box">
+    <div class="row">
+      <label>New scene name:</label>
+      <input id="sceneName" placeholder="example: demo">
+      <button id="addScene">Add Scene</button>
+    </div>
+    <div class="spacer"></div>
+    <div class="row">
+      <label>Rename scene:</label>
+      <input id="sceneOld" placeholder="old name">
+      <input id="sceneNew" placeholder="new name">
+      <button id="renameScene">Rename Scene</button>
+    </div>
+  </div>
+
+  <h2>Modules</h2>
+  <div class="box">
+    <div class="row">
+      <label>New module name:</label>
+      <input id="moduleName" placeholder="example: ai">
+      <label>Deps (comma list):</label>
+      <input id="moduleDeps" placeholder="example: graphics, input">
+      <button id="addModule">Add Module</button>
+    </div>
+    <div class="spacer"></div>
+    <div class="row">
+      <label>Rename module:</label>
+      <input id="moduleOld" placeholder="old name">
+      <input id="moduleNew" placeholder="new name">
+      <button id="renameModule">Rename Module</button>
+    </div>
+  </div>
+
+  <h2>Settings</h2>
+  <div class="box">
+    <div class="row">
+      <label>Initial Scene:</label>
+      <select id="initialScene"></select>
+      <button id="setInitialScene">Set</button>
+    </div>
+    <div class="spacer"></div>
+    <div class="row">
+      <label>Modules Enabled:</label>
+      <select id="modulesList"></select>
+      <select id="moduleEnabled">
+        <option value="1">Enabled</option>
+        <option value="0">Disabled</option>
+      </select>
+      <button id="setModuleEnabled">Set</button>
+    </div>
+  </div>
+
+  <h2>Log</h2>
+  <div class="box">
+    <textarea id="log" readonly></textarea>
+  </div>
+
+  <script>
+    let rootHandle = null;
+
+    function log(msg, cls) {
+      const logBox = document.getElementById("log");
+      const prefix = cls ? "[" + cls + "] " : "";
+      logBox.value += prefix + msg + "\\n";
+      logBox.scrollTop = logBox.scrollHeight;
+    }
+
+    function sanitizeName(name) {
+      return name.trim().toLowerCase().replace(/[^a-z0-9_]/g, "_");
+    }
+
+    async function getDirHandle(pathParts, create) {
+      let handle = rootHandle;
+      for (const part of pathParts) {
+        handle = await handle.getDirectoryHandle(part, { create: !!create });
+      }
+      return handle;
+    }
+
+    async function readText(path) {
+      const parts = path.split("/").filter(Boolean);
+      const file = parts.pop();
+      const dir = await getDirHandle(parts, false);
+      const fh = await dir.getFileHandle(file);
+      const f = await fh.getFile();
+      return await f.text();
+    }
+
+    async function writeText(path, content) {
+      const parts = path.split("/").filter(Boolean);
+      const file = parts.pop();
+      const dir = await getDirHandle(parts, true);
+      const fh = await dir.getFileHandle(file, { create: true });
+      const w = await fh.createWritable();
+      await w.write(content);
+      await w.close();
+    }
+
+    async function fileExists(path) {
+      try { await readText(path); return true; } catch (e) { return false; }
+    }
+
+    async function renameFile(oldPath, newPath) {
+      const content = await readText(oldPath);
+      await writeText(newPath, content);
+      const parts = oldPath.split("/").filter(Boolean);
+      const file = parts.pop();
+      const dir = await getDirHandle(parts, false);
+      await dir.removeEntry(file);
+    }
+
+    function insertAfterLine(text, matcher, insert) {
+      const idx = text.lastIndexOf(matcher);
+      if (idx === -1) return null;
+      const lineEnd = text.indexOf("\\n", idx);
+      if (lineEnd === -1) return null;
+      return text.slice(0, lineEnd + 1) + insert + text.slice(lineEnd + 1);
+    }
+
+    function insertBefore(text, marker, insert) {
+      const idx = text.indexOf(marker);
+      if (idx === -1) return null;
+      return text.slice(0, idx) + insert + text.slice(idx);
+    }
+
+    function replaceAll(text, from, to) {
+      return text.split(from).join(to);
+    }
+
+    async function refreshSettings() {
+      if (!rootHandle) return;
+      try {
+        const constants = await readText("src/constants.h");
+        const sceneDefs = [...constants.matchAll(/#define\\s+(SCENE_[A-Z0-9_]+)\\s+(\\d+)/g)];
+        const sceneSelect = document.getElementById("initialScene");
+        sceneSelect.innerHTML = "";
+        for (const m of sceneDefs) {
+          const opt = document.createElement("option");
+          opt.value = m[1];
+          opt.textContent = m[1];
+          sceneSelect.appendChild(opt);
+        }
+
+        const modules = await readText("src/modules/modules_enabled.h");
+        const modDefs = [...modules.matchAll(/#define\\s+(MODULE_[A-Z0-9_]+_ENABLED)\\s+(\\d+)/g)];
+        const modSelect = document.getElementById("modulesList");
+        modSelect.innerHTML = "";
+        for (const m of modDefs) {
+          const opt = document.createElement("option");
+          opt.value = m[1];
+          opt.textContent = m[1];
+          modSelect.appendChild(opt);
+        }
+
+        document.getElementById("settingsStatus").textContent = "Loaded settings";
+        document.getElementById("settingsStatus").className = "ok";
+      } catch (e) {
+        document.getElementById("settingsStatus").textContent = "Failed to load settings";
+        document.getElementById("settingsStatus").className = "err";
+        log(e.toString(), "err");
+      }
+    }
+
+    async function addScene() {
+      if (!rootHandle) return;
+      const name = sanitizeName(document.getElementById("sceneName").value);
+      if (!name) return log("Scene name required", "err");
+      const upper = name.toUpperCase();
+      const sceneConst = "SCENE_" + upper;
+
+      const sceneC = "src/scenes/scene_" + name + ".c";
+      const sceneH = "src/scenes/scene_" + name + ".h";
+      if (await fileExists(sceneC) || await fileExists(sceneH)) {
+        return log("Scene files already exist: " + name, "err");
+      }
+
+      const guard = "SCENE_" + upper + "_H";
+      const header = [
+        "// scene_" + name + ".h",
+        "",
+        "#ifndef " + guard,
+        "#define " + guard,
+        "",
+        "void init_" + name + "_scene(void);",
+        "void update_" + name + "_scene(void);",
+        "void cleanup_" + name + "_scene(void);",
+        "",
+        "#endif // " + guard,
+        ""
+      ].join("\\n");
+
+      const source = [
+        "// scenes/scene_" + name + ".c",
+        "",
+        "#include \"scene_" + name + ".h\"",
+        "",
+        "#include \"../platform.h\"",
+        "#include \"../scene_manager.h\"",
+        "#include \"../modules/graphics.h\"",
+        "#include \"../modules/input.h\"",
+        "",
+        "void init_" + name + "_scene(void)",
+        "{",
+        "    platform_display_off();",
+        "    platform_sprites_8x8();",
+        "",
+        "    // TODO: setup background/sprites",
+        "",
+        "    platform_show_background();",
+        "    platform_show_sprites();",
+        "    platform_display_on();",
+        "}",
+        "",
+        "void update_" + name + "_scene(void)",
+        "{",
+        "    if (get_key_pressed(J_START))",
+        "        set_scene(SCENE_TITLE_SCREEN);",
+        "}",
+        "",
+        "void cleanup_" + name + "_scene(void)",
+        "{",
+        "    platform_hide_sprites();",
+        "    platform_hide_background();",
+        "}",
+        "",
+        "/* End of scenes/scene_" + name + ".c */",
+        ""
+      ].join("\\n");
+
+      await writeText(sceneH, header);
+      await writeText(sceneC, source);
+
+      let constants = await readText("src/constants.h");
+      const sceneDefs = [...constants.matchAll(/#define\\s+SCENE_[A-Z0-9_]+\\s+(\\d+)/g)];
+      let max = 0;
+      for (const m of sceneDefs) max = Math.max(max, parseInt(m[1], 10));
+      const newLine = "#define " + sceneConst + "  " + (max + 1) + "\\n";
+      const insertPos = constants.lastIndexOf("#define SCENE_");
+      const updated = insertAfterLine(constants, "#define SCENE_", newLine);
+      if (!updated) {
+        log("Failed to update constants.h", "err");
+      } else {
+        await writeText("src/constants.h", updated);
+      }
+
+      let sm = await readText("src/scene_manager.c");
+      const includeLine = "#include \"scenes/scene_" + name + ".h\"\\n";
+      if (!sm.includes(includeLine)) {
+        const incUpdated = insertAfterLine(sm, "#include \"scenes/scene_", includeLine);
+        if (incUpdated) sm = incUpdated;
+      }
+
+      const initCase = "        case " + sceneConst + ":\n" +
+        "            clear_game_state(&game);\n" +
+        "            init_" + name + "_scene();\n" +
+        "            break;\n";
+      const updateCase = "        case " + sceneConst + ":\n" +
+        "            update_" + name + "_scene();\n" +
+        "            break;\n";
+      const cleanupCase = "        case " + sceneConst + ":\n" +
+        "            cleanup_" + name + "_scene();\n" +
+        "            break;\n";
+
+      function insertCase(smText, fnName, block) {
+        const fnIdx = smText.indexOf("void " + fnName);
+        if (fnIdx === -1) return smText;
+        const defIdx = smText.indexOf("default:", fnIdx);
+        if (defIdx === -1) return smText;
+        return smText.slice(0, defIdx) + block + smText.slice(defIdx);
+      }
+      sm = insertCase(sm, "init_scene", initCase);
+      sm = insertCase(sm, "update_scene", updateCase);
+      sm = insertCase(sm, "cleanup_scene", cleanupCase);
+      await writeText("src/scene_manager.c", sm);
+
+      log("Scene added: " + name, "ok");
+      await refreshSettings();
+    }
+
+    async function renameScene() {
+      if (!rootHandle) return;
+      const oldName = sanitizeName(document.getElementById("sceneOld").value);
+      const newName = sanitizeName(document.getElementById("sceneNew").value);
+      if (!oldName || !newName) return log("Old/new scene names required", "err");
+
+      const oldConst = "SCENE_" + oldName.toUpperCase();
+      const newConst = "SCENE_" + newName.toUpperCase();
+
+      const oldC = "src/scenes/scene_" + oldName + ".c";
+      const oldH = "src/scenes/scene_" + oldName + ".h";
+      const newC = "src/scenes/scene_" + newName + ".c";
+      const newH = "src/scenes/scene_" + newName + ".h";
+
+      if (!(await fileExists(oldC)) || !(await fileExists(oldH))) {
+        return log("Scene files not found: " + oldName, "err");
+      }
+
+      const files = [oldC, oldH, "src/scene_manager.c", "src/constants.h"];
+      for (const f of files) {
+        let t = await readText(f);
+        t = replaceAll(t, oldConst, newConst);
+        t = replaceAll(t, "scene_" + oldName, "scene_" + newName);
+        t = replaceAll(t, "init_" + oldName + "_scene", "init_" + newName + "_scene");
+        t = replaceAll(t, "update_" + oldName + "_scene", "update_" + newName + "_scene");
+        t = replaceAll(t, "cleanup_" + oldName + "_scene", "cleanup_" + newName + "_scene");
+        const oldGuard = "SCENE_" + oldName.toUpperCase() + "_H";
+        const newGuard = "SCENE_" + newName.toUpperCase() + "_H";
+        t = replaceAll(t, oldGuard, newGuard);
+        await writeText(f, t);
+      }
+
+      await renameFile(oldC, newC);
+      await renameFile(oldH, newH);
+      log("Scene renamed: " + oldName + " -> " + newName, "ok");
+      await refreshSettings();
+    }
+
+    async function addModule() {
+      if (!rootHandle) return;
+      const name = sanitizeName(document.getElementById("moduleName").value);
+      if (!name) return log("Module name required", "err");
+      const upper = name.toUpperCase();
+
+      const depsRaw = document.getElementById("moduleDeps").value.trim();
+      const deps = depsRaw ? depsRaw.split(",").map(s => sanitizeName(s)).filter(Boolean) : [];
+
+      const modC = "src/modules/" + name + ".c";
+      const modH = "src/modules/" + name + ".h";
+      if (await fileExists(modC) || await fileExists(modH)) {
+        return log("Module files already exist: " + name, "err");
+      }
+
+      const guard = upper + "_H_";
+      const header = [
+        "// " + name + ".h",
+        "",
+        "#ifndef " + guard,
+        "#define " + guard,
+        "",
+        "#include <stdint.h>",
+        "",
+        "// Module: " + name,
+        "// Dependencies: core only",
+        "",
+        "void module_" + name + "_init(void);",
+        "void module_" + name + "_update(void);",
+        "void module_" + name + "_shutdown(void);",
+        "",
+        "#endif // " + guard,
+        ""
+      ].join("\\n");
+
+      const source = [
+        "// " + name + ".c",
+        "",
+        "#include \"" + name + ".h\"",
+        "",
+        "void module_" + name + "_init(void)",
+        "{",
+        "    // TODO",
+        "}",
+        "",
+        "void module_" + name + "_update(void)",
+        "{",
+        "    // TODO",
+        "}",
+        "",
+        "void module_" + name + "_shutdown(void)",
+        "{",
+        "    // TODO",
+        "}",
+        "",
+        "/* End of " + name + ".c */",
+        ""
+      ].join("\\n");
+
+      await writeText(modH, header);
+      await writeText(modC, source);
+
+      // modules_enabled.h
+      let enabled = await readText("src/modules/modules_enabled.h");
+      const defineLine = "#define MODULE_" + upper + "_ENABLED    1\\n";
+      if (!enabled.includes(defineLine)) {
+        enabled = insertBefore(enabled, "#endif", defineLine) || enabled;
+        await writeText("src/modules/modules_enabled.h", enabled);
+      }
+
+      // modules_registry.c
+      let reg = await readText("src/modules/modules_registry.c");
+      const incBlock = "#if MODULE_" + upper + "_ENABLED\\n#include \"" + name + ".h\"\\n#endif\\n";
+      if (!reg.includes(incBlock)) {
+        reg = insertBefore(reg, "// Module dependency bits", incBlock) || reg;
+      }
+
+      const bitMatches = [...reg.matchAll(/#define\\s+MODULE_BIT_[A-Z0-9_]+\\s+\\(1u << (\\d+)\\)/g)];
+      let nextBit = 0;
+      for (const m of bitMatches) nextBit = Math.max(nextBit, parseInt(m[1], 10) + 1);
+      const bitLine = "#define MODULE_BIT_" + upper + "    (1u << " + nextBit + ")\\n";
+      if (!reg.includes(bitLine)) {
+        reg = insertAfterLine(reg, "#define MODULE_BIT_", bitLine) || reg;
+      }
+
+      const depBits = deps.map(d => "MODULE_BIT_" + d.toUpperCase()).join(" | ") || "0";
+      const entryLine = "    { \"" + name + "\",    MODULE_BIT_" + upper + ",    (" + depBits + ") }";
+      if (!reg.includes(entryLine)) {
+        reg = insertBefore(reg, "};", entryLine + ",\\n") || reg;
+      }
+
+      const maskBlock = "#if MODULE_" + upper + "_ENABLED\\n    mask |= MODULE_BIT_" + upper + ";\\n#endif\\n";
+      if (!reg.includes(maskBlock)) {
+        reg = insertBefore(reg, "    return mask;", maskBlock) || reg;
+      }
+
+      const nameCase = "        case MODULE_BIT_" + upper + ":    return \"" + name + "\";\\n";
+      if (!reg.includes(nameCase)) {
+        reg = insertBefore(reg, "        default:", nameCase) || reg;
+      }
+
+      const initCall = "#if MODULE_" + upper + "_ENABLED\\n    module_" + name + "_init();\\n#endif\\n";
+      if (!reg.includes(initCall)) {
+        reg = insertBefore(reg, "}", initCall) || reg;
+      }
+
+      const updateCall = "#if MODULE_" + upper + "_ENABLED\\n    module_" + name + "_update();\\n#endif\\n";
+      if (!reg.includes(updateCall)) {
+        reg = insertBefore(reg, "}", updateCall) || reg;
+      }
+
+      const shutdownCall = "#if MODULE_" + upper + "_ENABLED\\n    module_" + name + "_shutdown();\\n#endif\\n";
+      if (!reg.includes(shutdownCall)) {
+        reg = insertBefore(reg, "}", shutdownCall) || reg;
+      }
+
+      await writeText("src/modules/modules_registry.c", reg);
+      log("Module added: " + name, "ok");
+      await refreshSettings();
+    }
+
+    async function renameModule() {
+      if (!rootHandle) return;
+      const oldName = sanitizeName(document.getElementById("moduleOld").value);
+      const newName = sanitizeName(document.getElementById("moduleNew").value);
+      if (!oldName || !newName) return log("Old/new module names required", "err");
+
+      const oldUpper = oldName.toUpperCase();
+      const newUpper = newName.toUpperCase();
+
+      const oldC = "src/modules/" + oldName + ".c";
+      const oldH = "src/modules/" + oldName + ".h";
+      const newC = "src/modules/" + newName + ".c";
+      const newH = "src/modules/" + newName + ".h";
+
+      if (!(await fileExists(oldC)) || !(await fileExists(oldH))) {
+        return log("Module files not found: " + oldName, "err");
+      }
+
+      const files = ["src/modules/modules_enabled.h", "src/modules/modules_registry.c", oldC, oldH];
+      for (const f of files) {
+        let t = await readText(f);
+        t = replaceAll(t, "MODULE_" + oldUpper + "_ENABLED", "MODULE_" + newUpper + "_ENABLED");
+        t = replaceAll(t, "MODULE_BIT_" + oldUpper, "MODULE_BIT_" + newUpper);
+        t = replaceAll(t, "module_" + oldName + "_", "module_" + newName + "_");
+        t = replaceAll(t, "#include \"" + oldName + ".h\"", "#include \"" + newName + ".h\"");
+        t = replaceAll(t, "\"" + oldName + "\"", "\"" + newName + "\"");
+        t = replaceAll(t, oldName + ".h", newName + ".h");
+        await writeText(f, t);
+      }
+
+      await renameFile(oldC, newC);
+      await renameFile(oldH, newH);
+      log("Module renamed: " + oldName + " -> " + newName, "ok");
+      await refreshSettings();
+    }
+
+    async function setInitialScene() {
+      if (!rootHandle) return;
+      const sel = document.getElementById("initialScene").value;
+      let main = await readText("src/main.c");
+      main = main.replace(/set_scene\\(SCENE_[A-Z0-9_]+\\);/, "set_scene(" + sel + ");");
+      await writeText("src/main.c", main);
+      log("Initial scene set to " + sel, "ok");
+    }
+
+    async function setModuleEnabled() {
+      if (!rootHandle) return;
+      const mod = document.getElementById("modulesList").value;
+      const val = document.getElementById("moduleEnabled").value;
+      let text = await readText("src/modules/modules_enabled.h");
+      const re = new RegExp("#define\\\\s+" + mod + "\\\\s+\\\\d+");
+      text = text.replace(re, "#define " + mod + "    " + val);
+      await writeText("src/modules/modules_enabled.h", text);
+      log(mod + " set to " + val, "ok");
+    }
+
+    document.getElementById("pickRoot").addEventListener("click", async () => {
+      try {
+        rootHandle = await window.showDirectoryPicker();
+        document.getElementById("rootStatus").textContent = "Selected: " + rootHandle.name;
+        document.getElementById("rootStatus").className = "ok";
+        await refreshSettings();
+      } catch (e) {
+        log("Folder pick cancelled or failed", "warn");
+      }
+    });
+
+    document.getElementById("refreshSettings").addEventListener("click", refreshSettings);
+    document.getElementById("addScene").addEventListener("click", addScene);
+    document.getElementById("renameScene").addEventListener("click", renameScene);
+    document.getElementById("addModule").addEventListener("click", addModule);
+    document.getElementById("renameModule").addEventListener("click", renameModule);
+    document.getElementById("setInitialScene").addEventListener("click", setInitialScene);
+    document.getElementById("setModuleEnabled").addEventListener("click", setModuleEnabled);
+  </script>
+</body>
+</html>
