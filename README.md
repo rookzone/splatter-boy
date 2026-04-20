@@ -18,20 +18,64 @@ GDD is google doc here[https://docs.google.com/document/d/1b7yYHS2PwsaXc8w60WU_Y
 
 ## Setup Developer Environment
 
-Dev environment is Win11 with VSCode using Make. Compiler is LCC.exe included with GBDK2020.
+This repo supports the same basic workflow on Windows and Linux:
 
-_**note**: These are steps for Windows. The Makefile should work on Linux in theory, as long as LCC is in PATH, but I have not been able to test this yet. I have no reccomendations for an emulator on Linux, but I'm sure there are plenty of accurate ones with debug features_
+- `make` builds `build/splatter-boy.gb`
+- `make run` builds and launches the ROM in an emulator
+
+On Linux, the minimum requirements are:
+
+- Bash
+- GNU Make
+- `curl`
+- `tar` with gzip support
+- `ca-certificates`
+- GBDK-2020
+- mGBA if you want `make run`
+
+Fresh Linux quick start:
+
+```bash
+./scripts/setup-linux.sh
+```
+
+That script will:
+
+- install missing base packages with `apt-get`, `dnf`, `pacman`, or `zypper` when available
+- download the latest official GBDK Linux release into `./.gbdk/`
+- download the latest official mGBA Linux AppImage into `./emu/mgba/`
+- create a local `emu/mgba/mgba` launcher so `make run` works on systems without separate AppImage/FUSE setup
 
 Follow these steps to get started:
 
 1. `git clone https://github.com/rookzone/splatter-boy.git`
 2. `cd splatter-boy`
-3. `code .` Open VSCode - make sure you are in the splatter-boy workspace (_check with `pwd`_).
-4. Download or install [GBDK 2020](https://gbdk.org) (v4.4.0) and copy the contents into the root.
-5. Install [make for windows](https://gnuwin32.sourceforge.net/packages/make.htm)
-6. Download [BGB emulator](https://bgb.bircd.org) and place in `emu/BGB` (_BGB is used as it has certain debugging features that interact with GBDK_)
-7. `make` and it will create the .gb file in the `build/` directory
-8. Use configs in these project files at `resources/configs`, place them in `.vscode/` This will set it up to build and then launch straight into BGB on CTRL+SHIFT+B
+3. `code .` Open VSCode if you want editor tasks and launch configs.
+4. Install [GBDK-2020](https://gbdk.org). The `Makefile` will look for `lcc` in this order:
+    - `GBDK_LCC=/full/path/to/lcc`
+    - `.gbdk/bin/lcc` on Linux or `.gbdk/bin/lcc.exe` on Windows
+    - `bin/lcc` on Linux or `bin/lcc.exe` on Windows
+    - `GBDK_HOME=/path/to/gbdk`
+    - `lcc` on `PATH`
+5. Install GNU Make. On Windows, `make` or `mingw32-make` on `PATH` both work with the helper scripts.
+6. Install [mGBA](https://mgba.io/) and either put it on `PATH` or place it in `emu/mgba/`.
+   The `run` target prefers mGBA on both platforms and still falls back to `emu/BGB/bgb.exe` on Windows if you already use BGB there. On Linux, `scripts/setup-linux.sh` installs a local wrapper at `emu/mgba/mgba`.
+7. Run `make`
+8. Run `make run`
+
+Helper scripts are also included:
+
+- Linux: `./scripts/build.sh` and `./scripts/run.sh`
+- Windows: `scripts\\build.bat` and `scripts\\run.bat`
+
+If your paths are unusual, these overrides are supported:
+
+- `make GBDK_HOME=/path/to/gbdk`
+- `make GBDK_LCC=/full/path/to/lcc`
+- `make run GB_EMULATOR=/full/path/to/mGBA`
+- `make doctor` prints the resolved tool paths
+
+Use the sample VS Code task files in `resources/CONFIGS/vscode/` if you want `Ctrl+Shift+B` to call the same portable `make` targets.
 
 ## Structure
 

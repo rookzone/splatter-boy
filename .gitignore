@@ -1,4 +1,5 @@
 # No GBDK and tools
+.gbdk/
 bin/
 lib/
 libexec/
