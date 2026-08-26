@@ -176,7 +176,7 @@ Pass tiles and map + number of tiles to set bg e.g...
 
 ## AI Usage
 
-There is no copy/paste AI code in this project (except the Makefiles...). AI has been used for documentation, comments, commit messages, and code reviews. Assuming anyone contributes, AI code is fine as long as they understand what it does. An issue I found with AI and a low-level project like this is that AI tends to add a lot of extraneous code, which for a performance critical project like this, becomes a problem quite rapidly.
+There is no copy/paste AI code in this project (except the Makefiles...). AI has been used for documentation, comments, commit messages, and code reviews. Assuming anyone contributes, AI code is fine as long as they understand what it does. An issue I found with AI and a low-level project like this is that AI tends to add a lot of extraneous code, which for a performance critical project like this, becomes a problem quite rapidly. However, good contributions are judged on their oen merit, AI or not.
 
 ## License
 
